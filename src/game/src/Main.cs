@@ -59,10 +59,10 @@ namespace Elite
                 Engine.Instance(new Dust());
             }
 
-            Enemy en = InstanceEnemy();
+            InstanceEnemy(new Charger(player));
 
 
-            InstanceEnemy();
+         //   InstanceEnemy();
            // Cube cube = (Cube) Engine.Instance(new Cube());
 
             
@@ -104,7 +104,7 @@ namespace Elite
 
 
             PlayerDisplay plDis = (PlayerDisplay) Engine.Instance(new PlayerDisplay());
-            plDis.target = en;
+           // plDis.target = en;
 
             EnemyHealth bgShieldDisplay = (EnemyHealth) Engine.Instance(new EnemyHealth());
             bgShieldDisplay.colour = 8;
@@ -133,9 +133,9 @@ namespace Elite
         }
 
 
-        private Enemy InstanceEnemy()
+        private Enemy InstanceEnemy(Enemy en)
         {
-            Enemy en = (Enemy) Engine.Instance(new Enemy(player));
+            Engine.Instance(en);
             enemies.Add(en);
 
             return en;
