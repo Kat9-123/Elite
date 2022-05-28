@@ -244,6 +244,8 @@ namespace Elite
 
         private static void Main(string[] args)
         {
+            // GIT TEST
+            // TEST TETSE
             FileHandler.Setup();
             FontHandler.LoadFont();
            // Console.ReadLine();
