@@ -5,7 +5,8 @@ namespace Elite
     public class Weapon : GameObject
     {
 
-
+        public Vector3 direction;
+        
 
         
 

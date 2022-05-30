@@ -9,7 +9,7 @@ namespace Elite
 
         public override void Start()
         {
-            
+            visible = false;
             SetMesh(ModelHandler.LoadModel("Cube.obj"));
             scale = new Vector3(0.01f,0.01f,0.01f);
             

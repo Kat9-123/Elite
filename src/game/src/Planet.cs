@@ -23,7 +23,7 @@ namespace Elite
         public override void Start()
         {
 
-            mesh = ModelHandler.LoadModel("Planet.obj");
+            mesh = Models.planet;
             
 
         }

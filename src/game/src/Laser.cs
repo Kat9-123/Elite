@@ -19,7 +19,7 @@ namespace Elite
             getsCulled = false;
 
             movesWithCamera = true;
-            colour = 12;
+            colour = 10;//12;
 
             
         }

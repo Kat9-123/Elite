@@ -8,6 +8,7 @@ namespace Elite
 
         public Charger(Player _player) : base(_player) {}
 
+
         public override void Start()
         {
 
@@ -20,7 +21,7 @@ namespace Elite
 
 
 
-            position = new Vector3(Utils.RandomFloat(-100,100),Utils.RandomFloat(-100,100),Utils.RandomFloat(-500,500));//issue
+            position = new Vector3(Utils.RandomFloat(-100,100),Utils.RandomFloat(-100,100),Utils.RandomFloat(-500,500)) + Engine.cameraPosition;//issue
          //   position = new Vector3(0,0,0);
             
             scale = new Vector3(1,1,1);
@@ -33,7 +34,7 @@ namespace Elite
 
 
             forward = (Engine.cameraPosition - position).Normalise();
-            player.AddRadarEnemy(this);  
+
            /// EnemyLaser laser = (EnemyLaser) Engine.Instance(new EnemyLaser(this));
 
         }
@@ -47,8 +48,16 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
+            
+            visible = true;
+            if(Engine.cameraPosition.SquaredDistanceTo(position) > 1050*1050)
+            {
+          //      visible = false;
+            }
 
             if(!isAlive) return;
+
+
           //  rot += deltaTime;
           //  forward = Utils.RotateAroundAxis(forward,new Vector3(0,0,1),0.12f*deltaTime);
         //    forward = Utils.RotateAroundAxis(forward,new Vector3(0,1,0),0.1f*deltaTime);
@@ -59,7 +68,7 @@ namespace Elite
             //col %= 16;
             //colour = (short)col;
 
-            Shoot(deltaTime,4,0.99f);
+            Shoot(deltaTime,4,0.9f);
 
             if(isHit)
             {
@@ -101,8 +110,7 @@ namespace Elite
 
             position += momentum*deltaTime;
 
-            lin.start = position;
-            lin.end = forward*300f;
+
       //      Line line = new Line(new Vector3(0,0,0),forward*5,5);
     //        Renderer.AddLine(line);
 

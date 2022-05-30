@@ -5,7 +5,7 @@ namespace Elite
     public class RadarEnemy : GameObject
     {
 
-        public GameObject enemy;
+        public Enemy enemy;
 
         public override void Start()
         {
@@ -38,6 +38,10 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
+          if(!enemy.isAlive)
+          {
+            Engine.QueueDestruction(this);
+          }
             
 
 

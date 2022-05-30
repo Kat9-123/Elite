@@ -27,6 +27,31 @@ namespace Elite
             return -1;
         }
 
+
+        public static Mesh GenerateRepeatingMesh(Mesh _mesh, int count, int seperation)
+        {
+            //scale = new Vector3(20,20,1);
+
+
+        //    Triangle baseTri = new Triangle();
+
+            Triangle[] triangles = new Triangle[count*_mesh.tris.Length];
+
+            for (int segment = 0; segment < count; segment++)
+            {
+                for (int tri = 0; tri < _mesh.tris.Length; tri++)
+                {
+                    triangles[segment*_mesh.tris.Length + tri] = _mesh.tris[tri];
+
+                    triangles[segment*_mesh.tris.Length + tri].a.z += seperation*segment;
+                    triangles[segment*_mesh.tris.Length + tri].b.z += seperation*segment;
+                    triangles[segment*_mesh.tris.Length + tri].c.z += seperation*segment;
+                }
+
+            }
+            return new Mesh(triangles);
+        }
+
         public static string FormatVector(Vector3 vec, string name)
         {
             string result = name + ": (";

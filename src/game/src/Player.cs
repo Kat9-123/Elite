@@ -8,6 +8,9 @@ namespace Elite
 
         public Enemy? target;
 
+
+        private Timer lastHitTimer;
+        private Timer shieldRegenTimer;
         private const float LASER_LIFETIME = 0.2f;
         private float laserTimer = 0f;
         private bool currentLaser = false;
@@ -15,24 +18,34 @@ namespace Elite
 
         public Laser laserRight;
 
+        public EnemyGenerator enemyGen;
+
 
 
         public Vector3 momentum = new Vector3(0,0,0);
-        public override void Start()
-        {
-            visible = false;
 
-
-        }
         public static Vector3 absoluteForward = new Vector3(0,0,1);
         public static Vector3 absoluteUp =new Vector3(0,1,0);
 
         public static Vector3 absoluteRight = new Vector3(1,0,0);
 
-
         public EnemyHealth shieldDisplay;
 
+
+
+
+        public EnemyHealth enemyShieldDisplay;
+
         private const float ROTATION_SPEED = 1.5f;
+
+        public override void Start()
+        {
+            visible = false;
+            lastHitTimer = new Timer(2f);
+            shieldRegenTimer = new Timer(0.8f);
+
+        }
+
 
         private void Shoot(float deltaTime)
         {
@@ -41,12 +54,12 @@ namespace Elite
             Vector3 test = new Vector3();
            
             //Console.WriteLine(Engine.main.enemies.Count);
-            for (int i = 0; i < Engine.main.enemies.Count; i++)
+            for (int i = 0; i < enemyGen.enemies.Count; i++)
             {
-                if(Physics.CheckLineBox(Engine.main.enemies[i].boundingBox.start + Engine.main.enemies[i].position, Engine.main.enemies[i].boundingBox.end + Engine.main.enemies[i].position, Engine.cameraPosition, Engine.cameraPosition+(Engine.cameraForward*1_000_000_000),ref test))
+                if(Physics.CheckLineBox(enemyGen.enemies[i].boundingBox.start + enemyGen.enemies[i].position, enemyGen.enemies[i].boundingBox.end + enemyGen.enemies[i].position, Engine.cameraPosition, Engine.cameraPosition+(Engine.cameraForward*1_000_000_000),ref test))
                 {
 
-                    hitEnemy = Engine.main.enemies[i];
+                    hitEnemy = enemyGen.enemies[i];
 
                 }
              //   else laserIsColliding = false;             
@@ -104,6 +117,7 @@ namespace Elite
         {
             RadarEnemy re = (RadarEnemy) Engine.Instance(new RadarEnemy());
             re.enemy = en;
+
         }
         public override void Update(float deltaTime)
         {
@@ -225,36 +239,55 @@ namespace Elite
    
             if(target != null)
             {
-                shieldDisplay.currentHealth = target.currentShield;
-                shieldDisplay.maxHealth = 200f;
+                enemyShieldDisplay.currentHealth = target.currentShield;
+                enemyShieldDisplay.maxHealth = 200f;
+
             }
 
+            shieldDisplay.currentHealth = currentShield;
+            shieldDisplay.maxHealth = 200f;
 
+
+            if(lastHitTimer.Accumulate(deltaTime))
+            {
+                if(shieldRegenTimer.Accumulate(deltaTime))
+                {
+                    currentShield += MathF.Min(200f-currentShield,10f);
+                    shieldRegenTimer.Reset();
+                }
+
+
+            }
 
 
         }
         public void Hit(float damage)
         {
             currentShield -= damage;
+            lastHitTimer.Reset();
         }
 
 
         public void Target()
         {
+            if(target != null && !target.isAlive)
+            {
+                target = null;
+            }
             if(!InputManager.IsKeyPressed(InputMap.TARGET)) return;
 
     
             float closestDot = -1000f;
             Enemy? closestEnemy = null;
-            for (int i = 0; i < Engine.main.enemies.Count; i++)
+            for (int i = 0; i < enemyGen.enemies.Count; i++)
             {
                 // && (position.SquaredDistanceTo(Engine.cameraPosition) < 90000)
-                float dot = Engine.cameraForward.Dot((Engine.main.enemies[i].position-Engine.cameraPosition).Normalise());
+                float dot = Engine.cameraForward.Dot((enemyGen.enemies[i].position-Engine.cameraPosition).Normalise());
               //  Renderer.WriteLine(i.ToString() + "   " + dot.ToString());
-                if((dot > closestDot) && (dot > 0.97f))
+                if((dot > closestDot) && (dot > 0.97f) && enemyGen.enemies[i].isAlive)
                 {
                     closestDot = dot;
-                    closestEnemy = Engine.main.enemies[i];
+                    closestEnemy =enemyGen.enemies[i];
                 }
             }
             if(closestEnemy != null)

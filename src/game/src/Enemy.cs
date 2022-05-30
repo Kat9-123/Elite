@@ -22,15 +22,19 @@ namespace Elite
 
         private static float shootTimer = 0f;
         private const float SHOOT_TIME = 0.1f;
-        protected Line lin = new Line(new Vector3(0,0,0), new Vector3(0,0,1),12);
 
+
+        protected EnemyLaser laser;
+
+
+        public Vector3 displaySize = new Vector3(0.02f,0.02f,0.02f);
 
         
         private static float fireTimer = 0f;
         private bool shooting = false;
 
 
-        protected bool isAlive = true;
+        public bool isAlive = true;
 
 
 
@@ -38,17 +42,26 @@ namespace Elite
         {
             player = _player;
             getsLit = true;
+            //mesh _mesh = new Mesh(new Triangle[]{new Triangle(new Vector3(0,0,0),new Vector3(0,0.0001f,0), new Vector3(0,0,5))});
+
+            laser = (EnemyLaser) Engine.Instance(new EnemyLaser(Models.enemyLaserMesh));
+            laser.colour = 12;
+            
+            player.AddRadarEnemy(this);  
         }
 
         protected void Shoot(float deltaTime, float damage, float accuracy, float maxDist=90000)
         {
+            laser.forward = forward;
+            laser.up = up;
+            laser.position = position;
             if(shooting)
             {
                 shootTimer += deltaTime;
                 if(shootTimer >= SHOOT_TIME)
                 {
                     shooting = false;
-                    lin.visible = false;
+                    laser.visible = false;
                     shootTimer = 0f;
                 }
             }
@@ -61,7 +74,7 @@ namespace Elite
             }
             fireTimer = 0f;
             shooting = true;
-            lin.visible = true;
+            laser.visible = true;
 
 
             if((forward.Dot((Engine.cameraPosition-position).Normalise()) > accuracy) && (position.SquaredDistanceTo(Engine.cameraPosition) < maxDist))
@@ -79,8 +92,9 @@ namespace Elite
 
             if(currentShield <= 0)
             {
+                Engine.QueueDestruction(this);
                 isAlive = false;
-                lin.visible = false;
+
                 colour = 4;
                 //Engine.Destroy(this);
                 //visible = false;

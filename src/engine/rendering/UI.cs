@@ -6,14 +6,17 @@ namespace Elite
     public static class UI
     {
 
-        public static ConsoleInterface.CharInfo[] AddSprite(ConsoleInterface.CharInfo[] buffer,Sprite sprite, int posX, int posY)
+        public static ConsoleInterface.CharInfo[] AddSprite(ConsoleInterface.CharInfo[] buffer,Sprite sprite, int posX, int posY,char character = '#')
         {
             for (int y = 0; y < sprite.height; y++)
             {
                 for (int x = 0; x < sprite.width; x++)
                 {
                     if(sprite.pixels[y*sprite.width+x].Attributes == 0) continue;
-                    buffer[(y+posY)*Settings.SCREEN_SIZE_X+x+posX] = sprite.pixels[y*sprite.width+x];
+                    if((x+posX) < 0 || (x+posX) >= Settings.SCREEN_SIZE_X || (y+posY) < 0 || (y+posY) >= Settings.SCREEN_SIZE_Y) continue;
+                   // buffer[(y+posY)*Settings.SCREEN_SIZE_X+x+posX].Attributes = sprite.pixels[y*sprite.width+x].Attributes;
+                    //buffer[(y+posY)*Settings.SCREEN_SIZE_X+x+posX].Char.AsciiChar = Convert.ToByte(character);
+                    buffer[(y+posY)*Settings.SCREEN_SIZE_X+x+posX]= sprite.pixels[y*sprite.width+x];
                 }
             }
             return buffer;
@@ -85,8 +88,12 @@ namespace Elite
 
            // Sprite sp = SpriteLoader.Load("Crosshair.png");
             buffer = AddSprite(buffer,Sprites.crosshair,Settings.SCREEN_SIZE_X/2-4,Settings.SCREEN_SIZE_Y/2-4);
+
+            buffer = AddSprite(buffer,Sprites.radar,89,157);
+          //  buffer = AddSprite(buffer,Sprites.radar2,60,140,'.');
             //Sprite cockpit = SpriteLoader.Load("test.png");
 //            buffer = AddSprite(buffer,Sprites.cockpit,0,0);
+
 
 
           //  buffer = WriteText(buffer, "100",0,170);

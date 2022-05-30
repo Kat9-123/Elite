@@ -30,12 +30,14 @@ namespace Elite
                 visible = false;
                 return;
             }
+
             
             visible = true;
 
             target = Engine.main.player.target;
+            scale = target.displaySize;
             mesh = target.mesh;
-            position =new Vector3(1.3f,1.1f,2f);
+            position = new Vector3(1.29f,1.2f,2f);
             forward = target.forward;
             up = target.up;
             colour = target.colour;

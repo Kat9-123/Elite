@@ -23,9 +23,31 @@ namespace Elite
         private static List<GameObject> gameObjects = new List<GameObject>(256);
 
 
+        private static List<GameObject> queuedObjectsForDestruction = new List<GameObject>();
+
+        
 
         // Used in deltaTime calculations
         private static double previousTime = 0;
+
+
+        
+        public static void MoveLayer(GameObject item, int newIndex)
+        {
+
+            int oldIndex = gameObjects.IndexOf(item);
+            if (oldIndex > -1)
+            {
+                gameObjects.RemoveAt(oldIndex);
+
+                if (newIndex > oldIndex) newIndex--;
+                // the actual index could have shifted due to the removal
+
+                gameObjects.Insert(newIndex, item);
+            }
+            
+
+        }
 
        
         // Instance the given object.
@@ -36,9 +58,10 @@ namespace Elite
             return obj;
         }
 
-        public static void Destroy(GameObject obj)
+        public static void QueueDestruction(GameObject obj)
         {
-            gameObjects.Remove(obj);
+            queuedObjectsForDestruction.Add(obj);
+            //gameObjects.Remove(obj);
         }
 
         public static void Setup()
@@ -69,6 +92,12 @@ namespace Elite
 
             while (true)
             {  
+
+                for (int i = 0; i < queuedObjectsForDestruction.Count; i++)
+                {
+                    gameObjects.Remove(queuedObjectsForDestruction[i]);
+                    queuedObjectsForDestruction.Remove(queuedObjectsForDestruction[i]);
+                }
 
                 float deltaTime = (float) CalculateDeltaTime();
                 
