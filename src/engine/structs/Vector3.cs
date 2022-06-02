@@ -8,7 +8,7 @@ namespace Elite
         public float x,y,z;
 
 
-        public Vector3(float _x, float _y, float _z)
+        public Vector3(float _x=0f, float _y=0f, float _z=0f)
         {
             x = _x; y = _y; z = _z;
 

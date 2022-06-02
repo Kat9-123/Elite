@@ -147,16 +147,16 @@ namespace Elite
             if (InputManager.IsKeyHeld(InputMap.YAW_LEFT))
             {
                // absoluteForward = (((forward*100)-right).Normalise()*deltaTime*0.1f).Normalise();
-                absoluteForward = Utils.RotateAroundAxis(absoluteForward,absoluteUp,-ROTATION_SPEED*deltaTime);
-                absoluteRight = Utils.RotateAroundAxis(absoluteRight,absoluteUp,-ROTATION_SPEED*deltaTime);
+                absoluteForward = Utils.RotateAroundAxis(absoluteForward,absoluteUp,-ROTATION_SPEED*deltaTime*0.8f);
+                absoluteRight = Utils.RotateAroundAxis(absoluteRight,absoluteUp,-ROTATION_SPEED*deltaTime*0.8f);
                 
             }
 
             
             if (InputManager.IsKeyHeld(InputMap.YAW_RIGHT))
             { 
-                absoluteForward = Utils.RotateAroundAxis(absoluteForward,absoluteUp,ROTATION_SPEED*deltaTime);
-                absoluteRight = Utils.RotateAroundAxis(absoluteRight,absoluteUp,ROTATION_SPEED*deltaTime);
+                absoluteForward = Utils.RotateAroundAxis(absoluteForward,absoluteUp,ROTATION_SPEED*deltaTime*0.8f);
+                absoluteRight = Utils.RotateAroundAxis(absoluteRight,absoluteUp,ROTATION_SPEED*deltaTime*0.8f);
             }
             if (InputManager.IsKeyHeld(InputMap.PITH_UP))
             {

@@ -5,6 +5,8 @@ namespace Elite
     public class UIManager : GameObject
     {
         private Player player;
+
+        public string points = "";
         public UIManager(Player _player)
         {
             player = _player;
@@ -70,7 +72,8 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
-            UI.WriteText("10@",161,2);
+            UI.WriteText(points,173-(6*(points.Length-1)),2);
+
         }
 
 

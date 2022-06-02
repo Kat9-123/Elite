@@ -35,6 +35,9 @@ namespace Elite
 
             forward = (Engine.cameraPosition - position).Normalise();
 
+
+            laser = (EnemyLaser) Engine.Instance(new EnemyLaser(this,Models.enemyLaserMesh, new Vector3(0,0,0),10,0.99f,1f,0.2f));
+            laser.colour = 12;
            /// EnemyLaser laser = (EnemyLaser) Engine.Instance(new EnemyLaser(this));
 
         }
@@ -68,7 +71,8 @@ namespace Elite
             //col %= 16;
             //colour = (short)col;
 
-            Shoot(deltaTime,4,0.9f);
+           // Shoot(deltaTime,4,0.9f);
+            laser.Shoot(deltaTime);
 
             if(isHit)
             {

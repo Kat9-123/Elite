@@ -27,6 +27,10 @@ namespace Elite
         private static string ui = "";
 
 
+        private const string LUMINACES = "#0OC*+/^,.  ";//"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
+
+
+
       //  private static Matrix4x4 cameraRotationMatrixZ;
         //private static Matrix4x4 cameraRotationMatrixY;
         //private static Matrix4x4 cameraRotationMatrixX;
@@ -93,90 +97,61 @@ namespace Elite
         }
 
 
-        private static Triangle TranslateTriangle(
-            Triangle triangle,
-            Vector3 position, 
-            Vector3 scale,
-            
-            Matrix4x4 rotationMatrix,
-            Vector3 offset
-        )
+        private static Triangle TranslateTriangle(Triangle triangle,Matrix4x4 rotationMatrix,GameObject obj)
         {
+            
+            // Apply the objects offset to centre it
+            triangle = AddVecToTriangle(triangle,obj.offset);
 
 
-            triangle = AddVecToTriangle(triangle,offset);
-
+            // Scale
+            triangle.a *= obj.scale;
+            triangle.b *= obj.scale;
+            triangle.c *= obj.scale;
 
             // Rotation
-            triangle.a *= scale;
-            triangle.b *= scale;
-            triangle.c *= scale;
-
-
             triangle = MultiplyTriangleByMatrix(triangle, rotationMatrix);
         
-
-
-
 
             
 
             // Position
-            triangle = AddVecToTriangle(triangle,position);//new Vector3(0,1,3));
+            triangle = AddVecToTriangle(triangle,obj.position);
 
 
 
-
-            // Offset so that the camera is the origin
-
-            
 
 
 
             return triangle;
         }
 
-        private static void RenderTriangle(
-            Triangle triangle,
-            Vector3 position,
-            Vector3 scale,
-            short colour,
-            bool getsCulled,
-            bool filled,
-
-            Matrix4x4 rotationMatrix,
-            Vector3 offset,
-            bool movesWithCamera,
-            char character,
-            bool getsLit,
-            bool getsClipped,
-
-            Vector3 lightDir
-
-
-
-            )
+        private static void RenderTriangle(Triangle triangle,Matrix4x4 rotationMatrix,Matrix4x4 cameraRotationMatrix,GameObject obj)
         {
-            Triangle translatedTriangle = TranslateTriangle(triangle,position,scale,rotationMatrix, offset);
+            Triangle translatedTriangle = TranslateTriangle(triangle,rotationMatrix,obj);
         
 
-            if (!movesWithCamera)
+            if (!obj.movesWithCamera)
             {
+                // Apply inverted cameraposition
                 translatedTriangle = AddVecToTriangle(translatedTriangle,Engine.cameraPosition * -1);
                 
-                translatedTriangle = MultiplyTriangleByMatrix(translatedTriangle, camMat);
+                // Apply inverted camerarotation
+                translatedTriangle = MultiplyTriangleByMatrix(translatedTriangle, cameraRotationMatrix);
 
             }
 
-            if (getsClipped && ((translatedTriangle.a.z < 0) || (translatedTriangle.b.z < 0) || (translatedTriangle.c.z < 0))) return;
+
+            // A triangle gets clipped if any of its points are behind the camera.
+            if (obj.getsClipped && ((translatedTriangle.a.z < 0) || (translatedTriangle.b.z < 0) || (translatedTriangle.c.z < 0))) return;
 
 
- 
+    
 
 
 
 
-            // Cull faces that are not visible
+            // Calculate normal
             Vector3 normal, line1, line2;
 
             normal = new Vector3();
@@ -192,14 +167,15 @@ namespace Elite
             normal = normal.Normalise();
 
             // Check if triangle is facing away from the camera
-            if (getsCulled) 
+            if (obj.getsCulled) 
             {
                 if(normal.Dot(translatedTriangle.a) >= 0) return;
             }
 
             // Lighting
             
-            if(getsLit)
+            char character = obj.character;
+            if(obj.getsLit)
             {
 
 
@@ -207,7 +183,7 @@ namespace Elite
                 
                     
 
-                lightDir = MultiplyVectorByMatrix(lightDir, camMat);
+                Vector3 lightDir = MultiplyVectorByMatrix(obj.lightingDirection, cameraRotationMatrix);
                 lightDir = lightDir.Normalise();
 
                 float dp = normal.Dot(lightDir);
@@ -234,21 +210,21 @@ namespace Elite
             // Scale everything correctly back to screenspace
             projectedTriangle = AddVecToTriangle(projectedTriangle, new Vector3(1,1,0));
 
-            projectedTriangle.a.x *= 0.5f * (float) Settings.SCREEN_SIZE_X;
-            projectedTriangle.a.y *= 0.5f * (float) Settings.SCREEN_SIZE_Y;
+            projectedTriangle.a.x *= 0.5f * Settings.SCREEN_SIZE_X;
+            projectedTriangle.a.y *= 0.5f * Settings.SCREEN_SIZE_Y;
 
-            projectedTriangle.b.x *= 0.5f * (float) Settings.SCREEN_SIZE_X;
-            projectedTriangle.b.y *= 0.5f * (float) Settings.SCREEN_SIZE_Y;
+            projectedTriangle.b.x *= 0.5f * Settings.SCREEN_SIZE_X;
+            projectedTriangle.b.y *= 0.5f * Settings.SCREEN_SIZE_Y;
 
-            projectedTriangle.c.x *= 0.5f * (float) Settings.SCREEN_SIZE_X;
-            projectedTriangle.c.y *= 0.5f * (float) Settings.SCREEN_SIZE_Y;
-
-
+            projectedTriangle.c.x *= 0.5f * Settings.SCREEN_SIZE_X;
+            projectedTriangle.c.y *= 0.5f * Settings.SCREEN_SIZE_Y;
 
 
-            if(filled)
+
+            // Placing the projected triangle onto the buffer
+            if(obj.filled)
             {
-                DrawFilledTriangle(colour,
+                DrawFilledTriangle(obj.colour,
                     new Vector2(projectedTriangle.a.x,projectedTriangle.a.y),
                     new Vector2(projectedTriangle.b.x,projectedTriangle.b.y),
                     new Vector2(projectedTriangle.c.x,projectedTriangle.c.y),character
@@ -260,9 +236,9 @@ namespace Elite
 
        
 
-            DrawLine(colour,(int)projectedTriangle.a.x,(int)projectedTriangle.a.y,(int)projectedTriangle.b.x,(int)projectedTriangle.b.y,character);
-            DrawLine(colour,(int)projectedTriangle.b.x,(int)projectedTriangle.b.y,(int)projectedTriangle.c.x,(int)projectedTriangle.c.y,character);
-            DrawLine(colour,(int)projectedTriangle.c.x,(int)projectedTriangle.c.y,(int)projectedTriangle.a.x,(int)projectedTriangle.a.y,character);
+            DrawLine(obj.colour,(int)projectedTriangle.a.x,(int)projectedTriangle.a.y,(int)projectedTriangle.b.x,(int)projectedTriangle.b.y,character);
+            DrawLine(obj.colour,(int)projectedTriangle.b.x,(int)projectedTriangle.b.y,(int)projectedTriangle.c.x,(int)projectedTriangle.c.y,character);
+            DrawLine(obj.colour,(int)projectedTriangle.c.x,(int)projectedTriangle.c.y,(int)projectedTriangle.a.x,(int)projectedTriangle.a.y,character);
 
 
                     
@@ -271,10 +247,6 @@ namespace Elite
 
         }
 
-        private static Matrix4x4 camMat;
-
-
-        private const string LUMINACES = "#0OC*+/^,.  ";//"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
 
         public static void Render(List<GameObject> gameObjects)
         {
@@ -282,7 +254,7 @@ namespace Elite
             image = GenerateEmptyBuffer();
             // Generate camera rotation matrices
 
-            camMat = Matrix4x4.DirectionToMatrix(Engine.cameraForward,Engine.cameraUp).MatrixQuickInverse();
+            Matrix4x4 cameraRotationMatrix = Matrix4x4.DirectionToMatrix(Engine.cameraForward,Engine.cameraUp).MatrixQuickInverse();
 
 
             for (int gameObject = 0; gameObject < gameObjects.Count; gameObject++)
@@ -291,24 +263,12 @@ namespace Elite
 
 
 
-                bool test = (obj==null);
                 if (!obj.visible) continue;
 
                 Triangle[] tris = obj.mesh.tris;
 
                 
                 Matrix4x4 rotationMatrix = Matrix4x4.DirectionToMatrix(obj.forward,obj.up);
-                Vector3 forw = obj.forward;
-                Vector3 up =obj.up;
-
-                Vector3 t2est = forw*up;
-
-
-               // Vector3 toCamera = (obj.position - Engine.cameraPosition).Normalise();
-             //   if(toCamera.Dot(Utils.CalculateForwardVector(obj.rotation)) <= f)
-           //     {
-            //        continue;
-              //  }
 
 
 
@@ -316,13 +276,15 @@ namespace Elite
 
                 for (int i = 0; i < tris.Length; i++)
                 {
-                    RenderTriangle(tris[i],obj.position,obj.scale,obj.colour,obj.getsCulled,obj.filled,rotationMatrix,obj.offset,obj.movesWithCamera,obj.character,obj.getsLit,obj.getsClipped,obj.lightingDirection);
+                    RenderTriangle(tris[i],rotationMatrix,cameraRotationMatrix,obj);
                 }                
             }
 
+            
+
+
+            /*
             Matrix4x4 rot = Matrix4x4.DirectionToMatrix(new Vector3(0,0,1),new Vector3(0,1,0));
-
-
             for (int i = 0; i < lines.Count; i++)
             {
                 if(!lines[i].visible) continue;
@@ -330,6 +292,7 @@ namespace Elite
                 RenderTriangle(tri,new Vector3(0,0,0),new Vector3(1,1,1),lines[i].colour,false,false,rot,new Vector3(0,0,0),false,'D',false,true,new Vector3(0,0,0));
             }
 
+            */
             
 
 
@@ -377,7 +340,7 @@ namespace Elite
                 {
                     if (x >= 0 && x < Settings.SCREEN_SIZE_X)
                     {
-                        image[y*Settings.SCREEN_SIZE_X + x].Char.AsciiChar = Convert.ToByte(character);
+                        image[y*Settings.SCREEN_SIZE_X + x].Char.AsciiChar = (byte)character;
                         image[y*Settings.SCREEN_SIZE_X + x].Attributes = colour;
                     }
                 }
@@ -425,7 +388,7 @@ namespace Elite
 
                     if(LiesPointWithinTriangle(new Vector2(x,y), a,b,c))
                     {
-                        image[y*Settings.SCREEN_SIZE_X + x].Char.AsciiChar = Convert.ToByte(character);
+                        image[y*Settings.SCREEN_SIZE_X + x].Char.AsciiChar = (byte)character;
                         image[y*Settings.SCREEN_SIZE_X + x].Attributes = colour;
                     }
                 }

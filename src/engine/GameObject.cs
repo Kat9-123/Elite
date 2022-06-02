@@ -31,11 +31,16 @@ namespace Elite
         public bool movesWithCamera = false;
         public Mesh mesh;
 
-        public char character = '#';
+
+        public char character;
+
+        //private byte byteChar;
+
+ 
 
         public bool visible = true;
 
-        public Vector3 offset;
+        public Vector3 offset = new Vector3();
 
         public bool getsClipped = true;
 

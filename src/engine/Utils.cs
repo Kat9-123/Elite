@@ -146,13 +146,26 @@ namespace Elite
 
         public static Vector3 Cross(Vector3 a, Vector3 b)
         {
-            Vector3 result;
+            Vector3 result = new Vector3();
 
             result.x = a.y * b.z - b.y * a.z;
             result.y = (a.x * b.z - b.x * a.z) * -1;
             result.z = a.x * b.y - b.x * a.y;
 
             return result;
+        }
+
+        public static Vector3 RelativeToRotation(Vector3 pos, Vector3 forward, Vector3 up)
+        {
+            Vector3 right = Cross(up,forward);
+
+
+            Vector3 result;
+            result = right*pos.x + up*pos.y + forward*pos.z;
+
+            return result;
+
+
         }
 
 

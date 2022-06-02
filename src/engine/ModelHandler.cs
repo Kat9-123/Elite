@@ -23,7 +23,7 @@ namespace Elite
 
                 if(splitData[i][0] == 'v')
                 {
-                    Vector3 vec;
+                    Vector3 vec = new Vector3();
                     string[] c = splitData[i].Split(" ");
                     vec.x = float.Parse(c[1]);
                     vec.y = float.Parse(c[2]);

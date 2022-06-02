@@ -8,7 +8,11 @@ namespace Elite
     public class Main : GameObject
     {
         
+
         public Player player;
+
+        public UpgradeManager upgradeManager;
+        public UIManager uiManager;
 
         public int enemyLayer = 1;
 
@@ -52,6 +56,8 @@ namespace Elite
             enemyLayer++;
 
 
+            upgradeManager = (UpgradeManager) Engine.Instance(new UpgradeManager());
+
             EnemyGenerator enemyGen = (EnemyGenerator) Engine.Instance(new EnemyGenerator());
             enemyLayer++;
             //player.t = en;
@@ -86,7 +92,7 @@ namespace Elite
             player.laserLeft = (Laser) Engine.Instance(new Laser(false));
             player.laserRight = (Laser) Engine.Instance(new Laser(true));
 
-            UIManager uiManager = (UIManager) Engine.Instance(new UIManager(player));
+            uiManager = (UIManager) Engine.Instance(new UIManager(player));
 
 
 

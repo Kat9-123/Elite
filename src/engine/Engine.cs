@@ -27,6 +27,8 @@ namespace Elite
 
         
 
+        public static float deltaTime = 0f;
+
         // Used in deltaTime calculations
         private static double previousTime = 0;
 
@@ -99,7 +101,7 @@ namespace Elite
                     queuedObjectsForDestruction.Remove(queuedObjectsForDestruction[i]);
                 }
 
-                float deltaTime = (float) CalculateDeltaTime();
+                deltaTime = (float) CalculateDeltaTime();
                 
                 
                 string fps = "";

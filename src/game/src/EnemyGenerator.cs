@@ -11,7 +11,10 @@ namespace Elite
 
         private int spawnDist = 300;
 
-        private Vector3 lastPlayerPos = new Vector3(-100000,0,0);
+        private Vector3 lastPlayerPos = new Vector3(0,0,0);
+
+
+
 
         public override void Start()
         {

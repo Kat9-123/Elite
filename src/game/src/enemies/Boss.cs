@@ -8,6 +8,14 @@ namespace Elite
 
         public Boss(Player _player) : base(_player) {}
 
+        private EnemyLaser bigLaser;
+
+        private EnemyLaser laserRight;
+
+        private EnemyLaser laserLeft;
+
+
+        private Timer canonTimer;
 
         public override void Start()
         {
@@ -35,6 +43,24 @@ namespace Elite
 
 
             forward = (Engine.cameraPosition - position).Normalise();
+            bigLaser = (EnemyLaser) Engine.Instance(new EnemyLaser(this,Models.bigLaserMesh,new Vector3(0,0,150),150f,0.9f,10f,1f));
+            bigLaser.colour = 5;
+
+            bigLaser.scale = new Vector3(40,40,1);
+    
+            laserRight = (EnemyLaser) Engine.Instance(new EnemyLaser(this,Models.enemyLaserMesh,new Vector3(50,-18,30),15f,0.98f,0.5f,0.05f));
+            laserRight.colour = 4;
+
+            laserLeft = (EnemyLaser) Engine.Instance(new EnemyLaser(this,Models.enemyLaserMesh,new Vector3(-50,-18,30),15f,0.98f,0.5f,0.05f));
+            laserLeft.colour = 4;
+
+
+           // canonTimer = new Timer(0.3f);
+
+//public EnemyProjectile(Enemy _owner,Vector3 _pos, Vector3 _momentum, float _damage, float _accuracy, float lifeTime)
+
+          
+            //forward = new Vector3(0,0,1);
 
            /// EnemyLaser laser = (EnemyLaser) Engine.Instance(new EnemyLaser(this));
 
@@ -49,6 +75,8 @@ namespace Elite
 
         public override void Update(float deltaTime)
         { 
+
+ 
             
             visible = true;
             if(Engine.cameraPosition.SquaredDistanceTo(position) > 1050*1050)
@@ -69,7 +97,20 @@ namespace Elite
             //col %= 16;
             //colour = (short)col;
 
-            Shoot(deltaTime,4,0.9f);
+           // Shoot(deltaTime,4,0.9f);
+            laserLeft.Shoot(deltaTime);
+            laserRight.Shoot(deltaTime);
+            bigLaser.Shoot(deltaTime);
+
+
+           // if(canonTimer.Accumulate(deltaTime))
+            //{
+              //  Engine.Instance(new EnemyProjectile(this,new Vector3(50,-18,30),momentum,20,10,5));
+                //Engine.Instance(new EnemyProjectile(this,new Vector3(-50,-18,30),momentum,20,10,5));
+                //canonTimer.Reset();
+           // }
+
+            
 
             if(isHit)
             {
@@ -82,6 +123,7 @@ namespace Elite
                 }
             }
 
+ 
             
             Vector3 currentForward = forward;
             Vector3 currentUp = up;

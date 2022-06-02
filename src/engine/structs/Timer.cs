@@ -16,7 +16,7 @@ namespace Elite
 
         public bool Accumulate(float deltaTime)
         {
-            time += deltaTime;
+            time += Engine.deltaTime;
 
             if(time < duration) return false;
 
