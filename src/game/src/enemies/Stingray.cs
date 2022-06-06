@@ -30,7 +30,7 @@ namespace Elite
 
             
 
-            mesh = ModelHandler.LoadModel("Ship.obj");
+            mesh = Models.stingrayMesh;
 
 
             forward = (Engine.cameraPosition - position).Normalise();

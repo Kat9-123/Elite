@@ -10,8 +10,8 @@ namespace Elite
     public static class InputManager
     {
 
-        private static List<short> keysPressed = new List<short>(16); // If more than 32 keys are being pressed at the same time
-                                                     // God help you.
+        private static List<short> keysPressed = new List<short>(16); 
+
 
         [DllImport("user32.dll")]
         private static extern int GetAsyncKeyState(int vKeys);
@@ -19,11 +19,6 @@ namespace Elite
         public static bool IsKeyHeld(short key)
         {
             return (GetAsyncKeyState(key) > 1);
-        }
-
-        private static int KeyState(short key)
-        {
-            return (GetAsyncKeyState(key));
         }
 
 

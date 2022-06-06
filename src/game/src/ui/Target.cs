@@ -13,7 +13,7 @@ namespace Elite
         {
             
           
-            SetMesh(ModelHandler.LoadModel("target.obj"));//Utils.GenerateCircle(50);
+            SetMesh(Models.targetMesh);//Utils.GenerateCircle(50);
             offset = new Vector3(-0.1f,0.05f,0);
             //up = new Vector3(0,-1,0);
             colour = 11;

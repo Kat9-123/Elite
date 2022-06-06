@@ -13,6 +13,8 @@ namespace Elite
         {
             originPath = Directory.GetCurrentDirectory() + "\\assets\\";
         }
+
+
         public static string Read(string path)
         {
             return File.ReadAllText(FileHandler.originPath + path);

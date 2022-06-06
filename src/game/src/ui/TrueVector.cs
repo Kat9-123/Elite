@@ -18,7 +18,7 @@ namespace Elite
             character = '*';
             filled = true;
           
-            SetMesh(ModelHandler.LoadModel("TrueVector.obj"));//Utils.GenerateCircle(50);
+            SetMesh(Models.directionMesh);//Utils.GenerateCircle(50);
             offset = new Vector3(-0.1f,0.05f,0);
             up = new Vector3(0,-1,0);
  

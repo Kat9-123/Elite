@@ -15,7 +15,7 @@ namespace Elite
 
             if(path != "")
             {
-                SpriteLoader.SetSprite(this,path);
+               SpriteLoader.SetSprite(this,path);
             }
 
         }

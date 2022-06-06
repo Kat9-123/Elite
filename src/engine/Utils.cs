@@ -71,14 +71,7 @@ namespace Elite
         }
 
 
-        public static Vector3 RotationToFowardVector(Vector3 rotation)
-        {
-            Vector3 forward = new Vector3(0,0,0);
-            forward.x = (float) (Math.Cos(rotation.x) * Math.Sin(rotation.y));
-            forward.y = -MathF.Sin(rotation.x);
-            forward.z = (float)( Math.Cos(rotation.x) * Math.Cos(rotation.y));
-            return forward;
-        }
+
 
         public static Vector3 RotateAroundAxis(Vector3 vec, Vector3 axis, float theta)
         {
@@ -91,57 +84,6 @@ namespace Elite
 
 
 
-        public static Mesh GenerateCircle(int pointCount)
-        {
-            Mesh result = new Mesh();
-
-            Vector3[] vectors = new Vector3[pointCount];
-            float fullCircle = 2 * MathF.PI;
-            float pointRads = fullCircle / (float) pointCount;
-
-            
-            float currentRads = 0f;
-            for (int i = 0; i < pointCount; i++)
-            {
-
-            
-                
-                
-                vectors[i].x = MathF.Cos(currentRads);
-                vectors[i].y = MathF.Sin(currentRads);
-
-                 
-
-                currentRads += pointRads;
-            }
-
-            Triangle[] tris = new Triangle[pointCount];
-            for (int i = 0; i < pointCount; i++)
-            {
-                if(i == pointCount-1)
-                {
-                    tris[i].a = vectors[i];
-                    tris[i].b = vectors[0];
-                    tris[i].c = new Vector3(0,0,0);
-                    continue;
-                }
-
-
-
-                tris[i].a = new Vector3(0,0,0);
-                tris[i].b = vectors[i];
-                tris[i].c = vectors[i+1];
-            
-
-
-
-
-
-            }
-            result.tris = tris;
-
-            return result;
-        }
 
 
         public static Vector3 Cross(Vector3 a, Vector3 b)

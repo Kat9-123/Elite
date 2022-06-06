@@ -33,6 +33,8 @@ namespace Elite
 
 
 
+        public BoundingBox boundingBox;
+
 
         public EnemyHealth enemyShieldDisplay;
 
@@ -43,6 +45,8 @@ namespace Elite
             visible = false;
             lastHitTimer = new Timer(2f);
             shieldRegenTimer = new Timer(0.8f);
+
+            boundingBox = new BoundingBox(new Vector3(-20,-20,-20), new Vector3(20,20,20));
 
         }
 

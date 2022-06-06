@@ -3,9 +3,9 @@ using System.IO;
 using System.Collections.Generic;
 namespace Elite
 {   
-    public static class ModelHandler
+    public static class ModelLoader
     {
-        public static Mesh LoadModel(string path)
+        public static Triangle[] LoadModel(string path)
         {
             string data = FileHandler.Read("models\\" + path);
 
@@ -43,8 +43,8 @@ namespace Elite
                 }
             }
         
-            Mesh mesh = new Mesh(tris.ToArray());
-            return mesh;
+            return tris.ToArray();
+
         }
 
     }

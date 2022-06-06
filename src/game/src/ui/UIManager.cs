@@ -44,10 +44,11 @@ namespace Elite
 
 
             EnemyHealth bgShieldDisplay = (EnemyHealth) Engine.Instance(new EnemyHealth(new Vector3(0.855f,1.84f,2),true));
-
+            bgShieldDisplay.scale.y *= 1.3f;
     
             EnemyHealth shieldDisplay = (EnemyHealth) Engine.Instance(new EnemyHealth(new Vector3(0.855f,1.84f,2)));
             shieldDisplay.colour = 4; //12
+            shieldDisplay.scale.y *= 1.3f;
 
             player.enemyShieldDisplay = shieldDisplay;
 

@@ -26,7 +26,7 @@ namespace Elite
         public override void Update(float deltaTime)
         {
             forward = (Engine.cameraPosition - position).Normalise();
-            if(((position-Engine.cameraPosition).Normalise()).Dot(Engine.cameraForward) <= 0.4)
+            if(((position-Engine.cameraPosition).Normalise()).Dot(Engine.cameraForward) <= 0.45)
             {
                 Reset();
             } 

@@ -10,6 +10,7 @@ namespace Elite
         private static void Main(string[] args)
         {
 
+
             FileHandler.Setup();
             FontHandler.LoadFont();
            // Console.ReadLine();

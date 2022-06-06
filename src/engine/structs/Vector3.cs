@@ -40,7 +40,7 @@ namespace Elite
             Vector3 self = Normalise();
             vec = vec.Normalise();
 
-            float dot =self.Dot(vec);
+            float dot = self.Dot(vec);
 
             if(dot > 1f) dot = 1f;
             if(dot < -1f) dot = -1f; 
@@ -68,6 +68,11 @@ namespace Elite
         public float SquaredDistanceTo(Vector3 vec)
         {
             return ((x - vec.x) * (x - vec.x) + (y - vec.y) * (y - vec.y) + (z - vec.z) * (z - vec.z));
+        }
+
+        public float DistanceTo(Vector3 vec)
+        {
+            return MathF.Sqrt(SquaredDistanceTo(vec));
         }
 
 

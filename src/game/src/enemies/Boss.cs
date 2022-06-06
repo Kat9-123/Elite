@@ -22,7 +22,7 @@ namespace Elite
 
             fireRate = 0.3f;
         
-            rotationSpeed = 1f;
+            rotationSpeed = 1.5f;
 
             
 
@@ -36,22 +36,22 @@ namespace Elite
             scale = new Vector3(3,3,3);
           //  up = new Vector3(0,1,0);
 
-            displaySize /= 3;
+            displaySize /= 2;
             
 
-            mesh = ModelHandler.LoadModel("Boss.obj");
+            mesh = Models.bossMesh;
 
 
             forward = (Engine.cameraPosition - position).Normalise();
-            bigLaser = (EnemyLaser) Engine.Instance(new EnemyLaser(this,Models.bigLaserMesh,new Vector3(0,0,150),150f,0.9f,10f,1f));
+            bigLaser = (EnemyLaser) Engine.Instance(new EnemyLaser(this,Models.bigLaserMesh,new Vector3(0,0,150),150f,3f,10f,1f));
             bigLaser.colour = 5;
 
             bigLaser.scale = new Vector3(40,40,1);
     
-            laserRight = (EnemyLaser) Engine.Instance(new EnemyLaser(this,Models.enemyLaserMesh,new Vector3(50,-18,30),15f,0.98f,0.5f,0.05f));
+            laserRight = (EnemyLaser) Engine.Instance(new EnemyLaser(this,Models.enemyLaserMesh,new Vector3(50,-18,30),15f,1,0.5f,0.05f));
             laserRight.colour = 4;
 
-            laserLeft = (EnemyLaser) Engine.Instance(new EnemyLaser(this,Models.enemyLaserMesh,new Vector3(-50,-18,30),15f,0.98f,0.5f,0.05f));
+            laserLeft = (EnemyLaser) Engine.Instance(new EnemyLaser(this,Models.enemyLaserMesh,new Vector3(-50,-18,30),15f,1f,0.5f,0.05f));
             laserLeft.colour = 4;
 
 
@@ -144,7 +144,14 @@ namespace Elite
             Renderer.WriteLine(Utils.FormatVector(up,"enemy_up"));
           //  Renderer.WriteLine(Utils.FormatVector(scale,"scale"));
             
-            momentum += forward * deltaTime*50f;
+            if (position.DistanceTo(Engine.cameraPosition) < 250f)
+            {
+                //momentum += Utils.Cross(up,forward) * deltaTime*30f;
+            }
+
+                momentum += forward * deltaTime*50f;
+            
+            
 
          //   if(momentum.LengthSquared() > 10000f*10000f)
            // {

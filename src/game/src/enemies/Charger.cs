@@ -13,7 +13,7 @@ namespace Elite
         {
 
             fireRate = 0.3f;
-            rotationSpeed = 20f;
+            rotationSpeed = 30f;
 
             
 
@@ -30,7 +30,7 @@ namespace Elite
 
             
 
-            mesh = ModelHandler.LoadModel("Ship2.obj");
+            mesh = Models.chargerMesh;
 
 
             forward = (Engine.cameraPosition - position).Normalise();

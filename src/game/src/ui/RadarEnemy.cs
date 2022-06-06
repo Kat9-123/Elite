@@ -12,7 +12,7 @@ namespace Elite
             
             
           //  movesWithCamera = true;
-            SetMesh(ModelHandler.LoadModel("RadarEnemy.obj"));
+            SetMesh(Models.radarEnemyMesh);
             offset = new Vector3(0,0,0);
             position = new Vector3(0,1,5);
             

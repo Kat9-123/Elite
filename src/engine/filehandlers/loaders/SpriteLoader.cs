@@ -68,6 +68,7 @@ namespace Elite
                     }
                 }
             } 
+            
             sprite.pixels = pixels;
 
 

@@ -13,6 +13,7 @@ namespace Elite
         private Enemy owner;
         
 
+        private Player player;
         private bool shooting;
 
         private float accuracy;
@@ -35,6 +36,8 @@ namespace Elite
             getsCulled = false;
             fireTimer = new Timer(fireTime);
             laserVisibilityTimer = new Timer(laserVisibilityTime);
+
+            player = Engine.main.player;
 
         }
 
@@ -75,9 +78,15 @@ namespace Elite
 
             // && (position.SquaredDistanceTo(Engine.cameraPosition) < 20000)
            // Renderer.WriteLine(forward.Dot((Engine.cameraPosition-position).Normalise()).ToString());
-            if((forward.Dot((Engine.cameraPosition-position).Normalise()) > accuracy))
+            //if((forward.Dot((Engine.cameraPosition-position).Normalise()) > accuracy))
+            //{
+              //  Engine.main.player.Hit(damage);   
+            //}
+
+            Vector3 test = new Vector3(0,0,0);
+            if(Physics.CheckLineBox((player.boundingBox.start*accuracy) + player.position, (player.boundingBox.end*accuracy) + player.position, position, position+(forward*1_000_000_000),ref test))
             {
-                Engine.main.player.Hit(damage);   
+                Engine.main.player.Hit(damage);  
             }
         }
 

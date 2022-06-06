@@ -38,15 +38,14 @@ namespace Elite
         {
 
             int oldIndex = gameObjects.IndexOf(item);
-            if (oldIndex > -1)
-            {
-                gameObjects.RemoveAt(oldIndex);
 
-                if (newIndex > oldIndex) newIndex--;
-                // the actual index could have shifted due to the removal
+            gameObjects.RemoveAt(oldIndex);
 
-                gameObjects.Insert(newIndex, item);
-            }
+            if (newIndex > oldIndex) newIndex--;
+            // the actual index could have shifted due to the removal
+
+            gameObjects.Insert(newIndex, item);
+        
             
 
         }
@@ -63,7 +62,6 @@ namespace Elite
         public static void QueueDestruction(GameObject obj)
         {
             queuedObjectsForDestruction.Add(obj);
-            //gameObjects.Remove(obj);
         }
 
         public static void Setup()
@@ -78,18 +76,20 @@ namespace Elite
             FileHandler.Setup();
 
 
+            Console.CursorVisible = false;
+            Console.Title = "ELITE";
+
 
         }
 
         public static void Run()
         {
             
-            
 
             // Instance the gamemanager
             main = (Main) Instance(new Main());
 
-            Console.Title = "ELITE";
+
 
 
             while (true)

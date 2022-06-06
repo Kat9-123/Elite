@@ -69,7 +69,7 @@ namespace Elite
 
             for (int i = 0; i < 80; i++)
             {
-
+                
                 Engine.Instance(new Dust());
                 enemyLayer++;
             }

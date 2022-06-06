@@ -10,6 +10,10 @@ namespace Elite
         {
             tris = _tris;
         }
+        public Mesh(string path="")
+        {
+            tris = ModelLoader.LoadModel(path);
+        }
 
     }
 }

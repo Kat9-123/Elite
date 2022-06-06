@@ -1,19 +1,12 @@
 using System;
 using System.Collections.Generic;
 
-namespace Elite
-{
-    public static class Renderer
+    namespace Elite
     {
-
-        private static List<Line> lines = new List<Line>(4);
-
-
-
-        public static void AddLine(Line line)
+        public static class Renderer
         {
-            lines.Add(line);
-        }
+
+
 
         public static void Initialise()
         {
@@ -21,7 +14,7 @@ namespace Elite
             ConsoleInterface.Initialise();
         }
 
-        private static ConsoleInterface.CharInfo[] image;
+        private static ConsoleInterface.CharInfo[] buffer;
         private static Matrix4x4 projectionMatrix;
 
         private static string ui = "";
@@ -29,11 +22,6 @@ namespace Elite
 
         private const string LUMINACES = "#0OC*+/^,.  ";//"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
 
-
-
-      //  private static Matrix4x4 cameraRotationMatrixZ;
-        //private static Matrix4x4 cameraRotationMatrixY;
-        //private static Matrix4x4 cameraRotationMatrixX;
 
 
 
@@ -100,7 +88,7 @@ namespace Elite
         private static Triangle TranslateTriangle(Triangle triangle,Matrix4x4 rotationMatrix,GameObject obj)
         {
             
-            // Apply the objects offset to centre it
+            // Apply the objects offset to centre it. legacy
             triangle = AddVecToTriangle(triangle,obj.offset);
 
 
@@ -113,20 +101,16 @@ namespace Elite
             triangle = MultiplyTriangleByMatrix(triangle, rotationMatrix);
         
 
-            
-
             // Position
             triangle = AddVecToTriangle(triangle,obj.position);
-
-
-
 
 
 
             return triangle;
         }
 
-        private static void RenderTriangle(Triangle triangle,Matrix4x4 rotationMatrix,Matrix4x4 cameraRotationMatrix,GameObject obj)
+        private static void RenderTriangle(
+            Triangle triangle,Matrix4x4 rotationMatrix,Matrix4x4 cameraRotationMatrix,GameObject obj)
         {
             Triangle translatedTriangle = TranslateTriangle(triangle,rotationMatrix,obj);
         
@@ -251,7 +235,7 @@ namespace Elite
         public static void Render(List<GameObject> gameObjects)
         {
 
-            image = GenerateEmptyBuffer();
+            buffer = GenerateEmptyBuffer();
             // Generate camera rotation matrices
 
             Matrix4x4 cameraRotationMatrix = Matrix4x4.DirectionToMatrix(Engine.cameraForward,Engine.cameraUp).MatrixQuickInverse();
@@ -283,22 +267,12 @@ namespace Elite
             
 
 
-            /*
-            Matrix4x4 rot = Matrix4x4.DirectionToMatrix(new Vector3(0,0,1),new Vector3(0,1,0));
-            for (int i = 0; i < lines.Count; i++)
-            {
-                if(!lines[i].visible) continue;
-                Triangle tri = new Triangle(lines[i].start,new Vector3(lines[i].start.x,lines[i].start.y,lines[i].start.z+0.001f),lines[i].end);
-                RenderTriangle(tri,new Vector3(0,0,0),new Vector3(1,1,1),lines[i].colour,false,false,rot,new Vector3(0,0,0),false,'D',false,true,new Vector3(0,0,0));
-            }
-
-            */
             
 
 
-            image = UI.AddUI(image,ui);
+            buffer = UI.AddUI(buffer,ui);
             ui = "";
-            ConsoleInterface.Write(image);
+            ConsoleInterface.Write(buffer);
 
         }
 
@@ -340,8 +314,8 @@ namespace Elite
                 {
                     if (x >= 0 && x < Settings.SCREEN_SIZE_X)
                     {
-                        image[y*Settings.SCREEN_SIZE_X + x].Char.AsciiChar = (byte)character;
-                        image[y*Settings.SCREEN_SIZE_X + x].Attributes = colour;
+                        buffer[y*Settings.SCREEN_SIZE_X + x].Char.AsciiChar = (byte)character;
+                        buffer[y*Settings.SCREEN_SIZE_X + x].Attributes = colour;
                     }
                 }
                 
@@ -388,8 +362,8 @@ namespace Elite
 
                     if(LiesPointWithinTriangle(new Vector2(x,y), a,b,c))
                     {
-                        image[y*Settings.SCREEN_SIZE_X + x].Char.AsciiChar = (byte)character;
-                        image[y*Settings.SCREEN_SIZE_X + x].Attributes = colour;
+                        buffer[y*Settings.SCREEN_SIZE_X + x].Char.AsciiChar = (byte)character;
+                        buffer[y*Settings.SCREEN_SIZE_X + x].Attributes = colour;
                     }
                 }
             }
@@ -421,24 +395,6 @@ namespace Elite
 
 
 
-
-        /*
-        public static Vector3 RotateAroundPoint(Vector3 vec, Vector3 axis, float theta)
-        {
-            Vector3 result;
-            result = vec * (float)Math.Cos(theta) + (axis*vec) * (float)Math.Sin(theta) + axis *(axis*vec)*(1-(float)Math.Cos(theta));
-            return result;
-        }
-        private static Triangle RotateTriangleAroundPoint(Triangle triangle, Vector3 axis, float theta)
-        {
-            Triangle result = new Triangle();
-
-            result.a = RotateAroundPoint(triangle.a,axis,theta);
-            result.b = RotateAroundPoint(triangle.b,axis,theta);
-            result.c = RotateAroundPoint(triangle.c,axis,theta);
-            return result;
-        }
-        */
 
 
 

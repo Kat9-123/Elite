@@ -30,6 +30,7 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
+            
             position = offset + Engine.cameraPosition;
         }
 
