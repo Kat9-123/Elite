@@ -32,6 +32,7 @@ namespace Elite
         public override void Start()
         {
             scale = new Vector3(0.1f,0.1f,0.1f);
+           
             
           //  filled = true;
 
@@ -52,6 +53,10 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
+            if(Engine.main.player.isDead)
+            {
+                Engine.QueueDestruction(this);
+            }
 
             if(!isPlayer && Engine.main.player.target == null)
             {

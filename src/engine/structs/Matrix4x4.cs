@@ -52,11 +52,11 @@ namespace Elite
         {
             Matrix4x4 mat = new Matrix4x4();
             mat.matrix = new float[4,4];
-            mat.matrix[0,0] =  (float) Math.Cos(theta);
-            mat.matrix[2,0] =  (float) Math.Sin(theta);
+            mat.matrix[0,0] =  (float)  Math.Cos(theta);
+            mat.matrix[2,0] =  (float)  Math.Sin(theta);
             mat.matrix[0,2] =  (float) -Math.Sin(theta);
             mat.matrix[1,1] =  1f;
-            mat.matrix[2,2] =  (float) Math.Cos(theta);
+            mat.matrix[2,2] =  (float)  Math.Cos(theta);
             mat.matrix[3,3] =  1f;
             return mat;            
         }

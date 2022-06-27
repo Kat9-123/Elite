@@ -35,7 +35,8 @@ namespace Elite
 
 
 
-            Engine.Instance(new Radar());
+
+        //    Engine.Instance(new PIP());
 
 
 
@@ -68,12 +69,40 @@ namespace Elite
 
 
 
+            Engine.Instance(new DeathBG());
+
+
+
     
         }
 
+
+
         public override void Update(float deltaTime)
         {
+            if(Engine.main.player.isDead)
+            {
+                return;
+            }
+            
             UI.WriteText(points,173-(6*(points.Length-1)),2);
+
+
+            UI.AddSprite(Sprites.crosshair,Settings.SCREEN_SIZE_X/2-4,Settings.SCREEN_SIZE_Y/2-4);
+
+            UI.AddSprite(Sprites.radar,89,157);
+            UI.AddSprite(Sprites.radar,
+            (int)Engine.main.mouseController.spritePos.x, 
+            (int)Engine.main.mouseController.spritePos.y);
+
+
+            if(Engine.main.player.target != null)
+            {
+                string str = ((int)Engine.main.player.target.momentum.Length()).ToString();
+
+                UI.WriteText(str,173-(6*(str.Length-1)),80);
+            }
+    
 
         }
 

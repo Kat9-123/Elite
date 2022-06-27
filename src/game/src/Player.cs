@@ -3,7 +3,7 @@ using System;
 
 namespace Elite
 {   
-    public class Player : Ship
+    public class Player : GameObject
     {
 
         public Enemy? target;
@@ -16,6 +16,8 @@ namespace Elite
         private bool currentLaser = false;
         public Laser laserLeft;
 
+
+        public bool isDead = false;
         public Laser laserRight;
 
         public EnemyGenerator enemyGen;
@@ -25,7 +27,7 @@ namespace Elite
         public Vector3 momentum = new Vector3(0,0,0);
 
         public static Vector3 absoluteForward = new Vector3(0,0,1);
-        public static Vector3 absoluteUp =new Vector3(0,1,0);
+        public static Vector3 absoluteUp = new Vector3(0,1,0);
 
         public static Vector3 absoluteRight = new Vector3(1,0,0);
 
@@ -35,7 +37,8 @@ namespace Elite
 
         public BoundingBox boundingBox;
 
-
+        private float health;
+        private const float MAX_HEALTH = 200f;
         public EnemyHealth enemyShieldDisplay;
 
         private const float ROTATION_SPEED = 1.5f;
@@ -48,7 +51,12 @@ namespace Elite
 
             boundingBox = new BoundingBox(new Vector3(-20,-20,-20), new Vector3(20,20,20));
 
+            health = MAX_HEALTH;
+
         }
+        private Vector3 prevForward = new Vector3(0,0,1);
+        private Vector3 prevUp = new Vector3(0,1,0);
+        private Vector3 prevRight = new Vector3(1,0,0);
 
 
         private void Shoot(float deltaTime)
@@ -78,6 +86,25 @@ namespace Elite
                 {
 
                     /*
+                    Vector3 f = Engine.cameraForward + ((Engine.cameraForward - prevForward)*6f);
+                    Vector3 u = Engine.cameraUp + ((Engine.cameraUp - prevUp)*6f);
+
+                    Engine.Instance(
+                        new Projectile(
+                        position+Utils.RelativeToRotation(new Vector3(1.3f,1.2f,-2f),
+                            f,
+                            u
+                        ),
+        
+                        f,
+                        momentum,
+                        u
+
+
+                    ));
+                    Engine.Instance(new Projectile(position+Utils.RelativeToRotation(new Vector3(-1.3f,1.2f,-2f),f,u),f,momentum,u));
+                    */
+                    /*
                     Projectile laserRight =(Projectile) Engine.Instance(new Projectile());
                      laserRight.momentum = momentum;
                      laserRight.player = this;
@@ -96,7 +123,7 @@ namespace Elite
 
                     if(hitEnemy != null)
                     {
-                        hitEnemy.Hit(5f);
+                        hitEnemy.Hit(10f);
                     }
                 
                     laserTimer = 0f;
@@ -117,14 +144,27 @@ namespace Elite
            // Renderer.WriteLine(Utils.FormatBool(laserIsColliding,"laser_hit")+ "\n");
         }
 
-        public void AddRadarEnemy(Enemy en)
+        public void AddRadarEnemy(Enemy en, Vector3? size=null)
         {
+            if(size == null)
+            {
+                size = new Vector3(1f,1f,1f);
+            }
             RadarEnemy re = (RadarEnemy) Engine.Instance(new RadarEnemy());
             re.enemy = en;
+            re.scale *= (Vector3) size;
 
         }
         public override void Update(float deltaTime)
         {
+
+
+            position += momentum*deltaTime;
+            if(health <= 0f)
+            {
+                UI.WriteText("YOU DIED",66,87);
+                return;
+            }
             //Engine.cameraPosition.x += 1f*deltaTime;
             
             Renderer.WriteLine("player:");
@@ -142,14 +182,23 @@ namespace Elite
            // Vector3 absoluteRight = Utils.Cross(up,forward).Normalise();
             Renderer.WriteLine(Utils.FormatVector(absoluteRight,"right"));
 
-            Renderer.WriteLine("Health: " + currentShield.ToString());
+            Renderer.WriteLine("Health: " + health.ToString());
 
            // Renderer.WriteLine(Utils.FormatVector(n,"asdfdsafdfsdf"));
 
-         
+
+            Target();
+
+
+
+ 
+
+
+            Vector3 rotationDirection = new Vector3(0,0,0);
 
             if (InputManager.IsKeyHeld(InputMap.YAW_LEFT))
             {
+
                // absoluteForward = (((forward*100)-right).Normalise()*deltaTime*0.1f).Normalise();
                 absoluteForward = Utils.RotateAroundAxis(absoluteForward,absoluteUp,-ROTATION_SPEED*deltaTime*0.8f);
                 absoluteRight = Utils.RotateAroundAxis(absoluteRight,absoluteUp,-ROTATION_SPEED*deltaTime*0.8f);
@@ -159,16 +208,18 @@ namespace Elite
             
             if (InputManager.IsKeyHeld(InputMap.YAW_RIGHT))
             { 
+
                 absoluteForward = Utils.RotateAroundAxis(absoluteForward,absoluteUp,ROTATION_SPEED*deltaTime*0.8f);
                 absoluteRight = Utils.RotateAroundAxis(absoluteRight,absoluteUp,ROTATION_SPEED*deltaTime*0.8f);
             }
             if (InputManager.IsKeyHeld(InputMap.PITH_UP))
             {
+
                 absoluteForward = Utils.RotateAroundAxis(absoluteForward,absoluteRight,ROTATION_SPEED*deltaTime);
                 absoluteUp = Utils.RotateAroundAxis(absoluteUp,absoluteRight,ROTATION_SPEED*deltaTime);
             }
             if (InputManager.IsKeyHeld(InputMap.PITCH_DOWN))
-            {
+            { 
                 absoluteForward = Utils.RotateAroundAxis(absoluteForward,absoluteRight,-ROTATION_SPEED*deltaTime);
                 absoluteUp = Utils.RotateAroundAxis(absoluteUp,absoluteRight,-ROTATION_SPEED*deltaTime);
             }
@@ -184,13 +235,32 @@ namespace Elite
                 absoluteUp = Utils.RotateAroundAxis(absoluteUp,absoluteForward,ROTATION_SPEED*deltaTime);
                 absoluteRight = Utils.RotateAroundAxis(absoluteRight,absoluteForward,ROTATION_SPEED*deltaTime);
             }
-
+            ///////
+         //   if (target != null)
+           // {
+             //   absoluteForward = (target.position - Engine.cameraPosition).Normalise();
+            //}
 
             absoluteUp = absoluteUp.Normalise();
             absoluteForward = absoluteForward.Normalise();
             absoluteRight = absoluteRight.Normalise();
             Engine.cameraUp = absoluteUp;//new Vector3(0,1,0);
             Engine.cameraForward = absoluteForward;//forward;
+            Engine.cameraRight = absoluteRight;
+
+
+            forward = Engine.cameraForward;
+            up = Engine.cameraUp;
+
+
+            Shoot(deltaTime); 
+
+            prevForward = absoluteForward;
+            prevUp = absoluteUp;
+            prevRight = absoluteRight; 
+
+
+
 //            Engine.cameraForward = (enemy.position - Engine.cameraPosition).Normalise();
 
             Vector3 thrustDirection = new Vector3(0,0,0);
@@ -202,6 +272,7 @@ namespace Elite
             if (InputManager.IsKeyHeld(InputMap.MOVE_UP)) thrustDirection.y = -1f;
             if (InputManager.IsKeyHeld(InputMap.MOVE_DOWN)) thrustDirection.y = 1f;
 
+            //thrustDirection = thrustDirection.Normalise();
            
             //position.y += 0.5f * deltaTime;
             if (InputManager.IsKeyHeld(InputMap.STOP))
@@ -225,7 +296,7 @@ namespace Elite
             }
             UI.WriteText(((int)(momentum.Length()*10)).ToString(),2,170);
 
-            position += momentum*deltaTime;
+
          //   ApplyMovement(Engine.cameraForward,deltaTime);
 
             Engine.cameraPosition = position;
@@ -234,29 +305,26 @@ namespace Elite
 
 
 
-            Target();
-
-
-
-            Shoot(deltaTime);
+ 
 
    
             if(target != null)
             {
-                enemyShieldDisplay.currentHealth = target.currentShield;
-                enemyShieldDisplay.maxHealth = 200f;
+                enemyShieldDisplay.currentHealth = target.health;
+                enemyShieldDisplay.maxHealth = target.maxHealth;
 
             }
 
-            shieldDisplay.currentHealth = currentShield;
-            shieldDisplay.maxHealth = 200f;
+            shieldDisplay.currentHealth = health;
+            shieldDisplay.maxHealth = MAX_HEALTH;
 
 
-            if(lastHitTimer.Accumulate(deltaTime))
+            if(lastHitTimer.Accumulate())
             {
-                if(shieldRegenTimer.Accumulate(deltaTime))
+                if(shieldRegenTimer.Accumulate())
                 {
-                    currentShield += MathF.Min(200f-currentShield,10f);
+
+                    health += MathF.Min(MAX_HEALTH-health,10f);
                     shieldRegenTimer.Reset();
                 }
 
@@ -267,8 +335,20 @@ namespace Elite
         }
         public void Hit(float damage)
         {
-            currentShield -= damage;
+            health -= damage;
             lastHitTimer.Reset();
+
+            if(health <= 0f)
+            {
+                isDead = true;
+            }
+
+
+        }
+
+        public void Heal()
+        {
+            health = MAX_HEALTH;
         }
 
 

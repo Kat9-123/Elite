@@ -17,7 +17,7 @@ namespace Elite
         public short colour = 15;
         public bool filled = false;
 
-
+        public bool isDestroyed = false;
         public Vector3 lightingDirection = new Vector3(0,0,-1);
 
 
@@ -36,18 +36,16 @@ namespace Elite
 
         //private byte byteChar;
 
+        public Vector3 offset;
+
  
 
         public bool visible = true;
 
-        public Vector3 offset = new Vector3();
 
         public bool getsClipped = true;
 
-        public GameObject()
-        {
 
-        }
 
 
         public virtual void Update(float deltaTime)
@@ -60,10 +58,7 @@ namespace Elite
 
         }
 
-        public void Destroy()
-        {
 
-        }
 
 
         public void SetMesh(Mesh _mesh)
@@ -79,9 +74,7 @@ namespace Elite
 
 
             Vector3 topLeft = new Vector3(0,0,0);
-            for (int i = 0; i < mesh.tris.Length; i++)
-            {
-            }
+
             for (int i = 0; i < mesh.tris.Length; i++)
             {
                 if(mesh.tris[i].a.x > result.x) result.x = mesh.tris[i].a.x;

@@ -6,25 +6,26 @@ namespace Elite
     {
 
 
+
         public Stingray(Player _player) : base(_player) {}
 
 
         public override void Start()
         {
-
+            score = 25;
             fireRate = 0.3f;
             rotationSpeed = 20f;
 
             
 
-            boundingBox = new BoundingBox(new Vector3(-20f,-20f,-20f),new Vector3(20f,20f,20f));
+            boundingBox = new BoundingBox(new Vector3(-30f,-30f,-30f),new Vector3(30f,30f,30f),this);
 
 
 
-            position = new Vector3(Utils.RandomFloat(-100,100),Utils.RandomFloat(-100,100),Utils.RandomFloat(-500,500)) + Engine.cameraPosition;//issue
+
          //   position = new Vector3(0,0,0);
             
-            scale = new Vector3(1,1,1);
+            scale = new Vector3(2,2,2);
           //  up = new Vector3(0,1,0);
 
 
@@ -34,9 +35,21 @@ namespace Elite
 
 
             forward = (Engine.cameraPosition - position).Normalise();
+            AddLaser(
+                laserMesh: Models.enemyLaserMesh, 
+                _offset: new Vector3(0,0,0), 
+                damage: 7f, 
+                accuracy: 1.8f, 
+                laserColour: 12, 
+                fireTime: 0.5f,
+                laserVisibilityTime: 0.2f
+            );
 
-            laser = (EnemyLaser) Engine.Instance(new EnemyLaser(this,Models.enemyLaserMesh, new Vector3(0,0,0),7,0.99f,0.5f,0.2f));
-            laser.colour = 12;
+
+            player.AddRadarEnemy(this);
+
+            maxHealth = 200f;
+            health = maxHealth;
  
            /// EnemyLaser laser = (EnemyLaser) Engine.Instance(new EnemyLaser(this));
 
@@ -51,7 +64,7 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
-            
+
             visible = true;
             if(Engine.cameraPosition.SquaredDistanceTo(position) > 1050*1050)
             {
@@ -72,7 +85,7 @@ namespace Elite
             //colour = (short)col;
 
             //Shoot(deltaTime,4,0.9f);
-            laser.Shoot(deltaTime);
+            ShootLasers(deltaTime);
 
             if(isHit)
             {
@@ -107,10 +120,10 @@ namespace Elite
             
             momentum += forward * deltaTime*120f;
 
-         //   if(momentum.LengthSquared() > 10000f*10000f)
-           // {
-             //   momentum = momentum.Normalise()*10000.001f;
-            //}
+            if(momentum.LengthSquared() > 2000f*2000f)
+            {
+                momentum = momentum.Normalise()*2000;
+            }
 
             position += momentum*deltaTime;
 

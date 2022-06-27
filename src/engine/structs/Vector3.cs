@@ -18,7 +18,7 @@ namespace Elite
         {
 
             Vector3 result = new Vector3(0,0,0);
-            float l = MathF.Sqrt(x*x + y*y + z *z); 
+            float l = Length();
 
             if(l == 0f) {result.x = 0f; result.y = 0f; result.z = 0f; return result;}
             result.x = x/l; result.y = y/l; result.z = z/l;
@@ -95,5 +95,8 @@ namespace Elite
 
         public static Vector3 operator *(Vector3 vec1, Vector3 vec2) => new Vector3(vec1.x*vec2.x,vec1.y*vec2.y,vec1.z*vec2.z);
         public static Vector3 operator /(Vector3 vec, float n) => new Vector3(vec.x/n,vec.y/n,vec.z/n);
+
+
+        public static Vector3 operator -(Vector3 vec1, float n) => new Vector3(vec1.x-n,vec1.y-n,vec1.z-n);
     }
 }

@@ -7,6 +7,33 @@ using System.Collections.Generic;
         {
 
 
+        
+        public static void RenderLoop()
+        {
+
+            double previousTime = 0d;
+
+            float acc = 0f;
+            while(true)
+            {
+
+                float deltaTime = (float) Utils.CalculateDeltaTime(ref previousTime);
+
+
+                acc += deltaTime;
+
+
+                if(acc > (1f/60f))
+                {
+                    acc = 0f;
+                    Render(Engine.gameObjects);
+                }
+               // 
+                
+
+            }
+        }
+
 
         public static void Initialise()
         {
@@ -235,6 +262,7 @@ using System.Collections.Generic;
         public static void Render(List<GameObject> gameObjects)
         {
 
+
             buffer = GenerateEmptyBuffer();
             // Generate camera rotation matrices
 
@@ -270,7 +298,7 @@ using System.Collections.Generic;
             
 
 
-            buffer = UI.AddUI(buffer,ui);
+            buffer = UI.ApplyUI(buffer,ui);
             ui = "";
             ConsoleInterface.Write(buffer);
 

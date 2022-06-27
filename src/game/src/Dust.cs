@@ -9,7 +9,7 @@ namespace Elite
         public override void Start()
         {
             scale = new Vector3(0.1f,0.1f,0.1f);
-            
+            character = '^';
           //  filled = true;
 
 

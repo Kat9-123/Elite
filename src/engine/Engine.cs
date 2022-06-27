@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+
+using System.Threading;
 using System.Diagnostics;
 
 
@@ -16,11 +18,12 @@ namespace Elite
 
         public static Vector3 cameraUp = new Vector3(0,1,0);
         public static Vector3 cameraForward = new Vector3(0,0,1);
+        public static Vector3 cameraRight = new Vector3(1,0,0);
 
     
         public static Main main;
 
-        private static List<GameObject> gameObjects = new List<GameObject>(256);
+        public volatile static List<GameObject> gameObjects = new List<GameObject>(256);
 
 
         private static List<GameObject> queuedObjectsForDestruction = new List<GameObject>();
@@ -62,6 +65,7 @@ namespace Elite
         public static void QueueDestruction(GameObject obj)
         {
             queuedObjectsForDestruction.Add(obj);
+            obj.isDestroyed = true;
         }
 
         public static void Setup()
@@ -69,10 +73,17 @@ namespace Elite
             ConsoleInterface.SetCurrentFont("Square", 1);
             Console.SetWindowSize(Settings.SCREEN_SIZE_X,Settings.SCREEN_SIZE_Y);
             Console.SetBufferSize(Settings.SCREEN_SIZE_X,Settings.SCREEN_SIZE_Y);    
-            ConsoleInterface.SetCurrentFont("Square", 3);    
+            ConsoleInterface.SetCurrentFont("Square", 3);  
+
+
+
+
+
+
+
+  
   
             Renderer.Initialise();
-
             FileHandler.Setup();
 
 
@@ -80,20 +91,32 @@ namespace Elite
             Console.Title = "ELITE";
 
 
+            /*
+            Thread gameThread = new Thread(Run);
+
+
+
+            gameThread.Start();
+
+            Renderer.RenderLoop();
+            //Run();
+            */
         }
 
         public static void Run()
         {
-            
+            main = (Main) Instance(new Main());       
 
             // Instance the gamemanager
-            main = (Main) Instance(new Main());
-
 
 
 
             while (true)
             {  
+                if(InputManager.IsKeyPressed(InputMap.PAUSE))
+                {
+                    Environment.Exit(1);
+                }
 
                 for (int i = 0; i < queuedObjectsForDestruction.Count; i++)
                 {
@@ -101,7 +124,8 @@ namespace Elite
                     queuedObjectsForDestruction.Remove(queuedObjectsForDestruction[i]);
                 }
 
-                deltaTime = (float) CalculateDeltaTime();
+                deltaTime = (float) Utils.CalculateDeltaTime(ref previousTime);
+
                 
                 
                 string fps = "";
@@ -126,18 +150,12 @@ namespace Elite
             
         }
 
-
-
-        private static double CalculateDeltaTime()
-        {
-            
-            double timestamp = Stopwatch.GetTimestamp();
-            double now = timestamp / Stopwatch.Frequency;
-            if (previousTime == 0) previousTime = now;
-            double deltaTime = (now - previousTime);
-            previousTime = now;
-            return deltaTime;
         
-        }
+
+
+
+
+
+
     }
 }

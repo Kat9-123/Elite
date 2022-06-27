@@ -12,8 +12,8 @@ namespace Elite
             
             
           //  movesWithCamera = true;
-            SetMesh(Models.radarEnemyMesh);
-            offset = new Vector3(0,0,0);
+            mesh = Models.radarEnemyMesh;
+
             position = new Vector3(0,1,5);
             
             float angle = MathF.PI/6;
@@ -38,10 +38,14 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
-          if(!enemy.isAlive)
-          {
-            Engine.QueueDestruction(this);
-          }
+            if(Engine.main.player.isDead)
+            {
+                Engine.QueueDestruction(this);
+            }
+            if(!enemy.isAlive)
+            {
+                Engine.QueueDestruction(this);
+            }
             
 
 
@@ -51,7 +55,7 @@ namespace Elite
             Vector3 right = Utils.Cross(Engine.cameraUp,Engine.cameraForward);
 
             visible = true;
-            if(Engine.cameraPosition.SquaredDistanceTo(enemy.position) > 1050*1050)
+            if(Engine.cameraPosition.SquaredDistanceTo(enemy.position) > 2500*2500)
             {
                 visible = false;
             }
@@ -66,7 +70,7 @@ namespace Elite
 
 
 
-            Vector3 pos = (enemy.position-Engine.cameraPosition)/1500f;
+            Vector3 pos = (enemy.position-Engine.cameraPosition)/3750f;
             position = pos;//pos.z + Engine.cameraUp*pos.y + right*pos.x;
 
             Vector3 add = new Vector3(0,1.5f,2f);

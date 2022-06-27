@@ -33,6 +33,9 @@ namespace Elite
         public const short TARGET = 0x54; //T
 
 
+        public const short PAUSE = 0x1B; // ESC
+
+
 
         public const short UPGRADE_SHIELD = 0x49; // I
 

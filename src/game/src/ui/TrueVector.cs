@@ -14,6 +14,7 @@ namespace Elite
         //private Line line;
         public override void Start()
         {
+            
 
             character = '*';
             filled = true;
@@ -27,6 +28,10 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
+            if(Engine.main.player.isDead)
+            {
+                Engine.QueueDestruction(this);
+            }
 
             position = (player.momentum).Normalise()*15;
             if(isBehind) position *= -1f;

@@ -6,34 +6,28 @@ namespace Elite
     {
 
 
+
         public Boss(Player _player) : base(_player) {}
 
-        private EnemyLaser bigLaser;
 
-        private EnemyLaser laserRight;
-
-        private EnemyLaser laserLeft;
-
-
-        private Timer canonTimer;
 
         public override void Start()
         {
-
+            score = 40;
             fireRate = 0.3f;
         
             rotationSpeed = 1.5f;
 
             
 
-            boundingBox = new BoundingBox(new Vector3(-80f,-80f,-80f),new Vector3(80f,80f,80f));
+            boundingBox = new BoundingBox(new Vector3(-120f,-120f,-120f),new Vector3(120f,120f,120f),this);
 
 
 
-            position = new Vector3(Utils.RandomFloat(-100,100),Utils.RandomFloat(-100,100),Utils.RandomFloat(-500,500)) + Engine.cameraPosition;//issue
+           
          //   position = new Vector3(0,0,0);
             
-            scale = new Vector3(3,3,3);
+            scale = new Vector3(6,6,6);
           //  up = new Vector3(0,1,0);
 
             displaySize /= 2;
@@ -43,18 +37,52 @@ namespace Elite
 
 
             forward = (Engine.cameraPosition - position).Normalise();
-            bigLaser = (EnemyLaser) Engine.Instance(new EnemyLaser(this,Models.bigLaserMesh,new Vector3(0,0,150),150f,3f,10f,1f));
-            bigLaser.colour = 5;
+           // bigLaser = (EnemyLaser) Engine.Instance(new EnemyLaser(this,Models.bigLaserMesh,new Vector3(0,0,150),150f,4.5f,10f,1f));
+           // bigLaser.colour = 5;
 
+            //Mesh laserMesh, Vector3 offset, float damage, float accuracy, short colour, float fireTime, float laserVisibilityTime)
+            EnemyLaser bigLaser = AddLaser(
+                laserMesh: Models.bigLaserMesh, 
+                _offset: new Vector3(0,0,150), 
+                damage: 150f, 
+                accuracy: 4f, 
+                laserColour: 5, 
+                fireTime: 10f,
+                laserVisibilityTime: 1f
+
+            );
             bigLaser.scale = new Vector3(40,40,1);
-    
-            laserRight = (EnemyLaser) Engine.Instance(new EnemyLaser(this,Models.enemyLaserMesh,new Vector3(50,-18,30),15f,1,0.5f,0.05f));
-            laserRight.colour = 4;
-
-            laserLeft = (EnemyLaser) Engine.Instance(new EnemyLaser(this,Models.enemyLaserMesh,new Vector3(-50,-18,30),15f,1f,0.5f,0.05f));
-            laserLeft.colour = 4;
 
 
+            AddLaser(
+                laserMesh: Models.enemyLaserMesh, 
+                _offset: new Vector3(50,-18,30), 
+                damage: 15f, 
+                accuracy: 1.5f, 
+                laserColour: 4, 
+                fireTime: 0.5f,
+                laserVisibilityTime: 0.05f
+            );
+
+
+
+            AddLaser(
+                laserMesh: Models.enemyLaserMesh, 
+                _offset: new Vector3(-50,-18,30), 
+                damage: 15f, 
+                accuracy: 1.5f, 
+                laserColour: 4, 
+                fireTime: 0.5f,
+                laserVisibilityTime: 0.05f
+            );
+
+
+
+
+            player.AddRadarEnemy(this, new Vector3(1.5f,1.5f,1.5f));
+
+            maxHealth = 300f;
+            health = maxHealth;
            // canonTimer = new Timer(0.3f);
 
 //public EnemyProjectile(Enemy _owner,Vector3 _pos, Vector3 _momentum, float _damage, float _accuracy, float lifeTime)
@@ -76,8 +104,7 @@ namespace Elite
         public override void Update(float deltaTime)
         { 
 
- 
-            
+
             visible = true;
             if(Engine.cameraPosition.SquaredDistanceTo(position) > 1050*1050)
             {
@@ -98,9 +125,10 @@ namespace Elite
             //colour = (short)col;
 
            // Shoot(deltaTime,4,0.9f);
-            laserLeft.Shoot(deltaTime);
-            laserRight.Shoot(deltaTime);
-            bigLaser.Shoot(deltaTime);
+
+            
+            
+            ShootLasers(deltaTime);
 
 
            // if(canonTimer.Accumulate(deltaTime))
@@ -149,7 +177,7 @@ namespace Elite
                 //momentum += Utils.Cross(up,forward) * deltaTime*30f;
             }
 
-                momentum += forward * deltaTime*50f;
+            momentum += forward * deltaTime*50f;
             
             
 

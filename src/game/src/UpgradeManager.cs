@@ -7,7 +7,7 @@ namespace Elite
 
         private static int points = 0;
 
-        private static int shieldLevel = 1;
+       // private static int shieldLevel = 1;
 
         public void AddPoints(int n)
         {
@@ -26,7 +26,7 @@ namespace Elite
             
             if(InputManager.IsKeyPressed(InputMap.UPGRADE_SHIELD))
             {
-                shieldLevel++;
+               // shieldLevel++;
             }
         }
 

@@ -1,5 +1,6 @@
 using System;
 
+using System.Diagnostics;
 namespace Elite
 {
 
@@ -17,6 +18,7 @@ namespace Elite
             return rng.Next(min,max);
         }
 
+        // Returns -1 or 1
         public static int RandomSign()
         {
             int n = rng.Next(0,2);
@@ -61,6 +63,14 @@ namespace Elite
 
             return result;
         }
+        public static string FormatVector(Vector2 vec, string name)
+        {
+            string result = name + ": (";
+            result += vec.x.ToString() + ", ";
+            result += vec.y.ToString() + ")";
+
+            return result;
+        }
 
         public static string FormatBool(bool b, string name)
         {
@@ -72,7 +82,8 @@ namespace Elite
 
 
 
-
+        // https://en.wikipedia.org/wiki/Rodrigues%27_rotation_formula
+        // Should I use matrices for this? yes. Do I want to? no.
         public static Vector3 RotateAroundAxis(Vector3 vec, Vector3 axis, float theta)
         {
             Vector3 result;
@@ -114,6 +125,48 @@ namespace Elite
         public static float Lerp(float start, float end, float t)
         {
             return (1 - t) * start + t * end;
+        }
+
+        public static double CalculateDeltaTime(ref double previousTime)
+        {
+            
+            double timestamp = Stopwatch.GetTimestamp();
+            double now = timestamp / Stopwatch.Frequency;
+            if (previousTime == 0) previousTime = now;
+            double deltaTime = (now - previousTime);
+            previousTime = now;
+            return deltaTime;
+        
+        }
+
+        // Generates a random point within the given rectangle
+        // but it rejects points that are too close to the centre
+        public static Vector3 RandomPositionExcludeCentre(float minDist, float maxDist)
+        {
+            Vector3 pos = new Vector3(0,0,0);
+            
+            pos.x = RandomFloat(minDist,maxDist) * RandomSign();
+            pos.y = RandomFloat(minDist,maxDist) * RandomSign();
+            pos.z = RandomFloat(minDist,maxDist) * RandomSign();
+
+            
+            return pos;
+            /*
+            Vector3 centre = new Vector3(0,0,0);
+            Vector3 pos = new Vector3(0,0,0);
+
+            // Rejection sampling 
+            while (pos.SquaredDistanceTo(centre) < (centreSize*centreSize))
+            {
+                pos.x = RandomFloat(rectStart.x, rectEnd.x);
+                pos.y = RandomFloat(rectStart.y, rectEnd.y);
+                pos.z = RandomFloat(rectStart.z, rectEnd.z);
+                
+            }
+
+
+            return pos;
+            */
         }
 
     }

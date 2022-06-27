@@ -11,6 +11,8 @@ namespace Elite
 
         private int spawnDist = 300;
 
+        private int enemiesSpawned = 0;
+
         private Vector3 lastPlayerPos = new Vector3(0,0,0);
 
 
@@ -40,7 +42,15 @@ namespace Elite
                 lastPlayerPos = Engine.cameraPosition;
 
                 Enemy enemy;
-                switch (Utils.RandomInt(0,3))
+
+                int upperBound = 2;
+
+                if(enemiesSpawned > 2)
+                {
+                    upperBound = 3;
+                }
+
+                switch (Utils.RandomInt(0,upperBound))
                 {
                     case 0:
                         enemy = InstanceEnemy(new Charger(Engine.main.player));
@@ -57,7 +67,9 @@ namespace Elite
 
                 }
 
-                spawnDist = Utils.RandomInt(500,2000);
+                enemiesSpawned++;
+
+                spawnDist = Utils.RandomInt(500,1500);
 
                     
             }
@@ -66,13 +78,22 @@ namespace Elite
 
         }
 
+
+        public void DestroyEnemy(Enemy enemy)
+        {
+            enemies.Remove(enemy);
+        }
+
         private Enemy InstanceEnemy(Enemy en)
         {
             Engine.Instance(en);
             enemies.Add(en);
             Engine.MoveLayer(en,Engine.main.enemyLayer);
 
+            en.position = Utils.RandomPositionExcludeCentre(50f,100f);
+
             return en;
+            
 
         }
 

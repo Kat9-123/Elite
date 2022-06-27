@@ -11,7 +11,7 @@ namespace Elite
         {
             
             
-            offset = new Vector3(0,0,0);
+            //offset = new Vector3(0,0,0);
 
             scale = new Vector3(0.02f,0.02f,0.02f);
             getsLit = true;
@@ -24,10 +24,15 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
+            if(Engine.main.player.isDead)
+            {
+                Engine.QueueDestruction(this);
+            }
            
             if(Engine.main.player.target == null)
             {
                 visible = false;
+
                 return;
             }
 
