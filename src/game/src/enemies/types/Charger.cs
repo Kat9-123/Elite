@@ -16,7 +16,7 @@ namespace Elite
             rotationSpeed = 25f;
 
             
-
+            
             boundingBox = new BoundingBox(new Vector3(-30f,-30f,-30f),new Vector3(30f,30f,30f),this);
 
 
@@ -52,6 +52,7 @@ namespace Elite
             health = maxHealth;
            /// EnemyLaser laser = (EnemyLaser) Engine.Instance(new EnemyLaser(this));
 
+            Setup();
         }
         
 
@@ -64,7 +65,7 @@ namespace Elite
         public override void Update(float deltaTime)
         {
 
-
+            return;
             visible = true;
             if(Engine.cameraPosition.SquaredDistanceTo(position) > 1050*1050)
             {

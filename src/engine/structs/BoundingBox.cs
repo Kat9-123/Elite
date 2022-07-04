@@ -8,19 +8,11 @@ namespace Elite
         public Vector3 end;
 
 
-        public BoundingBox(Vector3 _start, Vector3 _end, Enemy? enemy=null)
+        public BoundingBox(Vector3 _start, Vector3 _end)
         {
             
             start = _start;
             end = _end;
-            if(enemy != null)
-            {
-                Engine.Instance(new BoundingBoxDisplay((Enemy)enemy, start,end));
-
-            }
-
-
-
            
         }
 

@@ -140,7 +140,7 @@ namespace Elite
         }
 
         // Generates a random point within the given rectangle
-        // but it rejects points that are too close to the centre
+        // but it rejects points that are too close to the centre 
         public static Vector3 RandomPositionExcludeCentre(float minDist, float maxDist)
         {
             Vector3 pos = new Vector3(0,0,0);

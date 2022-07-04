@@ -36,7 +36,6 @@ namespace Elite
 
         public static void SetSprite(Sprite sprite, string path)
         {
-            //ConsoleColor.
 
             Bitmap img = new Bitmap(FileHandler.originPath + "sprites\\" + path);
             ConsoleInterface.CharInfo[] pixels = new ConsoleInterface.CharInfo[img.Width*img.Height];

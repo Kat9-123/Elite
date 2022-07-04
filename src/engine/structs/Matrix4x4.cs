@@ -20,7 +20,7 @@ namespace Elite
 
             float near = 0.05f;
             float far = 1000f;
-            float fov = 90f;
+            float fov = Settings.FOV;
             float aspectRatio = (float) Settings.SCREEN_SIZE_Y / (float) (Settings.SCREEN_SIZE_X);
 
             float fovRad = 1.0f/MathF.Tan(fov * 0.5f / 180f * MathF.PI);

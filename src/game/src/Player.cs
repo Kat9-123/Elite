@@ -144,6 +144,8 @@ namespace Elite
            // Renderer.WriteLine(Utils.FormatBool(laserIsColliding,"laser_hit")+ "\n");
         }
 
+
+
         public void AddRadarEnemy(Enemy en, Vector3? size=null)
         {
             if(size == null)
@@ -157,6 +159,7 @@ namespace Elite
         }
         public override void Update(float deltaTime)
         {
+
 
 
             position += momentum*deltaTime;
@@ -277,16 +280,16 @@ namespace Elite
             //position.y += 0.5f * deltaTime;
             if (InputManager.IsKeyHeld(InputMap.STOP))
             {
-                momentum = new Vector3(0,0,0);
+               // momentum = new Vector3(0,0,0);
                 thrustDirection = (momentum*-1f).Normalise();
-          //s      if(momentum.Length() < 0.01f) momentum = new Vector3(0,0,0);
+                if(momentum.Length() < 2f) momentum = new Vector3(0,0,0);
             }
 
 
 
             momentum += Engine.cameraForward * thrustDirection.z * 20f * deltaTime;
             momentum += Engine.cameraUp * thrustDirection.y * 20f * deltaTime;
-            momentum += absoluteRight * thrustDirection.x * 20f * deltaTime;
+            momentum += absoluteRight *   thrustDirection.x * 20f * deltaTime;
             
            
        //     Renderer.WriteLine(momentum.Length().ToString());
@@ -294,7 +297,7 @@ namespace Elite
             {
                 momentum = momentum.Normalise()*100.001f;
             }
-            UI.WriteText(((int)(momentum.Length()*10)).ToString(),2,170);
+
 
 
          //   ApplyMovement(Engine.cameraForward,deltaTime);
@@ -371,7 +374,7 @@ namespace Elite
                 if((dot > closestDot) && (dot > 0.97f) && enemyGen.enemies[i].isAlive)
                 {
                     closestDot = dot;
-                    closestEnemy =enemyGen.enemies[i];
+                    closestEnemy = enemyGen.enemies[i];
                 }
             }
             if(closestEnemy != null)

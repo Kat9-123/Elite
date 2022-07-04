@@ -6,6 +6,8 @@ namespace Elite
     public static class UI
     {
 
+        private static ConsoleInterface.CharInfo[] UIBuffer = new ConsoleInterface.CharInfo[Settings.SCREEN_SIZE_X*Settings.SCREEN_SIZE_Y];
+        private static string debugText = "";
         public static void AddSprite(Sprite sprite, int posX, int posY,char character = '#')
         {
             for (int y = 0; y < sprite.height; y++)
@@ -66,47 +68,43 @@ namespace Elite
 
         }
 
-        private static ConsoleInterface.CharInfo[] UIBuffer = new ConsoleInterface.CharInfo[Settings.SCREEN_SIZE_X*Settings.SCREEN_SIZE_Y];
 
         public static void ResetUI()
         {
-            UIBuffer = Renderer.GenerateEmptyBuffer();
+            
+            UIBuffer = Drawer.GenerateEmptyBuffer();
         }
 
 
-        public static ConsoleInterface.CharInfo[] ApplyUI(ConsoleInterface.CharInfo[] buffer, string text)
+        public static void Write(string text)
+        {
+            if(!Settings.DISPLAY_DEBUG_INFO) return;
+            debugText += text;
+        
+        }
+
+        public static void WriteLine(string text)
+        {
+            if(!Settings.DISPLAY_DEBUG_INFO) return;
+            Write(text + "\n");
+        }
+
+        
+
+        public static ConsoleInterface.CharInfo[] ApplyUI(ConsoleInterface.CharInfo[] buffer)
         {
 
-            
-        //    buffer = WriteCharacter(buffer,FontHandler.characters[0],20,20);
-          //  buffer = WriteCharacter(buffer,FontHandler.characters[1],26,20);
-
-            //buffer = WriteText(buffer,"abcdefg\nhijklmnop\nqrstuvw\nxyz\n0123456789",0,20);
-
-            //buffer = WriteText(buffer,"vel",20,20);
-            
-
-           // Sprite sp = SpriteLoader.Load("Crosshair.png");
-
-
-          //  buffer = AddSprite(buffer,Sprites.radar2,60,140,'.');
-            //Sprite cockpit = SpriteLoader.Load("test.png");
-//            buffer = AddSprite(buffer,Sprites.cockpit,0,0);
-
-
-
-          //  buffer = WriteText(buffer, "100",0,170);
             int x = 0;
             int y = 0;
-            for (int i = 0; i < text.Length; i++)
+            for (int i = 0; i < debugText.Length; i++)
             {
-                if (text[i] == '\n')
+                if (debugText[i] == '\n')
                 {
                     y++;
                     x = 0;
                     continue;
                 }
-                buffer[y*Settings.SCREEN_SIZE_X + x].Char.AsciiChar = Convert.ToByte(text[i]);
+                buffer[y*Settings.SCREEN_SIZE_X + x].Char.AsciiChar = Convert.ToByte(debugText[i]);
                 buffer[y*Settings.SCREEN_SIZE_X + x].Attributes = (short)ConsoleColor.White;
                 x++;
 
@@ -127,6 +125,7 @@ namespace Elite
                     buffer[b*Settings.SCREEN_SIZE_X + a].Attributes = UIBuffer[b*Settings.SCREEN_SIZE_X + a].Attributes;
                 }
             }
+            debugText = "";
             return buffer;
         }
     }

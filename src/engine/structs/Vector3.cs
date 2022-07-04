@@ -11,7 +11,6 @@ namespace Elite
         public Vector3(float _x=0f, float _y=0f, float _z=0f)
         {
             x = _x; y = _y; z = _z;
-
         }
 
         public Vector3 Normalise()
@@ -26,7 +25,7 @@ namespace Elite
             return result;
         }
 
-        // Returns true if identical
+
         public bool IsIdenticalTo(Vector3 vec)
         {
             if (vec.x == x && vec.y == y && vec.z == z) return true;
@@ -70,6 +69,7 @@ namespace Elite
             return ((x - vec.x) * (x - vec.x) + (y - vec.y) * (y - vec.y) + (z - vec.z) * (z - vec.z));
         }
 
+
         public float DistanceTo(Vector3 vec)
         {
             return MathF.Sqrt(SquaredDistanceTo(vec));
@@ -88,15 +88,11 @@ namespace Elite
 
 
         public static Vector3 operator +(Vector3 vec1, Vector3 vec2) => new Vector3(vec1.x+vec2.x,vec1.y+vec2.y,vec1.z+vec2.z);
-
         public static Vector3 operator -(Vector3 vec1, Vector3 vec2) => new Vector3(vec1.x-vec2.x,vec1.y-vec2.y,vec1.z-vec2.z);
-
-        public static Vector3 operator *(Vector3 vec, float val) => new Vector3(vec.x*val,vec.y*val,vec.z*val);
-
         public static Vector3 operator *(Vector3 vec1, Vector3 vec2) => new Vector3(vec1.x*vec2.x,vec1.y*vec2.y,vec1.z*vec2.z);
+
+        public static Vector3 operator *(Vector3 vec, float n) => new Vector3(vec.x*n,vec.y*n,vec.z*n);
         public static Vector3 operator /(Vector3 vec, float n) => new Vector3(vec.x/n,vec.y/n,vec.z/n);
-
-
         public static Vector3 operator -(Vector3 vec1, float n) => new Vector3(vec1.x-n,vec1.y-n,vec1.z-n);
     }
 }

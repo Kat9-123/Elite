@@ -7,11 +7,11 @@ namespace Elite
 
 
 
-        public Stingray(Player _player) : base(_player) {}
 
 
         public override void Start()
         {
+            
             score = 25;
             fireRate = 0.3f;
             rotationSpeed = 20f;
@@ -19,7 +19,7 @@ namespace Elite
             
 
             boundingBox = new BoundingBox(new Vector3(-30f,-30f,-30f),new Vector3(30f,30f,30f),this);
-
+        
 
 
 
@@ -49,9 +49,11 @@ namespace Elite
             player.AddRadarEnemy(this);
 
             maxHealth = 200f;
-            health = maxHealth;
+            
  
            /// EnemyLaser laser = (EnemyLaser) Engine.Instance(new EnemyLaser(this));
+
+           Setup();
 
         }
         
@@ -64,7 +66,7 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
-
+            return;
             visible = true;
             if(Engine.cameraPosition.SquaredDistanceTo(position) > 1050*1050)
             {
@@ -133,7 +135,7 @@ namespace Elite
             Renderer.WriteLine(Utils.FormatBool((forward.Dot((Engine.cameraPosition-position).Normalise()) > 0.99f) && (position.SquaredDistanceTo(Engine.cameraPosition) < 90000),"can_hit_player"));
 
 
-
+            Setup();
 
 
             

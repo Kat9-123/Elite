@@ -18,7 +18,7 @@ namespace Elite
 
 
 
-
+            
             TrueVector trueVector = (TrueVector) Engine.Instance(new TrueVector());
 
             trueVector.player = player;
@@ -85,23 +85,32 @@ namespace Elite
                 return;
             }
             
+
+            // Points
             UI.WriteText(points,173-(6*(points.Length-1)),2);
 
 
+            // Player speed
+            UI.WriteText(((int)(Engine.main.player.momentum.Length()*10)).ToString(),2,170);
+
+            // Crosshair
             UI.AddSprite(Sprites.crosshair,Settings.SCREEN_SIZE_X/2-4,Settings.SCREEN_SIZE_Y/2-4);
 
+            // Radar
             UI.AddSprite(Sprites.radar,89,157);
-            UI.AddSprite(Sprites.radar,
-            (int)Engine.main.mouseController.spritePos.x, 
-            (int)Engine.main.mouseController.spritePos.y);
 
+            // Mouse
+       //     UI.AddSprite(Sprites.radar,
+         //   (int)Engine.main.mouseController.spritePos.x, 
+         //   (int)Engine.main.mouseController.spritePos.y);
 
-            if(Engine.main.player.target != null)
-            {
-                string str = ((int)Engine.main.player.target.momentum.Length()).ToString();
+            // Target momentum
+            //if(Engine.main.player.target != null)
+            //{
+            //string str = ((int)Engine.main.player.target.momentum.Length()).ToString();
 
-                UI.WriteText(str,173-(6*(str.Length-1)),80);
-            }
+            //  UI.WriteText(str,173-(6*(str.Length-1)),80);
+            //}
     
 
         }
