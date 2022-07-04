@@ -21,7 +21,10 @@ namespace Elite
         public Vector3 momentum;
 
         
-        protected Player player;
+        private Player player;
+
+        protected Vector3 boundingBoxStart;
+        protected Vector3 boundingBoxEnd;
 
 
 
@@ -43,18 +46,14 @@ namespace Elite
         public short score;
 
 
-        public Enemy(Player _player)
+
+
+        public void Setup()
         {
-            player = _player;
-
+            player = Engine.main.player;
             getsLit = true;
-            //mesh _mesh = new Mesh(new Triangle[]{new Triangle(new Vector3(0,0,0),new Vector3(0,0.0001f,0), new Vector3(0,0,5))});
-// /public EnemyLaser(Enemy _owner, Mesh _mesh,float fireTime, float laserVisibilityTime)
-
-
+            health = maxHealth;
             
- 
-
         }
 
         protected void ShootLasers(float deltaTime)

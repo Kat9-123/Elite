@@ -7,32 +7,14 @@ using System.Collections.Generic;
         {
 
 
+        private static Matrix4x4 projectionMatrix;
+
+
+        private const string LUMINACES = "#0OC*+/^,.  ";//"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
+
+
         
-        public static void RenderLoop()
-        {
 
-            double previousTime = 0d;
-
-            float acc = 0f;
-            while(true)
-            {
-
-                float deltaTime = (float) Utils.CalculateDeltaTime(ref previousTime);
-
-
-                acc += deltaTime;
-
-
-                if(acc > (1f/60f))
-                {
-                    acc = 0f;
-                    Render(Engine.gameObjects);
-                }
-               // 
-                
-
-            }
-        }
 
 
         public static void Initialise()
@@ -41,17 +23,9 @@ using System.Collections.Generic;
             ConsoleInterface.Initialise();
         }
 
-        private static ConsoleInterface.CharInfo[] buffer;
-        private static Matrix4x4 projectionMatrix;
-
-        private static string ui = "";
 
 
-        private const string LUMINACES = "#0OC*+/^,.  ";//"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
-
-
-
-
+        // I decided to not use operator overloads for these functions
         private static Triangle MultiplyTriangleByMatrix(Triangle triangle, Matrix4x4 mat)
         {
             Triangle result;
@@ -75,48 +49,25 @@ using System.Collections.Generic;
 
             if(w != 0f)
             {
-                result.x /= w;
-                result.y /= w;
-                result.z /= w;
+                result /= w;
             }
 
 
             return result;
         }
 
-        public static ConsoleInterface.CharInfo[] GenerateEmptyBuffer()
-        {
-            ConsoleInterface.CharInfo[] result = new ConsoleInterface.CharInfo[Settings.SCREEN_SIZE_Y*Settings.SCREEN_SIZE_X];
-            for (int y = 0; y < Settings.SCREEN_SIZE_Y; y++)
-            {
-                for (int x = 0; x < Settings.SCREEN_SIZE_X; x++)
-                {
-                    result[y*Settings.SCREEN_SIZE_X + x].Char.AsciiChar = Convert.ToByte(' ');
-                }
-            }
-            return result;
-        }
 
 
 
 
-        // Adds vector to all vectors in triangle
-        private static Triangle AddVecToTriangle(Triangle tri, Vector3 vec)
-        {
-            Triangle result;
-            result.a = tri.a + vec;
-            result.b = tri.b + vec;
-            result.c = tri.c + vec;
-            return result;
-
-        }
 
 
+        // Apply the translations of the current gameobject to the current triangle
         private static Triangle TranslateTriangle(Triangle triangle,Matrix4x4 rotationMatrix,GameObject obj)
         {
             
             // Apply the objects offset to centre it. legacy
-            triangle = AddVecToTriangle(triangle,obj.offset);
+            triangle += obj.offset;
 
 
             // Scale
@@ -129,7 +80,7 @@ using System.Collections.Generic;
         
 
             // Position
-            triangle = AddVecToTriangle(triangle,obj.position);
+            triangle += obj.position;
 
 
 
@@ -142,18 +93,23 @@ using System.Collections.Generic;
             Triangle translatedTriangle = TranslateTriangle(triangle,rotationMatrix,obj);
         
 
+            // movesWithCamera is a slightly hacky flag that decides if the camera
+            // translations get applied to the triangle
             if (!obj.movesWithCamera)
             {
-                // Apply inverted cameraposition
-                translatedTriangle = AddVecToTriangle(translatedTriangle,Engine.cameraPosition * -1);
+                // Apply inverted cameraPosition
+                translatedTriangle += Engine.cameraPosition * -1;
                 
-                // Apply inverted camerarotation
+                // Apply inverted cameraRotation
                 translatedTriangle = MultiplyTriangleByMatrix(translatedTriangle, cameraRotationMatrix);
 
             }
 
 
             // A triangle gets clipped if any of its points are behind the camera.
+            // This will clip triangles that are visible, but just very close to the camera.
+            // This is fine because it's very unlikely for objects to be that close to the camera
+            // in this game
             if (obj.getsClipped && ((translatedTriangle.a.z < 0) || (translatedTriangle.b.z < 0) || (translatedTriangle.c.z < 0))) return;
 
 
@@ -183,76 +139,62 @@ using System.Collections.Generic;
                 if(normal.Dot(translatedTriangle.a) >= 0) return;
             }
 
-            // Lighting
-            
+            // Calculat lighting. Default character is the objects character
             char character = obj.character;
             if(obj.getsLit)
             {
 
-
-               // lightDir += Engine.cameraPosition;
-                
-                    
-
+                // Apply cameraRotation to the lighting direction
                 Vector3 lightDir = MultiplyVectorByMatrix(obj.lightingDirection, cameraRotationMatrix);
                 lightDir = lightDir.Normalise();
 
-                float dp = normal.Dot(lightDir);
-                if (dp > 1) dp = 1f;
-                if (dp < -1) dp = -1f;
+                float intensity = normal.Dot(lightDir);
+
+                if (intensity > 1) intensity = 1f;
+                if (intensity < -1) intensity = -1f;
                 
-                dp += 1f;
-                dp /= 2f;
-
-                character = LUMINACES[(int)(dp*(LUMINACES.Length-1))];
-   
+                // Scale the value from [-1 to 1] to [0 to 1]
+                intensity += 1f;
+                intensity /= 2f;
 
 
-                
+                character = LUMINACES[(int)(intensity*(LUMINACES.Length-1))];
+                   
             }
 
 
-            // Project
+            // Project to 3D
             Triangle projectedTriangle = MultiplyTriangleByMatrix(translatedTriangle,projectionMatrix);
 
 
 
 
-            // Scale everything correctly back to screenspace
-            projectedTriangle = AddVecToTriangle(projectedTriangle, new Vector3(1,1,0));
-
-            projectedTriangle.a.x *= 0.5f * Settings.SCREEN_SIZE_X;
-            projectedTriangle.a.y *= 0.5f * Settings.SCREEN_SIZE_Y;
-
-            projectedTriangle.b.x *= 0.5f * Settings.SCREEN_SIZE_X;
-            projectedTriangle.b.y *= 0.5f * Settings.SCREEN_SIZE_Y;
-
-            projectedTriangle.c.x *= 0.5f * Settings.SCREEN_SIZE_X;
-            projectedTriangle.c.y *= 0.5f * Settings.SCREEN_SIZE_Y;
+            // Scale everything to screenspace
+            projectedTriangle += new Vector3(1,1,0);
 
 
+            projectedTriangle.a.x *= Settings.SCREEN_SIZE_X/2;
+            projectedTriangle.a.y *= Settings.SCREEN_SIZE_Y/2;
 
-            // Placing the projected triangle onto the buffer
+            projectedTriangle.b.x *= Settings.SCREEN_SIZE_X/2;
+            projectedTriangle.b.y *= Settings.SCREEN_SIZE_Y/2;
+            projectedTriangle.c.x *= Settings.SCREEN_SIZE_X/2;
+            projectedTriangle.c.y *= Settings.SCREEN_SIZE_Y/2;
+
+
+ 
             if(obj.filled)
             {
-                DrawFilledTriangle(obj.colour,
-                    new Vector2(projectedTriangle.a.x,projectedTriangle.a.y),
-                    new Vector2(projectedTriangle.b.x,projectedTriangle.b.y),
-                    new Vector2(projectedTriangle.c.x,projectedTriangle.c.y),character
-                
-                );
+
+                Drawer.DrawFilledTriangle(projectedTriangle,character,obj.colour);
+
                 return;
                 
             }
 
-       
 
-            DrawLine(obj.colour,(int)projectedTriangle.a.x,(int)projectedTriangle.a.y,(int)projectedTriangle.b.x,(int)projectedTriangle.b.y,character);
-            DrawLine(obj.colour,(int)projectedTriangle.b.x,(int)projectedTriangle.b.y,(int)projectedTriangle.c.x,(int)projectedTriangle.c.y,character);
-            DrawLine(obj.colour,(int)projectedTriangle.c.x,(int)projectedTriangle.c.y,(int)projectedTriangle.a.x,(int)projectedTriangle.a.y,character);
+            Drawer.DrawTriangle(projectedTriangle,character,obj.colour);
 
-
-                    
                     
                     
 
@@ -263,9 +205,9 @@ using System.Collections.Generic;
         {
 
 
-            buffer = GenerateEmptyBuffer();
-            // Generate camera rotation matrices
+            Drawer.Reset();
 
+            // Generate camera rotation matricx
             Matrix4x4 cameraRotationMatrix = Matrix4x4.DirectionToMatrix(Engine.cameraForward,Engine.cameraUp).MatrixQuickInverse();
 
 
@@ -273,18 +215,11 @@ using System.Collections.Generic;
             {
                 GameObject obj = gameObjects[gameObject];
 
-
-
                 if (!obj.visible) continue;
 
                 Triangle[] tris = obj.mesh.tris;
 
-                
                 Matrix4x4 rotationMatrix = Matrix4x4.DirectionToMatrix(obj.forward,obj.up);
-
-
-
-
 
                 for (int i = 0; i < tris.Length; i++)
                 {
@@ -295,138 +230,22 @@ using System.Collections.Generic;
             
 
 
-            
-
-
-            buffer = UI.ApplyUI(buffer,ui);
-            ui = "";
-            ConsoleInterface.Write(buffer);
+            Drawer.Draw();
 
         }
 
-
-
         public static void Write(string text)
         {
-            ui += text;
+            UI.Write(text);
         }
     
         public static void WriteLine(string text)
         {
-            ui += text + "\n";
+           UI.WriteLine(text);
         }
 
 
-        // Pick ya poison
-        private static void DrawLine(short colour, int x,int y,int x2, int y2,char character) {
-            int w = x2 - x;
-            int h = y2 - y;
-            int dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0;
-
-            if (w<0) dx1 = -1; else if (w>0) dx1 = 1;
-            if (h<0) dy1 = -1; else if (h>0) dy1 = 1;
-            if (w<0) dx2 = -1; else if (w>0) dx2 = 1;
-
-            int longest = Math.Abs(w);
-            int shortest = Math.Abs(h);
-            if (!(longest>shortest)) {
-                longest = Math.Abs(h);
-                shortest = Math.Abs(w);
-                if (h < 0) dy2 = -1; else if (h > 0) dy2 = 1;
-                dx2 = 0;            
-            }
-            int numerator = longest >> 1 ;
-            if(longest > 1000) return;
-            for (int i=0;i<=longest;i++) {
-                if (y >= 0 && y < Settings.SCREEN_SIZE_Y)
-                {
-                    if (x >= 0 && x < Settings.SCREEN_SIZE_X)
-                    {
-                        buffer[y*Settings.SCREEN_SIZE_X + x].Char.AsciiChar = (byte)character;
-                        buffer[y*Settings.SCREEN_SIZE_X + x].Attributes = colour;
-                    }
-                }
-                
-                numerator += shortest ;
-                if (!(numerator<longest)) {
-                    numerator -= longest ;
-                    x += dx1;
-                    y += dy1;
-                } else {
-                    x += dx2;
-                    y += dy2;
-                }
-            }
-        }
-
-
-        private static void DrawFilledTriangle(short colour, Vector2 a, Vector2 b, Vector2 c,char character)
-        {
-            Vector2 pos = new Vector2();
-            pos.x = MathF.Min(a.x,MathF.Min(b.x,c.x));
-            pos.y = MathF.Min(a.y,MathF.Min(b.y,c.y));
-
-
-            Vector2 largestSize = new Vector2();
-
-            largestSize.x = MathF.Max(a.x,MathF.Max(b.x,c.x));
-            largestSize.y = MathF.Max(a.y,MathF.Max(b.y,c.y));
-
-
-            Vector2 posEnd = new Vector2();
-
-            pos.x = MathF.Max(0,pos.x);
-            pos.y = MathF.Max(0,pos.y);
-
-            posEnd.x = MathF.Min(largestSize.x+pos.x,Settings.SCREEN_SIZE_X);
-            posEnd.y = MathF.Min(largestSize.y+pos.y,Settings.SCREEN_SIZE_Y);
-
-            for (int y = (int)pos.y; y < posEnd.y; y++)
-            {
-                for (int x = (int)pos.x; x < posEnd.x; x++)
-                {
-
-                    
-
-                    if(LiesPointWithinTriangle(new Vector2(x,y), a,b,c))
-                    {
-                        buffer[y*Settings.SCREEN_SIZE_X + x].Char.AsciiChar = (byte)character;
-                        buffer[y*Settings.SCREEN_SIZE_X + x].Attributes = colour;
-                    }
-                }
-            }
-
-        }
-
-        
-        private static bool LiesPointWithinTriangle(Vector2 point, Vector2 a, Vector2 b, Vector2 c)
-        {
-
-            float as_x = point.x-a.x;
-            float as_y = point.y-a.y;
-
-            bool s_ab = (b.x-a.x)*as_y-(b.y-a.y)*as_x > 0;
-
-            if((c.x-a.x)*as_y-(c.y-a.y)*as_x > 0 == s_ab) return false;
-
-            if((c.x-b.x)*(point.y-b.y)-(c.y-b.y)*(point.x-b.x) > 0 != s_ab) return false;
-
-            return true;
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
     }
 

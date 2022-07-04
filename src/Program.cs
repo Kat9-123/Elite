@@ -36,7 +36,7 @@ namespace Elite
             }
             Console.BackgroundColor = ConsoleColor.White;
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
             Console.ReadLine();
   

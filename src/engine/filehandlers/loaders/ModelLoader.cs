@@ -1,3 +1,4 @@
+// Heavily based on OneLoneCoder
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -16,10 +17,8 @@ namespace Elite
 
             for (int i = 0; i < splitData.Length; i++)
             {
-                if(splitData[i] == "")
-                {
-                    continue;
-                }
+                if(splitData[i] == "") continue;
+
 
                 if(splitData[i][0] == 'v')
                 {

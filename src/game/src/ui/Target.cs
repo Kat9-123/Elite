@@ -17,6 +17,7 @@ namespace Elite
             offset = new Vector3(-0.1f,0.05f,0);
             //up = new Vector3(0,-1,0);
             colour = 11;
+            filled = true;
  
           
         }

@@ -24,10 +24,10 @@ namespace Elite
         {
 
             
-            if(InputManager.IsKeyPressed(InputMap.UPGRADE_SHIELD))
-            {
+            //if(InputManager.IsKeyPressed(InputMap.UPGRADE_SHIELD))
+            //{
                // shieldLevel++;
-            }
+            //}
         }
 
 

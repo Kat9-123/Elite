@@ -16,14 +16,15 @@ namespace Elite
         [DllImport("user32.dll")]
         private static extern int GetAsyncKeyState(int vKeys);
 
-        public static bool IsKeyHeld(short key)
+        public static bool IsKeyHeld(InputMap key)
         {
-            return (GetAsyncKeyState(key) > 1);
+            return (GetAsyncKeyState((short)key) > 1);
         }
 
 
-        public static bool IsKeyPressed(short key)
+        public static bool IsKeyPressed(InputMap _key)
         {
+            short key = (short) _key;
             bool state = (GetAsyncKeyState(key) > 1);
 
             if(state)

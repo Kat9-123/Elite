@@ -4,7 +4,7 @@ namespace Elite
 {
     public class RadarEnemy : GameObject
     {
-
+        private const int RADAR_RANGE = 3000;
         public Enemy enemy;
 
         public override void Start()
@@ -55,7 +55,7 @@ namespace Elite
             Vector3 right = Utils.Cross(Engine.cameraUp,Engine.cameraForward);
 
             visible = true;
-            if(Engine.cameraPosition.SquaredDistanceTo(enemy.position) > 2500*2500)
+            if(Engine.cameraPosition.SquaredDistanceTo(enemy.position) > RADAR_RANGE*RADAR_RANGE)
             {
                 visible = false;
             }
@@ -70,7 +70,7 @@ namespace Elite
 
 
 
-            Vector3 pos = (enemy.position-Engine.cameraPosition)/3750f;
+            Vector3 pos = (enemy.position-Engine.cameraPosition)/(RADAR_RANGE*1.4f);
             position = pos;//pos.z + Engine.cameraUp*pos.y + right*pos.x;
 
             Vector3 add = new Vector3(0,1.5f,2f);

@@ -1,4 +1,6 @@
 // stackoverflow.com/questions/6554536/possible-to-get-set-console-font-size-in-c-sharp-net
+
+// All just nicked straight from stackoverflow
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -106,7 +108,7 @@ namespace Elite
         ref SmallRect lpWriteRegion);
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct Coord
+        private struct Coord
         {
             public short X;
             public short Y;
@@ -133,7 +135,7 @@ namespace Elite
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SmallRect
+        private struct SmallRect
         {
             public short Left;
             public short Top;
@@ -153,26 +155,14 @@ namespace Elite
         [STAThread]
         public static void Write(CharInfo[] buf)
         {
-            /*
-            string s = "";
-            for (int y = 0; y < Settings.SCREEN_SIZE_Y; y++)
-            {
-                for (int x = 0; x < Settings.SCREEN_SIZE_X; x++)
-                {
-                    s += Convert.ToChar(buf[y*Settings.SCREEN_SIZE_Y+x].Char.AsciiChar);
-                }
-                s += "\n";
-            }
-            Console.Write(s);
-            return;
-            */
+  
             if (!safeFileHandle.IsInvalid)
             {
                 SmallRect rect = new SmallRect() { Left = 0, Top = 0, Right = Settings.SCREEN_SIZE_X, Bottom = Settings.SCREEN_SIZE_Y };
 
                 
                 // Write to screen
-                bool b = WriteConsoleOutputW(safeFileHandle, buf,
+                WriteConsoleOutputW(safeFileHandle, buf,
                     new Coord() { X = Settings.SCREEN_SIZE_X, Y = Settings.SCREEN_SIZE_Y },
                     new Coord() { X = 0, Y = 0 },
                     ref rect
