@@ -3,12 +3,12 @@ using System;
 
 namespace Elite
 {
-    public class Laser : GameObject
+    public class PlayerLaser : GameObject
     {
 
       //  private static float LIFETIME
 
-        public Laser(bool type)
+        public PlayerLaser(bool type)
         {
             if (!type) mesh = Models.laserLeft;
             else mesh = Models.laserRight;

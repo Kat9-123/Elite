@@ -6,6 +6,8 @@ namespace Elite
     {
 
         private float duration;
+
+        // currentTime
         private float time;
 
         public Timer(float _duration)

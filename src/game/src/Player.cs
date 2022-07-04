@@ -11,14 +11,14 @@ namespace Elite
 
         private Timer lastHitTimer;
         private Timer shieldRegenTimer;
-        private const float LASER_LIFETIME = 0.2f;
-        private float laserTimer = 0f;
+        private Timer laserTimer = new Timer(0.2f);
         private bool currentLaser = false;
-        public Laser laserLeft;
+        private PlayerLaser laserLeft;
+        private PlayerLaser laserRight;
 
 
         public bool isDead = false;
-        public Laser laserRight;
+        
 
         public EnemyGenerator enemyGen;
 
@@ -52,6 +52,8 @@ namespace Elite
             boundingBox = new BoundingBox(new Vector3(-20,-20,-20), new Vector3(20,20,20));
 
             health = MAX_HEALTH;
+            laserLeft = (PlayerLaser) Engine.Instance(new PlayerLaser(false));
+            laserRight = (PlayerLaser) Engine.Instance(new PlayerLaser(true));
 
         }
         private Vector3 prevForward = new Vector3(0,0,1);
@@ -80,43 +82,12 @@ namespace Elite
 
             if (InputManager.IsKeyHeld(InputMap.SHOOT))  
             {
-                laserTimer += deltaTime;
+                
 
-                if(laserTimer >= LASER_LIFETIME)
+                if(laserTimer.Accumulate())
                 {
+                    laserTimer.Reset();
 
-                    /*
-                    Vector3 f = Engine.cameraForward + ((Engine.cameraForward - prevForward)*6f);
-                    Vector3 u = Engine.cameraUp + ((Engine.cameraUp - prevUp)*6f);
-
-                    Engine.Instance(
-                        new Projectile(
-                        position+Utils.RelativeToRotation(new Vector3(1.3f,1.2f,-2f),
-                            f,
-                            u
-                        ),
-        
-                        f,
-                        momentum,
-                        u
-
-
-                    ));
-                    Engine.Instance(new Projectile(position+Utils.RelativeToRotation(new Vector3(-1.3f,1.2f,-2f),f,u),f,momentum,u));
-                    */
-                    /*
-                    Projectile laserRight =(Projectile) Engine.Instance(new Projectile());
-                     laserRight.momentum = momentum;
-                     laserRight.player = this;
-
-                    laserRight.forward = forward;
-                    laserRight.up = up;
-
-
-                    laserLeft.position = position;
-                    */
-                    laserTimer = 0f;
-                    
 
                     laserLeft.visible = !currentLaser;
                     laserRight.visible = currentLaser;
@@ -126,8 +97,8 @@ namespace Elite
                         hitEnemy.Hit(10f);
                     }
                 
-                    laserTimer = 0f;
                     currentLaser = !currentLaser;
+                    
                     
                 }
                 
@@ -136,7 +107,6 @@ namespace Elite
             {
                 laserLeft.visible = false;
                 laserRight.visible = false;
-                laserTimer = 10f;
             }
 
 

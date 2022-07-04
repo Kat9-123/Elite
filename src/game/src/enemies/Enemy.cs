@@ -53,6 +53,7 @@ namespace Elite
             player = Engine.main.player;
             getsLit = true;
             health = maxHealth;
+            forward = (Engine.cameraPosition - position).Normalise();
             
         }
 
@@ -91,8 +92,7 @@ namespace Elite
                 isAlive = false;
 
                 colour = 4;
-                Engine.main.upgradeManager.AddPoints(score);
-                Engine.main.player.Heal();
+                player.Heal();
                 Engine.main.explosionManager.DoExplosion(this);
                 Engine.main.enemyManager.DestroyEnemy(this);
 

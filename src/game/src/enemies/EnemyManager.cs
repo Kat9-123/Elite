@@ -21,7 +21,6 @@ namespace Elite
         public override void Start()
         {
             visible = false;
-
         }
 
         public override void Update(float deltaTime)
@@ -53,15 +52,15 @@ namespace Elite
                 switch (Utils.RandomInt(0,upperBound))
                 {
                     case 0:
-                        enemy = InstanceEnemy(new Charger(Engine.main.player));
+                        enemy = InstanceEnemy(new Charger());
 
                         break;
                     case 1:
-                        enemy = InstanceEnemy(new Stingray(Engine.main.player));
+                        enemy = InstanceEnemy(new Stingray());
 
                         break;
                     case 2:
-                        enemy = InstanceEnemy(new Boss(Engine.main.player));
+                        enemy = InstanceEnemy(new Boss());
                         
                         break;
 

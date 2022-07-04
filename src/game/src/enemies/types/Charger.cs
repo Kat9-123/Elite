@@ -19,21 +19,12 @@ namespace Elite
             
             boundingBox = new BoundingBox(new Vector3(-30f,-30f,-30f),new Vector3(30f,30f,30f),this);
 
-
-
-        
-         //   position = new Vector3(0,0,0);
-            
-            scale = new Vector3(2,2,2);
-          //  up = new Vector3(0,1,0);
-
-
-            
+             
+            scale = new Vector3(2,2,2);        
 
             mesh = Models.chargerMesh;
 
 
-            forward = (Engine.cameraPosition - position).Normalise();
 
             AddLaser(
                 laserMesh: Models.enemyLaserMesh, 
@@ -46,13 +37,15 @@ namespace Elite
             );
 
 
-            player.AddRadarEnemy(this);
+            
 
             maxHealth = 100f;
-            health = maxHealth;
-           /// EnemyLaser laser = (EnemyLaser) Engine.Instance(new EnemyLaser(this));
 
+           /// EnemyLaser laser = (EnemyLaser) Engine.Instance(new EnemyLaser(this));
+            
+            player.AddRadarEnemy(this);
             Setup();
+            
         }
         
 

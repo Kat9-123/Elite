@@ -13,7 +13,7 @@ namespace Elite
         public Vector3 forward = new Vector3(0,0,1);
 
         
-        public bool getsCulled = true;
+        
         public short colour = 15;
         public bool filled = false;
 
@@ -42,21 +42,16 @@ namespace Elite
 
         public bool visible = true;
 
-
         public bool getsClipped = true;
+        public bool getsCulled = true;
+
+
+        public virtual void Start() {}
 
 
 
+        public virtual void Update(float deltaTime) {}
 
-        public virtual void Update(float deltaTime)
-        {
-
-        }
-
-        public virtual void Start()
-        {
-
-        }
 
 
 

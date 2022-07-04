@@ -11,7 +11,6 @@ namespace Elite
 
         public Player player;
 
-        public UpgradeManager upgradeManager;
         public UIManager uiManager;
         public EnemyGenerator enemyManager;
 
@@ -53,8 +52,6 @@ namespace Elite
             mouseController = (MouseController) Engine.Instance(new MouseController());
 
 
-            upgradeManager = (UpgradeManager) Engine.Instance(new UpgradeManager());
-            enemyLayer++;
 
             explosionManager = (ExplosionManager) Engine.Instance(new ExplosionManager());
             enemyLayer++;
@@ -91,8 +88,7 @@ namespace Elite
             
 
 
-            player.laserLeft = (Laser) Engine.Instance(new Laser(false));
-            player.laserRight = (Laser) Engine.Instance(new Laser(true));
+
 
             uiManager = (UIManager) Engine.Instance(new UIManager(player));
 

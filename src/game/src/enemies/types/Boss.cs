@@ -7,8 +7,6 @@ namespace Elite
 
 
 
-        public Boss(Player _player) : base(_player) {}
-
 
 
         public override void Start()
@@ -25,10 +23,9 @@ namespace Elite
 
 
            
-         //   position = new Vector3(0,0,0);
-            
+
             scale = new Vector3(6,6,6);
-          //  up = new Vector3(0,1,0);
+
 
             displaySize /= 2;
             
@@ -36,11 +33,7 @@ namespace Elite
             mesh = Models.bossMesh;
 
 
-            forward = (Engine.cameraPosition - position).Normalise();
-           // bigLaser = (EnemyLaser) Engine.Instance(new EnemyLaser(this,Models.bigLaserMesh,new Vector3(0,0,150),150f,4.5f,10f,1f));
-           // bigLaser.colour = 5;
-
-            //Mesh laserMesh, Vector3 offset, float damage, float accuracy, short colour, float fireTime, float laserVisibilityTime)
+           
             EnemyLaser bigLaser = AddLaser(
                 laserMesh: Models.bigLaserMesh, 
                 _offset: new Vector3(0,0,150), 
