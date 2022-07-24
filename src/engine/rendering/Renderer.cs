@@ -1,31 +1,38 @@
+// This renderer is based on OLC's C++ renderer.
+// Any optimisation tips are appreciated!
 using System;
 using System.Collections.Generic;
 
-    namespace Elite
+namespace Elite
+{
+    public static class Renderer
     {
-        public static class Renderer
-        {
 
 
         private static Matrix4x4 projectionMatrix;
 
-
-        private const string LUMINACES = "#0OC*+/^,.  ";//"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
-
+        // Characters that are used for lighting.
+        private const string LUMINACES = "#0OC*+/^,.        ";//"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
+        //"#0OC*+/^,.  "
 
         
 
+        public static void SetProjectionMatrix(float fov)
+        {
+            projectionMatrix = Matrix4x4.GenerateProjectionMatrix(fov);
+        }
 
 
         public static void Initialise()
         {
-            projectionMatrix = Matrix4x4.GenerateProjectionMatrix();
+            SetProjectionMatrix(Settings.FOV);
             ConsoleInterface.Initialise();
         }
 
 
 
-        // I decided to not use operator overloads for these functions
+        // I decided to not use operator overloads for these functions, because
+        // they are slightly less efficient than function-calls (citation needed)
         private static Triangle MultiplyTriangleByMatrix(Triangle triangle, Matrix4x4 mat)
         {
             Triangle result;
@@ -66,7 +73,7 @@ using System.Collections.Generic;
         private static Triangle TranslateTriangle(Triangle triangle,Matrix4x4 rotationMatrix,GameObject obj)
         {
             
-            // Apply the objects offset to centre it. legacy
+            // Apply the objects offset to centre it. Legacy
             triangle += obj.offset;
 
 
@@ -88,13 +95,16 @@ using System.Collections.Generic;
         }
 
         private static void RenderTriangle(
-            Triangle triangle,Matrix4x4 rotationMatrix,Matrix4x4 cameraRotationMatrix,GameObject obj)
+            Triangle triangle,
+            Matrix4x4 rotationMatrix,Matrix4x4 cameraRotationMatrix,
+            GameObject obj)
         {
+           
             Triangle translatedTriangle = TranslateTriangle(triangle,rotationMatrix,obj);
         
 
             // movesWithCamera is a slightly hacky flag that decides if the camera
-            // translations get applied to the triangle
+            // translations gets applied to the triangle. Used for some UI elements.
             if (!obj.movesWithCamera)
             {
                 // Apply inverted cameraPosition
@@ -139,7 +149,7 @@ using System.Collections.Generic;
                 if(normal.Dot(translatedTriangle.a) >= 0) return;
             }
 
-            // Calculat lighting. Default character is the objects character
+            // Calculate lighting. Default character is the objects character
             char character = obj.character;
             if(obj.getsLit)
             {
@@ -168,7 +178,6 @@ using System.Collections.Generic;
 
 
 
-
             // Scale everything to screenspace
             projectedTriangle += new Vector3(1,1,0);
 
@@ -185,18 +194,13 @@ using System.Collections.Generic;
  
             if(obj.filled)
             {
-
                 Drawer.DrawFilledTriangle(projectedTriangle,character,obj.colour);
-
                 return;
                 
             }
 
-
             Drawer.DrawTriangle(projectedTriangle,character,obj.colour);
-
-                    
-                    
+          
 
         }
 
@@ -207,19 +211,20 @@ using System.Collections.Generic;
 
             Drawer.Reset();
 
-            // Generate camera rotation matricx
+            // Generate camera rotation matrix
             Matrix4x4 cameraRotationMatrix = Matrix4x4.DirectionToMatrix(Engine.cameraForward,Engine.cameraUp).MatrixQuickInverse();
 
 
             for (int gameObject = 0; gameObject < gameObjects.Count; gameObject++)
             {
+            
                 GameObject obj = gameObjects[gameObject];
-
                 if (!obj.visible) continue;
 
                 Triangle[] tris = obj.mesh.tris;
 
                 Matrix4x4 rotationMatrix = Matrix4x4.DirectionToMatrix(obj.forward,obj.up);
+
 
                 for (int i = 0; i < tris.Length; i++)
                 {
@@ -227,13 +232,13 @@ using System.Collections.Generic;
                 }                
             }
 
-            
 
-
-            Drawer.Draw();
+            Drawer.DrawBufferToScreen();
 
         }
 
+
+        // Legacy.
         public static void Write(string text)
         {
             UI.Write(text);
@@ -243,7 +248,6 @@ using System.Collections.Generic;
         {
            UI.WriteLine(text);
         }
-
 
  
 

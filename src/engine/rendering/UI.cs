@@ -8,6 +8,7 @@ namespace Elite
 
         private static ConsoleInterface.CharInfo[] UIBuffer = new ConsoleInterface.CharInfo[Settings.SCREEN_SIZE_X*Settings.SCREEN_SIZE_Y];
         private static string debugText = "";
+
         public static void AddSprite(Sprite sprite, int posX, int posY,char character = '#')
         {
             for (int y = 0; y < sprite.height; y++)
@@ -16,8 +17,6 @@ namespace Elite
                 {
                     if(sprite.pixels[y*sprite.width+x].Attributes == 0) continue;
                     if((x+posX) < 0 || (x+posX) >= Settings.SCREEN_SIZE_X || (y+posY) < 0 || (y+posY) >= Settings.SCREEN_SIZE_Y) continue;
-                   // buffer[(y+posY)*Settings.SCREEN_SIZE_X+x+posX].Attributes = sprite.pixels[y*sprite.width+x].Attributes;
-                    //buffer[(y+posY)*Settings.SCREEN_SIZE_X+x+posX].Char.AsciiChar = Convert.ToByte(character);
                     UIBuffer[(y+posY)*Settings.SCREEN_SIZE_X+x+posX]= sprite.pixels[y*sprite.width+x];
                 }
             }
@@ -36,11 +35,13 @@ namespace Elite
                     continue;
                 }
 
-                int index = char.ToUpper(text[i]) - '@';
+                // Ascii to index in font array.
+                // I have no idea how this works...
+                int index = char.ToUpper(text[i]) - '@' - 1;
 
                 if(index < 0)
                 {
-                    index = char.ToUpper(text[i]) - '/' + 26;
+                    index = char.ToUpper(text[i]) - '/' + 25;
 
                 }
 
@@ -93,7 +94,9 @@ namespace Elite
 
         public static ConsoleInterface.CharInfo[] ApplyUI(ConsoleInterface.CharInfo[] buffer)
         {
+            
 
+            // Debugtext
             int x = 0;
             int y = 0;
             for (int i = 0; i < debugText.Length; i++)
@@ -109,8 +112,9 @@ namespace Elite
                 x++;
 
             }
+            debugText = "";
 
-
+            // Other UI
             for (int b = 0; b < Settings.SCREEN_SIZE_Y; b++)
             {
                 for (int a = 0; a < Settings.SCREEN_SIZE_X; a++)
@@ -125,7 +129,7 @@ namespace Elite
                     buffer[b*Settings.SCREEN_SIZE_X + a].Attributes = UIBuffer[b*Settings.SCREEN_SIZE_X + a].Attributes;
                 }
             }
-            debugText = "";
+           
             return buffer;
         }
     }

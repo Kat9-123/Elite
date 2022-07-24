@@ -11,6 +11,17 @@ namespace Elite
 
 
         public const bool DISPLAY_DEBUG_INFO = true;
+
+        public const string FONT = "Square";
+
+        public const int DUST_COUNT = 40;
+
+        public const int MIN_PLANET_COUNT = 10;
+        public const int MAX_PLANET_COUNT = 20;
+
+
+
+ 
     }
 
 }

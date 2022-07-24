@@ -29,13 +29,11 @@ namespace Elite
             return -1;
         }
 
-
+        // Takes the given mesh and extends it by the given amount. The distance between itterations
+        // is defined by the seperation. This function is mainly used for lasers.
         public static Mesh GenerateRepeatingMesh(Mesh _mesh, int count, int seperation)
         {
-            //scale = new Vector3(20,20,1);
-
-
-        //    Triangle baseTri = new Triangle();
+ 
 
             Triangle[] triangles = new Triangle[count*_mesh.tris.Length];
 
@@ -54,6 +52,8 @@ namespace Elite
             return new Mesh(triangles);
         }
 
+
+        // Format a vector3/2 so that it can be printed
         public static string FormatVector(Vector3 vec, string name)
         {
             string result = name + ": (";
@@ -72,6 +72,7 @@ namespace Elite
             return result;
         }
 
+        // Format bool so that it can be printed
         public static string FormatBool(bool b, string name)
         {
             string result = name + ": ";
@@ -108,6 +109,22 @@ namespace Elite
             return result;
         }
 
+
+        // Takes the given position and rotates it so that it's located relative to the given forward and up direction.
+        // examples:
+
+        // Forward = (0,0,1), Up = (0,1,0)
+        // pos = (0,0,10)
+        // returns (0,0,10)
+
+        // Forward = (0,0,-1), Up = (0,1,0)
+        // pos = (0,0,10)
+        // returns (0,0,-10)
+
+        // Forward = (1,0,0), Up = (0,1,0)
+        // pos = (0,0,10)
+        // returns (10,0,0)
+        // etc.
         public static Vector3 RelativeToRotation(Vector3 pos, Vector3 forward, Vector3 up)
         {
             Vector3 right = Cross(up,forward);
@@ -122,10 +139,7 @@ namespace Elite
         }
 
 
-        public static float Lerp(float start, float end, float t)
-        {
-            return (1 - t) * start + t * end;
-        }
+
 
         public static double CalculateDeltaTime(ref double previousTime)
         {
@@ -139,7 +153,7 @@ namespace Elite
         
         }
 
-        // Generates a random point within the given rectangle
+        // Generates a random point within the given square
         // but it rejects points that are too close to the centre 
         public static Vector3 RandomPositionExcludeCentre(float minDist, float maxDist)
         {
@@ -151,22 +165,6 @@ namespace Elite
 
             
             return pos;
-            /*
-            Vector3 centre = new Vector3(0,0,0);
-            Vector3 pos = new Vector3(0,0,0);
-
-            // Rejection sampling 
-            while (pos.SquaredDistanceTo(centre) < (centreSize*centreSize))
-            {
-                pos.x = RandomFloat(rectStart.x, rectEnd.x);
-                pos.y = RandomFloat(rectStart.y, rectEnd.y);
-                pos.z = RandomFloat(rectStart.z, rectEnd.z);
-                
-            }
-
-
-            return pos;
-            */
         }
 
     }

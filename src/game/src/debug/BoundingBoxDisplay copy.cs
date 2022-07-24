@@ -1,3 +1,5 @@
+// Boundbox visualiser for debug purposes.
+
 using System;
 
 namespace Elite

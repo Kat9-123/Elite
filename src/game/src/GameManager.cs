@@ -18,14 +18,13 @@ namespace Elite
 
         public MouseController mouseController;
 
-      //  public const int ENEMY_LAYER = 10;
 
         public int enemyLayer = 1;
 
 
         public void GenerateBodies()
         {
-            int l = Utils.RandomInt(10,20);
+            int l = Utils.RandomInt(Settings.MIN_PLANET_COUNT,Settings.MAX_PLANET_COUNT);
             for (int i = 0; i < l; i++)
             {
                 Vector3 pos = Utils.RandomPositionExcludeCentre(2f,16f);
@@ -44,13 +43,17 @@ namespace Elite
         {
           //  Models.cubeMesh = ModelHandler.LoadModel("test.obj");
             visible = false;
-           // 
+
+            Engine.cameraPosition = new Vector3(0,0,0);
+
+
+            Engine.cameraUp = new Vector3(0,1,0);
+            Engine.cameraForward = new Vector3(0,0,1);
+            Engine.cameraRight = new Vector3(1,0,0);
+
+
             player = (Player) Engine.Instance(new Player());
             enemyLayer++;
-
-
-            mouseController = (MouseController) Engine.Instance(new MouseController());
-
 
 
             explosionManager = (ExplosionManager) Engine.Instance(new ExplosionManager());
@@ -58,7 +61,7 @@ namespace Elite
 
             EnemyGenerator enemyGen = (EnemyGenerator) Engine.Instance(new EnemyGenerator());
             enemyLayer++;
-            //player.t = en;
+
             player.enemyGen = enemyGen;
             enemyManager = enemyGen;
 
@@ -66,7 +69,7 @@ namespace Elite
             GenerateBodies();
             
 
-            for (int i = 0; i < 80; i++)
+            for (int i = 0; i < Settings.DUST_COUNT; i++)
             {
 
                 Engine.Instance(new Dust());
@@ -74,18 +77,15 @@ namespace Elite
             }
 
 
+
             //              <--- ENEMIES
 
 
 
 
-         //   InstanceEnemy();
-           // Cube cube = (Cube) Engine.Instance(new Cube());
 
-            
-            //en.target = cube;
 
-            
+            player.SetupLasers();
 
 
 

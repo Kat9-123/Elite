@@ -11,7 +11,7 @@ namespace Elite
 
         public override void Start()
         {
-            mesh = Models.pip;
+          //  mesh = Models.pip;
             colour = 6;
             scale = new Vector3(1,1,1);
         }

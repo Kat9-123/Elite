@@ -2,7 +2,7 @@ using System;
 
 namespace Elite
 {
-    public class EnemyHealth : GameObject
+    public class ShieldDisplay : GameObject
     {
 
 
@@ -17,7 +17,7 @@ namespace Elite
         private bool isBackground;
 
 
-        public EnemyHealth(Vector3 _basePos, bool _isBackground = false, bool _isPlayer = false)
+        public ShieldDisplay(Vector3 _basePos, bool _isBackground = false, bool _isPlayer = false)
         {
             basePos = _basePos;
             isPlayer = _isPlayer;

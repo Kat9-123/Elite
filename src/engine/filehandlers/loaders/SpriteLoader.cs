@@ -5,7 +5,6 @@ namespace Elite
 {   
     public static class SpriteLoader
     {
-        private const string BRIGHTNESS = "#0OC+/^. ";
 
 
         private static Colour[] colours = new Colour[] {

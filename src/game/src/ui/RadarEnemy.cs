@@ -5,18 +5,24 @@ namespace Elite
     public class RadarEnemy : GameObject
     {
         private const int RADAR_RANGE = 3000;
-        public Enemy enemy;
+        private Enemy enemy;
+
+
+        public RadarEnemy(Enemy _enemy, Vector3 _scale)
+        {
+            enemy = _enemy;
+            scale = _scale;
+        }
 
         public override void Start()
         {
             
-            
-          //  movesWithCamera = true;
+
             mesh = Models.radarEnemyMesh;
 
             position = new Vector3(0,1,5);
             
-            float angle = MathF.PI/6;
+ 
             getsCulled = false;
 
             Vector3 axis = Utils.Cross(up,forward);

@@ -37,16 +37,13 @@ namespace Elite
                 Engine.QueueDestruction(this);
             }
 
-
-            Vector3 hit = new Vector3(0,0,0);
-
             for (int i = 0; i < Engine.main.enemyManager.enemies.Count; i++)
             {
                 Enemy enemy = Engine.main.enemyManager.enemies[i];
                 if(Physics.CheckLineBox(
                     enemy.boundingBox.start+enemy.position, 
                     enemy.boundingBox.end+enemy.position, 
-                    position, position+forward*3f, ref hit)
+                    position, position+forward*3f)
                 )
                 {
                     enemy.Hit(20f);

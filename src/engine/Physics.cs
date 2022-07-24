@@ -5,8 +5,9 @@ namespace Elite
 
     public static class Physics
     {
-        public static bool CheckLineBox(Vector3 B1, Vector3 B2, Vector3 L1, Vector3 L2, ref Vector3 Hit)
+        public static bool CheckLineBox(Vector3 B1, Vector3 B2, Vector3 L1, Vector3 L2)
         {
+            Vector3 Hit = new Vector3(0,0,0);
 
             if (L2.x < B1.x && L1.x < B1.x) return false;
             if (L2.x > B2.x && L1.x > B2.x) return false;

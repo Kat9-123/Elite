@@ -6,6 +6,9 @@ namespace Elite
     {
         private Player player;
 
+        private ShieldDisplay enemyShieldDisplay;
+        private ShieldDisplay playerShieldDisplay;
+
         public string points = "";
         public UIManager(Player _player)
         {
@@ -44,28 +47,32 @@ namespace Elite
             PlayerDisplay plDis = (PlayerDisplay) Engine.Instance(new PlayerDisplay());
 
 
-            EnemyHealth bgShieldDisplay = (EnemyHealth) Engine.Instance(new EnemyHealth(new Vector3(0.855f,1.84f,2),true));
+            ShieldDisplay bgShieldDisplay = (ShieldDisplay) Engine.Instance(new ShieldDisplay(new Vector3(0.855f,1.84f,2),true));
             bgShieldDisplay.scale.y *= 1.3f;
     
-            EnemyHealth shieldDisplay = (EnemyHealth) Engine.Instance(new EnemyHealth(new Vector3(0.855f,1.84f,2)));
-            shieldDisplay.colour = 4; //12
-            shieldDisplay.scale.y *= 1.3f;
-
-            player.enemyShieldDisplay = shieldDisplay;
+            enemyShieldDisplay = (ShieldDisplay) Engine.Instance(new ShieldDisplay(new Vector3(0.855f,1.84f,2)));
+            enemyShieldDisplay.colour = 4; //12
+            enemyShieldDisplay.scale.y *= 1.3f;
 
 
+            
 
 
-            EnemyHealth playerShieldBg = (EnemyHealth) Engine.Instance(new EnemyHealth(new Vector3(-1.89f,1.7f,2),true,true));
+
+
+            ShieldDisplay playerShieldBg = (ShieldDisplay) Engine.Instance(new ShieldDisplay(new Vector3(-1.89f,1.7f,2),true,true));
 
             playerShieldBg.scale = new Vector3(0.15f,0.15f,0.15f);
 
 
-            EnemyHealth playerShieldDisplay = (EnemyHealth) Engine.Instance(new EnemyHealth(new Vector3(-1.89f,1.7f,2),false,true));
+            playerShieldDisplay = (ShieldDisplay) Engine.Instance(new ShieldDisplay(new Vector3(-1.89f,1.7f,2),false,true));
             playerShieldDisplay.colour = 1;
             playerShieldDisplay.scale = new Vector3(0.15f,0.15f,0.15f);
 
-            player.shieldDisplay = playerShieldDisplay;
+            playerShieldDisplay.maxHealth = Player.MAX_HEALTH;
+
+
+
 
 
 
@@ -76,6 +83,34 @@ namespace Elite
     
         }
 
+        public void AddRadarEnemy(Enemy enemy, Vector3 size)
+        {
+
+            RadarEnemy radarEnemy = (RadarEnemy) Engine.Instance(new RadarEnemy(enemy,size));
+
+
+        }
+
+        public void DebugInfo()
+        {
+            Renderer.WriteLine("player:");
+            Renderer.WriteLine(Utils.FormatVector(Engine.cameraPosition,"position"));
+            
+            Renderer.Write(Utils.FormatVector(Engine.cameraForward,"forward"));
+            Renderer.Write(" | ");
+            Renderer.WriteLine(Engine.cameraForward.Length().ToString());
+
+            Renderer.Write(Utils.FormatVector(Engine.cameraUp,"up"));
+            Renderer.Write(" | ");
+            Renderer.WriteLine(Engine.cameraUp.Length().ToString());
+
+
+            Renderer.WriteLine(Utils.FormatVector(Engine.cameraRight,"right"));
+
+            Renderer.WriteLine("Health: " + player.health.ToString());
+            // UI.WriteText("0123456789\nabcdefg\nhijklmnop\nqrstuvw\nxyz",5,5);
+        }
+
 
 
         public override void Update(float deltaTime)
@@ -84,6 +119,10 @@ namespace Elite
             {
                 return;
             }
+
+
+
+            DebugInfo();
             
 
             // Points
@@ -98,6 +137,20 @@ namespace Elite
 
             // Radar
             UI.AddSprite(Sprites.radar,89,157);
+
+           
+
+            if(player.target != null)
+            {
+                enemyShieldDisplay.currentHealth = player.target.health;
+                enemyShieldDisplay.maxHealth = player.target.maxHealth;
+
+            }
+
+            playerShieldDisplay.currentHealth = player.health;
+
+
+
 
             // Mouse
        //     UI.AddSprite(Sprites.radar,

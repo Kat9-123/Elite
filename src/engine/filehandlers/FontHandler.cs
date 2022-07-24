@@ -5,8 +5,8 @@ namespace Elite
 {   
     public static class FontHandler
     {
-        // 1 special, 10 numbers, 26 characters
-        public static string[] characters = new string[1+10+26];
+        // 26 characters + 10 numbers
+        public static string[] characters = new string[26+10];
 
         public static void LoadFont()
         {
@@ -17,7 +17,7 @@ namespace Elite
           
             for (int i = 0; i < splitData.Length; i++)
             {
-                // 
+                // Get the curent character (split into 7 parts, height)
                 string[] splitCharacter = splitData[i].Split("\r\n");
 
                 for (int line = 0; line < splitCharacter.Length; line++)
@@ -26,6 +26,7 @@ namespace Elite
                     splitCharacter[line] = splitCharacter[line].PadRight(5);
 
                 }
+
                 string res = string.Join("",splitCharacter);
                 characters[i] = res;
 

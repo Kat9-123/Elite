@@ -83,8 +83,8 @@ namespace Elite
               //  Engine.main.player.Hit(damage);   
             //}
 
-            Vector3 test = new Vector3(0,0,0);
-            if(Physics.CheckLineBox((player.boundingBox.start*accuracy) + player.position, (player.boundingBox.end*accuracy) + player.position, position, position+(forward*1_000_000_000),ref test))
+
+            if(Physics.CheckLineBox((player.boundingBox.start*accuracy) + player.position, (player.boundingBox.end*accuracy) + player.position, position, position+(forward*1_000_000)))
             {
                 Engine.main.player.Hit(damage);  
             }

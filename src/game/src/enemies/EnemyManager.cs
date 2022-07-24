@@ -25,6 +25,7 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
+            // Despawn enemies if they're too far away
             for (int i = 0; i < enemies.Count; i++)
             {
                 if(Engine.cameraPosition.SquaredDistanceTo(enemies[i].position) > 5000*5000)
@@ -33,6 +34,7 @@ namespace Elite
                 }
             }
 
+            // Don't spawn more than 4 enemies
             if(enemies.Count > 3) return;
 
 
@@ -42,8 +44,9 @@ namespace Elite
 
                 Enemy enemy;
 
+                // After 3 enemies were spawned, the boss
+                // can spawn as well.
                 int upperBound = 2;
-
                 if(enemiesSpawned > 2)
                 {
                     upperBound = 3;

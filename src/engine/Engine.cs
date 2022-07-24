@@ -15,7 +15,6 @@ namespace Elite
         // like a gameobject. 
         public static Vector3 cameraPosition = new Vector3(0,0,0);
 
-
         public static Vector3 cameraUp = new Vector3(0,1,0);
         public static Vector3 cameraForward = new Vector3(0,0,1);
         public static Vector3 cameraRight = new Vector3(1,0,0);
@@ -45,11 +44,19 @@ namespace Elite
             gameObjects.RemoveAt(oldIndex);
 
             if (newIndex > oldIndex) newIndex--;
-            // the actual index could have shifted due to the removal
 
             gameObjects.Insert(newIndex, item);
         
             
+
+        }
+        private static void DestroyQueuedObjects()
+        {
+            for (int i = 0; i < queuedObjectsForDestruction.Count; i++)
+            {
+                gameObjects.Remove(queuedObjectsForDestruction[i]);
+                queuedObjectsForDestruction.Remove(queuedObjectsForDestruction[i]);
+            }
 
         }
 
@@ -70,15 +77,13 @@ namespace Elite
 
         public static void Setup()
         {
-            ConsoleInterface.SetCurrentFont("Square", 1);
+            FileHandler.Setup();
+            FontHandler.LoadFont();
+
+            ConsoleInterface.SetCurrentFont(Settings.FONT, 1);
             Console.SetWindowSize(Settings.SCREEN_SIZE_X,Settings.SCREEN_SIZE_Y);
             Console.SetBufferSize(Settings.SCREEN_SIZE_X,Settings.SCREEN_SIZE_Y);    
-            ConsoleInterface.SetCurrentFont("Square", 3);  
-
-
-
-
-
+            ConsoleInterface.SetCurrentFont(Settings.FONT, 3);
 
 
   
@@ -88,41 +93,44 @@ namespace Elite
 
 
             Console.CursorVisible = false;
-            Console.Title = "ELITE";
+            Console.Title = "ELITE | By Kat9_123";
 
 
-            /*
-            Thread gameThread = new Thread(Run);
-
-
-
-            gameThread.Start();
-
-            Renderer.RenderLoop();
-            //Run();
-            */
         }
 
         public static void Run()
         {
-            main = (Main) Instance(new Main());       
 
             // Instance the gamemanager
+            main = (Main) Instance(new Main());       
+
+            
 
 
 
             while (true)
             {  
-                if(InputManager.IsKeyPressed(InputMap.PAUSE))
+
+                // Exit if ESC was pressed
+                if(InputManager.IsKeyPressed(InputMap.PAUSE)) Environment.Exit(1);
+
+                if(InputManager.IsKeyPressed(InputMap.RESTART)) 
                 {
-                    Environment.Exit(1);
+                    for (int i = 0; i < gameObjects.Count; i++)
+                    {
+                        QueueDestruction(gameObjects[i]);
+                       
+                    }
+                    DestroyQueuedObjects();
+
+
+
+
+                    Run();  
+                    
                 }
 
-                for (int i = 0; i < queuedObjectsForDestruction.Count; i++)
-                {
-                    gameObjects.Remove(queuedObjectsForDestruction[i]);
-                    queuedObjectsForDestruction.Remove(queuedObjectsForDestruction[i]);
-                }
+                DestroyQueuedObjects();
 
                 deltaTime = (float) Utils.CalculateDeltaTime(ref previousTime);
 
@@ -150,12 +158,7 @@ namespace Elite
             
         }
 
-        
-
-
-
-
-
+    
 
     }
 }

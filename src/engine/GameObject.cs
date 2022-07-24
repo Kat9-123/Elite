@@ -8,50 +8,45 @@ namespace Elite
  
 
         public bool getsLit = false;
-
-        public Vector3 up = new Vector3(0,1,0);
-        public Vector3 forward = new Vector3(0,0,1);
-
-        
-        
-        public short colour = 15;
-        public bool filled = false;
-
-        public bool isDestroyed = false;
-        public Vector3 lightingDirection = new Vector3(0,0,-1);
-
-
-
-
-        public Vector3 scale = new Vector3(1,1,1);
-
-
-        public Vector3 position = new Vector3(0,0,0);
-
-        public bool movesWithCamera = false;
-        public Mesh mesh;
-
-
-        public char character;
-
-        //private byte byteChar;
-
-        public Vector3 offset;
-
- 
-
         public bool visible = true;
 
         public bool getsClipped = true;
         public bool getsCulled = true;
 
+        public bool filled = false;
+
+        public bool movesWithCamera = false;
+
+        // Instead of euler angles I decided to define rotation with
+        // a forward vector and an up vector, because it's (in my opinion)
+        // for easier to reason with.
+        public Vector3 up = new Vector3(0,1,0);
+        public Vector3 forward = new Vector3(0,0,1);
+
+        public Vector3 scale = new Vector3(1,1,1);
+        public Vector3 position = new Vector3(0,0,0);
+        public Vector3 offset;
+        
+        
+        public short colour = 15;
+
+        public Vector3 lightingDirection = new Vector3(0,0,-1);
+
+    
+
+        public Mesh mesh;
+
+
+        public char character;
+
+  
+
+ 
+        public bool isDestroyed = false;
+
 
         public virtual void Start() {}
-
-
-
         public virtual void Update(float deltaTime) {}
-
 
 
 

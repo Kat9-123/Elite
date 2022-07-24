@@ -36,6 +36,7 @@ namespace Elite
                 return;
             }
 
+
             
             visible = true;
 

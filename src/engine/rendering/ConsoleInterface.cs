@@ -1,6 +1,5 @@
-// stackoverflow.com/questions/6554536/possible-to-get-set-console-font-size-in-c-sharp-net
 
-// All just nicked straight from stackoverflow
+// All just nicked straight from stackoverflow. It's dark magic to me.
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -10,6 +9,7 @@ namespace Elite
 {
     public static class ConsoleInterface
     {
+        // stackoverflow.com/questions/6554536/possible-to-get-set-console-font-size-in-c-sharp-net
         private const int FixedWidthTrueType = 54;
         private const int StandardOutputHandle = -11;
 
@@ -37,7 +37,7 @@ namespace Elite
             public int FontFamily;
             public int FontWeight;
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
-            //[MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.wc, SizeConst = 32)]
+
             public string FontName;
         }
 
@@ -145,7 +145,7 @@ namespace Elite
 
         private static SafeFileHandle safeFileHandle;
 
-        // Dark magic
+
         [STAThread]
         public static void Initialise()
         {
@@ -160,7 +160,7 @@ namespace Elite
             {
                 SmallRect rect = new SmallRect() { Left = 0, Top = 0, Right = Settings.SCREEN_SIZE_X, Bottom = Settings.SCREEN_SIZE_Y };
 
-                
+        
                 // Write to screen
                 WriteConsoleOutputW(safeFileHandle, buf,
                     new Coord() { X = Settings.SCREEN_SIZE_X, Y = Settings.SCREEN_SIZE_Y },
@@ -168,8 +168,6 @@ namespace Elite
                     ref rect
                 );
             }
-
-
 
         }
     }
