@@ -1,4 +1,3 @@
-using System;
 
 namespace Elite
 {
@@ -9,6 +8,7 @@ namespace Elite
         private bool isActivated;
         public override void Start()
         {
+
             character = ' ';
             colour = 0;
             mesh = Models.circle;
@@ -35,9 +35,7 @@ namespace Elite
             {
                 return;
             }
-            scale.x += 3f *deltaTime;
-            scale.y += 3f *deltaTime;
-            scale.z += 3f *deltaTime;
+            scale += 3f * deltaTime;
 
             
         }

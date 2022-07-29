@@ -4,20 +4,31 @@ namespace Elite
 {   
     public static class Settings
     {
-        public const short SCREEN_SIZE_X = 180;
-        public const short SCREEN_SIZE_Y = 180;
+
+
+
+
+
+        public static short SCREEN_SIZE_X = (short) SettingHandler.LoadInt("ScreenSizeX"); //180
+        public static short SCREEN_SIZE_Y = (short) SettingHandler.LoadInt("ScreenSizeY");
+        public static short FONT_SCALE = (short) SettingHandler.LoadInt("FontScale");
 
         public const float FOV = 90f;
 
 
-        public const bool DISPLAY_DEBUG_INFO = true;
+        public static bool DISPLAY_DEBUG_INFO = SettingHandler.LoadBool("Debug");
 
-        public const string FONT = "Square";
+        public static string FONT = SettingHandler.LoadString("Font");
+
+        public static int PLANET_QUALITY = SettingHandler.LoadInt("PlanetQuality");
 
         public const int DUST_COUNT = 40;
 
-        public const int MIN_PLANET_COUNT = 10;
-        public const int MAX_PLANET_COUNT = 20;
+        public static int MIN_PLANET_COUNT = SettingHandler.LoadInt("MinPlanetCount");
+        public static int MAX_PLANET_COUNT = SettingHandler.LoadInt("MaxPlanetCount");
+
+        public static bool SHOW_HITBOXES = SettingHandler.LoadBool("ShowHitboxes");
+
 
 
 

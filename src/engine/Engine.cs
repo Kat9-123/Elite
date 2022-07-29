@@ -79,11 +79,12 @@ namespace Elite
         {
             FileHandler.Setup();
             FontHandler.LoadFont();
+            SettingHandler.Initialise();
 
             ConsoleInterface.SetCurrentFont(Settings.FONT, 1);
             Console.SetWindowSize(Settings.SCREEN_SIZE_X,Settings.SCREEN_SIZE_Y);
             Console.SetBufferSize(Settings.SCREEN_SIZE_X,Settings.SCREEN_SIZE_Y);    
-            ConsoleInterface.SetCurrentFont(Settings.FONT, 3);
+            ConsoleInterface.SetCurrentFont(Settings.FONT, Settings.FONT_SCALE);
 
 
   

@@ -1,0 +1,17 @@
+ScreenSizeX=180
+ScreenSizeY=180
+FontScale=3
+
+Font=Square
+
+# 0 = Low, 1 = Medium, 2 = High
+PlanetQuality=1
+
+MinPlanetCount=10
+MaxPlanetCount=20
+
+
+# Debug info
+Debug=false
+ShowHitboxes=true
+

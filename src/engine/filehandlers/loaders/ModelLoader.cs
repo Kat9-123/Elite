@@ -1,11 +1,13 @@
 // Heavily based on OneLoneCoder
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.Globalization;
 namespace Elite
 {   
     public static class ModelLoader
     {
+        private static CultureInfo culture = new CultureInfo("en-UK");
+
         public static Triangle[] LoadModel(string path)
         {
             string data = FileHandler.Read("models\\" + path);
@@ -24,9 +26,9 @@ namespace Elite
                 {
                     Vector3 vec = new Vector3();
                     string[] c = splitData[i].Split(" ");
-                    vec.x = float.Parse(c[1]);
-                    vec.y = float.Parse(c[2]);
-                    vec.z = float.Parse(c[3]);
+                    vec.x = float.Parse(c[1],culture);
+                    vec.y = float.Parse(c[2],culture);
+                    vec.z = float.Parse(c[3],culture);
 
                     verts.Add(vec);
                 }

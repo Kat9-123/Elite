@@ -64,8 +64,11 @@ namespace Elite
 
             boundingBox = new BoundingBox(boundingBoxStart,boundingBoxEnd);
 
+            if(Settings.SHOW_HITBOXES)
+            {
+                Engine.Instance(new BoundingBoxDisplay(this,boundingBoxStart,boundingBoxEnd));
+            }
 
-           // Engine.Instance(new BoundingBoxDisplay(this,boundingBoxStart,boundingBoxEnd));
 
             
         }

@@ -18,7 +18,8 @@ namespace Elite
                 Console.BackgroundColor = (System.ConsoleColor) ((i) %16);
                 Console.WriteLine(" ");
             }
-            Console.BackgroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+
 
 
             Console.ReadLine();

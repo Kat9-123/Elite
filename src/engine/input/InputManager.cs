@@ -1,4 +1,4 @@
-// Very simple (keyboard!) input manager.
+// Very simple (keyboard only!) input manager.
 using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;

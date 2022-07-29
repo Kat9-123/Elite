@@ -47,21 +47,22 @@ namespace Elite
 
         public static Mesh bigLaserMesh = Utils.GenerateRepeatingMesh(new Mesh("BigLaser.obj"),1000,20);
 
-        public static Mesh planet = new Mesh("PlanetLow.obj");
 
-
+        public static Mesh planetHigh = new Mesh("PlanetHigh.obj");
+        public static Mesh planetMedium = new Mesh("PlanetMedium.obj");
+        public static Mesh planetLow = new Mesh("PlanetLow.obj");
 
 
         // Enemies
-        public static Mesh chargerMesh = new Mesh("Ship2.obj");
-        public static Mesh stingrayMesh = new Mesh("Ship.obj");
+        public static Mesh chargerMesh = new Mesh("Charger.obj");
+        public static Mesh stingrayMesh = new Mesh("Stingray.obj");
         public static Mesh bossMesh = new Mesh("Boss.obj");
 
         // UI
         public static Mesh radarEnemyMesh = new Mesh("RadarEnemy.obj");
-        public static Mesh targetMesh = new Mesh("target.obj");
+        public static Mesh targetMesh = new Mesh("Target.obj");
         public static Mesh circle = new Mesh("Circle.obj");
-        public static Mesh directionMesh = new Mesh("directionIndicator.obj");
+        public static Mesh directionMesh = new Mesh("DirectionIndicator.obj");
         
 
 

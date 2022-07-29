@@ -94,5 +94,6 @@ namespace Elite
         public static Vector3 operator *(Vector3 vec, float n) => new Vector3(vec.x*n,vec.y*n,vec.z*n);
         public static Vector3 operator /(Vector3 vec, float n) => new Vector3(vec.x/n,vec.y/n,vec.z/n);
         public static Vector3 operator -(Vector3 vec1, float n) => new Vector3(vec1.x-n,vec1.y-n,vec1.z-n);
+        public static Vector3 operator +(Vector3 vec, float n) => new Vector3(vec.x+n,vec.y+n,vec.z+n);
     }
 }
