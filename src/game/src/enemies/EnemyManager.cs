@@ -8,6 +8,7 @@ namespace Elite
 
         public List<Enemy> enemies = new List<Enemy>();
 
+        private Timer enemySpawnTimer = new Timer(10);
 
         private int spawnDist = 300;
 
@@ -40,7 +41,7 @@ namespace Elite
             if(enemies.Count > 3) return;
 
 
-            if(lastPlayerPos.SquaredDistanceTo(Engine.cameraPosition) > spawnDist*spawnDist)
+            if(enemySpawnTimer.Accumulate())
             {
                 lastPlayerPos = Engine.cameraPosition;
 
@@ -73,7 +74,8 @@ namespace Elite
 
                 enemiesSpawned++;
 
-                spawnDist = Utils.RandomInt(500,1500);
+                enemySpawnTimer.SetDuration(Utils.RandomFloat(10,30));
+                enemySpawnTimer.Reset();
 
                     
             }

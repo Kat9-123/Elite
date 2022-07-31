@@ -19,7 +19,7 @@ namespace Elite
 
         // Instead of euler angles I decided to define rotation with
         // a forward vector and an up vector, because it's (in my opinion)
-        // for easier to reason with.
+        // farr easier to reason with.
         public Vector3 up = new Vector3(0,1,0);
         public Vector3 forward = new Vector3(0,0,1);
 
@@ -40,7 +40,8 @@ namespace Elite
 
         public char character;
 
-  
+        // Characters that are used for lighting.
+        public string luminances = "#0OC*+/^,.  "; //"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
 
  
         public bool isDestroyed = false;

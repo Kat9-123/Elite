@@ -57,6 +57,8 @@ namespace Elite
         public const float DAMAGE = 10f;
 
 
+
+
         public override void Start()
         {
 
@@ -69,8 +71,10 @@ namespace Elite
             health = MAX_HEALTH;
 
 
+
         }
 
+        private static bool prepareBlink;
         public void SetupLasers()
         {
             laserLeft = (PlayerLaser) Engine.Instance(new PlayerLaser(false));
@@ -91,11 +95,32 @@ namespace Elite
                 return;
             }
 
+            if((InputManager.IsKeyHeld(InputMap.BLINK) || InputManager.IsKeyHeld(InputMap.BLINK_MOUSE)) && !prepareBlink)
+            {
+                prepareBlink = true;
+                Engine.main.blinkController.InitBlink();
+            }
+
+            if(!(InputManager.IsKeyHeld(InputMap.BLINK) || InputManager.IsKeyHeld(InputMap.BLINK_MOUSE)) && prepareBlink)
+            {
+                if (Engine.main.blinkController.DoBlink()) momentum = forward * 50f;
+                prepareBlink = false;
+            }
+
+            if(Engine.main.blinkController.isBlinking) return;
 
             DoMovement(deltaTime);
+
+            if(prepareBlink) 
+            {
+                laserLeft.visible = false;
+                laserRight.visible = false;
+                return;
+            }
             Target();
 
             Shoot(deltaTime); 
+
 
 
 
@@ -117,7 +142,7 @@ namespace Elite
         }
 
 
-
+        private bool isShooting = false;
         private void Shoot(float deltaTime)
         {
             Enemy? hitEnemy = null;
@@ -136,35 +161,44 @@ namespace Elite
                 }         
             }
 
+            if(isShooting && laserTimer.Accumulate())
+            {
+                laserTimer.Reset();
+
+
+                laserLeft.visible = !currentLaser;
+                laserRight.visible = currentLaser;
+
+                Sounds.shoot.Play();
+
+                if(hitEnemy != null)
+                {
+                    hitEnemy.Hit(DAMAGE);
+                }
+            
+                currentLaser = !currentLaser;
+                isShooting = false;
+                
+                
+            }
+
+
 
             if (InputManager.IsKeyHeld(InputMap.SHOOT) || InputManager.IsKeyHeld(InputMap.SHOOT_MOUSE))  
             {
-                
-
-                if(laserTimer.Accumulate())
-                {
-                    laserTimer.Reset();
-
-
-                    laserLeft.visible = !currentLaser;
-                    laserRight.visible = currentLaser;
-
-                    if(hitEnemy != null)
-                    {
-                        hitEnemy.Hit(DAMAGE);
-                    }
-                
-                    currentLaser = !currentLaser;
-                    
-                    
-                }
+                Sounds.warp.Play();
+                isShooting = true;
                 
             }
-            else
+
+            if(!isShooting)
             {
+                currentLaser = false;
                 laserLeft.visible = false;
                 laserRight.visible = false;
+            
             }
+
 
 
            // UI.WriteLine(InputManager.KeyState(InputMap.SHOOT).ToString());
@@ -291,7 +325,7 @@ namespace Elite
             {
                 target = null;
             }
-            if(!InputManager.IsKeyPressed(InputMap.TARGET)) return;
+            if(!(InputManager.IsKeyPressed(InputMap.TARGET) || InputManager.IsKeyPressed(InputMap.TARGET_MOUSE))) return;
 
     
             float closestDot = -1000f;

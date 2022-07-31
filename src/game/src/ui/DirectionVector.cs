@@ -27,7 +27,10 @@ namespace Elite
         }
 
         public override void Update(float deltaTime)
-        {
+        {   
+            visible = !Engine.main.uiManager.isBlinking;
+   
+
             if(Engine.main.player.isDead)
             {
                 Engine.QueueDestruction(this);

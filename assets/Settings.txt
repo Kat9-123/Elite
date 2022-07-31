@@ -11,7 +11,11 @@ MinPlanetCount=10
 MaxPlanetCount=20
 
 
-DoMouseControls=true
+# 0 = Infinte planet scale (default).
+PlanetScale=1
+
+
+DoMouseControls=false
 
 DustCount=40
 

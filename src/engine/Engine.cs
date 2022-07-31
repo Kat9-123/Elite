@@ -52,6 +52,8 @@ namespace Elite
         // Used in deltaTime calculations
         private static double previousTime = 0;
 
+        public static float timeScale = 1f;
+
 
         // Change the render order (Z-index) of an object. An object
         // with a lower layer gets rendered behind objects
@@ -168,7 +170,7 @@ namespace Elite
 
                 DestroyQueuedObjects();
 
-                deltaTime = (float) Utils.CalculateDeltaTime(ref previousTime);
+                deltaTime = ((float) Utils.CalculateDeltaTime(ref previousTime)) * timeScale;
 
                 
                 

@@ -18,6 +18,8 @@ namespace Elite
 
         public MouseController mouseController;
 
+        public Blink blinkController;
+
 
 
         public int enemyLayer;
@@ -67,9 +69,7 @@ namespace Elite
 
             enemyLayer = Engine.GameObjectCount();  //    <--- ENEMIES
 
-
-
-
+            blinkController = (Blink) Engine.Instance(new Blink());
 
             player.SetupLasers();
 

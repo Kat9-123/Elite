@@ -47,6 +47,8 @@ namespace Elite
 
         public static Mesh bigLaserMesh = Utils.GenerateRepeatingMesh(new Mesh("BigLaser.obj"),1000,20);
 
+        public static Mesh blink = new Mesh("BigLaser.obj");
+
 
         public static Mesh planetHigh = new Mesh("PlanetHigh.obj");
         public static Mesh planetMedium = new Mesh("PlanetMedium.obj");

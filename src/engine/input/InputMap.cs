@@ -25,6 +25,7 @@ namespace Elite
 
 
         TARGET = 0x54, //T
+        TARGET_MOUSE = 0x04, // MIDDLE MOUSE BUTTON
 
 
         PAUSE = 0x1B, // ESC
@@ -34,7 +35,9 @@ namespace Elite
 
         ZOOM = 0x46, //F
 
-        SHOOT_MOUSE = 0x1 // RIGHT MOUSE BUTTON
+        SHOOT_MOUSE = 0x1, // LEFT MOUSE BUTTON
+        BLINK = 0x43, // C
+        BLINK_MOUSE = 0x2 // RIGHT MOUSE BUTTON
 
 
 

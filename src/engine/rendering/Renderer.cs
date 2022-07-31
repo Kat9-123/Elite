@@ -11,9 +11,7 @@ namespace Elite
 
         private static Matrix4x4 projectionMatrix;
 
-        // Characters that are used for lighting.
-        private const string LUMINACES = "#0OC*+/^,.        ";//"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
-        //"#0OC*+/^,.  "
+
 
         
 
@@ -165,7 +163,7 @@ namespace Elite
                 intensity /= 2f;
 
 
-                character = LUMINACES[(int)(intensity*(LUMINACES.Length-1))];
+                character = obj.luminances[(int)(intensity*(obj.luminances.Length-1))];
                    
             }
 
@@ -193,8 +191,6 @@ namespace Elite
             else //2D 
             {
                 projectedTriangle = translatedTriangle;
-
-
 
             }
 

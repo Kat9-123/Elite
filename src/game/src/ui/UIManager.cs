@@ -9,6 +9,7 @@ namespace Elite
         private ShieldDisplay enemyShieldDisplay;
         private ShieldDisplay playerShieldDisplay;
 
+        public bool isBlinking = false;
 
         public string score = "0";
         public UIManager(Player _player)
@@ -135,7 +136,7 @@ namespace Elite
             UI.WriteText(((int)(Engine.main.player.momentum.Length()*10)).ToString(),2,170);
 
             // Crosshair
-            UI.AddSprite(Sprites.crosshair,Settings.SCREEN_SIZE_X/2-4,Settings.SCREEN_SIZE_Y/2-4);
+            if(!isBlinking) UI.AddSprite(Sprites.crosshair,Settings.SCREEN_SIZE_X/2-4,Settings.SCREEN_SIZE_Y/2-4);
 
             // Radar
             UI.AddSprite(Sprites.radar,89,157);
