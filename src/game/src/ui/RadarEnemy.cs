@@ -4,7 +4,7 @@ namespace Elite
 {
     public class RadarEnemy : GameObject
     {
-        private const int RADAR_RANGE = 3000;
+        private const int RADAR_RANGE = 5000;
         private Enemy enemy;
 
 
@@ -22,21 +22,13 @@ namespace Elite
 
             position = new Vector3(0,1,5);
             
- 
+            colour = 4;
             getsCulled = false;
 
             Vector3 axis = Utils.Cross(up,forward);
 
             scale = new Vector3(0.03f,0.03f,0.03f);
 
-          //  forward = Utils.RotateAroundAxis(forward,axis,angle);
-            
-        //    up = Utils.RotateAroundAxis(up,axis,angle);
-
-            colour = 4;
-
-          //  getsClipped = false;
-            //getsClipped = false
 
             
 
@@ -52,6 +44,8 @@ namespace Elite
             {
                 Engine.QueueDestruction(this);
             }
+
+            colour = 4;
             
 
 
@@ -66,11 +60,11 @@ namespace Elite
                 visible = false;
             }
 
-            colour = 4;
+            
 
             if(enemy == Engine.main.player.target)
             {
-                colour = 7;
+                colour = 3;
             }
             
 

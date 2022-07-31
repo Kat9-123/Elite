@@ -54,10 +54,7 @@ namespace Elite
             result.z = vec.x * mat.matrix[0,2] + vec.y * mat.matrix[1,2] + vec.z * mat.matrix[2,2] + mat.matrix[3,2];
             float w =  vec.x * mat.matrix[0,3] + vec.y * mat.matrix[1,3] + vec.z * mat.matrix[2,3] + mat.matrix[3,3];
 
-            if(w != 0f)
-            {
-                result /= w;
-            }
+            if(w != 0f) result /= w;
 
 
             return result;
@@ -172,44 +169,56 @@ namespace Elite
                    
             }
 
+            Triangle projectedTriangle;
 
-            // Project to 3D
-            Triangle projectedTriangle = MultiplyTriangleByMatrix(translatedTriangle,projectionMatrix);
-
-
-
-            // Scale everything to screenspace
-            projectedTriangle += new Vector3(1,1,0);
+            if(!obj.is2D)
+            {
+                // Project to 3D
+                projectedTriangle = MultiplyTriangleByMatrix(translatedTriangle,projectionMatrix);
 
 
-            projectedTriangle.a.x *= Settings.SCREEN_SIZE_X/2;
-            projectedTriangle.a.y *= Settings.SCREEN_SIZE_Y/2;
 
-            projectedTriangle.b.x *= Settings.SCREEN_SIZE_X/2;
-            projectedTriangle.b.y *= Settings.SCREEN_SIZE_Y/2;
-            projectedTriangle.c.x *= Settings.SCREEN_SIZE_X/2;
-            projectedTriangle.c.y *= Settings.SCREEN_SIZE_Y/2;
+                // Scale everything to screenspace
+                projectedTriangle += new Vector3(1,1,0);
+
+                projectedTriangle.a.x *= Settings.SCREEN_SIZE_X/2;
+                projectedTriangle.a.y *= Settings.SCREEN_SIZE_Y/2;
+
+                projectedTriangle.b.x *= Settings.SCREEN_SIZE_X/2;
+                projectedTriangle.b.y *= Settings.SCREEN_SIZE_Y/2;
+                projectedTriangle.c.x *= Settings.SCREEN_SIZE_X/2;
+                projectedTriangle.c.y *= Settings.SCREEN_SIZE_Y/2;
+
+            }
+            else //2D 
+            {
+                projectedTriangle = translatedTriangle;
+
+
+
+            }
+
 
 
  
             if(obj.filled)
             {
-                Drawer.DrawFilledTriangle(projectedTriangle,character,obj.colour);
+                Rasteriser.DrawFilledTriangle(projectedTriangle,character,obj.colour);
                 return;
-                
             }
 
-            Drawer.DrawTriangle(projectedTriangle,character,obj.colour);
+            Rasteriser.DrawTriangle(projectedTriangle,character,obj.colour);
           
 
         }
 
+        
 
         public static void Render(List<GameObject> gameObjects)
         {
 
 
-            Drawer.Reset();
+            Rasteriser.Reset();
 
             // Generate camera rotation matrix
             Matrix4x4 cameraRotationMatrix = Matrix4x4.DirectionToMatrix(Engine.cameraForward,Engine.cameraUp).MatrixQuickInverse();
@@ -233,25 +242,11 @@ namespace Elite
             }
 
 
-            Drawer.DrawBufferToScreen();
+            Rasteriser.DrawBufferToScreen();
 
         }
 
-
-        // Legacy.
-        public static void Write(string text)
-        {
-            UI.Write(text);
-        }
-    
-        public static void WriteLine(string text)
-        {
-           UI.WriteLine(text);
-        }
-
- 
 
     }
-
 
 }

@@ -13,6 +13,9 @@ namespace Elite
         public static short SCREEN_SIZE_Y = (short) SettingHandler.LoadInt("ScreenSizeY");
         public static short FONT_SCALE = (short) SettingHandler.LoadInt("FontScale");
 
+        public static bool DO_MOUSE_CONTROLS = SettingHandler.LoadBool("DoMouseControls");
+
+
         public const float FOV = 90f;
 
 
@@ -22,7 +25,10 @@ namespace Elite
 
         public static int PLANET_QUALITY = SettingHandler.LoadInt("PlanetQuality");
 
-        public const int DUST_COUNT = 40;
+        public static int DUST_COUNT = SettingHandler.LoadInt("DustCount");
+
+
+        public static bool SHOW_COLOURS_ON_STARTUP = SettingHandler.LoadBool("ShowColoursOnStartup");
 
         public static int MIN_PLANET_COUNT = SettingHandler.LoadInt("MinPlanetCount");
         public static int MAX_PLANET_COUNT = SettingHandler.LoadInt("MaxPlanetCount");

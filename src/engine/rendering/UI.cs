@@ -73,7 +73,7 @@ namespace Elite
         public static void ResetUI()
         {
             
-            UIBuffer = Drawer.GenerateEmptyBuffer();
+            UIBuffer = Rasteriser.GenerateEmptyBuffer();
         }
 
 

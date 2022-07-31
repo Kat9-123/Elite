@@ -11,7 +11,12 @@ MinPlanetCount=10
 MaxPlanetCount=20
 
 
+DoMouseControls=true
+
+DustCount=40
+
 # Debug info
-Debug=false
+Debug=true
 ShowHitboxes=true
+ShowColoursOnStartup=true
 

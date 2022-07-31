@@ -129,9 +129,6 @@ namespace Elite
 
 
 
-            Renderer.WriteLine(Utils.FormatBool((forward.Dot((Engine.cameraPosition-position).Normalise()) > 0.99f) && (position.SquaredDistanceTo(Engine.cameraPosition) < 90000),"can_hit_player"));
-
-
 
 
 

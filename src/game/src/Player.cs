@@ -59,6 +59,7 @@ namespace Elite
 
         public override void Start()
         {
+
             visible = false;
 
 
@@ -136,7 +137,7 @@ namespace Elite
             }
 
 
-            if (InputManager.IsKeyHeld(InputMap.SHOOT))  
+            if (InputManager.IsKeyHeld(InputMap.SHOOT) || InputManager.IsKeyHeld(InputMap.SHOOT_MOUSE))  
             {
                 
 
@@ -166,54 +167,48 @@ namespace Elite
             }
 
 
-           // Renderer.WriteLine(InputManager.KeyState(InputMap.SHOOT).ToString());
-           // Renderer.WriteLine(Utils.FormatBool(laserIsColliding,"laser_hit")+ "\n");
+           // UI.WriteLine(InputManager.KeyState(InputMap.SHOOT).ToString());
+           // UI.WriteLine(Utils.FormatBool(laserIsColliding,"laser_hit")+ "\n");
         }
+
+        // X = Pitch
+        // Y = Yaw
+        // Z = Roll
+        public Vector3 rotationDirection = new Vector3(0,0,0);
 
         public void DoMovement(float deltaTime)
         {
-
-
-
-
-            if (InputManager.IsKeyHeld(InputMap.YAW_LEFT))
-            {
-
-                absoluteForward = Utils.RotateAroundAxis(absoluteForward,absoluteUp,-YAW_SPEED*deltaTime*zoomMultiplier);
-                absoluteRight = Utils.RotateAroundAxis(absoluteRight,absoluteUp,-YAW_SPEED*deltaTime*zoomMultiplier);
-                
-            }
-
             
-            if (InputManager.IsKeyHeld(InputMap.YAW_RIGHT))
-            { 
 
-                absoluteForward = Utils.RotateAroundAxis(absoluteForward,absoluteUp,YAW_SPEED*deltaTime*zoomMultiplier);
-                absoluteRight = Utils.RotateAroundAxis(absoluteRight,absoluteUp,YAW_SPEED*deltaTime*zoomMultiplier);
-            }
-            if (InputManager.IsKeyHeld(InputMap.PITH_UP))
+
+            if(!Settings.DO_MOUSE_CONTROLS)
             {
+                rotationDirection = new Vector3(0,0,0);
 
-                absoluteForward = Utils.RotateAroundAxis(absoluteForward,absoluteRight,PITCH_SPEED*deltaTime*zoomMultiplier);
-                absoluteUp = Utils.RotateAroundAxis(absoluteUp,absoluteRight,PITCH_SPEED*deltaTime*zoomMultiplier);
-            }
-            if (InputManager.IsKeyHeld(InputMap.PITCH_DOWN))
-            { 
-                absoluteForward = Utils.RotateAroundAxis(absoluteForward,absoluteRight,-PITCH_SPEED*deltaTime*zoomMultiplier);
-                absoluteUp = Utils.RotateAroundAxis(absoluteUp,absoluteRight,-PITCH_SPEED*deltaTime*zoomMultiplier);
+                if (InputManager.IsKeyHeld(InputMap.YAW_LEFT)) rotationDirection.y = -1f;
+                if (InputManager.IsKeyHeld(InputMap.YAW_RIGHT)) rotationDirection.y = 1f;
+                if (InputManager.IsKeyHeld(InputMap.PITH_UP)) rotationDirection.x = 1f;
+                if (InputManager.IsKeyHeld(InputMap.PITCH_DOWN)) rotationDirection.x = -1f;
             }
 
 
-            if (InputManager.IsKeyHeld(InputMap.ROLL_LEFT))
-            {
-                absoluteUp = Utils.RotateAroundAxis(absoluteUp,absoluteForward,-ROLL_SPEED*deltaTime*zoomMultiplier);
-                absoluteRight = Utils.RotateAroundAxis(absoluteRight,absoluteForward,-ROLL_SPEED*deltaTime*zoomMultiplier);
-            }
-            if (InputManager.IsKeyHeld(InputMap.ROLL_RIGHT))
-            {
-                absoluteUp = Utils.RotateAroundAxis(absoluteUp,absoluteForward,ROLL_SPEED*deltaTime*zoomMultiplier);
-                absoluteRight = Utils.RotateAroundAxis(absoluteRight,absoluteForward,ROLL_SPEED*deltaTime*zoomMultiplier);
-            }
+            rotationDirection.z = 0f;
+            if (InputManager.IsKeyHeld(InputMap.ROLL_LEFT)) rotationDirection.z = -1f;
+            if (InputManager.IsKeyHeld(InputMap.ROLL_RIGHT)) rotationDirection.z = 1f;
+            
+
+            absoluteForward = Utils.RotateAroundAxis(absoluteForward,absoluteUp,rotationDirection.y * YAW_SPEED*deltaTime*zoomMultiplier);
+            absoluteRight = Utils.RotateAroundAxis(absoluteRight,absoluteUp,rotationDirection.y * YAW_SPEED*deltaTime*zoomMultiplier);
+            
+        
+            absoluteForward = Utils.RotateAroundAxis(absoluteForward,absoluteRight,rotationDirection.x * PITCH_SPEED*deltaTime*zoomMultiplier);
+            absoluteUp = Utils.RotateAroundAxis(absoluteUp,absoluteRight,rotationDirection.x * PITCH_SPEED*deltaTime*zoomMultiplier);
+    
+
+            absoluteUp = Utils.RotateAroundAxis(absoluteUp,absoluteForward,rotationDirection.z * ROLL_SPEED*deltaTime*zoomMultiplier);
+            absoluteRight = Utils.RotateAroundAxis(absoluteRight,absoluteForward,rotationDirection.z * ROLL_SPEED*deltaTime*zoomMultiplier);
+        
+
 
 
             absoluteUp = absoluteUp.Normalise();

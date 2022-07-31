@@ -7,7 +7,7 @@ namespace Elite
     // Main game manager. 
     public class Main : GameObject
     {
-        
+
 
         public Player player;
 
@@ -19,7 +19,8 @@ namespace Elite
         public MouseController mouseController;
 
 
-        public int enemyLayer = 1;
+
+        public int enemyLayer;
 
 
         public void GenerateBodies()
@@ -32,35 +33,23 @@ namespace Elite
                 float s = Utils.RandomFloat(0.5f,2.7f);
 
                 Engine.Instance(new Planet(pos,(short)Utils.RandomInt(1,14),s));
-                enemyLayer++;
+
             }
 
             Engine.Instance(new Planet(new Vector3(0,0,20),(short)ConsoleColor.Yellow,1,false));
-            enemyLayer++;
+
         }
 
-        public override void Start()
+
+        public void Setup()
         {
-          //  Models.cubeMesh = ModelHandler.LoadModel("test.obj");
-            visible = false;
-
-            Engine.cameraPosition = new Vector3(0,0,0);
-
-
-            Engine.cameraUp = new Vector3(0,1,0);
-            Engine.cameraForward = new Vector3(0,0,1);
-            Engine.cameraRight = new Vector3(1,0,0);
 
 
             player = (Player) Engine.Instance(new Player());
-            enemyLayer++;
-
 
             explosionManager = (ExplosionManager) Engine.Instance(new ExplosionManager());
-            enemyLayer++;
 
             EnemyGenerator enemyGen = (EnemyGenerator) Engine.Instance(new EnemyGenerator());
-            enemyLayer++;
 
             player.enemyGen = enemyGen;
             enemyManager = enemyGen;
@@ -71,15 +60,12 @@ namespace Elite
 
             for (int i = 0; i < Settings.DUST_COUNT; i++)
             {
-
                 Engine.Instance(new Dust());
-                enemyLayer++;
             }
 
 
 
-            //              <--- ENEMIES
-
+            enemyLayer = Engine.GameObjectCount();  //    <--- ENEMIES
 
 
 
@@ -88,26 +74,38 @@ namespace Elite
             player.SetupLasers();
 
 
-
+            mouseController = (MouseController) Engine.Instance(new MouseController());
 
             uiManager = (UIManager) Engine.Instance(new UIManager(player));
 
 
+            Engine.cameraPosition = new Vector3(0,0,0);
+
+
+            Engine.cameraUp = new Vector3(0,1,0);
+            Engine.cameraForward = new Vector3(0,0,1);
+            Engine.cameraRight = new Vector3(1,0,0);
 
 
         }
 
-
-
-
-        public override void Update(float deltaTime)
+        public override void Start()
         {
+            //  Models.cubeMesh = ModelHandler.LoadModel("test.obj");
+            visible = false;
+
+            Setup();
+
 
         }
 
-        public void GameOver()
-        {
-            
-        }
+
+
+
+
+
+
+
+
     }
 }

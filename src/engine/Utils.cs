@@ -53,32 +53,33 @@ namespace Elite
         }
 
 
-        // Format a vector3/2 so that it can be printed
+        // Format a vector3 so that it can be printed. Legacy.
         public static string FormatVector(Vector3 vec, string name)
         {
             string result = name + ": (";
-            result += vec.x.ToString() + ", ";
-            result += vec.y.ToString() + ", ";
-            result += vec.z.ToString() + ")";
-
-            return result;
-        }
-        public static string FormatVector(Vector2 vec, string name)
-        {
-            string result = name + ": (";
-            result += vec.x.ToString() + ", ";
-            result += vec.y.ToString() + ")";
+            result += vec.x.ToString("0.00") + ", ";
+            result += vec.y.ToString("0.00") + ", ";
+            result += vec.z.ToString("0.00") + ")";
 
             return result;
         }
 
-        // Format bool so that it can be printed
-        public static string FormatBool(bool b, string name)
+        // Debug stuff
+        public static void ShowColours()
         {
-            string result = name + ": ";
-            result += b.ToString();
-
-            return result;
+            // Debug colours
+            Console.ForegroundColor = ConsoleColor.White;
+            for (int i = 0; i < 16; i++)
+            {
+                Console.BackgroundColor = 0;
+                
+                Console.Write((i.ToString() + ": ").PadRight(4));
+                Console.BackgroundColor = (System.ConsoleColor) ((i) %16);
+                Console.WriteLine(" ");
+            }
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ReadLine();
+        
         }
 
 
@@ -89,7 +90,7 @@ namespace Elite
         {
             Vector3 result;
 
-            result = vec * MathF.Cos(theta) + (Cross(axis,vec))*MathF.Sin(theta) + axis*(axis.Dot(vec)) * (1-MathF.Cos(theta));
+            result = vec * MathF.Cos(theta) + (Cross(axis,vec))*MathF.Sin(theta) + axis* (axis.Dot(vec)) * (1-MathF.Cos(theta));
             return result;
         }
 

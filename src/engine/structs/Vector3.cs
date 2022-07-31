@@ -58,10 +58,12 @@ namespace Elite
 
         public Vector3 Clamp(float n)
         {
-            Vector3 result = new Vector3(0,0,0);
-            if (Length() == 0f) return result;
-            result = this * (n / Length());
-            return result;
+            Vector3 vec = new Vector3(x,y,z);
+            if(LengthSquared() > n*n)
+            {
+                vec = Normalise() * n;
+            }
+            return vec;
         }
 
         public float SquaredDistanceTo(Vector3 vec)
@@ -82,6 +84,17 @@ namespace Elite
         }
 
 
+        public override string ToString()
+        {
+            string result = "(";
+            result += x.ToString("0.00") + ", ";
+            result += y.ToString("0.00") + ", ";
+            result += z.ToString("0.00") + ")";
+
+            return result;
+
+
+        }
 
 
 

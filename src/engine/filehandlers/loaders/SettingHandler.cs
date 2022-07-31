@@ -26,7 +26,7 @@ namespace Elite
                 // Comments 
                 if(data[i].Length == 0 || data[i][0] == '#') {names[i] = ""; values[i] = ""; continue;} 
 
-                string[] line = data[i].Split('=');
+                string[] line = data[i].Split('=', 2);
                 names[i] = line[0];
                 values[i] = line[1];
             }

@@ -9,7 +9,8 @@ namespace Elite
         private ShieldDisplay enemyShieldDisplay;
         private ShieldDisplay playerShieldDisplay;
 
-        public string points = "";
+
+        public string score = "0";
         public UIManager(Player _player)
         {
             player = _player;
@@ -79,7 +80,6 @@ namespace Elite
             Engine.Instance(new DeathBG());
 
 
-
     
         }
 
@@ -93,21 +93,23 @@ namespace Elite
 
         public void DebugInfo()
         {
-            Renderer.WriteLine("player:");
-            Renderer.WriteLine(Utils.FormatVector(Engine.cameraPosition,"position"));
+            UI.WriteLine("player:");
+            UI.WriteLine("position: " + Engine.cameraPosition.ToString());
             
-            Renderer.Write(Utils.FormatVector(Engine.cameraForward,"forward"));
-            Renderer.Write(" | ");
-            Renderer.WriteLine(Engine.cameraForward.Length().ToString());
+            UI.Write("forward: " + Engine.cameraForward.ToString());
+            UI.Write(" | ");
+            UI.WriteLine(Engine.cameraForward.Length().ToString());
 
-            Renderer.Write(Utils.FormatVector(Engine.cameraUp,"up"));
-            Renderer.Write(" | ");
-            Renderer.WriteLine(Engine.cameraUp.Length().ToString());
+            UI.Write("up: " + Engine.cameraUp.ToString());
+            UI.Write(" | ");
+            UI.WriteLine(Engine.cameraUp.Length().ToString());
 
 
-            Renderer.WriteLine(Utils.FormatVector(Engine.cameraRight,"right"));
+            UI.WriteLine(Utils.FormatVector(Engine.cameraRight,"right"));
 
-            Renderer.WriteLine("Health: " + player.health.ToString());
+            UI.WriteLine("Health: " + player.health.ToString());
+
+            UI.WriteLine("\ngameobjectcount: " + Engine.GameObjectCount().ToString());
             // UI.WriteText("0123456789\nabcdefg\nhijklmnop\nqrstuvw\nxyz",5,5);
         }
 
@@ -126,7 +128,7 @@ namespace Elite
             
 
             // Points
-            UI.WriteText(points,173-(6*(points.Length-1)),2);
+            UI.WriteText(score,173-(6*(score.Length-1)),2);
 
 
             // Player speed

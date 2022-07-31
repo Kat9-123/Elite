@@ -34,6 +34,23 @@ namespace Elite
             return result;
         }
 
+        public override string ToString()
+        {
+            string result = "(";
+            result += x.ToString("0.00") + ", ";
+            result += y.ToString("0.00") + ")";
+            return result;
+
+        }
+        public Vector2 Clamp(float n)
+        {
+            Vector2 vec = new Vector2(x,y);
+            if(LengthSquared() > n*n)
+            {
+                vec = Normalise() * n;
+            }
+            return vec;
+        }
 
         public static Vector2 operator -(Vector2 vec1, Vector2 vec2) => new Vector2(vec1.x-vec2.x,vec1.y-vec2.y);
         public static Vector2 operator +(Vector2 vec1, Vector2 vec2) => new Vector2(vec1.x+vec2.x,vec1.y+vec2.y);

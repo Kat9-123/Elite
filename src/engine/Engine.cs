@@ -1,8 +1,24 @@
+/*
+=== High level engine overview
+
+                     (UIManager) --------------------> [  UI  ]
+                          |                             /.\  |
+                          |                              |  \./
+                     [GAMEOBJECTS] --> [RENDERER] --> [RASTERISER] --> [CONSOLEINTERFACE]
+                         /.\
+                       {Update}
+                          |
+[ENTRY] -{SETUP}--+--> [ENGINE] ---+
+                  |                |
+                  +----------------+
+
+[] = Core engine part
+() = GameObject that functions as a manager.
+{} = What happens
+
+*/
 using System;
 using System.Collections.Generic;
-
-using System.Threading;
-using System.Diagnostics;
 
 
 namespace Elite
@@ -19,15 +35,17 @@ namespace Elite
         public static Vector3 cameraForward = new Vector3(0,0,1);
         public static Vector3 cameraRight = new Vector3(1,0,0);
 
-    
+
+        // GameManager. First object to be instanced
         public static Main main;
 
-        public volatile static List<GameObject> gameObjects = new List<GameObject>(256);
+        public volatile static List<GameObject> gameObjects = new List<GameObject>(128);
 
 
         private static List<GameObject> queuedObjectsForDestruction = new List<GameObject>();
 
         
+        private const string title = "Elite not very Dangerous | By Kat9_123";
 
         public static float deltaTime = 0f;
 
@@ -35,24 +53,31 @@ namespace Elite
         private static double previousTime = 0;
 
 
-        
-        public static void MoveLayer(GameObject item, int newIndex)
+        // Change the render order (Z-index) of an object. An object
+        // with a lower layer gets rendered behind objects
+        // with a higher layer.
+
+        public static int GameObjectCount()
+        {
+            return gameObjects.Count;
+        }
+        public static void ChanageIndex(GameObject gameObject, int newIndex)
         {
 
-            int oldIndex = gameObjects.IndexOf(item);
+            int oldIndex = gameObjects.IndexOf(gameObject);
 
             gameObjects.RemoveAt(oldIndex);
 
             if (newIndex > oldIndex) newIndex--;
 
-            gameObjects.Insert(newIndex, item);
+            gameObjects.Insert(newIndex, gameObject);
         
             
 
         }
         private static void DestroyQueuedObjects()
         {
-            for (int i = 0; i < queuedObjectsForDestruction.Count; i++)
+            for (int i = queuedObjectsForDestruction.Count-1; i >= 0; i--)
             {
                 gameObjects.Remove(queuedObjectsForDestruction[i]);
                 queuedObjectsForDestruction.Remove(queuedObjectsForDestruction[i]);
@@ -75,28 +100,54 @@ namespace Elite
             obj.isDestroyed = true;
         }
 
+
         public static void Setup()
         {
+            
+            // Initialise file stuff
             FileHandler.Setup();
             FontHandler.LoadFont();
             SettingHandler.Initialise();
+            
+            if(Settings.SHOW_COLOURS_ON_STARTUP) Utils.ShowColours();
 
+            Window.Setup();
+        
+            // Windows is a bit strange so we first need to set the
+            // font to the minimum size before changing the windowsize.
             ConsoleInterface.SetCurrentFont(Settings.FONT, 1);
+
             Console.SetWindowSize(Settings.SCREEN_SIZE_X,Settings.SCREEN_SIZE_Y);
-            Console.SetBufferSize(Settings.SCREEN_SIZE_X,Settings.SCREEN_SIZE_Y);    
+            Console.SetBufferSize(Settings.SCREEN_SIZE_X,Settings.SCREEN_SIZE_Y); 
+       
             ConsoleInterface.SetCurrentFont(Settings.FONT, Settings.FONT_SCALE);
 
 
-  
-  
-            Renderer.Initialise();
-            FileHandler.Setup();
 
+
+            // Graphics
+            Renderer.Initialise();
 
             Console.CursorVisible = false;
-            Console.Title = "ELITE | By Kat9_123";
+            Console.Title = title;
 
 
+        }
+
+        public static void Restart()
+        {    
+
+            // Destroy all queued object except for the gamemanager.
+            for (int i = 1; i < gameObjects.Count; i++)
+            {
+                QueueDestruction(gameObjects[i]);
+                
+            }
+            DestroyQueuedObjects();
+
+            main.Setup();
+
+ 
         }
 
         public static void Run()
@@ -105,9 +156,6 @@ namespace Elite
             // Instance the gamemanager
             main = (Main) Instance(new Main());       
 
-            
-
-
 
             while (true)
             {  
@@ -115,21 +163,8 @@ namespace Elite
                 // Exit if ESC was pressed
                 if(InputManager.IsKeyPressed(InputMap.PAUSE)) Environment.Exit(1);
 
-                if(InputManager.IsKeyPressed(InputMap.RESTART)) 
-                {
-                    for (int i = 0; i < gameObjects.Count; i++)
-                    {
-                        QueueDestruction(gameObjects[i]);
-                       
-                    }
-                    DestroyQueuedObjects();
+                if(InputManager.IsKeyPressed(InputMap.RESTART)) Restart();
 
-
-
-
-                    Run();  
-                    
-                }
 
                 DestroyQueuedObjects();
 
@@ -141,8 +176,8 @@ namespace Elite
                 if (deltaTime != 0f) fps = (1f/deltaTime).ToString();
 
                 if(fps.Length > 5) fps = fps.Substring(0,5);
-                Renderer.WriteLine("FPS: " + fps + "\n");
-                //Console.Title = fps;
+                UI.WriteLine("FPS: " + fps + "\n");
+                //Console.Title = title + " | " + fps;
                 
     
 

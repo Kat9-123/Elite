@@ -101,8 +101,8 @@ namespace Elite
 
 
 
-            Renderer.WriteLine(Utils.FormatVector(forward,"enemy_forward"));
-            Renderer.WriteLine(Utils.FormatVector(up,"enemy_up"));
+            UI.WriteLine(Utils.FormatVector(forward,"enemy_forward"));
+            UI.WriteLine(Utils.FormatVector(up,"enemy_up"));
         }
 
         protected void ShootLasers(float deltaTime)
@@ -141,6 +141,7 @@ namespace Elite
                 Engine.QueueDestruction(this);
                 isAlive = false;
 
+                Engine.main.uiManager.score = (int.Parse(Engine.main.uiManager.score) + score).ToString();
                 player.Heal();
                 Engine.main.explosionManager.DoExplosion(this);
                 Engine.main.enemyManager.DestroyEnemy(this);

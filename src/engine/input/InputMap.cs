@@ -32,7 +32,9 @@ namespace Elite
         RESTART = 0x52, //R
 
 
-        ZOOM = 0x46 //F
+        ZOOM = 0x46, //F
+
+        SHOOT_MOUSE = 0x1 // RIGHT MOUSE BUTTON
 
 
 

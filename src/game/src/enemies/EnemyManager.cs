@@ -26,6 +26,7 @@ namespace Elite
         public override void Update(float deltaTime)
         {
             // Despawn enemies if they're too far away
+            /*
             for (int i = 0; i < enemies.Count; i++)
             {
                 if(Engine.cameraPosition.SquaredDistanceTo(enemies[i].position) > 5000*5000)
@@ -33,6 +34,7 @@ namespace Elite
                     Engine.QueueDestruction(enemies[i]);
                 }
             }
+            */
 
             // Don't spawn more than 4 enemies
             if(enemies.Count > 3) return;
@@ -90,7 +92,7 @@ namespace Elite
         {
             Engine.Instance(en);
             enemies.Add(en);
-            Engine.MoveLayer(en,Engine.main.enemyLayer);
+            Engine.ChanageIndex(en,Engine.main.enemyLayer);
 
             en.position = Utils.RandomPositionExcludeCentre(50f,100f);
 

@@ -43,7 +43,7 @@ namespace Elite
 
         public override void Start()
         {
-            Engine.MoveLayer(this,Engine.main.enemyLayer); 
+            Engine.ChanageIndex(this,Engine.main.enemyLayer); 
         }
 
 
@@ -77,7 +77,7 @@ namespace Elite
             visible = true;
 
             // && (position.SquaredDistanceTo(Engine.cameraPosition) < 20000)
-           // Renderer.WriteLine(forward.Dot((Engine.cameraPosition-position).Normalise()).ToString());
+           // UI.WriteLine(forward.Dot((Engine.cameraPosition-position).Normalise()).ToString());
             //if((forward.Dot((Engine.cameraPosition-position).Normalise()) > accuracy))
             //{
               //  Engine.main.player.Hit(damage);   

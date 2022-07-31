@@ -21,7 +21,6 @@ namespace Elite
             movesWithCamera = true;
             colour = 10;//12;
 
-            
         }
 
 
