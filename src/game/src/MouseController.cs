@@ -5,8 +5,7 @@ namespace Elite
     public class MouseController : GameObject
     {
 
-
-        public bool enabled = true;
+        private bool mouseFreed = false;
 
 
 
@@ -40,10 +39,29 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
-
+            
 
             if(!Settings.DO_MOUSE_CONTROLS) return;
 
+            if(InputManager.IsKeyPressed(InputMap.FREE_MOUSE)) 
+            {
+                mouseFreed = !mouseFreed;
+
+                Vector2 apos,asize;
+                (apos,asize) = Window.WinRect();
+
+
+                Vector2 acentre = asize / 2f + apos;
+
+                if(!mouseFreed) MouseManager.SetCursorPosition(acentre);
+            }
+
+            if(mouseFreed) 
+            {
+                Engine.main.player.rotationDirection.x = 0f;
+                Engine.main.player.rotationDirection.y = 0f;
+                return;
+            }
 
             Vector2 pos,size;
             (pos,size) = Window.WinRect();

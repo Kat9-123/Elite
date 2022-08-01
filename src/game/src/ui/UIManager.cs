@@ -20,7 +20,7 @@ namespace Elite
         public override void Start()
         {
             visible = false;
-
+            if(!Settings.SHOW_UI) return;
 
 
             
@@ -118,10 +118,13 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
+            if(!Settings.SHOW_UI) return;
             if(Engine.main.player.isDead)
             {
                 return;
             }
+
+
 
 
 

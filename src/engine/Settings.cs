@@ -30,7 +30,10 @@ namespace Elite
 
         public static bool SHOW_COLOURS_ON_STARTUP = SettingHandler.LoadBool("ShowColoursOnStartup");
 
+        public static bool DO_ENEMY_AI = SettingHandler.LoadBool("DoEnemyAI");
 
+        public static string PLANET_LUMINANCES = SettingHandler.LoadString("PlanetLuminances");
+        public static bool SHOW_UI = SettingHandler.LoadBool("ShowUI");
         public static int PLANET_SCALE = SettingHandler.LoadInt("PlanetScale");
         public static int MIN_PLANET_COUNT = SettingHandler.LoadInt("MinPlanetCount");
         public static int MAX_PLANET_COUNT = SettingHandler.LoadInt("MaxPlanetCount");

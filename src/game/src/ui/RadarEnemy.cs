@@ -18,6 +18,7 @@ namespace Elite
         {
             
 
+
             mesh = Models.radarEnemyMesh;
 
             position = new Vector3(0,1,5);
@@ -30,7 +31,6 @@ namespace Elite
             scale = new Vector3(0.03f,0.03f,0.03f);
 
 
-            
 
         }
 
@@ -54,7 +54,7 @@ namespace Elite
 
             Vector3 right = Utils.Cross(Engine.cameraUp,Engine.cameraForward);
 
-            visible = true;
+            visible = Settings.SHOW_UI;
             if(Engine.cameraPosition.SquaredDistanceTo(enemy.position) > RADAR_RANGE*RADAR_RANGE)
             {
                 visible = false;

@@ -74,7 +74,7 @@ namespace Elite
         }
         protected void DoMovement(float deltaTime)
         {
-           // return;
+            if(!Settings.DO_ENEMY_AI) return;
             momentum += forward * deltaTime*speed;
 
             if(momentum.LengthSquared() > 2000f*2000f)
@@ -85,7 +85,8 @@ namespace Elite
         }
         protected void DoRotation(float deltaTime)
         {
-           // return;
+            if(!Settings.DO_ENEMY_AI) return;
+
             Vector3 currentForward = forward;
             Vector3 currentUp = up;
             Vector3 desiredForward = (Engine.cameraPosition - position).Normalise();
@@ -107,7 +108,7 @@ namespace Elite
 
         protected void ShootLasers(float deltaTime)
         {
-
+            if(!Settings.DO_ENEMY_AI) return;
             for (int i = 0; i < lasers.Count; i++)
             {
                 lasers[i].Shoot(deltaTime);

@@ -13,7 +13,7 @@ namespace Elite
 
         public Planet(Vector3 _offset, short _colour, float _scale, bool _isLit = true)
         {
-            luminances = "#0OC*+/^,.        ";
+            luminances = Settings.PLANET_LUMINANCES;//"#0OC*+/^,.        ";
             pos = _offset;
             colour = _colour;
             scale = new Vector3(_scale,_scale,_scale);

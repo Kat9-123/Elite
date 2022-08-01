@@ -97,8 +97,10 @@ namespace Elite
 
             if((InputManager.IsKeyHeld(InputMap.BLINK) || InputManager.IsKeyHeld(InputMap.BLINK_MOUSE)) && !prepareBlink)
             {
-                prepareBlink = true;
-                Engine.main.blinkController.InitBlink();
+                if(Engine.main.blinkController.InitBlink()) prepareBlink = true;
+
+                
+                
             }
 
             if(!(InputManager.IsKeyHeld(InputMap.BLINK) || InputManager.IsKeyHeld(InputMap.BLINK_MOUSE)) && prepareBlink)
@@ -169,7 +171,6 @@ namespace Elite
                 laserLeft.visible = !currentLaser;
                 laserRight.visible = currentLaser;
 
-                Sounds.shoot.Play();
 
                 if(hitEnemy != null)
                 {
@@ -186,7 +187,7 @@ namespace Elite
 
             if (InputManager.IsKeyHeld(InputMap.SHOOT) || InputManager.IsKeyHeld(InputMap.SHOOT_MOUSE))  
             {
-                Sounds.warp.Play();
+
                 isShooting = true;
                 
             }

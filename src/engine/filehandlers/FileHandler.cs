@@ -17,11 +17,11 @@ namespace Elite
 
         public static string Read(string path)
         {
-            return File.ReadAllText(FileHandler.originPath + path);
+            return File.ReadAllText(originPath + path);
         }
         public static void Write(string path, string data)
         {
-            File.WriteAllText(FileHandler.originPath + path, data);
+            File.WriteAllText(originPath + path, data);
         }
 
 

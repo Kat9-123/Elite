@@ -11,18 +11,25 @@ namespace Elite
 
         private Timer lifeTimer = new Timer(0);
 
+        private Timer colourTimer = new Timer();
+
         private bool isExploding = false;
         public override void Start()
         {
-            colour = 8;
+            colour = 4;
             mesh = Models.cube;
             visible = false;
+
         }
 
         public override void Update(float deltaTime)
         {
             if(!isExploding) return;
 
+            if(colourTimer.Accumulate())
+            {
+                colour = 8;
+            }
             position += momentum*deltaTime;
 
             momentum -= momentum/20f;
@@ -46,6 +53,9 @@ namespace Elite
             deceleration = _deceleration;
 
             lifeTimer.SetDuration(lifeTime);
+            lifeTimer.Reset();
+            colourTimer.SetDuration(Utils.RandomFloat(0.2f,0.5f));
+            colourTimer.Reset();
 
             isExploding = true;
             visible = true;

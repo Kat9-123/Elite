@@ -21,6 +21,14 @@ namespace Elite
         private bool currentFlash = false;
 
 
+        private Timer cooldownTimer = new Timer(5f);
+
+
+        private bool onCooldown;
+
+        private bool startCoolDownTimer;
+
+
         public override void Start()
         {
             movesWithCamera = true;
@@ -33,8 +41,12 @@ namespace Elite
             visible = false;
         }
 
-        public void InitBlink()
+        public bool InitBlink()
         {
+
+            if(isBlinking) return false;
+            if(reset) return false;
+            if(onCooldown) return false;
             up = new Vector3(0,1,0);
             Engine.main.uiManager.isBlinking = true;
             ResetBools();
@@ -47,6 +59,7 @@ namespace Elite
             
             //position = new Vector3(0,0,20.5f);
             visible = true;
+            return true;
         }
         public bool DoBlink()
         {
@@ -71,10 +84,25 @@ namespace Elite
             reset = false;
             isBlinking = false;
             currentFlash = false;
+
         }
+
 
         public override void Update(float deltaTime)
         {
+
+            if(startCoolDownTimer)
+            {
+                if(cooldownTimer.Accumulate())
+                {
+                    onCooldown = false;
+                    startCoolDownTimer = false;
+                    cooldownTimer.Reset();
+                }
+            }
+
+
+
             if(loadingBlink)
             {
                 position.z += deltaTime * 20;
@@ -87,9 +115,11 @@ namespace Elite
 
                     flashTimer.Reset();
                     colour = 3;
+
                     
 
                 }
+
             }
 
             if(reset)
@@ -128,10 +158,11 @@ namespace Elite
                 Engine.main.player.position += Engine.cameraForward * deltaTime * 1500;
                 position.z -= deltaTime * 20;
                 scale.z -= deltaTime * 2f;
-
                 if(scale.z < -0.5f) 
                 {
                     ResetBools();
+                    startCoolDownTimer = true;
+                    onCooldown = true;
                     Engine.main.uiManager.isBlinking = false;
                 }
 
