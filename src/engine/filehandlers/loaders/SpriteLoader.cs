@@ -1,3 +1,5 @@
+// Very basic because the game only uses two very simple sprites. 
+// (that could also just be hard coded tbh)
 using System;
 using System.Drawing;
 
@@ -28,7 +30,7 @@ namespace Elite
         };
 
 
-        public static int DistanceBetweenColours(Colour col1, Colour col2)
+        private static int DistanceBetweenColours(Colour col1, Colour col2)
         {
             return Math.Abs(col1.R - col2.R) + Math.Abs(col1.G - col2.G) + Math.Abs(col1.B - col2.B);
         }

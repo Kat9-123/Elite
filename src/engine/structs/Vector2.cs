@@ -7,7 +7,7 @@ namespace Elite
     {
         public float x,y;
 
-        public Vector2(float _x, float _y)
+        public Vector2(float _x=0f, float _y=0f)
         {
             x = _x; y = _y;
         }
@@ -28,8 +28,8 @@ namespace Elite
             Vector2 result = new Vector2(0,0);
             float l = Length();
 
-            if(l == 0f) {result.x = 0f; result.y = 0f; return result;}
-            result.x = x/l; result.y = y/l;
+            if(l == 0f) {return result;}
+            result = this/l;
 
             return result;
         }

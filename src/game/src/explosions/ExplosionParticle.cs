@@ -52,10 +52,12 @@ namespace Elite
             scale = _size;
             deceleration = _deceleration;
 
-            lifeTimer.SetDuration(lifeTime);
             lifeTimer.Reset();
-            colourTimer.SetDuration(Utils.RandomFloat(0.2f,0.5f));
+            lifeTimer.SetDuration(lifeTime);
+            
             colourTimer.Reset();
+            colourTimer.SetDuration(Utils.RandomFloat(0.2f,0.5f));
+            
 
             isExploding = true;
             visible = true;

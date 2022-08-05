@@ -19,8 +19,8 @@ namespace Elite
             Vector3 result = new Vector3(0,0,0);
             float l = Length();
 
-            if(l == 0f) {result.x = 0f; result.y = 0f; result.z = 0f; return result;}
-            result.x = x/l; result.y = y/l; result.z = z/l;
+            if(l == 0f) {return result;}
+            result = this/l;
 
             return result;
         }

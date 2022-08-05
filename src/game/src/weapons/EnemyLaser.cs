@@ -37,13 +37,13 @@ namespace Elite
             fireTimer = new Timer(fireTime);
             laserVisibilityTimer = new Timer(laserVisibilityTime);
 
-            player = Engine.main.player;
+            player = Engine.gameManager.player;
 
         }
 
         public override void Start()
         {
-            Engine.ChanageIndex(this,Engine.main.enemyLayer); 
+            Engine.ChanageIndex(this,Engine.gameManager.enemyLayer); 
         }
 
 
@@ -80,13 +80,13 @@ namespace Elite
            // UI.WriteLine(forward.Dot((Engine.cameraPosition-position).Normalise()).ToString());
             //if((forward.Dot((Engine.cameraPosition-position).Normalise()) > accuracy))
             //{
-              //  Engine.main.player.Hit(damage);   
+              //  Engine.gameManager.player.Hit(damage);   
             //}
 
 
             if(Physics.CheckLineBox((player.boundingBox.start*accuracy) + player.position, (player.boundingBox.end*accuracy) + player.position, position, position+(forward*1_000_000)))
             {
-                Engine.main.player.Hit(damage);  
+                Engine.gameManager.player.Hit(damage);  
             }
         }
 

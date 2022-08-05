@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
+using System.Diagnostics;
 
 namespace Elite
 {
@@ -150,6 +151,9 @@ namespace Elite
         public static void Initialise()
         {
             safeFileHandle = CreateFile("CONOUT$", 0x40000000, 2, IntPtr.Zero, FileMode.Open, 0, IntPtr.Zero);
+            WindowHandlePtr = ThisProcess.MainWindowHandle;
+            windowRect = new Rect();
+            DisableQuickEdit();
         }    
     
         [STAThread]
@@ -170,5 +174,85 @@ namespace Elite
             }
 
         }
+
+        const uint ENABLE_QUICK_EDIT = 0x0040;
+
+        // STD_INPUT_HANDLE (DWORD): -10 is the standard input device.
+        const int STD_INPUT_HANDLE = -10;
+
+
+
+        [DllImport("kernel32.dll")]
+        static extern bool GetConsoleMode(IntPtr hConsoleHandle, out uint lpMode);
+
+        [DllImport("kernel32.dll")]
+        static extern bool SetConsoleMode(IntPtr hConsoleHandle, uint dwMode);
+
+        private static bool DisableQuickEdit()
+        {
+            IntPtr consoleHandle = GetStdHandle(STD_INPUT_HANDLE);
+
+            // get current console mode
+            uint consoleMode;
+            if (!GetConsoleMode(consoleHandle, out consoleMode))
+            {
+                // ERROR: Unable to get console mode.
+                return false;
+            }
+
+            // Clear the quick edit bit in the mode flags
+            consoleMode &= ~ENABLE_QUICK_EDIT;
+
+            // set the new mode
+            if (!SetConsoleMode(consoleHandle, consoleMode))
+            {
+                // ERROR: Unable to set console mode
+                return false;
+            }
+
+            return true;
+        }
+
+
+
+        private static Rect windowRect;
+        private static Process ThisProcess = Process.GetCurrentProcess();
+        private static IntPtr WindowHandlePtr;
+
+
+
+        [DllImport("user32.dll")]
+        private static extern bool GetWindowRect(IntPtr hwnd, ref Rect rectangle);
+
+
+
+        private struct Rect
+        {
+            public int Left { get; set; }
+            public int Top { get; set; }
+            public int Right { get; set; }
+            public int Bottom { get; set; }
+        }
+
+
+
+
+
+
+        public static (Vector2,Vector2) WindowRect()
+        {
+            GetWindowRect(WindowHandlePtr, ref windowRect);
+
+            // I think this constant value is needed because of the title bar thingy?
+            windowRect.Bottom += 22;
+
+            Vector2 pos,size;
+
+            pos = new Vector2(windowRect.Left,windowRect.Top);
+            size = new Vector2(windowRect.Right - windowRect.Left,windowRect.Bottom - windowRect.Top);
+
+            return (pos,size);
+        }
+
     }
 }

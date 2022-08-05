@@ -3,8 +3,8 @@ namespace Elite
 
     public static class Sprites
     {
-        public static Sprite crosshair = new Sprite("Crosshair.png");
-        public static Sprite radar = new Sprite("Radar.png");
+        public static readonly Sprite crosshair = new Sprite("Crosshair.png");
+        public static readonly Sprite radar = new Sprite("Radar.png");
 
     }
 

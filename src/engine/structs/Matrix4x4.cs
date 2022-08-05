@@ -6,12 +6,6 @@ namespace Elite
     {
         public float[,] matrix;
 
-        /*
-        public Matrix4x4(bool _ = false)
-        {
-            matrix = new float[4,4];
-        }
-        */
 
         public static Matrix4x4 GenerateProjectionMatrix(float fov)
         {
@@ -33,66 +27,27 @@ namespace Elite
 
             return matrix;
         }
-        public static Matrix4x4 GenerateZRotationMatrix(float theta)
-        {
-            Matrix4x4 mat = new Matrix4x4();
-            mat.matrix = new float[4,4];
-            mat.matrix[0,0] = (float)  Math.Cos(theta);
-            mat.matrix[0,1] = (float)  Math.Sin(theta);
-            mat.matrix[1,0] = (float) -Math.Sin(theta);
-            mat.matrix[1,1] = (float)  Math.Cos(theta);
-            mat.matrix[2,2] = 1f;
-            mat.matrix[3,3] = 1f;
-
-            return mat;
-        }
-
-        public static Matrix4x4 GenerateYRotationMatrix(float theta)
-        {
-            Matrix4x4 mat = new Matrix4x4();
-            mat.matrix = new float[4,4];
-            mat.matrix[0,0] =  (float)  Math.Cos(theta);
-            mat.matrix[2,0] =  (float)  Math.Sin(theta);
-            mat.matrix[0,2] =  (float) -Math.Sin(theta);
-            mat.matrix[1,1] =  1f;
-            mat.matrix[2,2] =  (float)  Math.Cos(theta);
-            mat.matrix[3,3] =  1f;
-            return mat;            
-        }
-
-        public static Matrix4x4 GenerateXRotationMatrix(float theta)
-        {
-            Matrix4x4 mat = new Matrix4x4();
-            mat.matrix = new float[4,4];
-            mat.matrix[0,0] = 1f;
-            mat.matrix[1,1] =  MathF.Cos(theta);
-            mat.matrix[1,2] =  MathF.Sin(theta);
-            mat.matrix[2,1] = -MathF.Sin(theta);
-            mat.matrix[2,2] =  (float) Math.Cos(theta);
-            mat.matrix[3,3] =  1f;
-            return mat;            
-        }
 
         public static Matrix4x4 DirectionToMatrix(Vector3 direction, Vector3 up)
         {
             Matrix4x4 mat = new Matrix4x4();
             mat.matrix = new float[4,4];
-            Vector3 xaxis = Utils.Cross(up,direction);
-            xaxis = xaxis.Normalise();
+            Vector3 xAxis = Utils.Cross(up,direction);
+            xAxis = xAxis.Normalise();
          
-            Vector3 yaxis = Utils.Cross(direction, xaxis);
-            yaxis = yaxis.Normalise();
+            Vector3 yAxis = Utils.Cross(direction, xAxis);
+            yAxis = yAxis.Normalise();
 
-            mat.matrix[0,0] = xaxis.x;
-            mat.matrix[1,0] = yaxis.x;
+            mat.matrix[0,0] = xAxis.x;
+            mat.matrix[1,0] = yAxis.x;
             mat.matrix[2,0] = direction.x;
 
-            mat.matrix[0,1] = xaxis.y;
-            mat.matrix[1,1] = yaxis.y;
+            mat.matrix[0,1] = xAxis.y;
+            mat.matrix[1,1] = yAxis.y;
             mat.matrix[2,1] = direction.y;
 
-            mat.matrix[0,2] = xaxis.z;
-            mat.matrix[1,2] = yaxis.z;
+            mat.matrix[0,2] = xAxis.z;
+            mat.matrix[1,2] = yAxis.z;
             mat.matrix[2,2] = direction.z;
 
 

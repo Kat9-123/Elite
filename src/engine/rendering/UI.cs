@@ -95,7 +95,6 @@ namespace Elite
         public static ConsoleInterface.CharInfo[] ApplyUI(ConsoleInterface.CharInfo[] buffer)
         {
             
-
             // Debugtext
             int x = 0;
             int y = 0;

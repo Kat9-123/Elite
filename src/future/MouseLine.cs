@@ -25,8 +25,8 @@ namespace Elite
             int x,y;
             x = 0;
             y = 0;
-           // (x,y) = Window.ConvertPxToConsole((int)(Engine.main.mouseController.mousePosition.x+Engine.main.mouseController.centre.x),
-            //(int)(Engine.main.mouseController.mousePosition.y+Engine.main.mouseController.centre.y));
+           // (x,y) = Window.ConvertPxToConsole((int)(Engine.gameManager.mouseController.mousePosition.x+Engine.gameManager.mouseController.centre.x),
+            //(int)(Engine.gameManager.mouseController.mousePosition.y+Engine.gameManager.mouseController.centre.y));
 
             Vector3 pos = new Vector3(0,0,0);
             pos.x = x - Settings.SCREEN_SIZE_X/2;

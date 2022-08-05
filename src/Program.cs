@@ -10,11 +10,10 @@ namespace Elite
         {
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                Console.WriteLine("This project only supports windows");
+                Console.WriteLine("This project only supports windows.");
                 Console.ReadKey();
                 return;
             }
-
 
             Engine.Setup();
 

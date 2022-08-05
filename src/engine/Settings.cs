@@ -35,7 +35,7 @@ namespace Elite
         public static string PLANET_LUMINANCES = SettingHandler.LoadString("PlanetLuminances");
         public static bool SHOW_UI = SettingHandler.LoadBool("ShowUI");
         public static int PLANET_SCALE = SettingHandler.LoadInt("PlanetScale");
-        public static int MIN_PLANET_COUNT = SettingHandler.LoadInt("MinPlanetCount");
+        public static readonly int MIN_PLANET_COUNT = SettingHandler.LoadInt("MinPlanetCount");
         public static int MAX_PLANET_COUNT = SettingHandler.LoadInt("MaxPlanetCount");
 
         public static bool SHOW_HITBOXES = SettingHandler.LoadBool("ShowHitboxes");

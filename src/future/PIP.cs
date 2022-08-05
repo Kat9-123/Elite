@@ -18,7 +18,7 @@ namespace Elite
         public override void Update(float deltaTime)
         {
 
-            target = Engine.main.player.target;
+            target = Engine.gameManager.player.target;
 
             if(target == null)
             {

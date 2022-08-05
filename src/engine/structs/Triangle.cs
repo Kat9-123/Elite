@@ -15,9 +15,5 @@ namespace Elite
 
         public static Triangle operator +(Triangle tri, Vector3 vec) => new Triangle(tri.a+vec,tri.b+vec,tri.c+vec);
 
-
-
-        //public static Triangle operator *(Triangle t, Vector3 vec) => new Triangle(new);
-
     }
 }

@@ -2,7 +2,7 @@ namespace Elite
 {
     public enum InputMap
     {
-        MOVE_LEFT = 0x41, // A //
+        MOVE_LEFT = 0x41, // A
         MOVE_RIGHT = 0x44, // D
         MOVE_FORWARD = 0x57, // W
         MOVE_BACK = 0x53, // S

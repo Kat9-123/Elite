@@ -15,15 +15,18 @@ namespace Elite
         public static void Initialise()
         {
             string text = FileHandler.Read("Settings.txt");
+
+            // Windows...
             text = text.Replace("\r","");
             string[] data = text.Split('\n');
 
+            // I should use a dictionary for this
             names = new string[data.Length];
             values = new string[data.Length];
 
             for (int i = 0; i < data.Length; i++)
             {
-                // Comments 
+                // Comments and empty lines
                 if(data[i].Length == 0 || data[i][0] == '#') {names[i] = ""; values[i] = ""; continue;} 
 
                 string[] line = data[i].Split('=', 2);
@@ -34,7 +37,6 @@ namespace Elite
 
         public static float LoadFloat(string name)
         {
-
             return float.Parse(Load(name),culture);
         }
         public static int LoadInt(string name)

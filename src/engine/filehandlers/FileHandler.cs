@@ -1,7 +1,6 @@
-// Simple filehandler
-
-using System;
+// Simple FileHandler
 using System.IO;
+using System;
 namespace Elite
 {   
     public static class FileHandler
@@ -11,7 +10,14 @@ namespace Elite
 
         public static void Setup()
         {
+            
             originPath = Directory.GetCurrentDirectory() + "\\assets\\";
+            if(!Directory.Exists(originPath))
+            {
+                Console.WriteLine("Assets folder not found.");
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
         }
 
 

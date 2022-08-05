@@ -24,17 +24,15 @@ namespace Elite
         {
             visible = false;
 
-            DisableConsoleQuickEdit.Go();
             if(!Settings.DO_MOUSE_CONTROLS) return;
-            MouseManager.ShowCursor(false);
 
             Vector2 pos,size;
-            (pos,size) = Window.WinRect();
+            (pos,size) = ConsoleInterface.WindowRect();
 
 
             Vector2 centre = size / 2f + pos;
 
-            MouseManager.SetCursorPosition(centre);
+            InputManager.SetCursorPosition(centre);
         }
 
         public override void Update(float deltaTime)
@@ -48,23 +46,22 @@ namespace Elite
                 mouseFreed = !mouseFreed;
 
                 Vector2 apos,asize;
-                (apos,asize) = Window.WinRect();
-
+                (apos,asize) = ConsoleInterface.WindowRect();
 
                 Vector2 acentre = asize / 2f + apos;
 
-                if(!mouseFreed) MouseManager.SetCursorPosition(acentre);
+                if(!mouseFreed) InputManager.SetCursorPosition(acentre);
             }
 
             if(mouseFreed) 
             {
-                Engine.main.player.rotationDirection.x = 0f;
-                Engine.main.player.rotationDirection.y = 0f;
+                Engine.gameManager.player.rotationDirection.x = 0f;
+                Engine.gameManager.player.rotationDirection.y = 0f;
                 return;
             }
 
             Vector2 pos,size;
-            (pos,size) = Window.WinRect();
+            (pos,size) = ConsoleInterface.WindowRect();
 
 
             Vector2 centre = size / 2f + pos;
@@ -74,7 +71,7 @@ namespace Elite
             float minMouseDist = size.x * MIN_MOUSE_DIST_PERCENTAGE / 2f;
 
 
-            mousePosition = MouseManager.GetCursorPosition() - centre;
+            mousePosition = InputManager.GetCursorPosition() - centre;
 
     
 
@@ -88,20 +85,20 @@ namespace Elite
                 Vector2 adjusted = direction * length;
 
 
-                Engine.main.player.rotationDirection.x = -(adjusted.y / maxMouseDist) * 1.5f;
-                Engine.main.player.rotationDirection.y = (adjusted.x / maxMouseDist) * 1.5f;
+                Engine.gameManager.player.rotationDirection.x = -(adjusted.y / maxMouseDist) * 1.5f;
+                Engine.gameManager.player.rotationDirection.y = (adjusted.x / maxMouseDist) * 1.5f;
                 
             }
             else
             {
                 
-                Engine.main.player.rotationDirection.x = 0f;
-                Engine.main.player.rotationDirection.y = 0f;
+                Engine.gameManager.player.rotationDirection.x = 0f;
+                Engine.gameManager.player.rotationDirection.y = 0f;
                
             }
 
 
-            MouseManager.SetCursorPosition(mousePosition + centre);
+            InputManager.SetCursorPosition(mousePosition + centre);
 
 
         }

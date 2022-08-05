@@ -97,7 +97,7 @@ namespace Elite
 
             if((InputManager.IsKeyHeld(InputMap.BLINK) || InputManager.IsKeyHeld(InputMap.BLINK_MOUSE)) && !prepareBlink)
             {
-                if(Engine.main.blinkController.InitBlink()) prepareBlink = true;
+                if(Engine.gameManager.blinkController.InitBlink()) prepareBlink = true;
 
                 
                 
@@ -105,11 +105,11 @@ namespace Elite
 
             if(!(InputManager.IsKeyHeld(InputMap.BLINK) || InputManager.IsKeyHeld(InputMap.BLINK_MOUSE)) && prepareBlink)
             {
-                if (Engine.main.blinkController.DoBlink()) momentum = forward * 50f;
+                if (Engine.gameManager.blinkController.DoBlink()) momentum = forward * 50f;
                 prepareBlink = false;
             }
 
-            if(Engine.main.blinkController.isBlinking) return;
+            if(Engine.gameManager.blinkController.isBlinking) return;
 
             DoMovement(deltaTime);
 

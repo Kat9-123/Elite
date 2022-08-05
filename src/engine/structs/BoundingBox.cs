@@ -1,5 +1,4 @@
-using System;
-
+// Used for collision
 namespace Elite
 {
     public struct BoundingBox

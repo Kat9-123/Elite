@@ -1,12 +1,12 @@
 using System;
-
 using System.Diagnostics;
+
 namespace Elite
 {
 
     public static class Utils
     {
-        private static Random rng = new Random();
+        private static readonly Random rng = new Random();
 
         public static float RandomFloat(float min, float max)
         {
@@ -23,7 +23,6 @@ namespace Elite
         {
             int n = rng.Next(0,2);
 
-
             if (n == 1) return 1;
             
             return -1;
@@ -34,7 +33,6 @@ namespace Elite
         public static Mesh GenerateRepeatingMesh(Mesh _mesh, int count, int seperation)
         {
  
-
             Triangle[] triangles = new Triangle[count*_mesh.tris.Length];
 
             for (int segment = 0; segment < count; segment++)
@@ -74,7 +72,7 @@ namespace Elite
                 Console.BackgroundColor = 0;
                 
                 Console.Write((i.ToString() + ": ").PadRight(4));
-                Console.BackgroundColor = (System.ConsoleColor) ((i) %16);
+                Console.BackgroundColor = (System.ConsoleColor) ((i) % 16);
                 Console.WriteLine(" ");
             }
             Console.BackgroundColor = ConsoleColor.Black;
@@ -93,10 +91,6 @@ namespace Elite
             result = vec * MathF.Cos(theta) + (Cross(axis,vec))*MathF.Sin(theta) + axis* (axis.Dot(vec)) * (1-MathF.Cos(theta));
             return result;
         }
-
-
-
-
 
 
         public static Vector3 Cross(Vector3 a, Vector3 b)
@@ -130,12 +124,10 @@ namespace Elite
         {
             Vector3 right = Cross(up,forward);
 
-
             Vector3 result;
             result = right*pos.x + up*pos.y + forward*pos.z;
 
             return result;
-
 
         }
 
@@ -147,15 +139,18 @@ namespace Elite
             
             double timestamp = Stopwatch.GetTimestamp();
             double now = timestamp / Stopwatch.Frequency;
+
             if (previousTime == 0) previousTime = now;
+
             double deltaTime = (now - previousTime);
             previousTime = now;
+
             return deltaTime;
         
         }
 
-        // Generates a random point within the given square
-        // but it rejects points that are too close to the centre 
+        // Generate a random point within a circle
+        // excluding a smaller circle in the centre.
         public static Vector3 RandomPositionExcludeCentre(float minDist, float maxDist)
         {
             Vector3 pos = new Vector3(0,0,0);

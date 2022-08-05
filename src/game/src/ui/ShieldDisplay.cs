@@ -33,14 +33,6 @@ namespace Elite
         {
             scale = new Vector3(0.1f,0.1f,0.1f);
            
-            
-          //  filled = true;
-
-
-
-            //getsCulled = false;
-            //  filled = true;
-            //direction = true;
 
             movesWithCamera = true;
 
@@ -53,12 +45,12 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
-            if(Engine.main.player.isDead)
+            if(Engine.gameManager.player.isDead)
             {
                 Engine.QueueDestruction(this);
             }
 
-            if(!isPlayer && Engine.main.player.target == null)
+            if(!isPlayer && Engine.gameManager.player.target == null)
             {
                 visible = false;
                 return;

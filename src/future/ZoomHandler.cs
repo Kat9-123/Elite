@@ -21,12 +21,12 @@ namespace Elite
             if(isZoomed)
             {
                 Renderer.SetProjectionMatrix(40f);
-                Engine.main.player.zoomMultiplier = 0.6f;
+                Engine.gameManager.player.zoomMultiplier = 0.6f;
             }
             else
             {
                 Renderer.SetProjectionMatrix(Settings.FOV);
-                Engine.main.player.zoomMultiplier = 1f;
+                Engine.gameManager.player.zoomMultiplier = 1f;
             }
         }
 

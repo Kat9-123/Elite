@@ -1,8 +1,6 @@
-using System;
-
 namespace Elite
 {
-    public class PlayerDisplay : GameObject
+    public class EnemyDisplay : GameObject
     {
 
 
@@ -24,12 +22,12 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
-            if(Engine.main.player.isDead)
+            if(Engine.gameManager.player.isDead)
             {
                 Engine.QueueDestruction(this);
             }
            
-            if(Engine.main.player.target == null)
+            if(Engine.gameManager.player.target == null)
             {
                 visible = false;
 
@@ -40,7 +38,7 @@ namespace Elite
             
             visible = true;
 
-            target = Engine.main.player.target;
+            target = Engine.gameManager.player.target;
             scale = target.displaySize;
             mesh = target.mesh;
             position = new Vector3(1.29f,1.2f,2f);

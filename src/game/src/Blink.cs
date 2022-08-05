@@ -48,7 +48,7 @@ namespace Elite
             if(reset) return false;
             if(onCooldown) return false;
             up = new Vector3(0,1,0);
-            Engine.main.uiManager.isBlinking = true;
+            Engine.gameManager.uiManager.isBlinking = true;
             ResetBools();
             loadingBlink = true;
             //scale = new Vector3(1f,1f,2f);
@@ -130,7 +130,7 @@ namespace Elite
                 if(scale.z <= -0.2f)
                 {
                     ResetBools();
-                    Engine.main.uiManager.isBlinking = false;
+                    Engine.gameManager.uiManager.isBlinking = false;
                 }
             }
 
@@ -155,7 +155,7 @@ namespace Elite
                 ready = false;
                 up = Utils.RotateAroundAxis(up, forward, deltaTime*1f);
 
-                Engine.main.player.position += Engine.cameraForward * deltaTime * 1500;
+                Engine.gameManager.player.position += Engine.cameraForward * deltaTime * 1500;
                 position.z -= deltaTime * 20;
                 scale.z -= deltaTime * 2f;
                 if(scale.z < -0.5f) 
@@ -163,7 +163,7 @@ namespace Elite
                     ResetBools();
                     startCoolDownTimer = true;
                     onCooldown = true;
-                    Engine.main.uiManager.isBlinking = false;
+                    Engine.gameManager.uiManager.isBlinking = false;
                 }
 
 

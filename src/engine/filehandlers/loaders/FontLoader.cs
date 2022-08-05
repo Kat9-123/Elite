@@ -29,8 +29,7 @@ namespace Elite
 
                 string res = string.Join("",splitCharacter);
                 characters[i] = res;
-
-                
+          
             }
 
         }

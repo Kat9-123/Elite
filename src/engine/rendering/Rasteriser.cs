@@ -1,5 +1,5 @@
 // Takes 2D triangles from the renderer and writes those to an output buffer,
-// Which it then sends to the consoleinterface to be dumped onto the screen.
+// Which it then sends to the ConsoleInterface to be dumped onto the screen.
 using System;
 
 namespace Elite

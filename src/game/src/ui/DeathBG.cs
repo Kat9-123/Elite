@@ -10,6 +10,7 @@ namespace Elite
         {
 
             character = ' ';
+            visible = false;
             colour = 0;
             mesh = Models.circle;
             movesWithCamera = true;
@@ -20,21 +21,14 @@ namespace Elite
 
             scale = new Vector3(0f,0f,0f);
         }
-        public void Activate()
-        {
-            isActivated = true;
-        }
+
 
         public override void Update(float deltaTime)
         {
-            if(Engine.main.player.isDead)
-            {
-                Activate();
-            }
-            if(!isActivated)
-            {
-                return;
-            }
+            if(!Engine.gameManager.player.isDead) return;
+
+            visible = true;
+
             scale += 3f * deltaTime;
 
             

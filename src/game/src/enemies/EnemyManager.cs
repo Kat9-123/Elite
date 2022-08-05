@@ -10,7 +10,7 @@ namespace Elite
 
         private Timer enemySpawnTimer = new Timer(10);
 
-        private int spawnDist = 300;
+
 
         private int enemiesSpawned = 0;
 
@@ -94,7 +94,7 @@ namespace Elite
         {
             Engine.Instance(en);
             enemies.Add(en);
-            Engine.ChanageIndex(en,Engine.main.enemyLayer);
+            Engine.ChanageIndex(en,Engine.gameManager.enemyLayer);
 
             en.position = Utils.RandomPositionExcludeCentre(50f,100f);
 

@@ -1,20 +1,27 @@
 /*
+This engine lacks some very important features, like audio, true frustum culling,
+occlusion, object ordering based on distance, etc. I didn't implement these features
+because they really aren't necessary for this project.
+
+
+
 === High level engine overview
 
                      (UIManager) --------------------> [  UI  ]
-                          |                             /.\  |
-                          |                              |  \./
+                          |                                |
+                          |                               \./
                      [GAMEOBJECTS] --> [RENDERER] --> [RASTERISER] --> [CONSOLEINTERFACE]
-                         /.\
-                       {Update}
-                          |
+                       /.\    |
+                     {Update} |
+                        |    \./
 [ENTRY] -{SETUP}--+--> [ENGINE] ---+
                   |                |
-                  +----------------+
+                  +---{GAMELOOP}---+
 
 [] = Core engine part
 () = GameObject that functions as a manager.
 {} = What happens
+
 
 */
 using System;
@@ -36,33 +43,33 @@ namespace Elite
         public static Vector3 cameraRight = new Vector3(1,0,0);
 
 
-        // GameManager. First object to be instanced
-        public static Main main;
+        // GameManager. First object to be instanced.
+        public static GameManager gameManager;
 
-        public volatile static List<GameObject> gameObjects = new List<GameObject>(128);
+        public static List<GameObject> gameObjects = new List<GameObject>(128);
 
 
         private static List<GameObject> queuedObjectsForDestruction = new List<GameObject>();
 
         
-        private const string title = "Elite not very Dangerous | By Kat9_123";
+        private const string TITLE = "Elite not very Dangerous | By Kat9_123";
 
         public static float deltaTime = 0f;
 
         // Used in deltaTime calculations
         private static double previousTime = 0;
 
-        public static float timeScale = 1f;
 
 
-        // Change the render order (Z-index) of an object. An object
-        // with a lower layer gets rendered behind objects
-        // with a higher layer.
 
         public static int GameObjectCount()
         {
             return gameObjects.Count;
         }
+
+        // Change the index of a gameObject in the gameObjects list.
+        // Objects with a higher index render in front of
+        // Objects with a lower index.
         public static void ChanageIndex(GameObject gameObject, int newIndex)
         {
 
@@ -79,6 +86,8 @@ namespace Elite
         }
         private static void DestroyQueuedObjects()
         {
+            // Here the objects get deleted back to front because.. ummm...
+            // otherwise it doesn't work...
             for (int i = queuedObjectsForDestruction.Count-1; i >= 0; i--)
             {
                 gameObjects.Remove(queuedObjectsForDestruction[i]);
@@ -88,7 +97,7 @@ namespace Elite
         }
 
        
-        // Instance the given object.
+
         public static GameObject Instance(GameObject obj)
         {
             gameObjects.Add(obj);
@@ -113,8 +122,7 @@ namespace Elite
             
             if(Settings.SHOW_COLOURS_ON_STARTUP) Utils.ShowColours();
 
-            Window.Setup();
-        
+
             // Windows is a bit strange so we first need to set the
             // font to the minimum size before changing the windowsize.
             ConsoleInterface.SetCurrentFont(Settings.FONT, 1);
@@ -131,7 +139,7 @@ namespace Elite
             Renderer.Initialise();
 
             Console.CursorVisible = false;
-            Console.Title = title;
+            Console.Title = TITLE;
 
 
         }
@@ -139,15 +147,14 @@ namespace Elite
         public static void Restart()
         {    
 
-            // Destroy all queued object except for the gamemanager.
+            // Destroy all objects except for the gamemanager.
             for (int i = 1; i < gameObjects.Count; i++)
             {
-                QueueDestruction(gameObjects[i]);
-                
+                QueueDestruction(gameObjects[i]);      
             }
             DestroyQueuedObjects();
 
-            main.Setup();
+            gameManager.Setup();
 
  
         }
@@ -156,7 +163,7 @@ namespace Elite
         {
 
             // Instance the gamemanager
-            main = (Main) Instance(new Main());       
+            gameManager = (GameManager) Instance(new GameManager());       
 
 
             while (true)
@@ -170,7 +177,7 @@ namespace Elite
 
                 DestroyQueuedObjects();
 
-                deltaTime = ((float) Utils.CalculateDeltaTime(ref previousTime)) * timeScale;
+                deltaTime = ((float) Utils.CalculateDeltaTime(ref previousTime));
 
                 
                 

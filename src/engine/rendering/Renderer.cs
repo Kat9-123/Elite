@@ -167,32 +167,26 @@ namespace Elite
                    
             }
 
-            Triangle projectedTriangle;
-
-            if(!obj.is2D)
-            {
-                // Project to 3D
-                projectedTriangle = MultiplyTriangleByMatrix(translatedTriangle,projectionMatrix);
 
 
 
-                // Scale everything to screenspace
-                projectedTriangle += new Vector3(1,1,0);
+            // Project to 3D
+            Triangle projectedTriangle = MultiplyTriangleByMatrix(translatedTriangle,projectionMatrix);
 
-                projectedTriangle.a.x *= Settings.SCREEN_SIZE_X/2;
-                projectedTriangle.a.y *= Settings.SCREEN_SIZE_Y/2;
 
-                projectedTriangle.b.x *= Settings.SCREEN_SIZE_X/2;
-                projectedTriangle.b.y *= Settings.SCREEN_SIZE_Y/2;
-                projectedTriangle.c.x *= Settings.SCREEN_SIZE_X/2;
-                projectedTriangle.c.y *= Settings.SCREEN_SIZE_Y/2;
 
-            }
-            else //2D 
-            {
-                projectedTriangle = translatedTriangle;
+            // Scale everything to screenspace
+            projectedTriangle += new Vector3(1,1,0);
 
-            }
+            projectedTriangle.a.x *= Settings.SCREEN_SIZE_X/2;
+            projectedTriangle.a.y *= Settings.SCREEN_SIZE_Y/2;
+
+            projectedTriangle.b.x *= Settings.SCREEN_SIZE_X/2;
+            projectedTriangle.b.y *= Settings.SCREEN_SIZE_Y/2;
+            projectedTriangle.c.x *= Settings.SCREEN_SIZE_X/2;
+            projectedTriangle.c.y *= Settings.SCREEN_SIZE_Y/2;
+
+
 
 
 

@@ -46,7 +46,7 @@ namespace Elite
 
 
 
-            PlayerDisplay plDis = (PlayerDisplay) Engine.Instance(new PlayerDisplay());
+            Engine.Instance(new EnemyDisplay());
 
 
             ShieldDisplay bgShieldDisplay = (ShieldDisplay) Engine.Instance(new ShieldDisplay(new Vector3(0.855f,1.84f,2),true));
@@ -119,13 +119,10 @@ namespace Elite
         public override void Update(float deltaTime)
         {
             if(!Settings.SHOW_UI) return;
-            if(Engine.main.player.isDead)
+            if(Engine.gameManager.player.isDead)
             {
                 return;
             }
-
-
-
 
 
             DebugInfo();
@@ -136,7 +133,7 @@ namespace Elite
 
 
             // Player speed
-            UI.WriteText(((int)(Engine.main.player.momentum.Length()*10)).ToString(),2,170);
+            UI.WriteText(((int)(Engine.gameManager.player.momentum.Length()*10)).ToString(),2,170);
 
             // Crosshair
             if(!isBlinking) UI.AddSprite(Sprites.crosshair,Settings.SCREEN_SIZE_X/2-4,Settings.SCREEN_SIZE_Y/2-4);
@@ -158,18 +155,17 @@ namespace Elite
 
 
 
-            // Mouse
-       //     UI.AddSprite(Sprites.radar,
-         //   (int)Engine.main.mouseController.spritePos.x, 
-         //   (int)Engine.main.mouseController.spritePos.y);
+
 
             // Target momentum
-            //if(Engine.main.player.target != null)
-            //{
-            //string str = ((int)Engine.main.player.target.momentum.Length()).ToString();
+            /*
+            if(Engine.gameManager.player.target != null)
+            {
+                string str = ((int)Engine.gameManager.player.target.momentum.Length()).ToString();
 
-            //  UI.WriteText(str,173-(6*(str.Length-1)),80);
-            //}
+                UI.WriteText(str,173-(6*(str.Length-1)),80);
+            }
+            */
     
 
         }

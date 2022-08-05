@@ -55,12 +55,12 @@ namespace Elite
 
         protected void Setup()
         {
-            player = Engine.main.player;
+            player = Engine.gameManager.player;
             getsLit = true;
             health = maxHealth;
             forward = (Engine.cameraPosition - position).Normalise();
 
-            Engine.main.uiManager.AddRadarEnemy(this,radarSize);
+            Engine.gameManager.uiManager.AddRadarEnemy(this,radarSize);
 
             boundingBox = new BoundingBox(boundingBoxStart,boundingBoxEnd);
 
@@ -142,10 +142,10 @@ namespace Elite
                 Engine.QueueDestruction(this);
                 isAlive = false;
 
-                Engine.main.uiManager.score = (int.Parse(Engine.main.uiManager.score) + score).ToString();
+                Engine.gameManager.uiManager.score = (int.Parse(Engine.gameManager.uiManager.score) + score).ToString();
                 player.Heal();
-                Engine.main.explosionManager.DoExplosion(this);
-                Engine.main.enemyManager.DestroyEnemy(this);
+                Engine.gameManager.explosionManager.DoExplosion(this);
+                Engine.gameManager.enemyManager.DestroyEnemy(this);
 
                 for (int i = 0; i < lasers.Count; i++)
                 {

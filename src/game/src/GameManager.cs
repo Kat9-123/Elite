@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 namespace Elite
 {   
-    // Main game manager. 
-    public class Main : GameObject
+    // GameManager game manager. 
+    public class GameManager : GameObject
     {
 
 

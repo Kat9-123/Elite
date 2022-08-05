@@ -1,13 +1,9 @@
-using System;
-
 namespace Elite
 {
     public struct Timer
     {
-
         private float duration;
 
-        // currentTime
         private float time;
 
         public Timer(float _duration)

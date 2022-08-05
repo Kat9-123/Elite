@@ -37,9 +37,9 @@ namespace Elite
                 Engine.QueueDestruction(this);
             }
 
-            for (int i = 0; i < Engine.main.enemyManager.enemies.Count; i++)
+            for (int i = 0; i < Engine.gameManager.enemyManager.enemies.Count; i++)
             {
-                Enemy enemy = Engine.main.enemyManager.enemies[i];
+                Enemy enemy = Engine.gameManager.enemyManager.enemies[i];
                 if(Physics.CheckLineBox(
                     enemy.boundingBox.start+enemy.position, 
                     enemy.boundingBox.end+enemy.position, 

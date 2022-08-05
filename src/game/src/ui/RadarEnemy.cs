@@ -36,7 +36,7 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
-            if(Engine.main.player.isDead)
+            if(Engine.gameManager.player.isDead)
             {
                 Engine.QueueDestruction(this);
             }
@@ -62,7 +62,7 @@ namespace Elite
 
             
 
-            if(enemy == Engine.main.player.target)
+            if(enemy == Engine.gameManager.player.target)
             {
                 colour = 3;
             }
