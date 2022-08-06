@@ -56,8 +56,6 @@ After that the rest of the Engine architecture was relatively simple.
 
 
 ## How to play it
-
-#### You will need to use a square font!
 #### For the best experience use <a href="https://strlen.com/square/">Square</a>
 if you decide to use a different font, modify the Font option in assets/Settings.txt
 
@@ -135,4 +133,5 @@ Features:
 
 
 ## Miscellaneous
-If you have any tips, optimisations, etc. Please either message me or make a contribution.
+If you have any tips, optimisations, etc. Please either message me or make a pull request.
+The code is stil relatively messy.

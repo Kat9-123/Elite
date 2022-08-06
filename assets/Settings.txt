@@ -5,7 +5,7 @@ FontScale=3
 Font=Square
 
 # 0 = Low, 1 = Medium, 2 = High
-PlanetQuality=2
+PlanetQuality=0
 
 MinPlanetCount=10
 MaxPlanetCount=20
@@ -20,14 +20,15 @@ DoEnemyAI=true
 
 
 
-DoMouseControls=false
+DoMouseControls=true
 
 DustCount=40
 
 ShowUI=true
 
 # Debug info
-Debug=false
-ShowHitboxes=false
+Debug=true
+ShowHitboxes=true
 ShowColoursOnStartup=false
+ShowFPS=true
 

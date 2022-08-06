@@ -40,6 +40,8 @@ namespace Elite
 
         public static bool SHOW_HITBOXES = SettingHandler.LoadBool("ShowHitboxes");
 
+        public static readonly bool SHOW_FPS = SettingHandler.LoadBool("ShowFPS");
+
 
 
 

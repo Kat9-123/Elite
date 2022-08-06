@@ -4,7 +4,7 @@ namespace Elite
 {
     public class RadarEnemy : GameObject
     {
-        private const int RADAR_RANGE = 5000;
+        private const int RADAR_RANGE = 3000;
         private Enemy enemy;
 
 

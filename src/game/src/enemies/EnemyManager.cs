@@ -14,9 +14,6 @@ namespace Elite
 
         private int enemiesSpawned = 0;
 
-        private Vector3 lastPlayerPos = new Vector3(0,0,0);
-
-
 
 
         public override void Start()
@@ -43,7 +40,6 @@ namespace Elite
 
             if(enemySpawnTimer.Accumulate())
             {
-                lastPlayerPos = Engine.cameraPosition;
 
                 Enemy enemy;
 
@@ -74,7 +70,7 @@ namespace Elite
 
                 enemiesSpawned++;
 
-                enemySpawnTimer.SetDuration(Utils.RandomFloat(10,30));
+                enemySpawnTimer.SetDuration(Utils.RandomFloat(7,25));
                 enemySpawnTimer.Reset();
 
                     
@@ -95,8 +91,6 @@ namespace Elite
             Engine.Instance(en);
             enemies.Add(en);
             Engine.ChanageIndex(en,Engine.gameManager.enemyLayer);
-
-            en.position = Utils.RandomPositionExcludeCentre(50f,100f);
 
             return en;
             

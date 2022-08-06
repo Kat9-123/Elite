@@ -6,15 +6,12 @@ namespace Elite
     {
 
 
-
-
-
         public override void Start()
         {
             score = 40;
             fireRate = 0.3f;
         
-            rotationSpeed = 1.5f;
+            rotationSpeed = 5f;
             speed = 50f;
 
 
@@ -39,7 +36,7 @@ namespace Elite
                 laserMesh: Models.bigLaserMesh, 
                 _offset: new Vector3(0,0,150), 
                 damage: 150f, 
-                accuracy: 4f, 
+                accuracy: 6f, 
                 laserColour: 5, 
                 fireTime: 10f,
                 laserVisibilityTime: 1f
@@ -102,8 +99,6 @@ namespace Elite
 
             
             ShootLasers(deltaTime);
-
-
 
 
             

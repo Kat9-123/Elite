@@ -16,9 +16,7 @@ namespace Elite
         {
             string text = FileHandler.Read("Settings.txt");
 
-            // Windows...
-            text = text.Replace("\r","");
-            string[] data = text.Split('\n');
+            string[] data = text.Split("\r\n");
 
             // I should use a dictionary for this
             names = new string[data.Length];

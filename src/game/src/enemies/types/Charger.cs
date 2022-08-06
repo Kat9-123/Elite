@@ -4,8 +4,6 @@ namespace Elite
 {
     public class Charger : Enemy
     {
-        public const short SCORE = 10;
-
 
         public override void Start()
         {

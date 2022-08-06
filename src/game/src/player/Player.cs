@@ -198,9 +198,10 @@ namespace Elite
 
             if(!isShooting)
             {
-                currentLaser = false;
+                currentLaser = !currentLaser;
                 laserLeft.visible = false;
                 laserRight.visible = false;
+                laserTimer.Accumulate();
             
             }
 

@@ -33,7 +33,9 @@ namespace Elite
         public Vector3 lightingDirection = new Vector3(0,0,-1);
 
 
+
         public Mesh mesh;
+
 
 
 

@@ -4,6 +4,7 @@ namespace Elite
 {
     public class Blink : GameObject
     {
+        private const float WARP_SPEED = 800f;
 
 
 
@@ -13,8 +14,6 @@ namespace Elite
         public bool isBlinking = false;
 
         private bool reset = false;
-        private Timer loadTimer = new Timer(0.5f);
-        private Timer blinkTimer = new Timer(1f);
 
         private Timer flashTimer = new Timer(0.6f);
 
@@ -105,8 +104,8 @@ namespace Elite
 
             if(loadingBlink)
             {
-                position.z += deltaTime * 20;
-                scale.z += deltaTime * 2f;
+                position.z += deltaTime * 12f;
+                scale.z += deltaTime * 1.2f;
 
                 if(scale.z >= 2f)
                 {
@@ -155,7 +154,7 @@ namespace Elite
                 ready = false;
                 up = Utils.RotateAroundAxis(up, forward, deltaTime*1f);
 
-                Engine.gameManager.player.position += Engine.cameraForward * deltaTime * 1500;
+                Engine.gameManager.player.position += Engine.cameraForward * deltaTime * WARP_SPEED;
                 position.z -= deltaTime * 20;
                 scale.z -= deltaTime * 2f;
                 if(scale.z < -0.5f) 

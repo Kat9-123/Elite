@@ -62,7 +62,6 @@ namespace Elite
 
 
 
-
         public static int GameObjectCount()
         {
             return gameObjects.Count;
@@ -191,15 +190,16 @@ namespace Elite
                 deltaTime = ((float) Utils.CalculateDeltaTime(ref previousTime));
 
                 
-                
-                string fps = "";
-                if (deltaTime != 0f) fps = (1f/deltaTime).ToString();
+                if(Settings.SHOW_FPS)
+                {
+                    string fps = "";
+                    if (deltaTime != 0f) fps = (1f/deltaTime).ToString();
 
-                if(fps.Length > 5) fps = fps.Substring(0,5);
-                UI.WriteLine("FPS: " + fps + "\n");
-                //Console.Title = title + " | " + fps;
-                
+                    if(fps.Length > 5) fps = fps.Substring(0,5);
+                    UI.WriteFPS(fps);
     
+                }
+
 
                 UI.ResetUI();                
                 // Update all gameobjects

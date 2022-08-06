@@ -55,7 +55,9 @@ namespace Elite
 
         protected void Setup()
         {
+           
             player = Engine.gameManager.player;
+            position = Utils.RandomPositionExcludeCentre(100f,400f) + player.position;
             getsLit = true;
             health = maxHealth;
             forward = (Engine.cameraPosition - position).Normalise();
