@@ -18,7 +18,8 @@ Everything was made by me except for the really low level console interactions.
 
 
 ## Screenshots
-![Alt text](/../<branch name>/screenshots/Screenshot2.png?raw=true "HUD explanation")
+### HUD Explanation
+![image](https://github.com/Kat9-123/Elite/blob/master/screenshots/Screenshot2.png)
 
 
 ## Why?
