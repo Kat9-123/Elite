@@ -25,16 +25,28 @@ namespace Elite
         // Keys that are currently pressed
         private static List<short> keysPressed = new List<short>(16);
 
+        private static bool isInFocus = true;
 
+        public static void TestFocus()
+        {
+            isInFocus = ConsoleInterface.IsFocused();
+
+            if(!isInFocus)
+            {
+                keysPressed.Clear();
+            }
+        }
 
         public static bool IsKeyHeld(InputMap key)
         {
+            if(!isInFocus) return false;
             return (GetAsyncKeyState((short)key) > 1);
         }
 
 
         public static bool IsKeyPressed(InputMap _key)
         {
+            if(!isInFocus) return false;
             short key = (short) _key;
             bool state = (GetAsyncKeyState(key) > 1);
 
@@ -64,6 +76,7 @@ namespace Elite
 
         public static void SetCursorPosition(Vector2 pos)
         {
+            if(!isInFocus) return;
             SetCursorPos((int) pos.x, (int) pos.y);
         }
 

@@ -53,7 +53,7 @@ namespace Elite
         private static List<GameObject> queuedObjectsForDestruction = new List<GameObject>();
 
         
-        private const string TITLE = "Elite not very Dangerous | By Kat9_123";
+        public const string TITLE = "Elite not very Dangerous | By Kat9_123";
 
         public static float deltaTime = 0f;
 
@@ -121,6 +121,7 @@ namespace Elite
                 Console.ReadKey();
                 return false;
             }
+            Console.Title = TITLE;
             
             // Initialise file stuff
             FileHandler.Setup();
@@ -145,8 +146,8 @@ namespace Elite
             // Graphics
             Renderer.Initialise();
 
+
             Console.CursorVisible = false;
-            Console.Title = TITLE;
 
             return true;
 
@@ -177,6 +178,7 @@ namespace Elite
 
             while (true)
             {  
+                InputManager.TestFocus();
 
                 // Exit if ESC was pressed
                 if(InputManager.IsKeyPressed(InputMap.PAUSE)) Environment.Exit(1);

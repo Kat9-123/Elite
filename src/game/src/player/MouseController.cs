@@ -7,6 +7,8 @@ namespace Elite
 
         private bool mouseFreed = false;
 
+        private bool reFocused = false;
+
 
 
         // Max mouse distance from centre expressed as a percentage
@@ -31,6 +33,12 @@ namespace Elite
             CentreMousePosition();
         }
 
+
+        private void ResetRotationDirection()
+        {
+            Engine.gameManager.player.rotationDirection.x = 0f;
+            Engine.gameManager.player.rotationDirection.y = 0f;
+        }
         private void CentreMousePosition()
         {
             Vector2 pos,size;
@@ -60,9 +68,21 @@ namespace Elite
 
             if(mouseFreed) 
             {
-                Engine.gameManager.player.rotationDirection.x = 0f;
-                Engine.gameManager.player.rotationDirection.y = 0f;
+                ResetRotationDirection();
                 return;
+            }
+
+            if(!ConsoleInterface.IsFocused()) 
+            {
+                ResetRotationDirection();
+                reFocused = false; 
+                return;
+            }
+
+            if(!reFocused)
+            {
+                reFocused = true;
+                CentreMousePosition();
             }
 
             Vector2 pos,size;
@@ -97,8 +117,7 @@ namespace Elite
             else
             {
                 
-                Engine.gameManager.player.rotationDirection.x = 0f;
-                Engine.gameManager.player.rotationDirection.y = 0f;
+                ResetRotationDirection();
                
             }
 
