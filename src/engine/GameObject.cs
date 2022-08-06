@@ -32,8 +32,7 @@ namespace Elite
 
         public Vector3 lightingDirection = new Vector3(0,0,-1);
 
-    
-        public bool is2D = false;
+
         public Mesh mesh;
 
 
@@ -59,6 +58,11 @@ namespace Elite
             offset = (FindLargestSize() / 2f) * -1f;
 
 
+        }
+
+        public void LookAt(Vector3 lookAtPos)
+        {
+            forward = (lookAtPos - position).Normalise();  
         }
         public Vector3 FindLargestSize()
         {

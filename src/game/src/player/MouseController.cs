@@ -13,6 +13,8 @@ namespace Elite
         // of the screen size.
         private const float MAX_MOUSE_DIST_PERCENTAGE = 0.7f;
 
+        // "Safe" radius expressed as a percentage of the screen size
+        // if the mouse is within this region, no rotation happens.
         private const float MIN_MOUSE_DIST_PERCENTAGE = 0.1f;
 
 
@@ -26,6 +28,11 @@ namespace Elite
 
             if(!Settings.DO_MOUSE_CONTROLS) return;
 
+            CentreMousePosition();
+        }
+
+        private void CentreMousePosition()
+        {
             Vector2 pos,size;
             (pos,size) = ConsoleInterface.WindowRect();
 
@@ -34,6 +41,8 @@ namespace Elite
 
             InputManager.SetCursorPosition(centre);
         }
+
+
 
         public override void Update(float deltaTime)
         {
@@ -45,12 +54,8 @@ namespace Elite
             {
                 mouseFreed = !mouseFreed;
 
-                Vector2 apos,asize;
-                (apos,asize) = ConsoleInterface.WindowRect();
 
-                Vector2 acentre = asize / 2f + apos;
-
-                if(!mouseFreed) InputManager.SetCursorPosition(acentre);
+                if(!mouseFreed) CentreMousePosition();
             }
 
             if(mouseFreed) 

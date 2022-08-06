@@ -4,8 +4,6 @@ namespace Elite
     public class DeathBG : GameObject
     {
 
-
-        private bool isActivated;
         public override void Start()
         {
 

@@ -169,11 +169,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\trist\\Desktop\\ALB\\Programming\\C#\\Elite\\Elite.csproj",
+      "projectUniqueName": "c:\\Users\\trist\\Desktop\\ALB\\Programming\\C#\\Elite\\Elite.csproj",
       "projectName": "Elite",
-      "projectPath": "C:\\Users\\trist\\Desktop\\ALB\\Programming\\C#\\Elite\\Elite.csproj",
+      "projectPath": "c:\\Users\\trist\\Desktop\\ALB\\Programming\\C#\\Elite\\Elite.csproj",
       "packagesPath": "C:\\Users\\trist\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\trist\\Desktop\\ALB\\Programming\\C#\\Elite\\obj\\",
+      "outputPath": "c:\\Users\\trist\\Desktop\\ALB\\Programming\\C#\\Elite\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\trist\\AppData\\Roaming\\NuGet\\NuGet.Config"

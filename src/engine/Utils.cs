@@ -65,7 +65,6 @@ namespace Elite
         // Debug stuff
         public static void ShowColours()
         {
-            // Debug colours
             Console.ForegroundColor = ConsoleColor.White;
             for (int i = 0; i < 16; i++)
             {
@@ -149,8 +148,8 @@ namespace Elite
         
         }
 
-        // Generate a random point within a circle
-        // excluding a smaller circle in the centre.
+        // Generate a random point within a square
+        // excluding a smaller square in the centre.
         public static Vector3 RandomPositionExcludeCentre(float minDist, float maxDist)
         {
             Vector3 pos = new Vector3(0,0,0);

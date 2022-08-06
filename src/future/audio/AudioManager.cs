@@ -1,6 +1,6 @@
 using System;
 
-using System.Media;
+//using System.Media;
 
 
 namespace Elite
@@ -9,14 +9,12 @@ namespace Elite
     {        
         private static void Play(string audio)
         {
+            
 
+          //  SoundPlayer player = new System.Media.SoundPlayer();
+          ///  player.SoundLocation = "warp.wav";
+            //player.Play();
 
-            SoundPlayer player = new System.Media.SoundPlayer();
-            player.SoundLocation = @"C:\Users\trist\Desktop\ALB\Programming\C#\Elite\warp.wav";
-            player.Play();
-            Engine.Setup();
-
-            Engine.Run();
         }
     }
 }

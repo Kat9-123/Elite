@@ -7,7 +7,7 @@ namespace Elite
         public override void Start()
         {
             mesh = Models.quad;
-            is2D = true;
+           /// is2D = true;
             movesWithCamera = true;
             //forward = new Vector3(0,0,-1);
             filled = true;

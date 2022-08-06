@@ -38,8 +38,13 @@ namespace Elite
 
         public float health;
 
+        // X = Pitch
+        // Y = Yaw
+        // Z = Roll
+        public Vector3 rotationDirection = new Vector3(0,0,0);
+        private bool isShooting = false;
+        private static bool prepareBlink;
 
-        private const float ROTATION_SPEED = 1.5f;
 
         // Player stats
         public const float YAW_SPEED = 1.2f;
@@ -74,7 +79,7 @@ namespace Elite
 
         }
 
-        private static bool prepareBlink;
+
         public void SetupLasers()
         {
             laserLeft = (PlayerLaser) Engine.Instance(new PlayerLaser(false));
@@ -144,7 +149,6 @@ namespace Elite
         }
 
 
-        private bool isShooting = false;
         private void Shoot(float deltaTime)
         {
             Enemy? hitEnemy = null;
@@ -206,10 +210,7 @@ namespace Elite
            // UI.WriteLine(Utils.FormatBool(laserIsColliding,"laser_hit")+ "\n");
         }
 
-        // X = Pitch
-        // Y = Yaw
-        // Z = Roll
-        public Vector3 rotationDirection = new Vector3(0,0,0);
+
 
         public void DoMovement(float deltaTime)
         {
@@ -285,8 +286,6 @@ namespace Elite
 
 
 
-
-            
            
             // Clamp momentum
             if(momentum.LengthSquared() > 100f*100f)

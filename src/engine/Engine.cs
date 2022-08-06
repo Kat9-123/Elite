@@ -26,6 +26,7 @@ because they really aren't necessary for this project.
 */
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 
 namespace Elite
@@ -112,8 +113,14 @@ namespace Elite
         }
 
 
-        public static void Setup()
+        public static bool Setup()
         {
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Console.WriteLine("This project only supports windows.");
+                Console.ReadKey();
+                return false;
+            }
             
             // Initialise file stuff
             FileHandler.Setup();
@@ -140,6 +147,8 @@ namespace Elite
 
             Console.CursorVisible = false;
             Console.Title = TITLE;
+
+            return true;
 
 
         }

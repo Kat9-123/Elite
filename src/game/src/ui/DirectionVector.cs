@@ -1,8 +1,6 @@
-using System;
-
 namespace Elite
 {
-    public class TrueVector : GameObject
+    public class DirectionVector : GameObject
     {
 
         public GameObject target;
@@ -19,7 +17,7 @@ namespace Elite
             character = '*';
             filled = true;
           
-            SetMesh(Models.directionMesh);//Utils.GenerateCircle(50);
+            SetMesh(Models.directionMesh);
             offset = new Vector3(-0.1f,0.05f,0);
             up = new Vector3(0,-1,0);
  
@@ -40,7 +38,7 @@ namespace Elite
             if(isBehind) position *= -1f;
 
             position += Engine.cameraPosition;
-            forward = (Engine.cameraPosition - position).Normalise();
+            LookAt(Engine.cameraPosition);
 
 
         }

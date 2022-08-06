@@ -24,12 +24,12 @@ namespace Elite
 
 
             
-            TrueVector trueVector = (TrueVector) Engine.Instance(new TrueVector());
+            DirectionVector trueVector = (DirectionVector) Engine.Instance(new DirectionVector());
 
             trueVector.player = player;
             trueVector.colour = 2;
 
-            TrueVector behindVector = (TrueVector) Engine.Instance(new TrueVector());
+            DirectionVector behindVector = (DirectionVector) Engine.Instance(new DirectionVector());
 
             behindVector.player = player;
             behindVector.colour = 4;

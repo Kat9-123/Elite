@@ -9,7 +9,7 @@ namespace Elite
 
         private float deceleration = 0f;
 
-        private Timer lifeTimer = new Timer(0);
+        private Timer lifeTimer = new Timer();
 
         private Timer colourTimer = new Timer();
 
@@ -57,6 +57,7 @@ namespace Elite
             
             colourTimer.Reset();
             colourTimer.SetDuration(Utils.RandomFloat(0.2f,0.5f));
+            colour = 4;
             
 
             isExploding = true;
