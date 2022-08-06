@@ -2,16 +2,15 @@ using System;
 
 namespace Elite
 {
-    public class Blink : GameObject
+    public class Warp : GameObject
     {
         private const float WARP_SPEED = 800f;
 
 
-
-        private bool loadingBlink = false;
+        private bool loadingWarp = false;
 
         private bool ready = false;
-        public bool isBlinking = false;
+        public bool isWarping = false;
 
         private bool reset = false;
 
@@ -20,7 +19,7 @@ namespace Elite
         private bool currentFlash = false;
 
 
-        private Timer cooldownTimer = new Timer(5f);
+        private Timer cooldownTimer = new Timer(10f);
 
 
         private bool onCooldown;
@@ -33,23 +32,23 @@ namespace Elite
             movesWithCamera = true;
            // getsClipped = false;
             getsCulled = false;
-            mesh = Models.blink;
+            mesh = Models.warp;
             scale = new Vector3(1f,1f,2f);
             position = new Vector3(0,0,20.5f);
             colour = 1;
             visible = false;
         }
 
-        public bool InitBlink()
+        public bool InitWarp()
         {
 
-            if(isBlinking) return false;
+            if(isWarping) return false;
             if(reset) return false;
             if(onCooldown) return false;
             up = new Vector3(0,1,0);
-            Engine.gameManager.uiManager.isBlinking = true;
+            Engine.gameManager.uiManager.isWarping = true;
             ResetBools();
-            loadingBlink = true;
+            loadingWarp = true;
             //scale = new Vector3(1f,1f,2f);
             scale = new Vector3(1f,1f,0f);
             position = new Vector3(0,0,0.5f);
@@ -60,7 +59,7 @@ namespace Elite
             visible = true;
             return true;
         }
-        public bool DoBlink()
+        public bool DoWarp()
         {
             if(!ready)
             {
@@ -70,7 +69,7 @@ namespace Elite
             }
             else
             {
-                isBlinking = true;
+                isWarping = true;
                 return true;
             }
             
@@ -78,10 +77,10 @@ namespace Elite
 
         public void ResetBools()
         {
-            loadingBlink = false;
+            loadingWarp = false;
             ready = false;
             reset = false;
-            isBlinking = false;
+            isWarping = false;
             currentFlash = false;
 
         }
@@ -102,7 +101,7 @@ namespace Elite
 
 
 
-            if(loadingBlink)
+            if(loadingWarp)
             {
                 position.z += deltaTime * 12f;
                 scale.z += deltaTime * 1.2f;
@@ -129,7 +128,7 @@ namespace Elite
                 if(scale.z <= -0.2f)
                 {
                     ResetBools();
-                    Engine.gameManager.uiManager.isBlinking = false;
+                    Engine.gameManager.uiManager.isWarping = false;
                 }
             }
 
@@ -148,7 +147,7 @@ namespace Elite
 
 
             
-            if(isBlinking)
+            if(isWarping)
             {
                 colour = 13;
                 ready = false;
@@ -162,7 +161,7 @@ namespace Elite
                     ResetBools();
                     startCoolDownTimer = true;
                     onCooldown = true;
-                    Engine.gameManager.uiManager.isBlinking = false;
+                    Engine.gameManager.uiManager.isWarping = false;
                 }
 
 

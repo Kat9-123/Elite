@@ -18,7 +18,7 @@ namespace Elite
 
         public MouseController mouseController;
 
-        public Blink blinkController;
+        public Warp warpController;
 
 
 
@@ -38,8 +38,14 @@ namespace Elite
 
             }
 
-            Engine.Instance(new Planet(new Vector3(0,0,20),(short)ConsoleColor.Yellow,1,false));
+          //  Engine.Instance(new Planet(new Vector3(0,0,20),(short)ConsoleColor.Yellow,1,false));
 
+            // Two suns are needed because blender messed up my circle mesh
+            // so the filling algorithm doesn't entirely work which
+            // makes the sun look really bad. A quick and dirty fix
+            // is to just spawn two.
+            Engine.Instance(new Sun());
+            Engine.Instance(new Sun()).up = new Vector3(1,0,0);
         }
 
 
@@ -69,7 +75,7 @@ namespace Elite
 
             enemyLayer = Engine.GameObjectCount();  //    <--- ENEMIES
 
-            blinkController = (Blink) Engine.Instance(new Blink());
+            warpController = (Warp) Engine.Instance(new Warp());
 
             player.SetupLasers();
 

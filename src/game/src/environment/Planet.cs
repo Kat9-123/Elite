@@ -8,17 +8,14 @@ namespace Elite
 
         private Vector3 pos;
 
-        private bool isSun = false;
-        
 
-        public Planet(Vector3 _offset, short _colour, float _scale, bool _isLit = true)
+        public Planet(Vector3 _offset, short _colour, float _scale)
         {
             luminances = Settings.PLANET_LUMINANCES;//"#0OC*+/^,.        ";
             pos = _offset;
             colour = _colour;
             scale = new Vector3(_scale,_scale,_scale);
-            getsLit = _isLit;
-            isSun = !getsLit;
+            getsLit = true;
 
             position = pos;
 
@@ -36,15 +33,14 @@ namespace Elite
                     break;
             }
             
-
-           
+        
 
         }
 
 
         public override void Update(float deltaTime)
         {
-            if(isSun || Settings.PLANET_SCALE == 0) 
+            if(Settings.PLANET_SCALE == 0) 
             {
                 position = pos + Engine.cameraPosition;
                 return;

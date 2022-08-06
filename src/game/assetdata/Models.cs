@@ -45,7 +45,7 @@ namespace Elite
         public static readonly Mesh bigLaserMesh = Utils.GenerateRepeatingMesh(new Mesh("Cylinder.obj"),1000,20);
 
 
-        public static readonly Mesh blink = new Mesh("Cylinder.obj");
+        public static readonly Mesh warp = new Mesh("Cylinder.obj");
 
 
         public static readonly Mesh planetHigh = new Mesh("PlanetHigh.obj");

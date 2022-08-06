@@ -43,7 +43,7 @@ namespace Elite
         // Z = Roll
         public Vector3 rotationDirection = new Vector3(0,0,0);
         private bool isShooting = false;
-        private static bool prepareBlink;
+        private static bool prepareWarp;
 
 
         // Player stats
@@ -100,25 +100,25 @@ namespace Elite
                 return;
             }
 
-            if((InputManager.IsKeyHeld(InputMap.BLINK) || InputManager.IsKeyHeld(InputMap.BLINK_MOUSE)) && !prepareBlink)
+            if((InputManager.IsKeyHeld(InputMap.WARP) || InputManager.IsKeyHeld(InputMap.WARP_MOUSE)) && !prepareWarp)
             {
-                if(Engine.gameManager.blinkController.InitBlink()) prepareBlink = true;
+                if(Engine.gameManager.warpController.InitWarp()) prepareWarp = true;
 
                 
                 
             }
 
-            if(!(InputManager.IsKeyHeld(InputMap.BLINK) || InputManager.IsKeyHeld(InputMap.BLINK_MOUSE)) && prepareBlink)
+            if(!(InputManager.IsKeyHeld(InputMap.WARP) || InputManager.IsKeyHeld(InputMap.WARP_MOUSE)) && prepareWarp)
             {
-                if (Engine.gameManager.blinkController.DoBlink()) momentum = forward * 50f;
-                prepareBlink = false;
+                if (Engine.gameManager.warpController.DoWarp()) momentum = forward * 50f;
+                prepareWarp = false;
             }
 
-            if(Engine.gameManager.blinkController.isBlinking) return;
+            if(Engine.gameManager.warpController.isWarping) return;
 
             DoMovement(deltaTime);
 
-            if(prepareBlink) 
+            if(prepareWarp) 
             {
                 laserLeft.visible = false;
                 laserRight.visible = false;

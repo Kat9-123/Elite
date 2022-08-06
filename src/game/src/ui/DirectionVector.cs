@@ -26,7 +26,7 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {   
-            visible = !Engine.gameManager.uiManager.isBlinking;
+            visible = !Engine.gameManager.uiManager.isWarping;
    
 
             if(Engine.gameManager.player.isDead)

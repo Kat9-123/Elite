@@ -73,14 +73,17 @@ LeftMouseButton/Space - Shoot
 
 
 ### Translation
-W - Forward
-S - Backwards
-A - Left
-D - Right
+- W - Forward
+- S - Backwards
+- A - Left
+- D - Right
 
 LShift - Up
 Control - Down
 
+C/RightMouseButton - Short distance warp
+
+X - Break
 
 
 ### Rotation
@@ -102,7 +105,9 @@ MouseMovementLeft - Yaw Left
 
 ## Misc
 M - Free mouse
-C/RightMouseButton - Short distance warp
+Escape - Exit
+R - Restart
+
 
 
 
@@ -135,3 +140,7 @@ Features:
 ## Miscellaneous
 If you have any tips, optimisations, etc. Please either message me or make a pull request.
 The code is stil relatively messy.
+
+### Perfomance
+Sadly the performance really isn't great. It will probably run on most computers
+but you will have to tinker a bit with the settings.

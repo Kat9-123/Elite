@@ -7,8 +7,8 @@ Font=Square
 # 0 = Low, 1 = Medium, 2 = High
 PlanetQuality=0
 
-MinPlanetCount=10
-MaxPlanetCount=20
+MinPlanetCount=5
+MaxPlanetCount=12
 
 # 0 = Infinte planet scale (default).
 PlanetScale=0
@@ -22,7 +22,7 @@ DoEnemyAI=true
 
 DoMouseControls=true
 
-DustCount=40
+DustCount=20
 
 ShowUI=true
 

@@ -36,8 +36,8 @@ namespace Elite
         ZOOM = 0x46, //F
 
         SHOOT_MOUSE = 0x1, // LEFT MOUSE BUTTON
-        BLINK = 0x43, // C
-        BLINK_MOUSE = 0x2, // RIGHT MOUSE BUTTON
+        WARP = 0x43, // C
+        WARP_MOUSE = 0x2, // RIGHT MOUSE BUTTON
 
 
         FREE_MOUSE = 0x4D, // M
