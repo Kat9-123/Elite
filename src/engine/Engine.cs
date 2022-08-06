@@ -175,7 +175,7 @@ namespace Elite
             // Instance the gamemanager
             gameManager = (GameManager) Instance(new GameManager());       
 
-
+            // Main gameloop
             while (true)
             {  
                 InputManager.TestFocus();

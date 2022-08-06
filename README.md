@@ -18,6 +18,7 @@ Everything was made by me except for the really low level console interactions.
 
 
 ## Screenshots
+![Alt text](/../<branch name>/screenshots/Screenshot2.png?raw=true "HUD explanation")
 
 
 ## Why?
@@ -32,10 +33,23 @@ After that the rest of the Engine architecture was relatively simple.
 
 
 ## How to play it
+
+#### You will need to use a square font!
+#### For the best experience use <a href="https://strlen.com/square/">Square</a>
+if you decide to use a different font, modify the Font option in assets/Settings.txt
+
+
 You can either either compile it from source yourself, or download it from the released tab.
-Just make sure that the assets folder is where you launch the executable from
+Just make sure that the assets folder is where you launch the executable from.
+
+I would suggest you take a look at assets/Settings.txt for things like graphics settings,
+or mouse controls
+
+
 
 ## Controls
+LeftMouseButton/Space - Shoot
+
 
 ### Translation
 W - Forward
@@ -64,6 +78,10 @@ MouseMovementDown - Pitch Down
 
 MouseMovementRight - Yaw Right
 MouseMovementLeft - Yaw Left
+
+## Misc
+M - Free mouse
+C/RightMouseButton - Short distance warp
 
 
 

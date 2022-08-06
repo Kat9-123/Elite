@@ -20,7 +20,7 @@ DoEnemyAI=true
 
 
 
-DoMouseControls=true
+DoMouseControls=false
 
 DustCount=40
 
