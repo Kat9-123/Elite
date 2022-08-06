@@ -16,11 +16,27 @@ This is a 3D engine and a simple game made. very loosely based on the original E
 Everything was made by me except for the really low level console interactions.
 
 
+### Features
+- 2 Enemies and a Boss
+
+
 
 ## Screenshots
 ### HUD Explanation
-![image](https://github.com/Kat9-123/Elite/blob/master/screenshots/Screenshot2.png)
+![image](https://github.com/Kat9-123/Elite/blob/master/screenshots/HUD.png)
 
+![image](https://github.com/Kat9-123/Elite/blob/master/screenshots/Enemy.png)
+
+![image](https://github.com/Kat9-123/Elite/blob/master/screenshots/Planets.png)
+
+### Boss
+![image](https://github.com/Kat9-123/Elite/blob/master/screenshots/Boss.png)
+
+### The Boss has a massive laser attack
+![image](https://github.com/Kat9-123/Elite/blob/master/screenshots/BossLaser.png)
+
+### Short distance warp ability
+![image](https://github.com/Kat9-123/Elite/blob/master/screenshots/Warp.png)
 
 ## Why?
 After finishing <a href="https://github.com/Kat9-123/Asteroids">Asteroids</a> 
