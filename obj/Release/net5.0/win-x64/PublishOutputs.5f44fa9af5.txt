@@ -1,1 +1,0 @@
-C:\Users\trist\Desktop\ALB\Programming\C#\Elite\bin\Release\net5.0\win-x64\publish\Elite.exe
