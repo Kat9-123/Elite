@@ -53,7 +53,7 @@ namespace Elite
         private static List<GameObject> queuedObjectsForDestruction = new List<GameObject>();
 
         
-        public const string TITLE = "Elite not very Dangerous | By Kat9_123";
+        private const string TITLE = "Elite not very Dangerous | By Kat9_123";
 
         public static float deltaTime = 0f;
 
@@ -122,6 +122,8 @@ namespace Elite
                 return false;
             }
             Console.Title = TITLE;
+            ConsoleInterface.SetConsoleIcon("assets\\icon.ico");
+            Console.CursorVisible = false;
             
             // Initialise file stuff
             FileHandler.Setup();
@@ -146,8 +148,6 @@ namespace Elite
             // Graphics
             Renderer.Initialise();
 
-
-            Console.CursorVisible = false;
 
             return true;
 

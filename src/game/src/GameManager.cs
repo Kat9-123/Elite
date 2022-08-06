@@ -82,7 +82,7 @@ namespace Elite
             Engine.cameraPosition = new Vector3(0,0,0);
 
 
-            Engine.cameraUp = new Vector3(0,1,0);
+            Engine.cameraUp = new Vector3(0,-1,0);
             Engine.cameraForward = new Vector3(0,0,1);
             Engine.cameraRight = new Vector3(1,0,0);
 
@@ -91,14 +91,10 @@ namespace Elite
 
         public override void Start()
         {
-            //  Models.cubeMesh = ModelHandler.LoadModel("test.obj");
             visible = false;
-
-            Setup();
-
+            Engine.Instance(new Titlescreen());
 
         }
-
 
 
 

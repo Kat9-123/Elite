@@ -45,7 +45,7 @@ namespace Elite
             forward = target.forward;
             up = target.up;
             colour = target.colour;
-            lightingDirection = Engine.cameraUp * 1f;
+            lightingDirection = Engine.cameraUp;
             //Vector3 add = 
            // position += Engine.cameraForward* add.z + Engine.cameraUp*add.y + Utils.Cross(Engine.cameraUp,Engine.cameraForward)*add.x;
         }

@@ -40,7 +40,9 @@ namespace Elite
         BLINK_MOUSE = 0x2, // RIGHT MOUSE BUTTON
 
 
-        FREE_MOUSE = 0x4D // M
+        FREE_MOUSE = 0x4D, // M
+
+        START_KEY = 0x0D // Enter
 
 
 

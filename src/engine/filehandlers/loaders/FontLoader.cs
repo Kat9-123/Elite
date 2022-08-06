@@ -6,14 +6,14 @@ namespace Elite
     public static class FontHandler
     {
         // 26 characters + 10 numbers
-        public static string[] characters = new string[26+10];
+        public static string[] characters = new string[26+10+2];
 
         public static void LoadFont()
         {
             string data = FileHandler.Read("Font.txt");
             
-            // Characters are separated by TWO newlines
-            string[] splitData = data.Split("\r\n\r\n");
+            // Characters are separated by TWO newlines and a backtick in between them
+            string[] splitData = data.Split("\r\n`\r\n");
           
             for (int i = 0; i < splitData.Length; i++)
             {

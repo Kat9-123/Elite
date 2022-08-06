@@ -12,12 +12,17 @@
 
 
 ## What is it?
-This is a 3D engine and a simple game made. very loosely based on the original Elite. 
+This is a simple game made in my custom 3D Engine that draws it's graphics to the console.
+The game is very loosely based on the original Elite. 
 Everything was made by me except for the really low level console interactions.
 
+The game isn't really a complete game. It's more of a techdemo.
 
 ### Features
 - 2 Enemies and a Boss
+- Mouse and Keyboard controls
+- Short distance warp ability
+
 
 
 
@@ -40,13 +45,14 @@ Everything was made by me except for the really low level console interactions.
 
 ## Why?
 After finishing <a href="https://github.com/Kat9-123/Asteroids">Asteroids</a> 
-I thought "What if I make another game in the console, but in 3D". First I dismissed it as I thought
+I thought "What if I made Elite in the console". First I dismissed it as I thought
 that I was far to incapable to do something like that. After a while of thinking about it I decided
 to do some research. I stumbled upon 
 <a href="https://www.youtube.com/watch?v=ih20l3pJoeU">OLC's 3D Rendering Engine</a> tutorial. Though
 it was a tutorial for C++ it was pretty easy to convert the core concepts to C#. After a lot of 
 tinkering I finally had a functioning renderer (rotation did take me some time to get fully functioning).
-After that the rest of the Engine architecture was relatively simple. 
+After that the rest of the Engine architecture was relatively simple.
+
 
 
 ## How to play it

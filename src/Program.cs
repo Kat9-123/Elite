@@ -6,7 +6,7 @@ namespace Elite
     {        
         private static void Main(string[] args)
         {
-
+           
             if(!Engine.Setup()) return;
 
             Engine.Run();

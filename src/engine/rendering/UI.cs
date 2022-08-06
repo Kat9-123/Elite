@@ -23,7 +23,7 @@ namespace Elite
   
         }
 
-        public static void WriteText(string text, int posX, int posY)
+        public static void WriteText(string text, int posX, int posY, char character='#', short colour=15)
         {
             int startX = posX;
             for (int i = 0; i < text.Length; i++)
@@ -45,7 +45,7 @@ namespace Elite
 
                 }
 
-                if(text[i] != ' ') WriteCharacter(FontHandler.characters[index],posX,posY);
+                if(text[i] != ' ') WriteCharacter(FontHandler.characters[index],posX,posY,character,colour);
 
                 posX += 6;
                 
@@ -54,15 +54,15 @@ namespace Elite
 
         }
         
-        private static void WriteCharacter(string character, int posX, int posY)
+        private static void WriteCharacter(string fontChar, int posX, int posY, char character, short colour)
         {
             for (int y = 0; y < 7; y++)
             {
                 for (int x = 0; x < 5; x++)
                 {
-                    if(character[y*5+x] == ' ') continue;
-                    UIBuffer[(y+posY)*Settings.SCREEN_SIZE_X + x+posX].Char.AsciiChar = Convert.ToByte(character[y*5+x]);
-                    UIBuffer[(y+posY)*Settings.SCREEN_SIZE_X + x+posX].Attributes = (short)ConsoleColor.White;
+                    if(fontChar[y*5+x] == ' ') continue;
+                    UIBuffer[(y+posY)*Settings.SCREEN_SIZE_X + x+posX].Char.AsciiChar = Convert.ToByte(character);
+                    UIBuffer[(y+posY)*Settings.SCREEN_SIZE_X + x+posX].Attributes = colour;
 
                 }
             }

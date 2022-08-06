@@ -261,6 +261,8 @@ namespace Elite
 
         [DllImport("user32.dll")]
         private static extern IntPtr GetForegroundWindow();
+
+        /*
         [DllImport("user32.dll")]
         private static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
 
@@ -276,10 +278,39 @@ namespace Elite
             }
             return null;
         }
-
+        */
         public static bool IsFocused()
         {
-            return GetActiveWindowTitle() == Engine.TITLE;
+            IntPtr handle = System.Diagnostics.Process.GetCurrentProcess().MainWindowHandle;
+    
+            return GetForegroundWindow() == handle;
+        }
+
+        
+        public static void SetConsoleIcon(string iconFilePath)
+        {
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                if (!string.IsNullOrEmpty(iconFilePath))
+                {
+                    System.Drawing.Icon icon = new System.Drawing.Icon(iconFilePath);
+                    SetWindowIcon(icon);
+                }
+            }
+        }
+
+
+        [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, IntPtr lParam);
+
+
+        private static void SetWindowIcon(System.Drawing.Icon icon)
+        {
+
+
+            IntPtr mwHandle = System.Diagnostics.Process.GetCurrentProcess().MainWindowHandle;
+            IntPtr result01 = SendMessage(mwHandle, 0x0080, 0, icon.Handle);
+            IntPtr result02 = SendMessage(mwHandle, 0x0080, 1, icon.Handle);
         }
     }
 }
