@@ -19,7 +19,7 @@ namespace Elite
         public static void Initialise()
         {
             SetProjectionMatrix(Settings.FOV);
-            ConsoleInterface.Initialise();
+            Window.Initialise();
         }
 
 

@@ -1,5 +1,5 @@
 # Elite not very Dangerous | By: Kat9_123
-#### A simple 3D game based on Elite that runs in the console. Written in C#
+#### A custom 3D Engine and game based on Elite that runs in the console. Written in C#
 #### Only for Windows!
 ## Tabel of contents
 - [What is it?](#how-to-play-it)
@@ -53,7 +53,7 @@ The game isn't really a complete game. It's more of a techdemo.
 ![image](/screenshots/Warp.png)
 
 ## Why?
-After finishing <a href="https://github.com/Kat9-123/Asteroids"> an Asteroids clone</a> for the Windows console
+After I finished making <a href="https://github.com/Kat9-123/Asteroids"> an Asteroids clone</a> for the Windows console
 I thought "What if I now made Elite in the console". First I dismissed it as I thought
 that I was far to incapable to do something like that. After a while of thinking about it I decided
 to do some research. I stumbled upon 
@@ -69,15 +69,15 @@ After that finishing the rest of the Engine architecture (and the game) was rela
 <i>If you want to use a different font, modify the Font option in assets/Settings.txt</i>
 
 
-You can either either compile it from source yourself, or download it from the <a href=https://github.com/Kat9-123/Elite/releases>Releases tab</a> Just make sure that the assets folder is located in the same directory as where you launch the executable from.
+You can either either compile it from source yourself, or download it from the <a href=https://github.com/Kat9-123/Elite/releases>Releases tab</a> just make sure that the assets folder is located in the same directory as where you launch the executable from.
 
-I would suggest you take a look at assets/Settings.txt for things like graphics settings,
-or mouse controls before playing.
+I would suggest you take a look at assets/Settings.txt for things like graphics settings
+or mouse settings before playing.
 
 
 
 ## Controls
-- LeftMouseButton/Space - Shoot
+- Space / LeftMouseButton - Shoot
 
 
 ### Translation
@@ -87,11 +87,11 @@ or mouse controls before playing.
 - D - Right
 ####
 - LShift - Up
-- Control - Down
+- LControl - Down
 ####
 - X - Break
 ####
-- C/RightMouseButton - Short distance warp
+- C / RightMouseButton - Short distance warp
 
 
 
@@ -104,13 +104,13 @@ or mouse controls before playing.
 - RightArrow - Yaw Right
 - UpArrow - Pitch Up
 - DownArrow - Pitch Down
-#### Or
+### Or
 - MouseMovementUp - Pitch Up
 - MouseMovementDown - Pitch Down
 - MouseMovementRight - Yaw Right
 - MouseMovementLeft - Yaw Left
 
-## Misc
+### Misc
 - M - Free mouse
 - Escape - Exit
 - R - Restart
@@ -125,8 +125,8 @@ Though the Engine and the game are pretty closely integrated, you could definite
 (if you really wanted to for some reason). 
 
 The Engine itself lacks some pretty important features,
-mainly true object layering and occlusion. I decided to not implement these feautures because
-<s>I was too lazy</s> it wasn' t necessary for this project and because it would cause unnecessary lag.
+mainly true object layering and occlusion. I decided not to implement these feautures because
+<s>I was too lazy</s> it wasn't necessary for this project and because it would cause unnecessary lag.
 Actual frustum culling would be nice though...
 
 Features:
@@ -146,8 +146,10 @@ Features:
 ## Miscellaneous
 If you have any tips, optimisations, etc. Please either message me or make a pull request.
 
-The code is still relatively messy.
+The code is still relatively messy so any help with that is also greatly appreciated.
 
 ### Perfomance
 Sadly the performance really isn't great. It will probably run on most computers
-but you will have to tinker a bit with the settings.
+but you will have to tinker a bit with the settings. The best solution for the
+performance problem is <s>being a better programmer</s> probably by utilising the GPU,
+but I have no idea how to do that...

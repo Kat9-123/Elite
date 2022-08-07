@@ -1,4 +1,5 @@
-﻿namespace Elite
+﻿// https://github.com/Kat9-123/Elite
+namespace Elite
 {
     static class Program
     {        

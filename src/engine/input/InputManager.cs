@@ -24,7 +24,7 @@ namespace Elite
 
         public static void TestFocus()
         {
-            isInFocus = ConsoleInterface.IsFocused();
+            isInFocus = Window.IsFocused();
 
             if(!isInFocus) keysPressed.Clear();
 

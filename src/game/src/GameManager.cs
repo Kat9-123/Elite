@@ -8,7 +8,7 @@ namespace Elite
         public Player player;
 
         public UIManager uiManager;
-        public EnemyGenerator enemyManager;
+        public EnemyManager enemyManager;
 
         public ExplosionManager explosionManager;
 
@@ -51,7 +51,7 @@ namespace Elite
 
             explosionManager = (ExplosionManager) Engine.Instance(new ExplosionManager());
 
-            EnemyGenerator enemyGen = (EnemyGenerator) Engine.Instance(new EnemyGenerator());
+            EnemyManager enemyGen = (EnemyManager) Engine.Instance(new EnemyManager());
 
             player.enemyGen = enemyGen;
             enemyManager = enemyGen;

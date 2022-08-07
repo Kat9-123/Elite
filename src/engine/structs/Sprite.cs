@@ -4,7 +4,7 @@ namespace Elite
     public class Sprite
     {
 
-        public ConsoleInterface.CharInfo[] pixels;
+        public Window.CharInfo[] pixels;
         public int height;
         public int width;
 

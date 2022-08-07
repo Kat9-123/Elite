@@ -43,7 +43,7 @@ namespace Elite
         private void CentreMousePosition()
         {
             Vector2 pos,size;
-            (pos,size) = ConsoleInterface.WindowRect();
+            (pos,size) = Window.WindowRect();
 
 
             Vector2 centre = size / 2f + pos;
@@ -73,7 +73,7 @@ namespace Elite
                 return;
             }
 
-            if(!ConsoleInterface.IsFocused()) 
+            if(!Window.IsFocused()) 
             {
                 ResetRotationDirection();
                 reFocused = false; 
@@ -87,7 +87,7 @@ namespace Elite
             }
 
             Vector2 pos,size;
-            (pos,size) = ConsoleInterface.WindowRect();
+            (pos,size) = Window.WindowRect();
 
 
             Vector2 centre = size / 2f + pos;

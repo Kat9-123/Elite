@@ -1,5 +1,5 @@
 // Takes 2D triangles from the renderer and writes those to an output buffer,
-// Which it then sends to the ConsoleInterface to be dumped onto the screen.
+// Which it then sends to the Window to be dumped onto the screen.
 using System;
 
 namespace Elite
@@ -7,11 +7,11 @@ namespace Elite
     public static class Rasteriser
     {
 
-        private static ConsoleInterface.CharInfo[] buffer;
+        private static Window.CharInfo[] buffer;
 
-        public static ConsoleInterface.CharInfo[] GenerateEmptyBuffer()
+        public static Window.CharInfo[] GenerateEmptyBuffer()
         {
-            ConsoleInterface.CharInfo[] result = new ConsoleInterface.CharInfo[Settings.SCREEN_SIZE_Y*Settings.SCREEN_SIZE_X];
+            Window.CharInfo[] result = new Window.CharInfo[Settings.SCREEN_SIZE_Y*Settings.SCREEN_SIZE_X];
             for (int y = 0; y < Settings.SCREEN_SIZE_Y; y++)
             {
                 for (int x = 0; x < Settings.SCREEN_SIZE_X; x++)
@@ -26,7 +26,7 @@ namespace Elite
         public static void DrawBufferToScreen()
         {
             buffer = UI.ApplyUI(buffer);
-            ConsoleInterface.Write(buffer);
+            Window.Write(buffer);
         }
         public static void Reset()
         {

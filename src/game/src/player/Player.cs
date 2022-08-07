@@ -20,7 +20,7 @@ namespace Elite
         public bool isDead = false;
         
 
-        public EnemyGenerator enemyGen;
+        public EnemyManager enemyGen;
 
 
 

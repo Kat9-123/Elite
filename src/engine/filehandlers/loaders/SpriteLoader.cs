@@ -39,7 +39,7 @@ namespace Elite
         {
 
             Bitmap img = new Bitmap(FileHandler.originPath + "sprites\\" + path);
-            ConsoleInterface.CharInfo[] pixels = new ConsoleInterface.CharInfo[img.Width*img.Height];
+            Window.CharInfo[] pixels = new Window.CharInfo[img.Width*img.Height];
             sprite.width = img.Width;
             sprite.height = img.Height;
             for (int y = 0; y < img.Height; y++)

@@ -124,7 +124,7 @@ namespace Elite
             FileHandler.Setup();
 
             Console.Title = TITLE;
-            ConsoleInterface.SetConsoleIcon("assets\\icon.ico");
+            Window.SetConsoleIcon("assets\\icon.ico");
             Console.CursorVisible = false;
             
             // Initialise file stuff
@@ -136,12 +136,12 @@ namespace Elite
 
             // Windows is a bit strange so we first need to set the
             // font to the minimum size before changing the windowsize.
-            ConsoleInterface.SetCurrentFont(Settings.FONT, 1);
+            Window.SetCurrentFont(Settings.FONT, 1);
 
             Console.SetWindowSize(Settings.SCREEN_SIZE_X,Settings.SCREEN_SIZE_Y);
             Console.SetBufferSize(Settings.SCREEN_SIZE_X,Settings.SCREEN_SIZE_Y); 
        
-            ConsoleInterface.SetCurrentFont(Settings.FONT, Settings.FONT_SCALE);
+            Window.SetCurrentFont(Settings.FONT, Settings.FONT_SCALE);
 
 
 

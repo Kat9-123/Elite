@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Elite
 {
-    public class EnemyGenerator : GameObject
+    public class EnemyManager : GameObject
     {
 
         public List<Enemy> enemies = new List<Enemy>();

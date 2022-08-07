@@ -7,7 +7,7 @@ namespace Elite
     public static class UI
     {
 
-        private static ConsoleInterface.CharInfo[] UIBuffer = new ConsoleInterface.CharInfo[Settings.SCREEN_SIZE_X*Settings.SCREEN_SIZE_Y];
+        private static Window.CharInfo[] UIBuffer = new Window.CharInfo[Settings.SCREEN_SIZE_X*Settings.SCREEN_SIZE_Y];
         private static string debugText = "";
 
         public static void AddSprite(Sprite sprite, int posX, int posY,char character = '#')
@@ -99,7 +99,7 @@ namespace Elite
 
         
 
-        public static ConsoleInterface.CharInfo[] ApplyUI(ConsoleInterface.CharInfo[] buffer)
+        public static Window.CharInfo[] ApplyUI(Window.CharInfo[] buffer)
         {
             
             // Debugtext
