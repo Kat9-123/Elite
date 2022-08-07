@@ -69,7 +69,7 @@ or mouse controls
 
 
 ## Controls
-LeftMouseButton/Space - Shoot
+- LeftMouseButton/Space - Shoot
 
 
 ### Translation
@@ -78,10 +78,13 @@ LeftMouseButton/Space - Shoot
 - A - Left
 - D - Right
 
+
 - LShift - Up
 - Control - Down
 
+
 - C/RightMouseButton - Short distance warp
+
 
 - X - Break
 
@@ -90,10 +93,12 @@ LeftMouseButton/Space - Shoot
 - Q - Roll right
 - E - Roll left
 
+
 - LeftArrow - Yaw Left
 - RightArrow - Yaw Right
 - UpArrow - Pitch Up
 - DownArrow - Pitch Down
+
 
 - MouseMovementUp - Pitch Up
 - MouseMovementDown - Pitch Down
