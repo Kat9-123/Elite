@@ -16,19 +16,17 @@ PlanetScale=0
 PlanetLuminances=#0OC*+/^,.     
 
 
-DoEnemyAI=true
-
-
-
 DoMouseControls=true
 
 DustCount=40
 
-ShowUI=true
-
-# Debug info
+### Debug info
 Debug=false
-ShowHitboxes=false
-ShowColoursOnStartup=false
 ShowFPS=true
+ShowColoursOnStartup=false
+
+ShowHitboxes=false
+DoEnemyAI=true
+
+ShowUI=true
 

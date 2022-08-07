@@ -1,15 +1,10 @@
-// Very simple inputmanager 
+// Very simple inputmanager for both mouse and keyboard
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Drawing;
 
-
-
 namespace Elite
 {
-
-
-
     public static class InputManager
     {
         [DllImport("user32.dll")]
@@ -31,10 +26,8 @@ namespace Elite
         {
             isInFocus = ConsoleInterface.IsFocused();
 
-            if(!isInFocus)
-            {
-                keysPressed.Clear();
-            }
+            if(!isInFocus) keysPressed.Clear();
+
         }
 
         public static bool IsKeyHeld(InputMap key)

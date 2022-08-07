@@ -23,16 +23,7 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
-            // Despawn enemies if they're too far away
-            /*
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                if(Engine.cameraPosition.SquaredDistanceTo(enemies[i].position) > 5000*5000)
-                {
-                    Engine.QueueDestruction(enemies[i]);
-                }
-            }
-            */
+
 
             // Don't spawn more than 4 enemies
             if(enemies.Count > 3) return;
@@ -70,7 +61,7 @@ namespace Elite
 
                 enemiesSpawned++;
 
-                enemySpawnTimer.SetDuration(Utils.RandomFloat(7,25));
+                enemySpawnTimer.SetDuration(Utils.RandomFloat(6,25));
                 enemySpawnTimer.Reset();
 
                     

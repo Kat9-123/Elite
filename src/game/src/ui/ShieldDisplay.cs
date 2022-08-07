@@ -1,11 +1,7 @@
-using System;
-
 namespace Elite
 {
     public class ShieldDisplay : GameObject
     {
-
-
 
         private Vector3 basePos;
 
@@ -57,7 +53,6 @@ namespace Elite
             }
             visible = true;
 
-            //if(isBackground) return;
 
             if(!isPlayer)
             {

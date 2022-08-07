@@ -1,4 +1,3 @@
-
 namespace Elite
 {
     public class Target : GameObject
@@ -32,7 +31,7 @@ namespace Elite
             position = (Engine.gameManager.player.target.position - Engine.cameraPosition).Normalise()*12f;
 
             position += Engine.cameraPosition;
-            forward = (Engine.cameraPosition - position).Normalise();
+            LookAt(Engine.cameraPosition);
 
 
         }

@@ -33,6 +33,7 @@ namespace Elite
             }
         }
 
+        // There is probably a better patern for doing this
         public static float LoadFloat(string name)
         {
             return float.Parse(Load(name),culture);
@@ -62,6 +63,7 @@ namespace Elite
                     return values[i];
                 }
             }
+            // This will make everything die horribly but whatever
             return "SETTING NOT FOUND";
         }
 

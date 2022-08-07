@@ -18,7 +18,7 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
-            forward = (Engine.cameraPosition - position).Normalise();
+            LookAt(Engine.cameraPosition);
 
             // Should be based on FOV
             if(((position-Engine.cameraPosition).Normalise()).Dot(Engine.cameraForward) <= 0.45)
@@ -36,19 +36,14 @@ namespace Elite
         }
         private void Reset()
         {
-            position = new Vector3(Utils.RandomFloat(-100,100), Utils.RandomFloat(-100,100), Utils.RandomFloat(-100,100));
+            position = Utils.RandomPositionExcludeCentre(50,110);
 
             position += Engine.cameraPosition;
 
             Vector3 offset = Utils.RelativeToRotation(new Vector3(0,0,100), Engine.cameraForward, Engine.cameraUp);
 
             position += offset;
-            if(position.SquaredDistanceTo(Engine.cameraPosition) < 50f)
-            {
-       
-                Reset();
-            }
-            //position *= Engine.cameraForward;
+
         }
 
 

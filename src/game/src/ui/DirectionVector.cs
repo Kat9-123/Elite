@@ -2,14 +2,11 @@ namespace Elite
 {
     public class DirectionVector : GameObject
     {
-
-        public GameObject target;
-
         public Player player;
 
 
         public bool isBehind = false;
-        //private Line line;
+
         public override void Start()
         {
             

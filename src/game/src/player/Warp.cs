@@ -1,5 +1,3 @@
-using System;
-
 namespace Elite
 {
     public class Warp : GameObject
@@ -30,7 +28,7 @@ namespace Elite
         public override void Start()
         {
             movesWithCamera = true;
-           // getsClipped = false;
+
             getsCulled = false;
             mesh = Models.warp;
             scale = new Vector3(1f,1f,2f);
@@ -49,13 +47,13 @@ namespace Elite
             Engine.gameManager.uiManager.isWarping = true;
             ResetBools();
             loadingWarp = true;
-            //scale = new Vector3(1f,1f,2f);
+
             scale = new Vector3(1f,1f,0f);
             position = new Vector3(0,0,0.5f);
 
             colour = 1;
             
-            //position = new Vector3(0,0,20.5f);
+
             visible = true;
             return true;
         }

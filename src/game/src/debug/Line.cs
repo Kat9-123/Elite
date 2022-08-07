@@ -1,6 +1,4 @@
 // Line renderer for debug purposes
-using System;
-
 namespace Elite
 {
     public class Line : GameObject

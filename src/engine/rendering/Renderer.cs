@@ -1,6 +1,5 @@
 // This renderer is based on OLC's C++ renderer.
 // Any optimisation tips are appreciated!
-using System;
 using System.Collections.Generic;
 
 namespace Elite
@@ -10,10 +9,6 @@ namespace Elite
 
 
         private static Matrix4x4 projectionMatrix;
-
-
-
-        
 
         public static void SetProjectionMatrix(float fov)
         {
@@ -58,19 +53,12 @@ namespace Elite
             return result;
         }
 
-
-
-
-
-
-
         // Apply the translations of the current gameobject to the current triangle
         private static Triangle TranslateTriangle(Triangle triangle,Matrix4x4 rotationMatrix,GameObject obj)
         {
             
             // Apply the objects offset to centre it. Legacy
             triangle += obj.offset;
-
 
             // Scale
             triangle.a *= obj.scale;
@@ -83,8 +71,6 @@ namespace Elite
 
             // Position
             triangle += obj.position;
-
-
 
             return triangle;
         }
@@ -185,8 +171,6 @@ namespace Elite
             projectedTriangle.b.y *= Settings.SCREEN_SIZE_Y/2;
             projectedTriangle.c.x *= Settings.SCREEN_SIZE_X/2;
             projectedTriangle.c.y *= Settings.SCREEN_SIZE_Y/2;
-
-
 
 
 

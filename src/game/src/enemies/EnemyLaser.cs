@@ -69,19 +69,12 @@ namespace Elite
 
             if(!fireTimer.Accumulate(deltaTime))
             {
-
                 return;
             }
             fireTimer.Reset();
             shooting = true;
             visible = true;
 
-            // && (position.SquaredDistanceTo(Engine.cameraPosition) < 20000)
-           // UI.WriteLine(forward.Dot((Engine.cameraPosition-position).Normalise()).ToString());
-            //if((forward.Dot((Engine.cameraPosition-position).Normalise()) > accuracy))
-            //{
-              //  Engine.gameManager.player.Hit(damage);   
-            //}
 
 
             if(Physics.CheckLineBox((player.boundingBox.start*accuracy) + player.position, (player.boundingBox.end*accuracy) + player.position, position, position+(forward*1_000_000)))
@@ -89,14 +82,5 @@ namespace Elite
                 Engine.gameManager.player.Hit(damage);  
             }
         }
-
-
-
-
-
-
-
-
-
     }
 }

@@ -5,10 +5,10 @@ namespace Elite
 
     public static class Models
     {
+        // Debug
         public static readonly Mesh line = Utils.GenerateRepeatingMesh(new Mesh(new Triangle[] {
             new Triangle(new Vector3(0,0,0),new Vector3(0,0,1),new Vector3(0,0.0001f,1)),
         }),10,1);
-
         public static readonly Mesh cube = new Mesh("Cube.obj");
 
 
@@ -47,7 +47,7 @@ namespace Elite
 
         public static readonly Mesh warp = new Mesh("Cylinder.obj");
 
-
+        // Planets
         public static readonly Mesh planetHigh = new Mesh("PlanetHigh.obj");
         public static readonly Mesh planetMedium = new Mesh("PlanetMedium.obj");
         public static readonly Mesh planetLow = new Mesh("PlanetLow.obj");

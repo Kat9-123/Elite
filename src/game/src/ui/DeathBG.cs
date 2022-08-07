@@ -9,7 +9,7 @@ namespace Elite
 
             character = ' ';
             visible = false;
-            colour = 0;
+
             mesh = Models.circle;
             movesWithCamera = true;
             filled = true;

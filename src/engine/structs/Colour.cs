@@ -1,5 +1,3 @@
-using System;
-
 namespace Elite
 {
     public struct Colour

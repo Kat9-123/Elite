@@ -4,8 +4,6 @@ namespace Elite
 {
     public class Boss : Enemy
     {
-
-
         public override void Start()
         {
             score = 40;
@@ -17,10 +15,7 @@ namespace Elite
 
             boundingBoxStart = new Vector3(-120f,-120f,-120f);
             boundingBoxEnd = new Vector3(120f,120f,120f);
-        
-
-
-           
+            
 
             scale = new Vector3(6,6,6);
 
@@ -30,10 +25,15 @@ namespace Elite
 
             mesh = Models.bossMesh;
 
+            maxHealth = 400f;
+
+
+            radarSize = new Vector3(1.5f,1.5f,1.5f);
+
 
            
             EnemyLaser bigLaser = AddLaser(
-                laserMesh: Models.bigLaserMesh, 
+                laserMesh: Models.bigLaserMesh,
                 _offset: new Vector3(0,0,150), 
                 damage: 150f, 
                 accuracy: 6f, 
@@ -67,68 +67,14 @@ namespace Elite
                 laserVisibilityTime: 0.05f
             );
 
-
-
-
-
-
-            maxHealth = 400f;
-
-
-            radarSize = new Vector3(1.5f,1.5f,1.5f);
             Setup();
 
         }
         
 
-
-        //public Player player;
-
-
-
-
         public override void Update(float deltaTime)
         { 
-
-
-            visible = true;
-
-            if(!isAlive) return;
-
-
-
-            
-            ShootLasers(deltaTime);
-
-
-            
-
-            if(isHit)
-            {
-                hitTimer += deltaTime;
-                if(hitTimer >= HITTIME)
-                {
-                    colour = 15;
-                    isHit = false;
-                    hitTimer = 0f;
-                }
-            }
-
- 
-            
-            DoRotation(deltaTime);
-
-
-
-            DoMovement(deltaTime);
-
-
-
-
-
-
-            
-
+            base.Update(deltaTime);
         }
 
 

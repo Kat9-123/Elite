@@ -28,8 +28,6 @@ namespace Elite
                 mesh = Models.chargerMesh;
             }
 
-
-
         }
 
         public override void Update(float deltaTime)

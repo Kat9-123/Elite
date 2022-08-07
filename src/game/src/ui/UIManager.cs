@@ -1,5 +1,3 @@
-using System;
-
 namespace Elite
 {
     public class UIManager : GameObject
@@ -40,12 +38,6 @@ namespace Elite
 
 
 
-
-        //    Engine.Instance(new PIP());
-
-
-
-
             Engine.Instance(new EnemyDisplay());
 
 
@@ -53,14 +45,11 @@ namespace Elite
             bgShieldDisplay.scale.y *= 1.3f;
     
             enemyShieldDisplay = (ShieldDisplay) Engine.Instance(new ShieldDisplay(new Vector3(0.855f,1.84f,2)));
-            enemyShieldDisplay.colour = 4; //12
+            enemyShieldDisplay.colour = 4;
             enemyShieldDisplay.scale.y *= 1.3f;
 
 
-            
-
-
-
+        
 
             ShieldDisplay playerShieldBg = (ShieldDisplay) Engine.Instance(new ShieldDisplay(new Vector3(-1.89f,1.7f,2),true,true));
 
@@ -75,12 +64,7 @@ namespace Elite
 
 
 
-
-
-
             Engine.Instance(new DeathBG());
-
-
     
         }
 
@@ -88,8 +72,6 @@ namespace Elite
         {
 
             RadarEnemy radarEnemy = (RadarEnemy) Engine.Instance(new RadarEnemy(enemy,size));
-
-
         }
 
         public void DebugInfo()
@@ -126,7 +108,6 @@ namespace Elite
 
 
             DebugInfo();
-
 
             
 

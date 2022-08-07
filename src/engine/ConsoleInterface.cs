@@ -1,12 +1,10 @@
-
-// All just nicked straight from stackoverflow. It's dark magic to me.
+// Bloated accursed amalgamation of code nicked straight from stackoverflow. It's dark magic to me.
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 using System.Diagnostics;
-using System.Text;
-using System.Timers;
+
 
 namespace Elite
 {
@@ -239,10 +237,6 @@ namespace Elite
         }
 
 
-
-
-
-
         public static (Vector2,Vector2) WindowRect()
         {
             GetWindowRect(WindowHandlePtr, ref windowRect);
@@ -262,23 +256,6 @@ namespace Elite
         [DllImport("user32.dll")]
         private static extern IntPtr GetForegroundWindow();
 
-        /*
-        [DllImport("user32.dll")]
-        private static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
-
-        private static string GetActiveWindowTitle()
-        {
-            const int nChars = 256;
-            StringBuilder Buff = new StringBuilder(nChars);
-            IntPtr handle = GetForegroundWindow();
-
-            if (GetWindowText(handle, Buff, nChars) > 0)
-            {
-                return Buff.ToString();
-            }
-            return null;
-        }
-        */
         public static bool IsFocused()
         {
             IntPtr handle = System.Diagnostics.Process.GetCurrentProcess().MainWindowHandle;

@@ -25,15 +25,6 @@ namespace Elite
             return result;
         }
 
-
-        public bool IsIdenticalTo(Vector3 vec)
-        {
-            if (vec.x == x && vec.y == y && vec.z == z) return true;
-
-            return false;
-
-        }
-
         public float AngleTo(Vector3 vec)
         {
             Vector3 self = Normalise();
@@ -56,7 +47,7 @@ namespace Elite
             return MathF.Sqrt(LengthSquared());
         }
 
-        public Vector3 Clamp(float n)
+        public Vector3 Clamped(float n)
         {
             Vector3 vec = new Vector3(x,y,z);
             if(LengthSquared() > n*n)
@@ -92,8 +83,6 @@ namespace Elite
             result += z.ToString("0.00") + ")";
 
             return result;
-
-
         }
 
 

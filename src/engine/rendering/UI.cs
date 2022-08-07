@@ -1,5 +1,6 @@
-using System;
+// UI handler that supports Sprites, Text and small debug text
 
+using System;
 
 namespace Elite
 {
@@ -119,7 +120,7 @@ namespace Elite
             }
             debugText = "";
 
-            // Other UI
+            // Main UI
             for (int b = 0; b < Settings.SCREEN_SIZE_Y; b++)
             {
                 for (int a = 0; a < Settings.SCREEN_SIZE_X; a++)

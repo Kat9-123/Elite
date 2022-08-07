@@ -1,14 +1,7 @@
-using System;
-
 namespace Elite
 {
     public class Stingray : Enemy
     {
-
-
-
-
-
         public override void Start()
         {
             
@@ -23,11 +16,10 @@ namespace Elite
 
             scale = new Vector3(2,2,2);
 
-
-
-            
-
             mesh = Models.stingrayMesh;
+
+            maxHealth = 200f;
+            
         
             AddLaser(
                 laserMesh: Models.enemyLaserMesh, 
@@ -41,57 +33,15 @@ namespace Elite
 
 
             
-
-            maxHealth = 200f;
-            
- 
-           /// EnemyLaser laser = (EnemyLaser) Engine.Instance(new EnemyLaser(this));
-
            Setup();
 
         }
         
 
 
-        //public Player player;
-
-
-
-
         public override void Update(float deltaTime)
-        {
-
-            visible = true;
-
-            if(!isAlive) return;
-
-            ShootLasers(deltaTime);
-
-            if(isHit)
-            {
-                hitTimer += deltaTime;
-                if(hitTimer >= HITTIME)
-                {
-                    colour = 15;
-                    isHit = false;
-                    hitTimer = 0f;
-                }
-            }
-
-            
-            DoRotation(deltaTime);
-            
-            DoMovement(deltaTime);
-
-
-
-
-
-
-
-
-            
-
+        {            
+            base.Update(deltaTime);
         }
 
 

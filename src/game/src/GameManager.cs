@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-
-
 namespace Elite
 {   
     // GameManager game manager. 
@@ -38,8 +34,6 @@ namespace Elite
 
             }
 
-          //  Engine.Instance(new Planet(new Vector3(0,0,20),(short)ConsoleColor.Yellow,1,false));
-
             // Two suns are needed because blender messed up my circle mesh
             // so the filling algorithm doesn't entirely work which
             // makes the sun look really bad. A quick and dirty fix
@@ -75,6 +69,7 @@ namespace Elite
 
             enemyLayer = Engine.GameObjectCount();  //    <--- ENEMIES
 
+
             warpController = (Warp) Engine.Instance(new Warp());
 
             player.SetupLasers();
@@ -101,10 +96,6 @@ namespace Elite
             Engine.Instance(new Titlescreen());
 
         }
-
-
-
-
 
 
 

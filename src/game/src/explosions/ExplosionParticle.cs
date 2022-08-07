@@ -1,5 +1,3 @@
-using System;
-
 namespace Elite
 {
     public class ExplosionParticle : GameObject
@@ -39,10 +37,7 @@ namespace Elite
             {
                 visible = false;
                 isExploding = false;
-            }
-
-
-            
+            }            
 
         }
 

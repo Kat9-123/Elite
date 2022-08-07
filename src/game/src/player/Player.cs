@@ -1,5 +1,5 @@
+// Is this class too big? yes.
 using System;
-
 
 namespace Elite
 {   
@@ -68,14 +68,9 @@ namespace Elite
         {
 
             visible = false;
-
-
             boundingBox = new BoundingBox(new Vector3(-20,-20,-20), new Vector3(20,20,20));
-
         
             health = MAX_HEALTH;
-
-
 
         }
 
@@ -104,8 +99,7 @@ namespace Elite
             {
                 if(Engine.gameManager.warpController.InitWarp()) prepareWarp = true;
 
-                
-                
+            
             }
 
             if(!(InputManager.IsKeyHeld(InputMap.WARP) || InputManager.IsKeyHeld(InputMap.WARP_MOUSE)) && prepareWarp)
@@ -141,10 +135,7 @@ namespace Elite
                     health += MathF.Min(MAX_HEALTH-health,REGEN);
                     shieldRegenTimer.Reset();
                 }
-
-
             }
-
 
         }
 
@@ -204,20 +195,10 @@ namespace Elite
                 laserTimer.Accumulate();
             
             }
-
-
-
-           // UI.WriteLine(InputManager.KeyState(InputMap.SHOOT).ToString());
-           // UI.WriteLine(Utils.FormatBool(laserIsColliding,"laser_hit")+ "\n");
         }
-
-
 
         public void DoMovement(float deltaTime)
         {
-            
-
-
             if(!Settings.DO_MOUSE_CONTROLS)
             {
                 rotationDirection = new Vector3(0,0,0);
@@ -233,7 +214,7 @@ namespace Elite
             if (InputManager.IsKeyHeld(InputMap.ROLL_LEFT)) rotationDirection.z = -1f;
             if (InputManager.IsKeyHeld(InputMap.ROLL_RIGHT)) rotationDirection.z = 1f;
             
-
+            // You do not want to know how much pain rotation brought me
             absoluteForward = Utils.RotateAroundAxis(absoluteForward,absoluteUp,rotationDirection.y * YAW_SPEED*deltaTime*zoomMultiplier);
             absoluteRight = Utils.RotateAroundAxis(absoluteRight,absoluteUp,rotationDirection.y * YAW_SPEED*deltaTime*zoomMultiplier);
             
@@ -285,16 +266,11 @@ namespace Elite
                 momentum += Engine.cameraRight *   thrustDirection.x * SPEED * deltaTime;
             }
 
-
-
-           
             // Clamp momentum
             if(momentum.LengthSquared() > 100f*100f)
             {
                 momentum = momentum.Normalise()*100.001f;
             }
-
-
 
         }
 

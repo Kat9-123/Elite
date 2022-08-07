@@ -1,3 +1,4 @@
+/// A bunch of random things
 using System;
 using System.Diagnostics;
 
@@ -86,7 +87,6 @@ namespace Elite
         public static Vector3 RotateAroundAxis(Vector3 vec, Vector3 axis, float theta)
         {
             Vector3 result;
-
             result = vec * MathF.Cos(theta) + (Cross(axis,vec))*MathF.Sin(theta) + axis* (axis.Dot(vec)) * (1-MathF.Cos(theta));
             return result;
         }
@@ -148,15 +148,20 @@ namespace Elite
         
         }
 
-        // Generate a random point within a square
-        // excluding a smaller square in the centre.
+        // Generate a random point within a circle
+        // excluding a smaller circle in the centre.
         public static Vector3 RandomPositionExcludeCentre(float minDist, float maxDist)
         {
             Vector3 pos = new Vector3(0,0,0);
             
-            pos.x = RandomFloat(minDist,maxDist) * RandomSign();
-            pos.y = RandomFloat(minDist,maxDist) * RandomSign();
-            pos.z = RandomFloat(minDist,maxDist) * RandomSign();
+            while(pos.LengthSquared() < minDist*minDist)
+            {
+                pos = new Vector3(0,0,0);
+                pos.x = RandomFloat(-maxDist,maxDist);
+                pos.y = RandomFloat(-maxDist,maxDist);
+                pos.z = RandomFloat(-maxDist,maxDist);
+            }
+
 
             
             return pos;

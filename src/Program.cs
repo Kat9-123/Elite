@@ -7,10 +7,6 @@
             if(!Engine.Setup()) return;
 
             Engine.Run();
-        }
-        
-
+        }    
     }
-
-
 }

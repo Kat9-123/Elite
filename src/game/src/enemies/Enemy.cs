@@ -55,7 +55,7 @@ namespace Elite
 
         protected void Setup()
         {
-           
+            visible = true;
             player = Engine.gameManager.player;
             position = Utils.RandomPositionExcludeCentre(100f,400f) + player.position;
             getsLit = true;
@@ -155,6 +155,33 @@ namespace Elite
                 }
             }
 
+        }
+
+        public override void Update(float deltaTime)
+        {
+            
+            if(!isAlive) return;
+            ShootLasers(deltaTime);        
+
+            if(isHit)
+            {
+                hitTimer += deltaTime;
+                if(hitTimer >= HITTIME)
+                {
+                    colour = 15;
+                    isHit = false;
+                    hitTimer = 0f;
+                }
+            }
+
+ 
+            
+            DoRotation(deltaTime);
+
+            DoMovement(deltaTime);
+
+
+            
         }
 
 

@@ -1,4 +1,3 @@
-using System;
 
 namespace Elite
 {
@@ -16,11 +15,11 @@ namespace Elite
             boundingBoxEnd = new Vector3(30f,30f,30f);
             
  
-             
+            maxHealth = 100f;
+       
             scale = new Vector3(2,2,2);        
 
             mesh = Models.chargerMesh;
-
 
 
             AddLaser(
@@ -33,62 +32,18 @@ namespace Elite
                 laserVisibilityTime: 0.2f
             );
 
-
-            
-
-            maxHealth = 100f;
-
-           /// EnemyLaser laser = (EnemyLaser) Engine.Instance(new EnemyLaser(this));
-
-            
             Setup();
-
             
         }
         
 
-
-        //public Player player;
 
 
 
 
         public override void Update(float deltaTime)
         {
-
-
-            visible = true;
-
-
-            if(!isAlive) return;
-
-
-            ShootLasers(deltaTime);
-
-            if(isHit)
-            {
-                hitTimer += deltaTime;
-                if(hitTimer >= HITTIME)
-                {
-                    colour = 15;
-                    isHit = false;
-                    hitTimer = 0f;
-                }
-            }
-
-            
-            DoRotation(deltaTime);
-
-            DoMovement(deltaTime);
-
-
-
-
-
-
-
-            
-
+            base.Update(deltaTime);     
         }
 
 

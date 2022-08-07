@@ -1,5 +1,3 @@
-using System;
-
 namespace Elite
 {
     public class RadarEnemy : GameObject
@@ -71,20 +69,14 @@ namespace Elite
 
 
             Vector3 pos = (enemy.position-Engine.cameraPosition)/(RADAR_RANGE*1.4f);
-            position = pos;//pos.z + Engine.cameraUp*pos.y + right*pos.x;
+            position = pos;
 
             Vector3 add = new Vector3(0,1.5f,2f);
             position += Engine.cameraForward* add.z + Engine.cameraUp*add.y + right*add.x;
 
             position += Engine.cameraPosition;
 
-
-          //  position = (enemy.position)/400f + new Vector3(0,2,4);
-
         }
-
-
-
 
     }
 }

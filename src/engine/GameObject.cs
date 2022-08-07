@@ -1,5 +1,3 @@
-using System;
-
 namespace Elite
 {
     public class GameObject
@@ -19,12 +17,15 @@ namespace Elite
 
         // Instead of euler angles I decided to define rotation with
         // a forward vector and an up vector, because it's (in my opinion)
-        // farr easier to reason with.
+        // far easier to reason with in my opinion.
         public Vector3 up = new Vector3(0,1,0);
         public Vector3 forward = new Vector3(0,0,1);
 
+
         public Vector3 scale = new Vector3(1,1,1);
         public Vector3 position = new Vector3(0,0,0);
+
+        // Kinda legacy, only used for hard-coded models
         public Vector3 offset;
         
         
@@ -66,6 +67,8 @@ namespace Elite
         {
             forward = (lookAtPos - position).Normalise();  
         }
+
+        // Legacy
         public Vector3 FindLargestSize()
         {
             Vector3 result = new Vector3(0,0,0);

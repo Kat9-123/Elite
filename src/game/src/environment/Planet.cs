@@ -11,7 +11,7 @@ namespace Elite
 
         public Planet(Vector3 _offset, short _colour, float _scale)
         {
-            luminances = Settings.PLANET_LUMINANCES;//"#0OC*+/^,.        ";
+            luminances = Settings.PLANET_LUMINANCES;
             pos = _offset;
             colour = _colour;
             scale = new Vector3(_scale,_scale,_scale);
@@ -45,7 +45,6 @@ namespace Elite
                 position = pos + Engine.cameraPosition;
                 return;
             }
-
 
             position = pos + Engine.cameraPosition - Engine.cameraPosition/Settings.PLANET_SCALE;
 

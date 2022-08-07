@@ -10,17 +10,12 @@ namespace Elite
 
         public Sprite(string path="")
         {
-
             if(path != "")
             {
                SpriteLoader.SetSprite(this,path);
             }
 
         }
-
-
-
-
 
     }
 }

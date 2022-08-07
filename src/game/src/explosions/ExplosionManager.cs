@@ -17,12 +17,6 @@ namespace Elite
             }
         }
 
-        public override void Update(float deltaTime)
-        {
-            
-        }
-
-
         public void DoExplosion(Enemy origin)
         {
             for (int i = 0; i < PARTICLE_COUNT; i++)

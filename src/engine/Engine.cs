@@ -3,7 +3,7 @@ This engine lacks some very important features, like audio, true frustum culling
 occlusion, object ordering based on distance, etc. I didn't implement these features
 because they really aren't necessary for this project.
 
-
+For more information visit: https://github.com/Kat9-123/Elite#engine
 
 === High level engine overview
 
@@ -18,7 +18,7 @@ because they really aren't necessary for this project.
                   |                |
                   +---{GAMELOOP}---+
 
-[] = Core engine part
+[] = Core engine component
 () = GameObject that functions as a manager.
 {} = What happens
 
@@ -52,13 +52,13 @@ namespace Elite
 
         private static List<GameObject> queuedObjectsForDestruction = new List<GameObject>();
 
-        
-        private const string TITLE = "Elite not very Dangerous | By Kat9_123";
-
+    
         public static float deltaTime = 0f;
 
         // Used in deltaTime calculations
         private static double previousTime = 0;
+
+        private const string TITLE = "Elite not very Dangerous | By Kat9_123";
 
 
 
@@ -120,12 +120,14 @@ namespace Elite
                 Console.ReadKey();
                 return false;
             }
+
+            FileHandler.Setup();
+
             Console.Title = TITLE;
             ConsoleInterface.SetConsoleIcon("assets\\icon.ico");
             Console.CursorVisible = false;
             
             // Initialise file stuff
-            FileHandler.Setup();
             FontHandler.LoadFont();
             SettingHandler.Initialise();
             
@@ -155,7 +157,6 @@ namespace Elite
 
         public static void Restart()
         {    
-
             // Destroy all objects except for the gamemanager.
             for (int i = 1; i < gameObjects.Count; i++)
             {
@@ -177,6 +178,7 @@ namespace Elite
             // Main gameloop
             while (true)
             {  
+                // Stop checking for input if the window is not in focus                
                 InputManager.TestFocus();
 
                 // Exit if ESC was pressed
@@ -213,8 +215,6 @@ namespace Elite
             }
             
         }
-
-    
 
     }
 }

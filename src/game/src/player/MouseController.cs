@@ -7,6 +7,7 @@ namespace Elite
 
         private bool mouseFreed = false;
 
+        // If the window gets refocused we want the mousecursor to return to the centre.
         private bool reFocused = false;
 
 
@@ -116,9 +117,7 @@ namespace Elite
             }
             else
             {
-                
-                ResetRotationDirection();
-               
+                ResetRotationDirection();  
             }
 
 
