@@ -1,12 +1,7 @@
-using System;
-
-
 namespace Elite
 {
     public class PlayerLaser : GameObject
     {
-
-      //  private static float LIFETIME
 
         public PlayerLaser(bool type)
         {
