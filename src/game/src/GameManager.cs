@@ -1,10 +1,13 @@
+
 namespace Elite
 {   
     // GameManager game manager. 
     public class GameManager : GameObject
     {
 
-
+        private const string SCORE_NAME = "score";
+        public string highscore;
+        public bool isSetup = false;
         public Player player;
 
         public UIManager uiManager;
@@ -87,13 +90,35 @@ namespace Elite
             Engine.cameraForward = new Vector3(0,0,1);
             Engine.cameraRight = new Vector3(1,0,0);
 
-
+            isSetup = true;
         }
 
         public override void Start()
         {
+            
             visible = false;
+
+            if(!FileHandler.FileExists(SCORE_NAME))
+            {
+                FileHandler.Write(SCORE_NAME,"0");
+            }
+
+            highscore = FileHandler.Read(SCORE_NAME);
+            
             Engine.Instance(new Titlescreen());
+
+        }
+
+        public void Exit()
+        {
+            if(!isSetup) return;
+
+
+            if(int.Parse(uiManager.score) >= int.Parse(highscore))
+            {
+                FileHandler.Write(SCORE_NAME,uiManager.score);
+            }
+        
 
         }
 

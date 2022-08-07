@@ -20,6 +20,11 @@ namespace Elite
             }
         }
 
+        public static bool FileExists(string path)
+        {
+            return File.Exists(originPath + path);
+        }
+
 
         public static string Read(string path)
         {

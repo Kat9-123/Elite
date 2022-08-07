@@ -28,7 +28,7 @@ namespace Elite
         TARGET_MOUSE = 0x04, // MIDDLE MOUSE BUTTON
 
 
-        PAUSE = 0x1B, // ESC
+        EXIT = 0x1B, // ESC
 
         RESTART = 0x52, //R
 

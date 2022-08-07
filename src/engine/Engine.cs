@@ -169,6 +169,12 @@ namespace Elite
  
         }
 
+        private static void Exit()
+        {
+            gameManager.Exit();
+            Environment.Exit(0);
+        }
+
         public static void Run()
         {
 
@@ -182,7 +188,7 @@ namespace Elite
                 InputManager.TestFocus();
 
                 // Exit if ESC was pressed
-                if(InputManager.IsKeyPressed(InputMap.PAUSE)) Environment.Exit(1);
+                if(InputManager.IsKeyPressed(InputMap.EXIT)) Exit();
 
                 if(InputManager.IsKeyPressed(InputMap.RESTART)) Restart();
 

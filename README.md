@@ -104,7 +104,7 @@ or mouse settings before playing.
 - RightArrow - Yaw Right
 - UpArrow - Pitch Up
 - DownArrow - Pitch Down
-### Or
+#### Or
 - MouseMovementUp - Pitch Up
 - MouseMovementDown - Pitch Down
 - MouseMovementRight - Yaw Right

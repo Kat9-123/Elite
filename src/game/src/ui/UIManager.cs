@@ -10,6 +10,7 @@ namespace Elite
         public bool isWarping = false;
 
         public string score = "0";
+        
         public UIManager(Player _player)
         {
             player = _player;
@@ -110,9 +111,22 @@ namespace Elite
             DebugInfo();
 
             
+            short scoreColour = 15;
+            if(int.Parse(score) >= int.Parse(Engine.gameManager.highscore))
+            {
+                scoreColour = 5;
 
-            // Points
-            UI.WriteText(score,173-(6*(score.Length-1)),2);
+            }
+            else
+            {    
+                // Highscore
+                UI.WriteText(Engine.gameManager.highscore,173-(6*(Engine.gameManager.highscore.Length-1)),10,'^',5);
+
+            }
+                // Score
+                UI.WriteText(score,173-(6*(score.Length-1)),2,'#',scoreColour);
+
+
 
 
             // Player speed

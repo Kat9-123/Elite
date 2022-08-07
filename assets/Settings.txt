@@ -23,7 +23,7 @@ DustCount=40
 ### Debug info
 Debug=false
 ShowFPS=true
-ShowColoursOnStartup=false
+ShowColoursOnStartup=true
 
 ShowHitboxes=false
 DoEnemyAI=true
