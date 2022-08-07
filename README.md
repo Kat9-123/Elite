@@ -77,29 +77,26 @@ or mouse controls
 - S - Backwards
 - A - Left
 - D - Right
-
-
+####
 - LShift - Up
 - Control - Down
-
-
+####
+- X - Break
+####
 - C/RightMouseButton - Short distance warp
 
-
-- X - Break
 
 
 ### Rotation
 - Q - Roll right
 - E - Roll left
-
+####
 
 - LeftArrow - Yaw Left
 - RightArrow - Yaw Right
 - UpArrow - Pitch Up
 - DownArrow - Pitch Down
-
-
+####
 - MouseMovementUp - Pitch Up
 - MouseMovementDown - Pitch Down
 - MouseMovementRight - Yaw Right
