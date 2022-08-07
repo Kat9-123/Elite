@@ -5,10 +5,10 @@ FontScale=3
 Font=Square
 
 # 0 = Low, 1 = Medium, 2 = High
-PlanetQuality=0
+PlanetQuality=2
 
-MinPlanetCount=5
-MaxPlanetCount=12
+MinPlanetCount=10
+MaxPlanetCount=20
 
 # 0 = Infinte planet scale (default).
 PlanetScale=0
@@ -22,13 +22,13 @@ DoEnemyAI=true
 
 DoMouseControls=true
 
-DustCount=20
+DustCount=40
 
 ShowUI=true
 
 # Debug info
-Debug=true
-ShowHitboxes=true
+Debug=false
+ShowHitboxes=false
 ShowColoursOnStartup=false
 ShowFPS=true
 

@@ -78,35 +78,32 @@ LeftMouseButton/Space - Shoot
 - A - Left
 - D - Right
 
-LShift - Up
-Control - Down
+- LShift - Up
+- Control - Down
 
-C/RightMouseButton - Short distance warp
+- C/RightMouseButton - Short distance warp
 
-X - Break
+- X - Break
 
 
 ### Rotation
-Q - Roll right
-E - Roll left
+- Q - Roll right
+- E - Roll left
 
+- LeftArrow - Yaw Left
+- RightArrow - Yaw Right
+- UpArrow - Pitch Up
+- DownArrow - Pitch Down
 
-LeftArrow - Yaw Left
-RightArrow - Yaw Right
-UpArrow - Pitch Up
-DownArrow - Pitch Down
-
-
-MouseMovementUp - Pitch Up
-MouseMovementDown - Pitch Down
-
-MouseMovementRight - Yaw Right
-MouseMovementLeft - Yaw Left
+- MouseMovementUp - Pitch Up
+- MouseMovementDown - Pitch Down
+- MouseMovementRight - Yaw Right
+- MouseMovementLeft - Yaw Left
 
 ## Misc
-M - Free mouse
-Escape - Exit
-R - Restart
+- M - Free mouse
+- Escape - Exit
+- R - Restart
 
 
 
