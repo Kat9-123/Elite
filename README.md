@@ -19,32 +19,40 @@ Everything was made by me except for the really low level console interactions.
 The game isn't really a complete game. It's more of a techdemo.
 
 ### Features
-- 2 Enemies and a Boss
+- Uses the Windows command prompt
+- 2 Enemies and a Boss with detailed models
 - Mouse and Keyboard controls
 - Short distance warp ability
+- Pew pew!
+- It looks relatively good
+- Space!
+
 
 
 
 
 ## Screenshots
 ### HUD Explanation
-![image](https://github.com/Kat9-123/Elite/blob/master/screenshots/HUD.png)
+![image](/screenshots/HUD.png)
 
-![image](https://github.com/Kat9-123/Elite/blob/master/screenshots/Enemy.png)
+### Planets
+![image](/screenshots/Planets.png)
 
-![image](https://github.com/Kat9-123/Elite/blob/master/screenshots/Planets.png)
+### Enemy
+![image](/screenshots/Enemy.png)
+
 
 ### Boss
-![image](https://github.com/Kat9-123/Elite/blob/master/screenshots/Boss.png)
+![image](/screenshots/Boss.png)
 
 ### The Boss has a massive laser attack
-![image](https://github.com/Kat9-123/Elite/blob/master/screenshots/BossLaser.png)
+![image](/screenshots/BossLaser.png)
 
 ### Short distance warp ability
-![image](https://github.com/Kat9-123/Elite/blob/master/screenshots/Warp.png)
+![image](/screenshots/Warp.png)
 
 ## Why?
-After finishing <a href="https://github.com/Kat9-123/Asteroids">Asteroids</a> 
+After finishing <a href="https://github.com/Kat9-123/Asteroids"> an Asteroids clone</a> in the Windows console 
 I thought "What if I made Elite in the console". First I dismissed it as I thought
 that I was far to incapable to do something like that. After a while of thinking about it I decided
 to do some research. I stumbled upon 
@@ -58,7 +66,6 @@ After that the rest of the Engine architecture was relatively simple.
 ## How to play it
 #### For the best experience use <a href="https://strlen.com/square/">Square</a>
 if you decide to use a different font, modify the Font option in assets/Settings.txt
-
 
 You can either either compile it from source yourself, or download it from the released tab.
 Just make sure that the assets folder is where you launch the executable from.
@@ -91,12 +98,12 @@ or mouse controls
 - Q - Roll right
 - E - Roll left
 ####
-
+####
 - LeftArrow - Yaw Left
 - RightArrow - Yaw Right
 - UpArrow - Pitch Up
 - DownArrow - Pitch Down
-####
+#### Or
 - MouseMovementUp - Pitch Up
 - MouseMovementDown - Pitch Down
 - MouseMovementRight - Yaw Right
@@ -111,14 +118,15 @@ or mouse controls
 
 
 ## Engine
-The Engine uses a basic object oriented aproach.
+The Engine uses a basic object oriented approach.
 
 Though the Engine and the game are pretty closely integrated, you could definitely extract the engine
 (if you really wanted to for some reason). 
 
 The Engine itself lacks some pretty important features,
 mainly true object layering and occlusion. I decided to not implement these feautures because
-<s>I was too lazy</s> it wasn' t necessary for this project
+<s>I was too lazy</s> it wasn' t necessary for this project and because it would cause unnecessary lag.
+Actual frustum culling would be nice though...
 
 Features:
 - Fully written in C#
@@ -126,19 +134,17 @@ Features:
 - Keyboard and Mouse support
 - 16 colours
 - Object oriented architecture (I kinda dislike OOP but whatever)
-- Rotation based on forward and up vectors
+- Rotation based on forward and up vectors (Is this a feature though?)
 - PNG and OBJ support
 - Custom font support
 - Basic line box collision detection
 - Easily accesible settings
 
 
-
-
-
 ## Miscellaneous
 If you have any tips, optimisations, etc. Please either message me or make a pull request.
-The code is stil relatively messy.
+
+The code is still relatively messy.
 
 ### Perfomance
 Sadly the performance really isn't great. It will probably run on most computers
