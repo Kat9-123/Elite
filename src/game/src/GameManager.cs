@@ -30,7 +30,7 @@ namespace Elite
             int planetCount = 0;
             while (planetCount < desiredPlanetCount)
             {
-                Vector3 pos = Utils.RandomPositionExcludeCentre(2.5f,16f);
+                Vector3 pos = Utils.RandomPositionExcludeCentre(2f,16f);
                 if(pos.Normalise().Dot(new Vector3(0,0,1)) > 0.9f) continue;
 
 

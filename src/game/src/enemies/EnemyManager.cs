@@ -6,6 +6,7 @@ namespace Elite
     public class EnemyManager : GameObject
     {
 
+
         public List<Enemy> enemies = new List<Enemy>();
 
         private Timer enemySpawnTimer = new Timer(10);
