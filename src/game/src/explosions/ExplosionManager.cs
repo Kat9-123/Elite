@@ -24,10 +24,8 @@ namespace Elite
                 ExplosionParticle particle = particles[i];
 
                 particle.position = origin.position;
-                Vector3 momentum = new Vector3();
-                momentum.x = Utils.RandomFloat(100f,500f) * Utils.RandomSign();
-                momentum.y = Utils.RandomFloat(100f,500f)* Utils.RandomSign();
-                momentum.z = Utils.RandomFloat(100f,500f)* Utils.RandomSign();
+                Vector3 momentum = Utils.RandomPositionExcludeCentre(100f,500f) + origin.momentum;
+
 
 
                 float size = Utils.RandomFloat(0.4f,1.5f);

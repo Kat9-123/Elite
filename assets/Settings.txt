@@ -1,9 +1,10 @@
+### WINDOW
 ScreenSizeX=180
 ScreenSizeY=180
 FontScale=3
-
 Font=Square
 
+### PLANET
 # 0 = Low, 1 = Medium, 2 = High
 PlanetQuality=0
 
@@ -12,15 +13,12 @@ MaxPlanetCount=25
 
 # 0 = Infinte planet scale (default).
 PlanetScale=0
-# default = |#0OC*+/^,.        |
+# default = |#0OC*+/^,.     |
 PlanetLuminances=#0OC*+/^,.     
+FillPlanets=true
 
 
-DoMouseControls=true
-
-DustCount=0
-
-### Debug info
+### DEBUG
 Debug=true
 ShowFPS=true
 ShowColoursOnStartup=true
@@ -29,4 +27,12 @@ ShowHitboxes=false
 DoEnemyAI=true
 
 ShowUI=true
+
+
+
+### MISC
+DoMouseControls=true
+
+DustCount=40
+
 

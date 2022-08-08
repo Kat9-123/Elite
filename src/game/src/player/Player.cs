@@ -92,6 +92,8 @@ namespace Elite
             if(health <= 0f)
             {
                 UI.WriteText("YOU DIED",66,87);
+                laserLeft.visible = false;
+                laserRight.visible = false;
                 return;
             }
 

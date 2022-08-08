@@ -57,7 +57,7 @@ namespace Elite
         {
             visible = true;
             player = Engine.gameManager.player;
-            position = Utils.RandomPositionExcludeCentre(100f,400f) + player.position;
+            position = Utils.RandomPositionExcludeCentre(200f,550f) + player.position;
             getsLit = true;
             health = maxHealth;
             forward = (Engine.cameraPosition - position).Normalise();

@@ -23,6 +23,8 @@ namespace Elite
         public static readonly int MIN_PLANET_COUNT = SettingHandler.LoadInt("MinPlanetCount");
         public static int MAX_PLANET_COUNT = SettingHandler.LoadInt("MaxPlanetCount");
 
+        public static readonly bool FILL_PLANETS = SettingHandler.LoadBool("FillPlanets");
+
 
         public static int DUST_COUNT = SettingHandler.LoadInt("DustCount");
 

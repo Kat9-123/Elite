@@ -11,6 +11,7 @@ namespace Elite
 
         public Planet(Vector3 _offset, short _colour, float _scale)
         {
+            filled = Settings.FILL_PLANETS;
             luminances = Settings.PLANET_LUMINANCES;
             pos = _offset;
             colour = _colour;
