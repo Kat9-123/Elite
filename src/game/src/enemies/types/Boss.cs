@@ -6,11 +6,12 @@ namespace Elite
     {
         public override void Start()
         {
+
             score = 40;
             fireRate = 0.3f;
         
             rotationSpeed = 5f;
-            speed = 50f;
+            speed = 50f + 2*difficulty;
 
 
             boundingBoxStart = new Vector3(-120f,-120f,-120f);
@@ -25,7 +26,7 @@ namespace Elite
 
             mesh = Models.bossMesh;
 
-            maxHealth = 400f;
+            maxHealth = 400f + 40*difficulty;
 
 
             radarSize = new Vector3(1.5f,1.5f,1.5f);
@@ -48,7 +49,7 @@ namespace Elite
             AddLaser(
                 laserMesh: Models.enemyLaserMesh, 
                 _offset: new Vector3(50,-18,30), 
-                damage: 15f, 
+                damage: 15f + 3*difficulty, 
                 accuracy: 1.5f, 
                 laserColour: 4, 
                 fireTime: 0.5f,
@@ -60,7 +61,7 @@ namespace Elite
             AddLaser(
                 laserMesh: Models.enemyLaserMesh, 
                 _offset: new Vector3(-50,-18,30), 
-                damage: 15f, 
+                damage: 15f + 3*difficulty, 
                 accuracy: 1.5f, 
                 laserColour: 4, 
                 fireTime: 0.5f,

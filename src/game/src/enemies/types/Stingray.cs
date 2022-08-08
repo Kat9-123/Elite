@@ -8,7 +8,7 @@ namespace Elite
             score = 25;
             fireRate = 0.3f;
             rotationSpeed = 20f;
-            speed = 100f;
+            speed = 100f+2*difficulty;
 
             boundingBoxStart = new Vector3(-30f,-30f,-30f);
             boundingBoxEnd = new Vector3(30f,30f,30f);
@@ -18,13 +18,13 @@ namespace Elite
 
             mesh = Models.stingrayMesh;
 
-            maxHealth = 200f;
+            maxHealth = 200f+15*difficulty;
             
         
             AddLaser(
                 laserMesh: Models.enemyLaserMesh, 
                 _offset: new Vector3(0,0,0), 
-                damage: 7f, 
+                damage: 7f+2*difficulty, 
                 accuracy: 1.8f, 
                 laserColour: 12, 
                 fireTime: 0.5f,

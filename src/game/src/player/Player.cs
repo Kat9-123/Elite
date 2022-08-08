@@ -20,7 +20,7 @@ namespace Elite
         public bool isDead = false;
         
 
-        public EnemyManager enemyGen;
+        public EnemyManager enemyManager;
 
 
 
@@ -147,15 +147,15 @@ namespace Elite
             Enemy? hitEnemy = null;
 
         
-            for (int i = 0; i < enemyGen.enemies.Count; i++)
+            for (int i = 0; i < enemyManager.enemies.Count; i++)
             {
                 if(Physics.CheckLineBox(
-                    enemyGen.enemies[i].boundingBox.start + enemyGen.enemies[i].position, 
-                    enemyGen.enemies[i].boundingBox.end + enemyGen.enemies[i].position, 
+                    enemyManager.enemies[i].boundingBox.start + enemyManager.enemies[i].position, 
+                    enemyManager.enemies[i].boundingBox.end + enemyManager.enemies[i].position, 
                     Engine.cameraPosition, Engine.cameraPosition+(Engine.cameraForward*1_000_000)))
                 {
 
-                    hitEnemy = enemyGen.enemies[i];
+                    hitEnemy = enemyManager.enemies[i];
 
                 }         
             }
@@ -309,15 +309,15 @@ namespace Elite
     
             float closestDot = -1000f;
             Enemy? closestEnemy = null;
-            for (int i = 0; i < enemyGen.enemies.Count; i++)
+            for (int i = 0; i < enemyManager.enemies.Count; i++)
             {
 
-                float dot = Engine.cameraForward.Dot((enemyGen.enemies[i].position-Engine.cameraPosition).Normalise());
+                float dot = Engine.cameraForward.Dot((enemyManager.enemies[i].position-Engine.cameraPosition).Normalise());
 
-                if((dot > closestDot) && (dot > 0.97f) && enemyGen.enemies[i].isAlive)
+                if((dot > closestDot) && (dot > 0.97f) && enemyManager.enemies[i].isAlive)
                 {
                     closestDot = dot;
-                    closestEnemy = enemyGen.enemies[i];
+                    closestEnemy = enemyManager.enemies[i];
                 }
             }
             if(closestEnemy != null)

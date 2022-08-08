@@ -8,14 +8,14 @@ namespace Elite
         {
             score = 10;
             fireRate = 0.3f;
-            rotationSpeed = 25f;
-            speed = 125f;
+            rotationSpeed = 25f+ 0.5f*difficulty;
+            speed = 125f + 7*difficulty;
 
             boundingBoxStart = new Vector3(-30f,-30f,-30f);
             boundingBoxEnd = new Vector3(30f,30f,30f);
             
  
-            maxHealth = 100f;
+            maxHealth = 100f + 5*difficulty;
        
             scale = new Vector3(2,2,2);        
 

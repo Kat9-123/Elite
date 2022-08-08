@@ -52,14 +52,12 @@ namespace Elite
 
             player = (Player) Engine.Instance(new Player());
 
-            explosionManager = (ExplosionManager) Engine.Instance(new ExplosionManager());
 
-            EnemyManager enemyGen = (EnemyManager) Engine.Instance(new EnemyManager());
 
-            player.enemyGen = enemyGen;
-            enemyManager = enemyGen;
+            enemyManager = (EnemyManager) Engine.Instance(new EnemyManager());
 
-   
+            player.enemyManager = enemyManager;
+
             GenerateBodies();
             
 
@@ -71,6 +69,8 @@ namespace Elite
 
 
             enemyLayer = Engine.GameObjectCount();  //    <--- ENEMIES
+
+            explosionManager = (ExplosionManager) Engine.Instance(new ExplosionManager());
 
 
             warpController = (Warp) Engine.Instance(new Warp());

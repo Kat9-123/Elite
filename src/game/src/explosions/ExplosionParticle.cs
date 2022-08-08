@@ -16,7 +16,7 @@ namespace Elite
         {
             colour = 4;
             mesh = Models.cube;
-            visible = false;
+//            visible = false;
 
         }
 

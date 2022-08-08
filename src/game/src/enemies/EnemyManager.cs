@@ -5,7 +5,7 @@ namespace Elite
 {
     public class EnemyManager : GameObject
     {
-
+        public int difficulty = 0;
 
         public List<Enemy> enemies = new List<Enemy>();
 
@@ -75,6 +75,7 @@ namespace Elite
 
         public void DestroyEnemy(Enemy enemy)
         {
+            difficulty++;
             enemies.Remove(enemy);
         }
 
