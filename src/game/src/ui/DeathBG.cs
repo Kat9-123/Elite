@@ -14,8 +14,9 @@ namespace Elite
             movesWithCamera = true;
             filled = true;
 
+
             position.z = 2f;
-            forward = new Vector3(0,0,-1f);
+            forward = new Vector3(0,0,1f);
 
             scale = new Vector3(0f,0f,0f);
         }

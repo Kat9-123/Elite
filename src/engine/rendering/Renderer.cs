@@ -204,6 +204,8 @@ namespace Elite
                 GameObject obj = gameObjects[gameObject];
                 if (!obj.visible) continue;
 
+                if(!obj.movesWithCamera && (obj.position - Engine.cameraPosition).Normalise().Dot(Engine.cameraForward) < 0f) continue;
+
                 Triangle[] tris = obj.mesh.tris;
 
                 Matrix4x4 rotationMatrix = Matrix4x4.DirectionToMatrix(obj.forward,obj.up);

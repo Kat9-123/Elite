@@ -10,10 +10,10 @@ namespace Elite
             getsLit = false;
             filled = true;
             mesh = Models.circle;
-            forward = new Vector3(0,0,-1);
+            forward = new Vector3(0,0,1);
             colour = (short)ConsoleColor.Yellow;
 
-            pos = new Vector3(0,0,20);
+            pos = new Vector3(0,0,20f);
         }
 
         public override void Update(float deltaTime)

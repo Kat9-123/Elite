@@ -26,23 +26,23 @@ namespace Elite
 
         public void GenerateBodies()
         {
-            int l = Utils.RandomInt(Settings.MIN_PLANET_COUNT,Settings.MAX_PLANET_COUNT);
-            for (int i = 0; i < l; i++)
+            int desiredPlanetCount = Utils.RandomInt(Settings.MIN_PLANET_COUNT,Settings.MAX_PLANET_COUNT);
+            int planetCount = 0;
+            while (planetCount < desiredPlanetCount)
             {
-                Vector3 pos = Utils.RandomPositionExcludeCentre(2f,16f);
+                Vector3 pos = Utils.RandomPositionExcludeCentre(2.5f,16f);
+                if(pos.Normalise().Dot(new Vector3(0,0,1)) > 0.9f) continue;
+
 
                 float s = Utils.RandomFloat(0.5f,2.7f);
 
                 Engine.Instance(new Planet(pos,(short)Utils.RandomInt(1,14),s));
-
+                planetCount++;
             }
 
-            // Two suns are needed because blender messed up my circle mesh
-            // so the filling algorithm doesn't entirely work which
-            // makes the sun look really bad. A quick and dirty fix
-            // is to just spawn two.
+
             Engine.Instance(new Sun());
-            Engine.Instance(new Sun()).up = new Vector3(1,0,0);
+
         }
 
 

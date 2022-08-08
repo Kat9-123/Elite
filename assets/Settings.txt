@@ -5,10 +5,10 @@ FontScale=3
 Font=Square
 
 # 0 = Low, 1 = Medium, 2 = High
-PlanetQuality=2
+PlanetQuality=0
 
-MinPlanetCount=10
-MaxPlanetCount=20
+MinPlanetCount=15
+MaxPlanetCount=25
 
 # 0 = Infinte planet scale (default).
 PlanetScale=0
@@ -18,10 +18,10 @@ PlanetLuminances=#0OC*+/^,.
 
 DoMouseControls=true
 
-DustCount=40
+DustCount=0
 
 ### Debug info
-Debug=false
+Debug=true
 ShowFPS=true
 ShowColoursOnStartup=true
 
