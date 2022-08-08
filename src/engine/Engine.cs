@@ -39,7 +39,7 @@ namespace Elite
         // like a gameobject. 
         public static Vector3 cameraPosition = new Vector3(0,0,0);
 
-        public static Vector3 cameraUp = new Vector3(0,1,0);
+        public static Vector3 cameraUp = new Vector3(0,-1,0);
         public static Vector3 cameraForward = new Vector3(0,0,1);
         public static Vector3 cameraRight = new Vector3(1,0,0);
 
@@ -157,6 +157,12 @@ namespace Elite
 
         public static void Restart()
         {    
+            // This doesn't actually do anything but ah well....
+            cameraPosition = new Vector3(0,0,0);
+            cameraForward = new Vector3(0,0,1);
+            cameraUp = new Vector3(0,-1,0);
+            cameraRight = new Vector3(1,0,0);
+
             // Destroy all objects except for the gamemanager.
             for (int i = 1; i < gameObjects.Count; i++)
             {
@@ -166,6 +172,8 @@ namespace Elite
 
             gameManager.Setup();
 
+
+            
  
         }
 

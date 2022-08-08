@@ -2,7 +2,7 @@
 #### A custom 3D Engine and game based on Elite that runs in the console. Written in C#
 #### Only for Windows!
 ## Tabel of contents
-- [What is it?](#how-to-play-it)
+- [What is it?](#what-is-it)
 - [Screenshots](#screenshots)
 - [Why?](#why)
 - [How to play it](#how-to-play-it)
@@ -27,9 +27,7 @@ The game isn't really a complete game. It's more of a techdemo.
 - It looks relatively good
 - Space!
 - Full HUD
-
-
-
+- Difficulty scaling
 
 
 ## Screenshots
@@ -128,6 +126,8 @@ The Engine itself lacks some pretty important features,
 mainly true object layering and occlusion. I decided not to implement these feautures because
 <s>I was too lazy</s> it wasn't necessary for this project and because it would cause unnecessary lag.
 Actual frustum culling would be nice though...
+
+It also doesn't support audio which I do want to change at some point.
 
 Features:
 - Fully written in C#

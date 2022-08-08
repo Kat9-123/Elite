@@ -6,14 +6,10 @@ namespace Elite
 
         public override void Start()
         {
-            
-          
             mesh = Models.targetMesh;
             offset = new Vector3(-0.1f,0.05f,0);
             colour = 11;
             filled = true;
- 
-          
         }
 
         public override void Update(float deltaTime)

@@ -5,7 +5,7 @@ namespace Elite
 {
     public class EnemyManager : GameObject
     {
-        public int difficulty = 0;
+        public int difficulty;
 
         public List<Enemy> enemies = new List<Enemy>();
 
@@ -20,6 +20,7 @@ namespace Elite
         public override void Start()
         {
             visible = false;
+            difficulty = Settings.INITIAL_DIFFICULTY;
         }
 
         public override void Update(float deltaTime)

@@ -14,19 +14,10 @@ MaxPlanetCount=25
 # 0 = Infinte planet scale (default).
 PlanetScale=0
 # default = |#0OC*+/^,.     |
-PlanetLuminances=#0OC*+/^,.     
+PlanetLuminances=#0OC*+/^,.      
 FillPlanets=true
 
 
-### DEBUG
-Debug=true
-ShowFPS=true
-ShowColoursOnStartup=true
-
-ShowHitboxes=false
-DoEnemyAI=true
-
-ShowUI=true
 
 
 
@@ -35,4 +26,20 @@ DoMouseControls=true
 
 DustCount=40
 
+# Each enemy kill increases the difficulty by one
+# every difficulty level increases stats like health and damage
+InitialDifficulty=0
+
+
+
+
+### DEBUG
+Debug=false
+ShowFPS=true
+ShowColoursOnStartup=false
+
+ShowHitboxes=false
+DoEnemyAI=true
+
+ShowUI=true
 

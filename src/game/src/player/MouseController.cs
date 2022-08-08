@@ -14,7 +14,7 @@ namespace Elite
 
         // Max mouse distance from centre expressed as a percentage
         // of the screen size.
-        private const float MAX_MOUSE_DIST_PERCENTAGE = 0.7f;
+        private const float MAX_MOUSE_DIST_PERCENTAGE = 0.75f;
 
         // "Safe" radius expressed as a percentage of the screen size
         // if the mouse is within this region, no rotation happens.

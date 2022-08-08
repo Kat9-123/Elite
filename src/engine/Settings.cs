@@ -29,6 +29,7 @@ namespace Elite
         public static int DUST_COUNT = SettingHandler.LoadInt("DustCount");
 
 
+        public static readonly int INITIAL_DIFFICULTY = SettingHandler.LoadInt("InitialDifficulty");
   
         // Debug
         public static bool SHOW_UI = SettingHandler.LoadBool("ShowUI");
