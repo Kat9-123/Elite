@@ -32,7 +32,7 @@ InitialDifficulty=0
 
 
 Music=true
-SoundEffects=false
+SoundEffects=true
 
 
 ### DEBUG

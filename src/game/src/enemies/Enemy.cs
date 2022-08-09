@@ -139,6 +139,7 @@ namespace Elite
             isHit = true;
             colour = 4;
             health -= damage;
+            
 
             if(health <= 0 && isAlive)
             {
@@ -154,7 +155,9 @@ namespace Elite
                 {
                     Engine.QueueDestruction(lasers[i]);
                 }
+                return;
             }
+            SoundManager.Play(Sounds.hit);
 
         }
 

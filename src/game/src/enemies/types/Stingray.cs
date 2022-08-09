@@ -10,15 +10,15 @@ namespace Elite
             rotationSpeed = 20f;
             speed = 100f+2*difficulty;
 
-            boundingBoxStart = new Vector3(-30f,-30f,-30f);
-            boundingBoxEnd = new Vector3(30f,30f,30f);
+            boundingBoxStart = new Vector3(-35f,-35f,-35f);
+            boundingBoxEnd = new Vector3(35f,35f,35f);
 
 
             scale = new Vector3(2,2,2);
 
             mesh = Models.stingrayMesh;
 
-            maxHealth = 200f+15*difficulty;
+            maxHealth = 180f+10*difficulty;
             
         
             AddLaser(

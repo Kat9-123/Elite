@@ -16,7 +16,12 @@ This is a simple game made in my custom 3D Engine that draws it's graphics to th
 The game is very loosely based on the original Elite. 
 Everything was made by me except for the really low level console interactions.
 
-The game isn't really a complete game. It's more of a techdemo.
+All of the assets were also created by me. The sprites were made in Slate, the models were made
+in Blender, the sound effects were made in SFXR and the music was made in MuseScore.
+
+It isn't really a game, it's more like a tech-demo.
+
+
 
 ### Features
 - Uses the Windows command prompt
@@ -28,6 +33,7 @@ The game isn't really a complete game. It's more of a techdemo.
 - Space!
 - Full HUD
 - Difficulty scaling
+- Soundeffects and music!
 
 
 ## Screenshots
@@ -127,7 +133,6 @@ mainly true object layering and occlusion. I decided not to implement these feau
 <s>I was too lazy</s> it wasn't necessary for this project and because it would cause unnecessary lag.
 Actual frustum culling would be nice though...
 
-It also doesn't support audio which I do want to change at some point.
 
 Features:
 - Fully written in C#
@@ -141,12 +146,14 @@ Features:
 - Basic line box collision detection
 - Easily accesible settings
 - Basic lighting
+- Basic sound support
 
 
 ## Miscellaneous
 If you have any tips, optimisations, etc. Please either message me or make a pull request.
 
-The code is still relatively messy so any help with that is also greatly appreciated.
+The code is still relatively messy so any help with that is also greatly appreciated. I got 
+kind of burned out so the newer features, like audio, are very messy.
 
 ### Perfomance
 Sadly the performance really isn't great. It will probably run on most computers

@@ -14,6 +14,10 @@ namespace Elite
 
         public static readonly Sound death = new Sound("Gameover.wav");
 
+
+
+        public static readonly Sound hit = new Sound("Hit.wav");
+
     }
 
 
