@@ -195,6 +195,8 @@ namespace Elite
                 // Stop checking for input if the window is not in focus                
                 InputManager.TestFocus();
 
+                SoundManager.UpdateSounds();
+
                 // Exit if ESC was pressed
                 if(InputManager.IsKeyPressed(InputMap.EXIT)) Exit();
 

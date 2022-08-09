@@ -160,19 +160,28 @@ namespace Elite
                 }         
             }
 
+            bool isHeld = InputManager.IsKeyHeld(InputMap.SHOOT) || InputManager.IsKeyHeld(InputMap.SHOOT_MOUSE);
+
             if(isShooting && laserTimer.Accumulate())
             {
                 laserTimer.Reset();
+
+                if(isHeld)
+                {
+                    SoundManager.Play(Sounds.shoot);
+                    if(hitEnemy != null)
+                    {
+                        hitEnemy.Hit(DAMAGE);
+                    }
+                }
+                
 
 
                 laserLeft.visible = !currentLaser;
                 laserRight.visible = currentLaser;
 
 
-                if(hitEnemy != null)
-                {
-                    hitEnemy.Hit(DAMAGE);
-                }
+
             
                 currentLaser = !currentLaser;
                 isShooting = false;
@@ -182,7 +191,7 @@ namespace Elite
 
 
 
-            if (InputManager.IsKeyHeld(InputMap.SHOOT) || InputManager.IsKeyHeld(InputMap.SHOOT_MOUSE))  
+            if (isHeld)  
             {
 
                 isShooting = true;
@@ -191,6 +200,7 @@ namespace Elite
 
             if(!isShooting)
             {
+
                 currentLaser = !currentLaser;
                 laserLeft.visible = false;
                 laserRight.visible = false;

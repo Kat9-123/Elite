@@ -19,6 +19,7 @@ namespace Elite
 
         public void DoExplosion(Enemy origin)
         {
+            SoundManager.Play(Sounds.explosion);
             for (int i = 0; i < PARTICLE_COUNT; i++)
             {
                 ExplosionParticle particle = particles[i];
