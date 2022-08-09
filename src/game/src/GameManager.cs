@@ -1,7 +1,6 @@
-
 namespace Elite
 {   
-    // GameManager game manager. 
+
     public class GameManager : GameObject
     {
 
@@ -9,6 +8,13 @@ namespace Elite
         public string highscore;
         public bool isSetup = false;
         public Player player;
+
+        private string music;
+        private string gameoverTrack;
+
+        private bool isGameover;
+        
+        private Timer musicTimer = new Timer(69.5f);
 
         public UIManager uiManager;
         public EnemyManager enemyManager;
@@ -91,6 +97,18 @@ namespace Elite
             Engine.cameraRight = new Vector3(1,0,0);
 
             isSetup = true;
+
+            musicTimer.Reset();
+
+            music = SoundManager.Play(Sounds.music);
+
+            if(gameoverTrack != "")
+            {
+                SoundManager.Stop(gameoverTrack);
+                gameoverTrack = "";
+            }
+            isGameover = false;
+            
         }
 
         public override void Start()
@@ -109,6 +127,29 @@ namespace Elite
 
         }
 
+        public void Gameover()
+        {
+            gameoverTrack = SoundManager.Play(Sounds.death);
+            if(music != "")
+            {
+                SoundManager.Stop(music);
+            }
+            
+
+            isGameover = true;
+        }
+
+        public override void Update(float deltaTime)
+        {
+            if(isGameover) return;
+
+            if(musicTimer.Accumulate())
+            {
+                music = SoundManager.Play(Sounds.music);
+                musicTimer.Reset();
+            }
+        }
+
         public void Exit()
         {
             if(!isSetup) return;
@@ -121,8 +162,6 @@ namespace Elite
         
 
         }
-
-
 
 
     }

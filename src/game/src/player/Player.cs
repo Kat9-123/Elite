@@ -303,7 +303,7 @@ namespace Elite
             {
                 if(!isDead)
                 {
-                    SoundManager.Play(Sounds.death);
+                    Engine.gameManager.Gameover();
                 }
                 isDead = true;
                 

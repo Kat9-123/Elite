@@ -4,6 +4,8 @@ namespace Elite
     public static class Sounds
     {
 
+        // A highly questionable fugue that I wrote in one hour
+        public static readonly Sound music = new Sound("Music.wav");
         public static readonly Sound shoot = new Sound("Laser.wav");
         public static readonly Sound explosion = new Sound("Explosion.wav");
 

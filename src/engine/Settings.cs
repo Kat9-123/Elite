@@ -30,6 +30,12 @@ namespace Elite
 
 
         public static readonly int INITIAL_DIFFICULTY = SettingHandler.LoadInt("InitialDifficulty");
+
+
+        // Sounds
+
+        public static readonly bool SOUND_EFFECTS = SettingHandler.LoadBool("SoundEffects");
+        public static readonly bool MUSIC = SettingHandler.LoadBool("Music");
   
         // Debug
         public static bool SHOW_UI = SettingHandler.LoadBool("ShowUI");

@@ -9,6 +9,7 @@ namespace Elite
         public string fileName;
         public string trackName;
 
+
         public Sound(string path)
         {
             fileName = FileHandler.originPath + "sounds\\" + path;

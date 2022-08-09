@@ -31,6 +31,8 @@ DustCount=40
 InitialDifficulty=0
 
 
+Music=true
+SoundEffects=false
 
 
 ### DEBUG

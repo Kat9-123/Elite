@@ -22,9 +22,14 @@ namespace Elite
 
         private static int totalTrackCount = 0;
   
-        public static void Play(Sound sound)
+        public static string Play(Sound sound)
         {
             string trackName = sound.trackName + totalTrackCount.ToString();
+
+            if(trackName.StartsWith("Music") && !Settings.MUSIC) return "";
+            if(!trackName.StartsWith("Music") && !Settings.SOUND_EFFECTS) return "";
+
+
             totalTrackCount++;
 
             StringBuilder sb = new StringBuilder();
@@ -42,7 +47,15 @@ namespace Elite
             
             tracks.Add(trackName);
             lengths.Add(Convert.ToInt32(sb.ToString()));
+            return trackName;
 
+        }
+
+        public static void Stop(string trackName)
+        {
+            StringBuilder sb = new StringBuilder();
+            mciSendString("stop " + trackName, sb, 0, IntPtr.Zero);
+            mciSendString("close " + trackName, sb, 0, IntPtr.Zero);      
         }
 
         public static void UpdateSounds()
@@ -72,6 +85,7 @@ namespace Elite
                     mciSendString("close " + trackName, sb, 0, IntPtr.Zero);
 
                     queuedForStop.Add(i);
+
 
                 }
             
