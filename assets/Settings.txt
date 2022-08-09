@@ -34,11 +34,11 @@ InitialDifficulty=0
 
 
 ### DEBUG
-Debug=false
+Debug=true
 ShowFPS=true
 ShowColoursOnStartup=false
 
-ShowHitboxes=false
+ShowHitboxes=true
 DoEnemyAI=true
 
 ShowUI=true

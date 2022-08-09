@@ -91,9 +91,8 @@ namespace Elite
            
             if(health <= 0f)
             {
+
                 UI.WriteText("YOU DIED",66,87);
-                laserLeft.visible = false;
-                laserRight.visible = false;
                 return;
             }
 
@@ -106,7 +105,12 @@ namespace Elite
 
             if(!(InputManager.IsKeyHeld(InputMap.WARP) || InputManager.IsKeyHeld(InputMap.WARP_MOUSE)) && prepareWarp)
             {
-                if (Engine.gameManager.warpController.DoWarp()) momentum = forward * 50f;
+                
+                if (Engine.gameManager.warpController.DoWarp()) 
+                {
+                    SoundManager.Play(Sounds.warp);
+                    momentum = forward * 50f;
+                }
                 prepareWarp = false;
             }
 
@@ -297,7 +301,15 @@ namespace Elite
 
             if(health <= 0f)
             {
+                if(!isDead)
+                {
+                    SoundManager.Play(Sounds.death);
+                }
                 isDead = true;
+                
+                
+                laserLeft.visible = false;
+                laserRight.visible = false;
             }
 
         }

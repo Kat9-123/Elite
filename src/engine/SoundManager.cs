@@ -1,19 +1,16 @@
+// If you have stumbled upon this code, god help you...
+// I am too burnt out to make this code not absolutely atrocious.
 using System;
-using System.Media;
-using System.Threading;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Text;
 
-
-//using System.Media;
 
 
 namespace Elite
 {
     static class SoundManager
     {  
-        const string VOLUME = "0";      
         private static List<string> tracks = new(4);
         private static List<int> lengths = new(4);
 
@@ -62,7 +59,10 @@ namespace Elite
                 {
                     pos = Convert.ToInt32(sb.ToString());
                 } 
-                catch {}
+                catch 
+                {
+                    pos = 100000;
+                }
                 
                 if (pos >= lengths[i])
                 {
@@ -80,6 +80,11 @@ namespace Elite
 
             for (int i = 0; i < queuedForStop.Count; i++)
             {
+                if(tracks.Count-1 < queuedForStop[i])
+                {
+                    queuedForStop.RemoveAt(i);
+                    continue;
+                }
                 tracks.RemoveAt(queuedForStop[i]);
                 lengths.RemoveAt(queuedForStop[i]);
                 queuedForStop.RemoveAt(i);

@@ -108,7 +108,7 @@ namespace Elite
                 {
                     ResetBools();
                     ready = true;
-
+                    SoundManager.Play(Sounds.warpLoaded);
                     flashTimer.Reset();
                     colour = 3;
 
