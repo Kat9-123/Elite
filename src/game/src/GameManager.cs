@@ -7,6 +7,8 @@ namespace Elite
         private const string SCORE_NAME = "score";
         public string highscore;
         public bool isSetup = false;
+
+        private bool started = false;
         public Player player;
 
         private string music;
@@ -54,7 +56,7 @@ namespace Elite
 
         public void Setup()
         {
-
+            started = true;
             if(!FileHandler.FileExists(SCORE_NAME))
             {
                 FileHandler.Write(SCORE_NAME,"0");
@@ -155,6 +157,7 @@ namespace Elite
         }
         public override void Update(float deltaTime)
         {
+            if(!started) return;
             if(isGameover) return;
 
             if(musicTimer.Accumulate())

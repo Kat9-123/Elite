@@ -86,6 +86,7 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
+            if(Engine.gameManager.player.isDead) return;
 
             if(startCoolDownTimer)
             {
@@ -93,6 +94,7 @@ namespace Elite
                 {
                     onCooldown = false;
                     startCoolDownTimer = false;
+                    SoundManager.Play(Sounds.warpCooldown);
                     cooldownTimer.Reset();
                 }
             }

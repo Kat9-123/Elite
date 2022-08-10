@@ -30,6 +30,7 @@ namespace Elite
 
 
         public static readonly int INITIAL_DIFFICULTY = SettingHandler.LoadInt("InitialDifficulty");
+        public static readonly bool DO_DIFFICULTY_SCALING = SettingHandler.LoadBool("DoDifficultyScaling");
 
 
         // Sounds

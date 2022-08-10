@@ -34,7 +34,6 @@ namespace Elite
             if(enemySpawnTimer.Accumulate())
             {
 
-                Enemy enemy;
 
                 // After 3 enemies were spawned, the boss
                 // can spawn as well.
@@ -47,15 +46,15 @@ namespace Elite
                 switch (Utils.RandomInt(0,upperBound))
                 {
                     case 0:
-                        enemy = InstanceEnemy(new Charger());
+                        InstanceEnemy(new Charger());
 
                         break;
                     case 1:
-                        enemy = InstanceEnemy(new Stingray());
+                        InstanceEnemy(new Stingray());
 
                         break;
                     case 2:
-                        enemy = InstanceEnemy(new Boss());
+                        InstanceEnemy(new Boss());
                         
                         break;
 
@@ -76,7 +75,7 @@ namespace Elite
 
         public void DestroyEnemy(Enemy enemy)
         {
-            difficulty++;
+            if(Settings.DO_DIFFICULTY_SCALING) difficulty++;
             enemies.Remove(enemy);
         }
 

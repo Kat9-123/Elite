@@ -4,6 +4,8 @@ namespace Elite
 {
     public class Titlescreen : GameObject
     {
+
+
         private Timer flashTimer = new Timer(0.8f);
         private bool currentFlash = false;
 

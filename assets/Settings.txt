@@ -1,10 +1,10 @@
-### WINDOW
+####            WINDOW
 ScreenSizeX=180
 ScreenSizeY=180
 FontScale=3
 Font=Square
 
-### PLANET
+####            PLANETS
 # 0 = Low, 1 = Medium, 2 = High
 PlanetQuality=0
 
@@ -19,23 +19,26 @@ FillPlanets=true
 
 
 
-
-
-### MISC
+####            MISC
 DoMouseControls=true
 
 DustCount=40
 
+
+####            DIFFICULTY
 # Each enemy kill increases the difficulty by one
 # every difficulty level increases stats like health and damage
 InitialDifficulty=0
+DoDifficultyScaling=true
 
 
+
+####            SOUNDS
 Music=true
 SoundEffects=true
 
 
-### DEBUG
+####            DEBUG
 Debug=true
 ShowFPS=true
 ShowColoursOnStartup=false
