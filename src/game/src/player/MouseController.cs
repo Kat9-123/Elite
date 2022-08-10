@@ -59,6 +59,9 @@ namespace Elite
 
             if(!Settings.DO_MOUSE_CONTROLS) return;
 
+
+            if(Engine.gameManager.player.isDead) return;
+
             if(InputManager.IsKeyPressed(InputMap.FREE_MOUSE)) 
             {
                 mouseFreed = !mouseFreed;

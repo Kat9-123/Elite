@@ -163,6 +163,7 @@ namespace Elite
             cameraUp = new Vector3(0,-1,0);
             cameraRight = new Vector3(1,0,0);
 
+            gameManager.SaveScore();
             // Destroy all objects except for the gamemanager.
             for (int i = 1; i < gameObjects.Count; i++)
             {

@@ -10,7 +10,7 @@ namespace Elite
             score = 40;
             fireRate = 0.3f;
         
-            rotationSpeed = 5f;
+            rotationSpeed = 4f;
             speed = 50f + 2*difficulty;
 
 
@@ -26,7 +26,7 @@ namespace Elite
 
             mesh = Models.bossMesh;
 
-            maxHealth = 400f + 40*difficulty;
+            maxHealth = 400f + 20*difficulty;
 
 
             radarSize = new Vector3(1.5f,1.5f,1.5f);
@@ -49,7 +49,7 @@ namespace Elite
             AddLaser(
                 laserMesh: Models.enemyLaserMesh, 
                 _offset: new Vector3(50,-18,30), 
-                damage: 15f + 3*difficulty, 
+                damage: 15f, 
                 accuracy: 1.5f, 
                 laserColour: 4, 
                 fireTime: 0.5f,
@@ -61,7 +61,7 @@ namespace Elite
             AddLaser(
                 laserMesh: Models.enemyLaserMesh, 
                 _offset: new Vector3(-50,-18,30), 
-                damage: 15f + 3*difficulty, 
+                damage: 15f,
                 accuracy: 1.5f, 
                 laserColour: 4, 
                 fireTime: 0.5f,

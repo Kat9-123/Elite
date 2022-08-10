@@ -24,7 +24,7 @@ namespace Elite
             AddLaser(
                 laserMesh: Models.enemyLaserMesh, 
                 _offset: new Vector3(0,0,0), 
-                damage: 7f+2*difficulty, 
+                damage: 7f+1*difficulty, 
                 accuracy: 1.8f, 
                 laserColour: 12, 
                 fireTime: 0.5f,

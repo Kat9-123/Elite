@@ -40,7 +40,7 @@ namespace Elite
                 if(pos.Normalise().Dot(new Vector3(0,0,1)) > 0.9f) continue;
 
 
-                float s = Utils.RandomFloat(0.5f,2.7f);
+                float s = Utils.RandomFloat(0.5f,2.3f);
 
                 Engine.Instance(new Planet(pos,(short)Utils.RandomInt(1,14),s));
                 planetCount++;
@@ -55,6 +55,12 @@ namespace Elite
         public void Setup()
         {
 
+            if(!FileHandler.FileExists(SCORE_NAME))
+            {
+                FileHandler.Write(SCORE_NAME,"0");
+            }
+
+            highscore = FileHandler.Read(SCORE_NAME);
 
             player = (Player) Engine.Instance(new Player());
 
@@ -100,6 +106,12 @@ namespace Elite
 
             musicTimer.Reset();
 
+
+            if(music != "")
+            {
+                SoundManager.Stop(music);
+            }
+
             music = SoundManager.Play(Sounds.music);
 
             if(gameoverTrack != "")
@@ -116,12 +128,6 @@ namespace Elite
             
             visible = false;
 
-            if(!FileHandler.FileExists(SCORE_NAME))
-            {
-                FileHandler.Write(SCORE_NAME,"0");
-            }
-
-            highscore = FileHandler.Read(SCORE_NAME);
             
             Engine.Instance(new Titlescreen());
 
@@ -139,6 +145,14 @@ namespace Elite
             isGameover = true;
         }
 
+
+        public void SaveScore()
+        {
+            if(int.Parse(uiManager.score) >= int.Parse(highscore))
+            {
+                FileHandler.Write(SCORE_NAME,uiManager.score);
+            }
+        }
         public override void Update(float deltaTime)
         {
             if(isGameover) return;
@@ -155,10 +169,7 @@ namespace Elite
             if(!isSetup) return;
 
 
-            if(int.Parse(uiManager.score) >= int.Parse(highscore))
-            {
-                FileHandler.Write(SCORE_NAME,uiManager.score);
-            }
+            SaveScore();
         
 
         }
