@@ -16,8 +16,8 @@ This is a simple game made in my custom 3D Engine that draws it's graphics to th
 The game is very loosely based on the original Elite. 
 Everything was made by me except for the really low level console interactions.
 
-All of the assets were also created by me. The sprites were made in Slate, the models were made
-in Blender, the sound effects were made in SFXR and the music was made in MuseScore.
+All of the assets were also created by me. The sprites were made in Slate, the models
+in Blender, the sound effects in SFXR and the music in MuseScore.
 
 It isn't really a game, it's more like a tech-demo.
 
@@ -29,11 +29,13 @@ It isn't really a game, it's more like a tech-demo.
 - Mouse and Keyboard controls
 - Short distance warp ability
 - Pew pew!
+- Planets
 - It looks relatively good
 - Space!
 - Full HUD
 - Difficulty scaling
 - Soundeffects and music!
+- Score saving
 
 
 ## Screenshots
@@ -66,6 +68,8 @@ it was a tutorial for C++ it was pretty easy to convert the core concepts to C#.
 tinkering I finally had a functioning renderer (rotation did take some time to get fully functioning).
 After that finishing the rest of the Engine architecture (and the game) was relatively simple.
 
+This was a very fun, challenging and educational project and I'm very happy with the result.
+
 
 
 ## How to play it
@@ -73,9 +77,9 @@ After that finishing the rest of the Engine architecture (and the game) was rela
 <i>If you want to use a different font, modify the Font option in assets/Settings.txt</i>
 
 
-You can either either compile it from source yourself, or download it from the <a href=https://github.com/Kat9-123/Elite/releases>Releases tab</a> just make sure that the assets folder is located in the same directory as where you launch the executable from.
+You can either compile it from source yourself, or download it from the <a href=https://github.com/Kat9-123/Elite/releases>Releases tab</a> just make sure that the assets folder is located in the same directory as where you launch the executable from.
 
-I would suggest you take a look at assets/Settings.txt for things like graphics settings
+I would suggest you take a look at assets/Settings.txt for things like graphics
 or mouse settings before playing.
 
 
@@ -84,7 +88,7 @@ or mouse settings before playing.
 - Space / LeftMouseButton - Shoot
 
 
-### Translation
+### Movement
 - W - Forward
 - S - Backwards
 - A - Left
@@ -139,7 +143,7 @@ Features:
 - Runs in the Windows command prompt
 - Keyboard and Mouse support
 - 16 colours
-- Object oriented architecture (I kinda dislike OOP but whatever)
+- Object oriented architecture
 - Rotation based on forward and up vectors (Is this a feature though?)
 - PNG and OBJ support
 - Custom font support

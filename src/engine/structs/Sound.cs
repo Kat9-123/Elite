@@ -1,7 +1,3 @@
-
-
-//https://pastebin.com/TtrCdeER
-
 namespace Elite
 {
     public struct Sound

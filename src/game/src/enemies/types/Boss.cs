@@ -10,7 +10,7 @@ namespace Elite
             score = 40;
             fireRate = 0.3f;
         
-            rotationSpeed = 4f;
+            rotationSpeed = 3f;
             speed = 50f + 2*difficulty;
 
 

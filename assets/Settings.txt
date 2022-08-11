@@ -6,16 +6,18 @@ Font=Square
 
 ####            PLANETS
 # 0 = Low, 1 = Medium, 2 = High
-PlanetQuality=0
+PlanetQuality=2
 
-MinPlanetCount=15
-MaxPlanetCount=25
+MinPlanetCount=10
+MaxPlanetCount=20
 
 # 0 = Infinte planet scale (default).
 PlanetScale=0
+
 # default = |#0OC*+/^,.     |
-PlanetLuminances=#0OC*+/^,.      
-FillPlanets=true
+PlanetLuminances=#0OC*+/^,.    
+
+FillPlanets=false
 
 
 
@@ -39,11 +41,11 @@ SoundEffects=true
 
 
 ####            DEBUG
-Debug=true
-ShowFPS=true
+Debug=false
+ShowFPS=false
 ShowColoursOnStartup=false
 
-ShowHitboxes=true
+ShowHitboxes=false
 DoEnemyAI=true
 
 ShowUI=true

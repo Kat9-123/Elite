@@ -7,7 +7,7 @@ namespace Elite
         private Vector3 pos;
         public override void Start()
         {
-            getsLit = false;
+            getsLit = false;   
             filled = true;
             mesh = Models.circle;
             forward = new Vector3(0,0,1);

@@ -1,5 +1,6 @@
 // If you have stumbled upon this code, god help you...
 // I am too burnt out to make this code not absolutely atrocious.
+// Loosely based on https://pastebin.com/TtrCdeER
 using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;

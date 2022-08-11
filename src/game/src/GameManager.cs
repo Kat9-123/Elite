@@ -11,12 +11,15 @@ namespace Elite
         private bool started = false;
         public Player player;
 
+
+        // Sounds
         private string music;
         private string gameoverTrack;
+        private Timer musicTimer = new Timer(69f);
+
 
         private bool isGameover;
         
-        private Timer musicTimer = new Timer(69.5f);
 
         public UIManager uiManager;
         public EnemyManager enemyManager;
@@ -38,11 +41,12 @@ namespace Elite
             int planetCount = 0;
             while (planetCount < desiredPlanetCount)
             {
-                Vector3 pos = Utils.RandomPositionExcludeCentre(2f,16f);
+
+                Vector3 pos = Utils.RandomPositionExcludeCentre(3.2f,16f);
                 if(pos.Normalise().Dot(new Vector3(0,0,1)) > 0.9f) continue;
 
 
-                float s = Utils.RandomFloat(0.5f,2.3f);
+                float s = Utils.RandomFloat(1.2f,2.3f);
 
                 Engine.Instance(new Planet(pos,(short)Utils.RandomInt(1,14),s));
                 planetCount++;

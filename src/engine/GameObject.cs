@@ -8,7 +8,10 @@ namespace Elite
         public bool getsLit = false;
         public bool visible = true;
 
+        // If a triangle isn't seen by the camera, it doesn't get rendered
         public bool getsClipped = true;
+
+        // If a triangles normal is pointing away from the camera, it doesn't get rendered
         public bool getsCulled = true;
 
         public bool filled = false;
@@ -16,8 +19,8 @@ namespace Elite
         public bool movesWithCamera = false;
 
         // Instead of euler angles I decided to define rotation with
-        // a forward vector and an up vector, because it's (in my opinion)
-        // far easier to reason with in my opinion.
+        // a forward vector and an up vector, because it is (in my opinion)
+        // far easier to reason with
         public Vector3 up = new Vector3(0,1,0);
         public Vector3 forward = new Vector3(0,0,1);
 
