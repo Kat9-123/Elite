@@ -10,7 +10,7 @@ namespace Elite
             score = 40;
             fireRate = 0.3f;
         
-            rotationSpeed = 3f;
+            rotationSpeed = 2f;
             speed = 50f + 2*difficulty;
 
 
@@ -36,7 +36,7 @@ namespace Elite
             EnemyLaser bigLaser = AddLaser(
                 laserMesh: Models.bigLaserMesh,
                 _offset: new Vector3(0,0,150), 
-                damage: 150f, 
+                damage: 130f, 
                 accuracy: 6f, 
                 laserColour: 5, 
                 fireTime: 10f,

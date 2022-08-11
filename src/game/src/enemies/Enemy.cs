@@ -166,6 +166,8 @@ namespace Elite
         {
             
             if(!isAlive) return;
+            UI.WriteLine("Enemy_____");
+            UI.WriteLine("Health: " + health.ToString());
             ShootLasers(deltaTime);        
 
             if(isHit)

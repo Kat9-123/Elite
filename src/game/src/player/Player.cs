@@ -328,7 +328,9 @@ namespace Elite
             }
             if(!(InputManager.IsKeyPressed(InputMap.TARGET) || InputManager.IsKeyPressed(InputMap.TARGET_MOUSE))) return;
 
-    
+
+            // Find the enemy closest to the centre and check if it's close enough
+            // to be targeted
             float closestDot = -1000f;
             Enemy? closestEnemy = null;
             for (int i = 0; i < enemyManager.enemies.Count; i++)
@@ -342,13 +344,18 @@ namespace Elite
                     closestEnemy = enemyManager.enemies[i];
                 }
             }
+
+
             if(closestEnemy != null)
             {
+                // Reset target if enemy is already targeted
                 if(target == closestEnemy)
                 {
+                    
                     target = null;
                     return;
                 }
+                SoundManager.Play(Sounds.target);
                 target = closestEnemy;
             } 
 

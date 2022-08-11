@@ -13,8 +13,8 @@ namespace Elite
 
 
         // Sounds
-        private string music;
-        private string gameoverTrack;
+        private string music = "";
+        private string gameoverTrack = "";
         private Timer musicTimer = new Timer(69f);
 
 

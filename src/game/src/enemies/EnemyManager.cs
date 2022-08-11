@@ -62,7 +62,7 @@ namespace Elite
 
                 enemiesSpawned++;
 
-                enemySpawnTimer.SetDuration(Utils.RandomFloat(6,25));
+                enemySpawnTimer.SetDuration(Utils.RandomFloat(7,20));
                 enemySpawnTimer.Reset();
 
                     

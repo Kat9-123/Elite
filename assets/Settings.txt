@@ -41,8 +41,8 @@ SoundEffects=true
 
 
 ####            DEBUG
-Debug=false
-ShowFPS=false
+Debug=true
+ShowFPS=true
 ShowColoursOnStartup=false
 
 ShowHitboxes=false

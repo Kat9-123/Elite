@@ -1,3 +1,4 @@
+// Template object
 namespace Elite
 {
     public class Empty : GameObject

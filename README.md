@@ -154,10 +154,10 @@ Features:
 
 
 ## Miscellaneous
-If you have any tips, optimisations, etc. Please either message me or make a pull request.
+If you have any tips, optimisations, balance changes, etc. Please either message me or make a pull request.
 
 The code is still relatively messy so any help with that is also greatly appreciated. I got 
-kind of burned out so the newer features, like audio, are very messy.
+kind of burned out so the newer features, like audio, are especially messy.
 
 ### Perfomance
 Sadly the performance really isn't great. It will probably run on most computers
