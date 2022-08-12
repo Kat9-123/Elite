@@ -1,4 +1,5 @@
-// Is this class too big? yes.
+// Is this file too big? absolutely
+// It should at least be split up into a Weapon class and a Controller class
 using System;
 
 namespace Elite
@@ -47,9 +48,9 @@ namespace Elite
 
 
         // Player stats
-        public const float YAW_SPEED = 1.2f;
+        public const float YAW_SPEED = 1.1f;
         public const float ROLL_SPEED = 1.5f;
-        public const float PITCH_SPEED = 1.5f;
+        public const float PITCH_SPEED = 1.3f;
 
         public float zoomMultiplier = 1f;
         
@@ -60,8 +61,6 @@ namespace Elite
         public const float REGEN = 10f;
 
         public const float DAMAGE = 10f;
-
-
 
 
         public override void Start()
@@ -213,23 +212,51 @@ namespace Elite
             }
         }
 
+        private float GetSmoothRotationDirection(float val, InputMap negative, InputMap positive)
+        {
+
+            if (InputManager.IsKeyHeld(negative))
+            {
+                val -= 3f * Engine.deltaTime;
+                if(val <= -1f) val = -1f;
+            } 
+            else if (InputManager.IsKeyHeld(positive))
+            {
+                val += 3f * Engine.deltaTime;
+                if(val >= 1f) val = 1f;
+            } 
+            else 
+            {
+                val -= MathF.Sign(val) * 2f * Engine.deltaTime;
+
+                if((MathF.Abs(val) - 0.05f) <= 0) val = 0f;
+            }
+            return val;
+        }
+
         public void DoMovement(float deltaTime)
         {
+            // Rotation smoothing is only used for the roll when mousecontrols
+            // are enabled.
             if(!Settings.DO_MOUSE_CONTROLS)
             {
                 rotationDirection = new Vector3(0,0,0);
+
 
                 if (InputManager.IsKeyHeld(InputMap.YAW_LEFT)) rotationDirection.y = -1f;
                 if (InputManager.IsKeyHeld(InputMap.YAW_RIGHT)) rotationDirection.y = 1f;
                 if (InputManager.IsKeyHeld(InputMap.PITH_UP)) rotationDirection.x = 1f;
                 if (InputManager.IsKeyHeld(InputMap.PITCH_DOWN)) rotationDirection.x = -1f;
+                if (InputManager.IsKeyHeld(InputMap.ROLL_LEFT)) rotationDirection.z = -1f;
+                if (InputManager.IsKeyHeld(InputMap.ROLL_RIGHT)) rotationDirection.z = 1f;
+            }
+            else
+            {
+                rotationDirection.z = GetSmoothRotationDirection(rotationDirection.z,InputMap.ROLL_LEFT,InputMap.ROLL_RIGHT);
             }
 
 
-            rotationDirection.z = 0f;
-            if (InputManager.IsKeyHeld(InputMap.ROLL_LEFT)) rotationDirection.z = -1f;
-            if (InputManager.IsKeyHeld(InputMap.ROLL_RIGHT)) rotationDirection.z = 1f;
-            
+
             // You do not want to know how much pain rotation brought me
             absoluteForward = Utils.RotateAroundAxis(absoluteForward,absoluteUp,rotationDirection.y * YAW_SPEED*deltaTime*zoomMultiplier);
             absoluteRight = Utils.RotateAroundAxis(absoluteRight,absoluteUp,rotationDirection.y * YAW_SPEED*deltaTime*zoomMultiplier);
@@ -296,8 +323,10 @@ namespace Elite
 
         public void Hit(float damage)
         {
+            if(isDead) return;
             health -= damage;
             lastHitTimer.Reset();
+            SoundManager.Play(Sounds.playerHit);
 
             if(health <= 0f)
             {

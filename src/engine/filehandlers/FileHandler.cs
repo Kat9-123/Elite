@@ -1,6 +1,7 @@
 // Simple FileHandler
 using System.IO;
 using System;
+using System.Drawing;
 namespace Elite
 {   
     public static class FileHandler
@@ -25,6 +26,32 @@ namespace Elite
         public static bool FileExists(string path)
         {
             return File.Exists(originPath + path);
+        }
+
+        public static bool CheckFont()
+        {
+            //https://stackoverflow.com/questions/113989/test-if-a-font-is-installed
+            string fontName = Settings.FONT;
+            float fontSize = 12;
+
+            using (Font fontTester = new Font( 
+                fontName, 
+                fontSize, 
+                FontStyle.Regular, 
+                GraphicsUnit.Pixel)) 
+            {
+                if (fontTester.Name != fontName)
+                {
+                    Console.WriteLine("Font not found");
+                    if(fontName == "Square")
+                    {
+                        Console.WriteLine("Download Square from strlen.com/square/ and install it.");
+                    }
+                    Console.ReadKey();
+                    return false;
+                }
+            }
+            return true;
         }
 
 

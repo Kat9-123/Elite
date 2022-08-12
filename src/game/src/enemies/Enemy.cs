@@ -140,8 +140,9 @@ namespace Elite
             isHit = true;
             colour = 4;
             health -= damage;
-            
 
+            // Causes lag spikes for some reason
+            //SoundManager.Play(Sounds.hit);
             if(health <= 0 && isAlive)
             {
                 Engine.QueueDestruction(this);
@@ -158,7 +159,6 @@ namespace Elite
                 }
                 return;
             }
-            SoundManager.Play(Sounds.hit);
 
         }
 
@@ -166,6 +166,8 @@ namespace Elite
         {
             
             if(!isAlive) return;
+
+
             UI.WriteLine("Enemy_____");
             UI.WriteLine("Health: " + health.ToString());
             ShootLasers(deltaTime);        

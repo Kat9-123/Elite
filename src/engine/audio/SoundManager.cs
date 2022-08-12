@@ -33,15 +33,13 @@ namespace Elite
   
         public static string Play(Sound sound)
         {
+            if(!Settings.SOUND) return "";
             int trackInt = totalTrackCount;
 
             totalTrackCount++;
 
             string trackName = trackInt.ToString();
 
-            // Bit hacky
-            if(trackName.StartsWith("Music") && !Settings.MUSIC) return "";
-            if(!trackName.StartsWith("Music") && !Settings.SOUND_EFFECTS) return "";
 
 
             // Play
@@ -62,7 +60,7 @@ namespace Elite
                 }
             }
 
-            return "FAILED";
+            return "";
 
             
 

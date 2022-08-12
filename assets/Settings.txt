@@ -8,7 +8,7 @@ Font=Square
 # 0 = Low, 1 = Medium, 2 = High
 PlanetQuality=2
 
-MinPlanetCount=10
+MinPlanetCount=15
 MaxPlanetCount=20
 
 # 0 = Infinte planet scale (default).
@@ -37,12 +37,12 @@ DoDifficultyScaling=true
 
 ####            SOUNDS
 Music=true
-SoundEffects=true
+Sound=true
 
 
 ####            DEBUG
-Debug=true
-ShowFPS=true
+Debug=false
+ShowFPS=false
 ShowColoursOnStartup=false
 
 ShowHitboxes=false

@@ -35,7 +35,7 @@ namespace Elite
 
         // Sounds
 
-        public static readonly bool SOUND_EFFECTS = SettingHandler.LoadBool("SoundEffects");
+        public static readonly bool SOUND = SettingHandler.LoadBool("Sound");
         public static readonly bool MUSIC = SettingHandler.LoadBool("Music");
   
         // Debug

@@ -118,7 +118,9 @@ namespace Elite
                 SoundManager.Stop(music);
             }
 
-            music = SoundManager.Play(Sounds.music);
+            PlayMusic();
+
+            
 
             if(gameoverTrack != "")
             {
@@ -127,6 +129,12 @@ namespace Elite
             }
             isGameover = false;
             
+        }
+
+        private void PlayMusic()
+        {
+            if(Settings.MUSIC) music = SoundManager.Play(Sounds.music);
+            else music = SoundManager.Play(Sounds.bg);  
         }
 
         public override void Start()
@@ -166,7 +174,7 @@ namespace Elite
 
             if(musicTimer.Accumulate())
             {
-                music = SoundManager.Play(Sounds.music);
+                PlayMusic();
                 musicTimer.Reset();
             }
         }

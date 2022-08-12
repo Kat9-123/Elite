@@ -120,7 +120,9 @@ namespace Elite
                 Console.ReadKey();
                 return false;
             }
+ 
 
+            
             FileHandler.Setup();
 
             Console.Title = TITLE;
@@ -130,6 +132,9 @@ namespace Elite
             // Initialise file stuff
             FontHandler.LoadFont();
             SettingHandler.Initialise();
+
+
+            if(!FileHandler.CheckFont()) return false;
             
             if(Settings.SHOW_COLOURS_ON_STARTUP) Utils.ShowColours();
 
