@@ -19,7 +19,8 @@ namespace Elite
        
             scale = new Vector3(2,2,2);        
 
-            mesh = Models.chargerMesh;
+            lod = Models.chargerLOD;
+            displayMesh = Models.chargerMesh;
 
 
             AddLaser(

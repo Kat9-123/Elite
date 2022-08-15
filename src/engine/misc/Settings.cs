@@ -47,6 +47,8 @@ namespace Elite
 
         public static bool DO_ENEMY_AI = SettingHandler.LoadBool("DoEnemyAI");
 
+        public static readonly bool SHOW_LOD = SettingHandler.LoadBool("ShowLOD");
+
 
 
 

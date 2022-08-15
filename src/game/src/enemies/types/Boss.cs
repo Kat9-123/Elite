@@ -24,7 +24,9 @@ namespace Elite
             displaySize /= 2;
             
 
-            mesh = Models.bossMesh;
+            lod = Models.bossLOD;
+            displayMesh = Models.bossMesh;
+
 
             maxHealth = 400f + 20*difficulty;
 

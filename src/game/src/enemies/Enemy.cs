@@ -12,7 +12,9 @@ namespace Elite
         protected int difficulty = Engine.gameManager.enemyManager.difficulty;
         private List<EnemyLaser> lasers = new List<EnemyLaser>(4);
 
+        public Mesh displayMesh;
 
+        protected LOD lod;
 
         // Collision
         protected Vector3 boundingBoxStart;
@@ -166,6 +168,11 @@ namespace Elite
         {
             
             if(!isAlive) return;
+
+
+            int col;
+            (mesh,col) = lod.Update(position);
+            if(Settings.SHOW_LOD) colour = (short) col;
 
 
             UI.WriteLine("Enemy_____");

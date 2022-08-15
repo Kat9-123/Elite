@@ -219,7 +219,7 @@ namespace Elite
                 DestroyQueuedObjects();
 
 
-
+                deltaTime = ((float) Utils.CalculateDeltaTime(ref previousTime));
                 
                 if(Settings.SHOW_FPS)
                 {
@@ -227,9 +227,8 @@ namespace Elite
                     if (deltaTime != 0f) fps = (1f/deltaTime).ToString();
 
                     if(fps.Length > 5) fps = fps.Substring(0,5);
-                 //   UI.WriteFPS(fps);
-                 //   Console.Title = fps;
-    
+                    UI.WriteFPS(fps);
+
                 }
 
   
@@ -240,10 +239,6 @@ namespace Elite
                     gameObjects[i].Update(deltaTime);
                 }
 
-                string fpi = "";
-                deltaTime = ((float) Utils.CalculateDeltaTime(ref previousTime));
-                if (deltaTime != 0f) fpi = (1f/deltaTime).ToString();
-                Console.Title = fpi; 
 
                 Renderer.Render(gameObjects);
 

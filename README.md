@@ -1,20 +1,20 @@
 # Elite not very Dangerous | By: Kat9_123
-#### A custom 3D Engine and game based on Elite that runs in the console. Written in C#
+#### A custom 3D Engine that draws it's graphics to the Windows console and a game loosely based on Elite. Fully written in C#.
 #### Only for Windows!
 ## Tabel of contents
 - [What is it?](#what-is-it)
 - [Screenshots](#screenshots)
 - [Why?](#why)
-- [How to play it](#how-to-play-it)
+- [How to play](#how-to-play)
 - [Controls](#controls)
 - [Engine](#engine)
 - [Miscellaneous](#miscellaneous)
 
 
 ## What is it?
-This is a simple game made in my custom 3D Engine that draws it's graphics to the console.
+Elite not very Dangerous is a simple game made in my custom 3D Engine that draws it's graphics to the console.
 The game is very loosely based on the original Elite. 
-Everything was made by me except for the really low level console interactions.
+Everything was made by me except for the really low level console interactions. Those were all adapted from Stackoverflow
 
 All of the assets were also created by me. The sprites were made in Slate, the models
 in Blender, the sound effects in SFXR and the music in MuseScore.
@@ -48,7 +48,6 @@ It isn't really a game, it's more like a tech-demo.
 ### Enemy
 ![image](/screenshots/Enemy.png)
 
-
 ### Boss
 ![image](/screenshots/Boss.png)
 
@@ -62,24 +61,24 @@ It isn't really a game, it's more like a tech-demo.
 After I finished making <a href="https://github.com/Kat9-123/Asteroids"> an Asteroids clone</a> for the Windows console
 I thought "What if I now made Elite in the console". First I dismissed it as I thought
 that I was far to incapable to do something like that. After a while of thinking about it I decided
-to do some research. I stumbled upon 
+to do some research. I quickly stumbled upon 
 <a href="https://www.youtube.com/watch?v=ih20l3pJoeU">OLC's 3D Rendering Engine</a> tutorial. Though
 it was a tutorial for C++ it was pretty easy to convert the core concepts to C#. After a lot of 
 tinkering I finally had a functioning renderer (rotation did take some time to get fully functioning).
-After that finishing the rest of the Engine architecture (and the game) was relatively simple.
+After that finishing the rest of the engine and game was relatively simple.
 
-This was a very fun, challenging and educational project and I'm very happy with the result.
+It was a very fun, challenging and educational project and I'm very happy with the result.
 
 
 
-## How to play it
+## How to play
 #### For the best experience use the <a href="https://strlen.com/square/">Square</a> font
 <i>If you want to use a different font, modify the Font option in assets/Settings.txt</i>
 
 
 You can either compile it from source yourself, or download it from the <a href=https://github.com/Kat9-123/Elite/releases>Releases tab</a> just make sure that the assets folder is located in the same directory as where you launch the executable from.
 
-I would suggest you take a look at assets/Settings.txt for things like graphics
+I  suggest you take a look at assets/Settings.txt for things like graphics
 or mouse settings before playing.
 
 
@@ -104,8 +103,8 @@ or mouse settings before playing.
 
 
 ### Rotation
-- Q - Roll right
-- E - Roll left
+- Q - Roll left
+- E - Roll right
 ####
 ####
 - LeftArrow - Yaw Left
@@ -113,10 +112,10 @@ or mouse settings before playing.
 - UpArrow - Pitch Up
 - DownArrow - Pitch Down
 #### Or
+- MouseMovementLeft - Yaw Left
+- MouseMovementRight - Yaw Right
 - MouseMovementUp - Pitch Up
 - MouseMovementDown - Pitch Down
-- MouseMovementRight - Yaw Right
-- MouseMovementLeft - Yaw Left
 
 ### Misc
 - M - Free mouse
@@ -144,23 +143,27 @@ Features:
 - Keyboard and Mouse support
 - 16 colours
 - Object oriented architecture
-- Rotation based on forward and up vectors (Is this a feature though?)
 - PNG and OBJ support
 - Custom font support
 - Basic line box collision detection
 - Easily accesible settings
 - Basic lighting
-- Basic sound support
+- Sound support
+- Basic LOD support
+
+Quirks:
+- Rotation based on forward and up vectors
+
 
 
 ## Miscellaneous
 If you have any tips, optimisations, balance changes, etc. Please either message me or make a pull request.
 
 The code is still relatively messy so any help with that is also greatly appreciated. I got 
-kind of burned out so the newer features, like audio, are especially messy.
+kind of burned out so the newer features, like audio and LOD, are especially messy.
 
 ### Perfomance
 Sadly the performance really isn't great. It will probably run on most computers
-but you will have to tinker a bit with the settings. The best solution for the
-performance problem is <s>being a better programmer</s> probably by utilising the GPU,
-but I have no idea how to do that...
+but you will have to tinker a bit with the settings. The biggest cause for the
+performance problem is the fact that all graphics get drawn to the console, which is
+kinda sad.

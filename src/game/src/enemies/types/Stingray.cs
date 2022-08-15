@@ -4,7 +4,7 @@ namespace Elite
     {
         public override void Start()
         {
-            
+
             score = 25;
             fireRate = 0.3f;
             rotationSpeed = 20f;
@@ -16,7 +16,10 @@ namespace Elite
 
             scale = new Vector3(2,2,2);
 
-            mesh = Models.stingrayMesh;
+
+            lod = Models.stringrayLOD;
+            displayMesh = Models.stingrayMesh;
+
 
             maxHealth = 180f+10*difficulty;
             

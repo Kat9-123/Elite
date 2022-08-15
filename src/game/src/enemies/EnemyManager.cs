@@ -47,15 +47,12 @@ namespace Elite
                 {
                     case 0:
                         InstanceEnemy(new Charger());
-
                         break;
                     case 1:
                         InstanceEnemy(new Stingray());
-
                         break;
                     case 2:
                         InstanceEnemy(new Boss());
-                        
                         break;
 
                 }

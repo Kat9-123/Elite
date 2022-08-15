@@ -54,9 +54,22 @@ namespace Elite
 
 
         // Enemies
-        public static readonly Mesh chargerMesh = new Mesh("enemies\\Charger.obj");
-        public static readonly Mesh stingrayMesh = new Mesh("enemies\\Stingray.obj");
-        public static readonly Mesh bossMesh = new Mesh("enemies\\Boss.obj");
+        public static readonly Mesh chargerMesh = new Mesh("enemies\\charger\\Charger-LOD0.obj");
+        public static readonly Mesh stingrayMesh = new Mesh("enemies\\stingray\\Stingray-LOD0.obj");
+        public static readonly LOD stringrayLOD = new LOD(new string[] 
+            {"enemies\\stingray\\Stingray-LOD0.obj", "enemies\\stingray\\Stingray-LOD1.obj", "enemies\\stingray\\Stingray-LOD2.obj"},
+            new float[] {0f,150f,230f}
+        );
+        public static readonly LOD chargerLOD = new LOD(new string[] 
+            {"enemies\\charger\\Charger-LOD0.obj", "enemies\\charger\\Charger-LOD1.obj", "enemies\\charger\\Charger-LOD2.obj"},
+            new float[] {0f,150f,230f}
+        );
+        public static readonly Mesh bossMesh = new Mesh("enemies\\boss\\Boss-LOD1.obj");
+
+        public static readonly LOD bossLOD = new LOD(new string[] 
+            {"enemies\\boss\\Boss-LOD0.obj", "enemies\\boss\\Boss-LOD1.obj", "enemies\\boss\\Boss-LOD2.obj"},
+            new float[] {0f,200f,500f}
+        );
 
         // UI
         public static readonly Mesh radarEnemyMesh = new Mesh("ui\\RadarEnemy.obj");

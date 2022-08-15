@@ -37,7 +37,8 @@ namespace Elite
 
             target = Engine.gameManager.player.target;
             scale = target.displaySize;
-            mesh = target.mesh;
+
+            mesh = target.displayMesh;
             position = new Vector3(1.29f,1.2f,2f);
             forward = target.forward;
             up = target.up;
