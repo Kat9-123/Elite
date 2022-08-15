@@ -142,6 +142,7 @@ Features:
 - Runs in the Windows command prompt
 - Keyboard and Mouse support
 - 16 colours
+- Rotation based on forward and up vectors (is this really a feature though?)
 - Object oriented architecture
 - PNG and OBJ support
 - Custom font support
@@ -150,9 +151,6 @@ Features:
 - Basic lighting
 - Sound support
 - Basic LOD support
-
-Quirks:
-- Rotation based on forward and up vectors
 
 
 
