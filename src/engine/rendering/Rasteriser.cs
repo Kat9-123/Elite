@@ -7,7 +7,7 @@ namespace Elite
     public static class Rasteriser
     {
 
-        private static Window.CharInfo[] buffer;
+        public static Window.CharInfo[] buffer;
 
         public static Window.CharInfo[] GenerateEmptyBuffer()
         {
@@ -21,6 +21,7 @@ namespace Elite
             }
             return result;
         }
+
 
 
         public static void DrawBufferToScreen()

@@ -6,9 +6,9 @@ namespace Elite
     public static class Models
     {
         // Debug
-        public static readonly Mesh line = Utils.GenerateRepeatingMesh(new Mesh(new Triangle[] {
+        public static readonly Mesh line = new Mesh(new Triangle[] {
             new Triangle(new Vector3(0,0,0),new Vector3(0,0,1),new Vector3(0,0.0001f,1)),
-        }),10,1);
+        });
         public static readonly Mesh cube = new Mesh("basic\\Cube.obj");
 
 

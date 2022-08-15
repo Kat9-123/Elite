@@ -91,7 +91,7 @@ namespace Elite
 
 
 
-        public static void SoundUpate()
+        public static void SoundUpdate()
         {
             UI.WriteLine("Sounds:");
 

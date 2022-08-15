@@ -138,8 +138,7 @@ namespace Elite
         }
 
         public override void Start()
-        {
-            
+        { 
             visible = false;
 
             

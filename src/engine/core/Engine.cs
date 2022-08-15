@@ -201,20 +201,24 @@ namespace Elite
             // Main gameloop
             while (true)
             {  
+
                 // Stop checking for input if the window is not in focus                
-                InputManager.TestFocus();
+           //     InputManager.TestFocus();
 
-                SoundManager.SoundUpate();
+                SoundManager.SoundUpdate();
 
+                
                 // Exit if ESC was pressed
                 if(InputManager.IsKeyPressed(InputMap.EXIT)) Exit();
+
+
 
                 if(gameManager.isSetup && InputManager.IsKeyPressed(InputMap.RESTART)) Restart();
 
 
                 DestroyQueuedObjects();
 
-                deltaTime = ((float) Utils.CalculateDeltaTime(ref previousTime));
+
 
                 
                 if(Settings.SHOW_FPS)
@@ -223,17 +227,23 @@ namespace Elite
                     if (deltaTime != 0f) fps = (1f/deltaTime).ToString();
 
                     if(fps.Length > 5) fps = fps.Substring(0,5);
-                    UI.WriteFPS(fps);
+                 //   UI.WriteFPS(fps);
+                 //   Console.Title = fps;
     
                 }
 
-
+  
                 UI.ResetUI();                
                 // Update all gameobjects
                 for (int i = 0; i < gameObjects.Count; i++)
                 {
                     gameObjects[i].Update(deltaTime);
                 }
+
+                string fpi = "";
+                deltaTime = ((float) Utils.CalculateDeltaTime(ref previousTime));
+                if (deltaTime != 0f) fpi = (1f/deltaTime).ToString();
+                Console.Title = fpi; 
 
                 Renderer.Render(gameObjects);
 

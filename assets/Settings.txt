@@ -36,17 +36,17 @@ DoDifficultyScaling=true
 
 
 ####            SOUNDS
-Music=true
-Sound=true
+Music=false
+Sound=false
 
 
 ####            DEBUG
 Debug=false
-ShowFPS=false
+ShowFPS=true
 ShowColoursOnStartup=false
 
 ShowHitboxes=false
-DoEnemyAI=true
+DoEnemyAI=false
 
 ShowUI=true
 

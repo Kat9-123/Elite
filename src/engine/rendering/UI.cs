@@ -80,7 +80,7 @@ namespace Elite
 
         public static void Write(string text)
         {
-            // Very hacky
+
             if(!Settings.DISPLAY_DEBUG_INFO) return;
             debugText += text;
         
@@ -93,7 +93,6 @@ namespace Elite
 
         public static void WriteLine(string text)
         {
-            if(!Settings.DISPLAY_DEBUG_INFO) return;
             Write(text + "\n");
         }
 
