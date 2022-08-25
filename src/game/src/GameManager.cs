@@ -1,3 +1,4 @@
+// This kinda became a god-object but whatever
 namespace Elite
 {   
 
@@ -34,7 +35,7 @@ namespace Elite
 
         public int enemyLayer;
 
-
+        // Generate the planets and the sun
         public void GenerateBodies()
         {
             int desiredPlanetCount = Utils.RandomInt(Settings.MIN_PLANET_COUNT,Settings.MAX_PLANET_COUNT);
@@ -57,7 +58,7 @@ namespace Elite
 
         }
 
-
+        // This will be ran everytime the game resets (and when it starts of course)
         public void Setup()
         {
             started = true;
@@ -65,12 +66,10 @@ namespace Elite
             {
                 FileHandler.Write(SCORE_NAME,"0");
             }
-
             highscore = FileHandler.Read(SCORE_NAME);
 
+            // Instance the main gameobjects.
             player = (Player) Engine.Instance(new Player());
-
-
 
             enemyManager = (EnemyManager) Engine.Instance(new EnemyManager());
 
@@ -88,6 +87,7 @@ namespace Elite
 
             enemyLayer = Engine.GameObjectCount();  //    <--- ENEMIES
 
+
             explosionManager = (ExplosionManager) Engine.Instance(new ExplosionManager());
 
 
@@ -99,7 +99,7 @@ namespace Elite
             mouseController = (MouseController) Engine.Instance(new MouseController());
 
             uiManager = (UIManager) Engine.Instance(new UIManager(player));
-
+            //
 
             Engine.cameraPosition = new Vector3(0,0,0);
 
@@ -137,6 +137,8 @@ namespace Elite
             else music = SoundManager.Play(Sounds.bg);  
         }
 
+
+        // This will only be ran once per application launch.
         public override void Start()
         { 
             visible = false;
@@ -181,13 +183,7 @@ namespace Elite
         public void Exit()
         {
             if(!isSetup) return;
-
-
-            SaveScore();
-        
-
+            SaveScore();   
         }
-
-
     }
 }

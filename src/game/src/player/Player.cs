@@ -34,7 +34,6 @@ namespace Elite
 
 
 
-
         public BoundingBox boundingBox;
 
         public float health;
@@ -94,12 +93,12 @@ namespace Elite
                 UI.WriteText("YOU DIED",66,87);
                 return;
             }
-
+            
+            // Warp stuff
             if((InputManager.IsKeyHeld(InputMap.WARP) || InputManager.IsKeyHeld(InputMap.WARP_MOUSE)) && !prepareWarp)
             {
                 if(Engine.gameManager.warpController.InitWarp()) prepareWarp = true;
 
-            
             }
 
             if(!(InputManager.IsKeyHeld(InputMap.WARP) || InputManager.IsKeyHeld(InputMap.WARP_MOUSE)) && prepareWarp)
@@ -115,20 +114,20 @@ namespace Elite
 
             if(Engine.gameManager.warpController.isWarping) return;
 
-            DoMovement(deltaTime);
-
             if(prepareWarp) 
             {
                 laserLeft.visible = false;
                 laserRight.visible = false;
                 return;
             }
+
+
+            DoMovement(deltaTime);
+
+
             Target();
 
             Shoot(deltaTime); 
-
-
-
 
 
             // Start regenerating health every shieldRegenTimer seconds if the player hasn't been hit for lastHitTimer seconds
@@ -149,21 +148,24 @@ namespace Elite
         {
             Enemy? hitEnemy = null;
 
-        
-            for (int i = 0; i < enemyManager.enemies.Count; i++)
+            bool isHeld = InputManager.IsKeyHeld(InputMap.SHOOT) || InputManager.IsKeyHeld(InputMap.SHOOT_MOUSE);
+
+            if(isHeld)
             {
-                if(Physics.CheckLineBox(
-                    enemyManager.enemies[i].boundingBox.start + enemyManager.enemies[i].position, 
-                    enemyManager.enemies[i].boundingBox.end + enemyManager.enemies[i].position, 
-                    Engine.cameraPosition, Engine.cameraPosition+(Engine.cameraForward*1_000_000)))
+                for (int i = 0; i < enemyManager.enemies.Count; i++)
                 {
+                    if(Physics.CheckLineBox(
+                        enemyManager.enemies[i].boundingBox.start + enemyManager.enemies[i].position, 
+                        enemyManager.enemies[i].boundingBox.end + enemyManager.enemies[i].position, 
+                        Engine.cameraPosition, Engine.cameraPosition+(Engine.cameraForward*1_000_000)))
+                    {
 
-                    hitEnemy = enemyManager.enemies[i];
-
-                }         
+                        hitEnemy = enemyManager.enemies[i];
+                        break;
+                    }         
+                }
             }
 
-            bool isHeld = InputManager.IsKeyHeld(InputMap.SHOOT) || InputManager.IsKeyHeld(InputMap.SHOOT_MOUSE);
 
             if(isShooting && laserTimer.Accumulate())
             {
@@ -182,8 +184,6 @@ namespace Elite
 
                 laserLeft.visible = !currentLaser;
                 laserRight.visible = currentLaser;
-
-
 
             
                 currentLaser = !currentLaser;

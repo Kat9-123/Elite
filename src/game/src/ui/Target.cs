@@ -3,7 +3,6 @@ namespace Elite
     public class Target : GameObject
     {
 
-
         public override void Start()
         {
             mesh = Models.targetMesh;

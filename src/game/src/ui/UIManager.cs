@@ -23,10 +23,10 @@ namespace Elite
 
 
             
-            DirectionVector trueVector = (DirectionVector) Engine.Instance(new DirectionVector());
+            DirectionVector directionVector = (DirectionVector) Engine.Instance(new DirectionVector());
 
-            trueVector.player = player;
-            trueVector.colour = 2;
+            directionVector.player = player;
+            directionVector.colour = 2;
 
             DirectionVector behindVector = (DirectionVector) Engine.Instance(new DirectionVector());
 
@@ -123,8 +123,8 @@ namespace Elite
                 UI.WriteText(Engine.gameManager.highscore,173-(6*(Engine.gameManager.highscore.Length-1)),10,'^',5);
 
             }
-                // Score
-                UI.WriteText(score,173-(6*(score.Length-1)),2,'#',scoreColour);
+            // Score
+            UI.WriteText(score,173-(6*(score.Length-1)),2,'#',scoreColour);
 
 
 
@@ -151,9 +151,6 @@ namespace Elite
 
 
 
-
-
-
             // Target momentum
             /*
             if(Engine.gameManager.player.target != null)
@@ -166,7 +163,5 @@ namespace Elite
     
 
         }
-
-
     }
 }

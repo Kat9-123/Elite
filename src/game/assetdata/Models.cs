@@ -42,7 +42,7 @@ namespace Elite
 
         public static readonly Mesh enemyLaserMesh = Utils.GenerateRepeatingMesh(new Mesh(new Triangle[]{new Triangle(new Vector3(0,0,0),new Vector3(0,0.0001f,0), new Vector3(0,0,5))}),1000,5);
 
-        public static readonly Mesh bigLaserMesh = Utils.GenerateRepeatingMesh(new Mesh("basic\\Cylinder.obj"),1000,20);
+        public static readonly Mesh bigLaserMesh = Utils.GenerateRepeatingMesh(new Mesh("basic\\Cylinder.obj"),100,20);
 
 
         public static readonly Mesh warp = new Mesh("basic\\Cylinder.obj");
@@ -54,12 +54,13 @@ namespace Elite
 
 
         // Enemies
-        public static readonly Mesh chargerMesh = new Mesh("enemies\\charger\\Charger-LOD0.obj");
         public static readonly Mesh stingrayMesh = new Mesh("enemies\\stingray\\Stingray-LOD0.obj");
         public static readonly LOD stringrayLOD = new LOD(new string[] 
             {"enemies\\stingray\\Stingray-LOD0.obj", "enemies\\stingray\\Stingray-LOD1.obj", "enemies\\stingray\\Stingray-LOD2.obj"},
             new float[] {0f,150f,230f}
         );
+
+        public static readonly Mesh chargerMesh = new Mesh("enemies\\charger\\Charger-LOD0.obj");
         public static readonly LOD chargerLOD = new LOD(new string[] 
             {"enemies\\charger\\Charger-LOD0.obj", "enemies\\charger\\Charger-LOD1.obj", "enemies\\charger\\Charger-LOD2.obj"},
             new float[] {0f,150f,230f}
@@ -76,10 +77,6 @@ namespace Elite
         public static readonly Mesh targetMesh = new Mesh("ui\\Target.obj");
         public static readonly Mesh circle = new Mesh("basic\\Circle.obj");
         public static readonly Mesh directionMesh = new Mesh("ui\\DirectionIndicator.obj");
-        
-
-
 
     }
-    
 }

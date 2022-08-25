@@ -1,3 +1,5 @@
+// Little timer struct, because timers
+// get used a lot in game dev
 namespace Elite
 {
     public struct Timer
@@ -12,6 +14,8 @@ namespace Elite
             time = 0f;
         }
 
+        // Returns true if the current duration is
+        // over the max duration. false otherwise.
         public bool Accumulate(float deltaTime=0f)
         {
             time += Engine.deltaTime;
@@ -30,7 +34,6 @@ namespace Elite
         {
             time = 0f;
         }
-
 
     }
 }

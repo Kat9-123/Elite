@@ -1,5 +1,6 @@
 using System;
 
+// Matrices, yes, I understand them fully, mhmm, I totally did not steal all of this code.
 namespace Elite
 {
     public struct Matrix4x4
@@ -28,6 +29,7 @@ namespace Elite
             return matrix;
         }
 
+        // Convert rotation represented by two vectors to a matrix
         public static Matrix4x4 DirectionToMatrix(Vector3 direction, Vector3 up)
         {
             Matrix4x4 mat = new Matrix4x4();
@@ -56,6 +58,7 @@ namespace Elite
 
         }
 
+        // OLC
         public Matrix4x4 MatrixQuickInverse() // Only for Rotation/Translation Matrices
         {
             Matrix4x4 m = this;

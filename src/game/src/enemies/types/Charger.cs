@@ -37,16 +37,7 @@ namespace Elite
             
         }
         
-
-
-
-
-
-        public override void Update(float deltaTime)
-        {
-            base.Update(deltaTime);     
-        }
-
+        public override void Update(float deltaTime) {base.Update(deltaTime);}
 
     }
 }

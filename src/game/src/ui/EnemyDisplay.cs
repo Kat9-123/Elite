@@ -45,9 +45,5 @@ namespace Elite
             colour = target.colour;
             lightingDirection = Engine.cameraUp;
         }
-
-
-
-
     }
 }

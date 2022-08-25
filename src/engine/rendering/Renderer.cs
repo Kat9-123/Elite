@@ -7,7 +7,6 @@ namespace Elite
     public static class Renderer
     {
 
-
         private static Matrix4x4 projectionMatrix;
 
         public static void SetProjectionMatrix(float fov)
@@ -19,7 +18,6 @@ namespace Elite
         public static void Initialise()
         {
             SetProjectionMatrix(Settings.FOV);
-            Window.Initialise();
         }
 
 
@@ -53,7 +51,7 @@ namespace Elite
             return result;
         }
 
-        // Apply the translations of the current gameobject to the current triangle
+        // Apply the translation, rotation and scale of the current gameobject to the current triangle
         private static Triangle TranslateTriangle(Triangle triangle,Matrix4x4 rotationMatrix,GameObject obj)
         {
             
@@ -104,10 +102,6 @@ namespace Elite
             if (obj.getsClipped && ((translatedTriangle.a.z < 0) || (translatedTriangle.b.z < 0) || (translatedTriangle.c.z < 0))) return;
 
 
-    
-
-
-
 
             // Calculate normal
             Vector3 normal, line1, line2;
@@ -141,6 +135,7 @@ namespace Elite
 
                 float intensity = normal.Dot(lightDir);
 
+                // Just in case
                 if (intensity > 1) intensity = 1f;
                 if (intensity < -1) intensity = -1f;
                 
@@ -166,15 +161,12 @@ namespace Elite
 
             projectedTriangle.a.x *= Settings.SCREEN_SIZE_X/2;
             projectedTriangle.a.y *= Settings.SCREEN_SIZE_Y/2;
-
             projectedTriangle.b.x *= Settings.SCREEN_SIZE_X/2;
             projectedTriangle.b.y *= Settings.SCREEN_SIZE_Y/2;
             projectedTriangle.c.x *= Settings.SCREEN_SIZE_X/2;
             projectedTriangle.c.y *= Settings.SCREEN_SIZE_Y/2;
 
 
-
- 
             if(obj.filled)
             {
                 Rasteriser.DrawFilledTriangle(projectedTriangle,character,obj.colour);
@@ -182,7 +174,6 @@ namespace Elite
             }
 
             Rasteriser.DrawTriangle(projectedTriangle,character,obj.colour);
-          
 
         }
 
@@ -204,6 +195,7 @@ namespace Elite
                 GameObject obj = gameObjects[gameObject];
                 if (!obj.visible) continue;
 
+                // Check if object is behind camera (if it doesnt move with the camera)
                 if(!obj.movesWithCamera && (obj.position - Engine.cameraPosition).Normalise().Dot(Engine.cameraForward) < 0f) continue;
 
                 Triangle[] tris = obj.mesh.tris;
@@ -221,8 +213,6 @@ namespace Elite
             Rasteriser.DrawBufferToScreen();
 
         }
-
-
     }
 
 }

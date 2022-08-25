@@ -9,8 +9,6 @@ namespace Elite
 
         public override void Start()
         {
-            
-
             character = '*';
             filled = true;
           

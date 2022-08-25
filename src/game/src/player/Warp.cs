@@ -65,11 +65,11 @@ namespace Elite
                 reset = true;
                 return false;
             }
-            else
-            {
-                isWarping = true;
-                return true;
-            }
+            
+        
+            isWarping = true;
+            return true;
+        
             
         }
 
@@ -168,9 +168,7 @@ namespace Elite
             }
 
 
-
         }
-
 
     }
 }

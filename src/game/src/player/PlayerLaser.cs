@@ -14,15 +14,9 @@ namespace Elite
             getsCulled = false;
 
             movesWithCamera = true;
-            colour = 10;//12;
+            colour = 10;
 
         }
-
-
-
-
-
-
 
     }
 }

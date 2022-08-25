@@ -9,7 +9,6 @@ namespace Elite
         private static string[] names;
         private static string[] values;
 
-
         private static CultureInfo culture = new CultureInfo("en-UK");
 
         public static void Initialise()
@@ -53,7 +52,6 @@ namespace Elite
         }
 
 
-
         private static string Load(string name)
         {
             for (int i = 0; i < names.Length; i++)
@@ -63,10 +61,9 @@ namespace Elite
                     return values[i];
                 }
             }
-            // This will make everything die horribly but whatever
+            // This will make everything die horribly but whatever.
+            // At least it wont go out with a whimper
             return "SETTING NOT FOUND";
         }
-
     }
-
 }

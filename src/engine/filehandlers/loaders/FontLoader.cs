@@ -1,6 +1,3 @@
-using System;
-using System.Drawing;
-
 namespace Elite
 {   
     public static class FontHandler
@@ -10,9 +7,9 @@ namespace Elite
 
         public static void LoadFont()
         {
-            string data = FileHandler.Read("Font.txt");
-            
-            // Characters are separated by two newlines and a backtick in between them
+            string data = FileHandler.Read("Font");
+             
+            // Characters are separated by: newline, `, newline
             string[] splitData = data.Split("\r\n`\r\n");
           
             for (int i = 0; i < splitData.Length; i++)
@@ -32,10 +29,7 @@ namespace Elite
           
             }
 
-        }
-
-
-        
+        }        
     }
 
 }

@@ -1,5 +1,3 @@
-using System;
-
 namespace Elite
 {
     public class ExplosionManager : GameObject

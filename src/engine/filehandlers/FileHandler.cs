@@ -6,7 +6,6 @@ namespace Elite
 {   
     public static class FileHandler
     {
-
         public static string originPath;
 
         public static void Setup()
@@ -19,8 +18,6 @@ namespace Elite
                 Console.ReadKey();
                 Environment.Exit(0);
             }
-
-
         }
 
         public static bool FileExists(string path)
@@ -63,8 +60,5 @@ namespace Elite
         {
             File.WriteAllText(originPath + path, data);
         }
-
-
     }
-
 }

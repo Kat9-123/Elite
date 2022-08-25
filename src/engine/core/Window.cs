@@ -171,7 +171,7 @@ namespace Elite
         }    
     
         [STAThread]
-        public static void Write(CharInfo[] buf)
+        public static void Write(ref CharInfo[] buf)
         {
   
             if (!safeFileHandle.IsInvalid)

@@ -98,7 +98,7 @@ namespace Elite
 
         
 
-        public static Window.CharInfo[] ApplyUI(Window.CharInfo[] buffer)
+        public static void ApplyUI(ref Window.CharInfo[] buffer)
         {
             
             // Debugtext
@@ -134,8 +134,7 @@ namespace Elite
                     buffer[b*Settings.SCREEN_SIZE_X + a].Attributes = UIBuffer[b*Settings.SCREEN_SIZE_X + a].Attributes;
                 }
             }
-           
-            return buffer;
+
         }
     }
 }

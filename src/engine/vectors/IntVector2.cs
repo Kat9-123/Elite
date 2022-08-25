@@ -1,5 +1,6 @@
 using System;
 
+// Your favourite data type, now in integer form.
 namespace Elite
 {
 

@@ -1,5 +1,3 @@
-using System;
-
 namespace Elite
 {
     public class MouseController : GameObject
@@ -19,7 +17,6 @@ namespace Elite
         // "Safe" radius expressed as a percentage of the screen size
         // if the mouse is within this region, no rotation happens.
         private const float MIN_MOUSE_DIST_PERCENTAGE = 0.1f;
-
 
 
         public Vector2 mousePosition;
@@ -65,7 +62,6 @@ namespace Elite
             if(InputManager.IsKeyPressed(InputMap.FREE_MOUSE)) 
             {
                 mouseFreed = !mouseFreed;
-
 
                 if(!mouseFreed) CentreMousePosition();
             }
@@ -128,7 +124,5 @@ namespace Elite
 
 
         }
-
-
     }
 }

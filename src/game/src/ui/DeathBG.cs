@@ -1,4 +1,3 @@
-
 namespace Elite
 {
     public class DeathBG : GameObject

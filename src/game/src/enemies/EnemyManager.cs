@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Elite
@@ -25,18 +24,13 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
-
-
             // Don't spawn more than 4 enemies
             if(enemies.Count > 3) return;
 
 
             if(enemySpawnTimer.Accumulate())
             {
-
-
-                // After 3 enemies were spawned, the boss
-                // can spawn as well.
+                // After 3 enemies have been spawned, the boss  can spawn as well.
                 int upperBound = 2;
                 if(enemiesSpawned > 2)
                 {
@@ -54,19 +48,14 @@ namespace Elite
                     case 2:
                         InstanceEnemy(new Boss());
                         break;
-
                 }
 
                 enemiesSpawned++;
 
                 enemySpawnTimer.SetDuration(Utils.RandomFloat(7,20));
                 enemySpawnTimer.Reset();
-
-                    
+       
             }
-
-
-
         }
 
 
@@ -86,8 +75,6 @@ namespace Elite
             
 
         }
-
-
 
 
     }

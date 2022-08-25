@@ -1,5 +1,4 @@
-using System;
-
+// Boss enemy
 namespace Elite
 {
     public class Boss : Enemy
@@ -74,12 +73,7 @@ namespace Elite
 
         }
         
-
-        public override void Update(float deltaTime)
-        { 
-            base.Update(deltaTime);
-        }
-
+        public override void Update(float deltaTime) {base.Update(deltaTime);}
 
     }
 }

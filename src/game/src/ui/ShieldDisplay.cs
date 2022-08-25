@@ -65,13 +65,7 @@ namespace Elite
                 position.y = basePos.y - scale.y/2f;   
             }
 
-
-
-
-
         }
-
-
 
     }
 }

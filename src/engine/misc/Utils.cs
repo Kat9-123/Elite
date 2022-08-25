@@ -7,6 +7,7 @@ namespace Elite
 
     public static class Utils
     {
+        // Random number generators
         private static readonly Random rng = new Random();
 
         public static float RandomFloat(float min, float max)
@@ -24,13 +25,14 @@ namespace Elite
         {
             int n = rng.Next(0,2);
 
-            if (n == 1) return 1;
-            
+            if (n == 1) return 1;      
             return -1;
         }
 
-        // Takes the given mesh and extends it by the given amount. The distance between itterations
-        // is defined by the seperation. This function is mainly used for lasers.
+
+        // Takes the given mesh and extends it by the given amount by duplicating and offsetting
+        // the new triangles. The distance between itterations is defined by the seperation.
+        // This function is mainly used for lasers.
         public static Mesh GenerateRepeatingMesh(Mesh _mesh, int count, int seperation)
         {
  
@@ -53,6 +55,7 @@ namespace Elite
 
 
         // Format a vector3 so that it can be printed. Legacy.
+        // Use vector.ToString()
         public static string FormatVector(Vector3 vec, string name)
         {
             string result = name + ": (";
@@ -77,7 +80,6 @@ namespace Elite
             }
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ReadLine();
-        
         }
 
 
@@ -92,6 +94,7 @@ namespace Elite
         }
 
 
+        // Crossproduct. a X b
         public static Vector3 Cross(Vector3 a, Vector3 b)
         {
             Vector3 result = new Vector3();
@@ -118,7 +121,6 @@ namespace Elite
         // Forward = (1,0,0), Up = (0,1,0)
         // pos = (0,0,10)
         // returns (10,0,0)
-        // etc.
         public static Vector3 RelativeToRotation(Vector3 pos, Vector3 forward, Vector3 up)
         {
             Vector3 right = Cross(up,forward);
@@ -149,20 +151,22 @@ namespace Elite
         }
 
         // Generate a random point within a circle
-        // excluding a smaller circle in the centre.
-        public static Vector3 RandomPositionExcludeCentre(float minDist, float maxDist)
+        // excluding a smaller circle in the centre. uses rejection sampling.
+        // After maxItterCount generations, it returns the number regardless.
+        // default is effectively infinite (100)
+        public static Vector3 RandomPositionExcludeCentre(float minDist, float maxDist, int maxItterCount=100)
         {
             Vector3 pos = new Vector3(0,0,0);
-            
+            int i = 0;
+
             while(pos.LengthSquared() < minDist*minDist)
             {
                 pos = new Vector3(0,0,0);
                 pos.x = RandomFloat(-maxDist,maxDist);
                 pos.y = RandomFloat(-maxDist,maxDist);
                 pos.z = RandomFloat(-maxDist,maxDist);
+                if(i >= maxItterCount) return pos;
             }
-
-
             
             return pos;
         }

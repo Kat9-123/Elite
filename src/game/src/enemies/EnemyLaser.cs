@@ -1,12 +1,7 @@
-using System;
-
 namespace Elite
 {
     public class EnemyLaser : GameObject
     {
-
-       // private const int SEGMENT_LENGTH = 5;
-
         private Timer fireTimer;
         private Timer laserVisibilityTimer;
 
@@ -45,7 +40,6 @@ namespace Elite
         {
             Engine.ChanageIndex(this,Engine.gameManager.enemyLayer); 
         }
-
 
 
         public void Shoot(float deltaTime)

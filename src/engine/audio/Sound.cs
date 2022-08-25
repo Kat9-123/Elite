@@ -1,15 +1,13 @@
+// Gets played by the SoundManager
 namespace Elite
 {
     public struct Sound
     {   
         public string fileName;
-        public string trackName;
-
 
         public Sound(string path)
         {
-            fileName = FileHandler.originPath + "sounds\\" + path;
-            trackName = path;
+            fileName = FileHandler.originPath + "sounds\\" + path;   
         }
 
     }

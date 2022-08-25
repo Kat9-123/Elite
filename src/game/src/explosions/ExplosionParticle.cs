@@ -17,7 +17,6 @@ namespace Elite
             colour = 4;
             mesh = Models.cube;
             visible = false;
-
         }
 
         public override void Update(float deltaTime)
@@ -59,7 +58,6 @@ namespace Elite
             visible = true;
 
         }
-
 
     }
 }

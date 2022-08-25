@@ -23,11 +23,10 @@ namespace Elite
         }
 
 
-
         public static void DrawBufferToScreen()
         {
-            buffer = UI.ApplyUI(buffer);
-            Window.Write(buffer);
+            UI.ApplyUI(ref buffer);
+            Window.Write(ref buffer);
         }
         public static void Reset()
         {
@@ -151,16 +150,5 @@ namespace Elite
             return true;
 
         }
-
-
-
-
-
-
-        
-
-
-
-
     }
 }

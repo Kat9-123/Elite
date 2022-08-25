@@ -1,5 +1,7 @@
 // Very basic because the game only uses two very simple sprites. 
 // (that could also just be hard coded tbh)
+// Don't look at the code pls.
+// TODO: also use different characters depending on the brightness of the pixel.
 using System;
 using System.Drawing;
 
@@ -7,7 +9,6 @@ namespace Elite
 {   
     public static class SpriteLoader
     {
-
 
         private static Colour[] colours = new Colour[] {
             new Colour(12,12,12),

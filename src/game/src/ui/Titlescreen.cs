@@ -34,6 +34,7 @@ namespace Elite
 
         public override void Update(float deltaTime)
         {
+            // Make the text flash
             if(flashTimer.Accumulate())
             {
                 currentFlash = !currentFlash;
@@ -42,6 +43,8 @@ namespace Elite
 
             short col = 15;
             if(currentFlash) col = 1;
+
+
 
             UI.WriteText("Elite not very Dangerous",20,20,'#',col);
             UI.WriteText("By: Kat9;123",53,33,'^',8);

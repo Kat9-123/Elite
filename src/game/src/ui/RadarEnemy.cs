@@ -14,9 +14,6 @@ namespace Elite
 
         public override void Start()
         {
-            
-
-
             mesh = Models.radarEnemyMesh;
 
             position = new Vector3(0,1,5);
@@ -27,8 +24,6 @@ namespace Elite
             Vector3 axis = Utils.Cross(up,forward);
 
             scale = new Vector3(0.03f,0.03f,0.03f);
-
-
 
         }
 

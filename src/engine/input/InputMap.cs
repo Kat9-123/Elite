@@ -43,10 +43,5 @@ namespace Elite
         FREE_MOUSE = 0x4D, // M
 
         START_KEY = 0x0D // Enter
-
-
-
     }
-
-
 }

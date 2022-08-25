@@ -1,11 +1,7 @@
-using System;
-
 namespace Elite
 {
     public class Dust : GameObject
     {
-
-
         public override void Start()
         {
             scale = new Vector3(0.1f,0.1f,0.1f);
@@ -36,7 +32,7 @@ namespace Elite
         }
         private void Reset()
         {
-            position = Utils.RandomPositionExcludeCentre(50,110);
+            position = Utils.RandomPositionExcludeCentre(50,110,4);
 
             position += Engine.cameraPosition;
 

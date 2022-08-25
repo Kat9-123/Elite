@@ -1,5 +1,4 @@
-using System;
-
+// TODO: LOD?
 namespace Elite
 {
     public class Planet : GameObject
@@ -33,8 +32,6 @@ namespace Elite
                     mesh = Models.planetHigh;
                     break;
             }
-            
-        
 
         }
 
@@ -47,13 +44,7 @@ namespace Elite
                 return;
             }
 
-            position = pos + Engine.cameraPosition - Engine.cameraPosition/Settings.PLANET_SCALE;
-
-            
+            position = pos + Engine.cameraPosition - Engine.cameraPosition/Settings.PLANET_SCALE;     
         }
-
-
-
-
     }
 }

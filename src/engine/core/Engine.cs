@@ -1,20 +1,20 @@
 /*
-This engine lacks some very important features, like audio, true frustum culling,
-occlusion, object ordering based on distance, etc. I didn't implement these features
+This engine lacks some very important features, true frustum culling,
+occlusion, object ordering based on distance, actual lighting, etc. I didn't implement these features
 because they really aren't necessary for this project.
 
-For more information visit: https://github.com/Kat9-123/Elite#engine
+For more information, visit: https://github.com/Kat9-123/Elite#engine
 
 === High level engine overview
 
                      (UIManager) --------------------> [  UI  ]
                           |                                |
                           |                               \./
-                     [GAMEOBJECTS] --> [RENDERER] --> [RASTERISER] --> [WINDOW]
-                       /.\    |
-                     {Update} |
-                        |    \./
-[ENTRY] -{SETUP}--+--> [ENGINE] ---+
+         AssetData -> GAMEOBJECTS    [RENDERER] --> [RASTERISER] --> [WINDOW]
+                          /.\            /.\
+                        {Update}          |
+                           |    {Sends all GameObjects}
+[ENTRY] -{SETUP}--+--> [ENGINE] ---+------+
                   |                |
                   +---{GAMELOOP}---+
 
@@ -36,15 +36,17 @@ namespace Elite
 
 
         // The camera is an essential part of the engine. There is only one camera and it's not handled
-        // like a gameobject. 
+        // like a gameobject.
         public static Vector3 cameraPosition = new Vector3(0,0,0);
 
         public static Vector3 cameraUp = new Vector3(0,-1,0);
         public static Vector3 cameraForward = new Vector3(0,0,1);
+
+        // Tracking cameraright is not necessary, but it gives me peace of mind
         public static Vector3 cameraRight = new Vector3(1,0,0);
 
 
-        // GameManager. First object to be instanced.
+        // GameManager. First object to be instanced. Treated as somewhat of a god-object
         public static GameManager gameManager;
 
         public static List<GameObject> gameObjects = new List<GameObject>(128);
@@ -52,11 +54,12 @@ namespace Elite
 
         private static List<GameObject> queuedObjectsForDestruction = new List<GameObject>();
 
-    
+        // We all know what deltaTime is right?
         public static float deltaTime = 0f;
 
         // Used in deltaTime calculations
         private static double previousTime = 0;
+
 
         private const string TITLE = "Elite not very Dangerous | By Kat9_123";
 
@@ -68,8 +71,7 @@ namespace Elite
         }
 
         // Change the index of a gameObject in the gameObjects list.
-        // Objects with a higher index render in front of
-        // Objects with a lower index.
+        // Objects with a higher index render in front of Objects with a lower index.
         public static void ChanageIndex(GameObject gameObject, int newIndex)
         {
 
@@ -97,7 +99,9 @@ namespace Elite
         }
 
        
-
+        // When a mommy object and a daddy object love eachother very much
+        // they can instance a gameobject (well you only need one object
+        // to instance another but whatever)
         public static GameObject Instance(GameObject obj)
         {
             gameObjects.Add(obj);
@@ -116,7 +120,7 @@ namespace Elite
         {
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                Console.WriteLine("This project only supports windows.");
+                Console.WriteLine("This project only supports Windows. Sorry!");
                 Console.ReadKey();
                 return false;
             }
@@ -133,7 +137,7 @@ namespace Elite
             FontHandler.LoadFont();
             SettingHandler.Initialise();
 
-
+            // Check if the user has the correct font installed
             if(!FileHandler.CheckFont()) return false;
             
             if(Settings.SHOW_COLOURS_ON_STARTUP) Utils.ShowColours();
@@ -149,11 +153,11 @@ namespace Elite
             Window.SetCurrentFont(Settings.FONT, Settings.FONT_SCALE);
 
 
-
+    
 
             // Graphics
             Renderer.Initialise();
-
+            Window.Initialise();
 
             SoundManager.Setup();
 
@@ -165,13 +169,14 @@ namespace Elite
 
         public static void Restart()
         {    
-            // This doesn't actually do anything but ah well....
+            // This doesn't work but ah well....
             cameraPosition = new Vector3(0,0,0);
             cameraForward = new Vector3(0,0,1);
             cameraUp = new Vector3(0,-1,0);
             cameraRight = new Vector3(1,0,0);
 
             gameManager.SaveScore();
+    
             // Destroy all objects except for the gamemanager.
             for (int i = 1; i < gameObjects.Count; i++)
             {
@@ -179,11 +184,7 @@ namespace Elite
             }
             DestroyQueuedObjects();
 
-            gameManager.Setup();
-
-
-            
- 
+            gameManager.Setup(); 
         }
 
         private static void Exit()
@@ -201,9 +202,10 @@ namespace Elite
             // Main gameloop
             while (true)
             {  
+                DestroyQueuedObjects();
 
                 // Stop checking for input if the window is not in focus                
-           //     InputManager.TestFocus();
+                InputManager.TestFocus(); // Might cause performance problems?
 
                 SoundManager.SoundUpdate();
 
@@ -212,11 +214,7 @@ namespace Elite
                 if(InputManager.IsKeyPressed(InputMap.EXIT)) Exit();
 
 
-
                 if(gameManager.isSetup && InputManager.IsKeyPressed(InputMap.RESTART)) Restart();
-
-
-                DestroyQueuedObjects();
 
 
                 deltaTime = ((float) Utils.CalculateDeltaTime(ref previousTime));
@@ -232,7 +230,8 @@ namespace Elite
                 }
 
   
-                UI.ResetUI();                
+                UI.ResetUI();
+           
                 // Update all gameobjects
                 for (int i = 0; i < gameObjects.Count; i++)
                 {

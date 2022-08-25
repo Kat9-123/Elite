@@ -11,7 +11,7 @@ namespace Elite
 
         // Obj files are split up in to two parts
         // a list of vertices (prefix: v) and a list of faces (prefix: f)
-        // every face uses 3 vertices (thus forming a triangle)
+        // every face uses 3 vertices, thus forming a triangle
 
         // Example (Quad)
         /*

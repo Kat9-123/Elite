@@ -1,3 +1,4 @@
+// A mesh is basically just a list of triangles.
 namespace Elite
 {
     public struct Mesh

@@ -21,6 +21,7 @@ in Blender, the sound effects in SFXR and the music in MuseScore.
 
 It isn't really a game, it's more like a tech-demo.
 
+https://www.youtube.com/watch?v=vIm_7NbgviA
 
 
 ### Features
@@ -36,6 +37,8 @@ It isn't really a game, it's more like a tech-demo.
 - Difficulty scaling
 - Soundeffects and music!
 - Score saving
+
+The music is <a href="https://www.youtube.com/watch?v=5w8NRdETNpA">a highly questionable fugue that I wrote in one hour</a>
 
 
 ## Screenshots
@@ -157,11 +160,11 @@ Features:
 ## Miscellaneous
 If you have any tips, optimisations, balance changes, etc. Please either message me or make a pull request.
 
-The code is still relatively messy so any help with that is also greatly appreciated. I got 
-kind of burned out so the newer features, like audio and LOD, are especially messy.
+The game code is still very messy so any help with that is also greatly appreciated.
+The engine code is much cleaner, but still not that good.
 
 ### Perfomance
 Sadly the performance really isn't great. It will probably run on most computers
-but you will have to tinker a bit with the settings. The biggest cause for the
-performance problem is the fact that all graphics get drawn to the console, which is
+at around 30-60 fps but you will have to tinker a bit with the settings. The biggest cause for the
+performance problem is probably the fact that all graphics are drawn to the console, which is
 kinda sad.

@@ -8,6 +8,5 @@ namespace Elite
         {
             R =_R; G=_G; B=_B;
         }
-
     }
 }

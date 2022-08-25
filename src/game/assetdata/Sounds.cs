@@ -23,10 +23,11 @@ namespace Elite
         public static readonly Sound hit = new Sound("enemy\\Hit.wav");
         public static readonly Sound target = new Sound("enemy\\Target.wav");
 
-        public static readonly Sound playerHit = new Sound("playerHit.wav");
+        public static readonly Sound playerHit = new Sound("PlayerHit.wav");
 
-        // Very soft sound that is inaudible that gets played in stead of the music
+        // Inaudible sound that gets played in stead of the music
         // if Settings.MUSIC == false so that the audio doesnt cause lag
+        // Test solution
         public static readonly Sound bg = new Sound("bg.wav");
     }
 
